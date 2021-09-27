@@ -1,5 +1,6 @@
 package com.example.firstproject3;
 
+import android.app.Application;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static com.example.firstproject3.CustomTodoAdapter.achieve_point;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,12 +22,6 @@ public class AchieveActivity extends AppCompatActivity {
     TextView showName, showExplain;
     int badgeId;
 
-    //hi
-    //업로드
-    //zzzzz
-    //159
-    //789
-    //aaaa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +63,24 @@ public class AchieveActivity extends AppCompatActivity {
             }
         });
 
+        /*private void getChecked(todo_do, todo_done)
+        {
+
+        };*/
         //뱃지 클릭 시 팝업창에 띄움
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 badgeId = v.getId();
                 ImageView img;
-                TextView text;
+                TextView text, showExplain;
                 Drawable clickimg;
                 String str;
+                showExplain = findViewById(R.id.showExplainBadge);
+
 
                 switch (badgeId) {
-                    case R.id.badge1 :
+                    case R.id.badge1:
                         img = findViewById(R.id.imagebadge1);
                         text = findViewById(R.id.textBadge1);
                         clickimg = img.getDrawable();
@@ -87,8 +91,10 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("연속 출석체크 30일 달성");
                         break;
-                    case R.id.badge2 :
+
+                    case R.id.badge2:
                         img = findViewById(R.id.imagebadge2);
                         text = findViewById(R.id.textbadge2);
                         clickimg = img.getDrawable();
@@ -99,8 +105,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("연속 출석체크 100일 달성");
                         break;
-                    case R.id.badge3 :
+                    case R.id.badge3:
                         img = findViewById(R.id.imagebadge3);
                         text = findViewById(R.id.textbadge3);
                         clickimg = img.getDrawable();
@@ -111,20 +118,26 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("상점에서 부위별 의상 2개이상 구매하기");
                         break;
-                    case R.id.badge4 :
-                        img = findViewById(R.id.imagebadge4);
-                        text = findViewById(R.id.textbadge4);
-                        clickimg = img.getDrawable();
-                        str = (String) text.getText();
+                    case R.id.badge4:
+                        if(achieve_point >= 5) {
+                            img = findViewById(R.id.imagebadge4);
+                            text = findViewById(R.id.textbadge4);
+                            clickimg = img.getDrawable();
+                            str = (String) text.getText();
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
+                            slideLayout.setVisibility(View.VISIBLE);
+                            darkView.setVisibility(View.VISIBLE);
+                            slideLayout.startAnimation(translateup);
+                            showImg.setImageDrawable(clickimg);
+                            showName.setText(str);
+                            showExplain.setText("5가지 이상의 To-Do 계획 후 완료하기");
+                        } else {
+                            Toast.makeText(getApplicationContext(),"아직 달성하지 못한 업적입니다!",Toast.LENGTH_SHORT).show();;
+                        }
                         break;
-                    case R.id.badge5 :
+                    case R.id.badge5:
                         img = findViewById(R.id.imagebadge5);
                         text = findViewById(R.id.textbadge5);
                         clickimg = img.getDrawable();
@@ -135,8 +148,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("상점에 있는 모든 패션아이템 구매하기");
                         break;
-                    case R.id.badge6 :
+                    case R.id.badge6:
                         img = findViewById(R.id.imagebadge6);
                         text = findViewById(R.id.textbadge6);
                         clickimg = img.getDrawable();
@@ -147,8 +161,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("챌린지 참가 신창하기");
                         break;
-                    case R.id.badge7 :
+                    case R.id.badge7:
                         img = findViewById(R.id.imagebadge7);
                         text = findViewById(R.id.textbadge7);
                         clickimg = img.getDrawable();
@@ -159,8 +174,10 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
+
                         break;
-                    case R.id.badge8 :
+                    case R.id.badge8:
                         img = findViewById(R.id.imagebadge8);
                         text = findViewById(R.id.textbadge8);
                         clickimg = img.getDrawable();
@@ -171,8 +188,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge9 :
+                    case R.id.badge9:
                         img = findViewById(R.id.imagebadge9);
                         text = findViewById(R.id.textbadge9);
                         clickimg = img.getDrawable();
@@ -183,8 +201,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge10 :
+                    case R.id.badge10:
                         img = findViewById(R.id.imagebadge10);
                         text = findViewById(R.id.textbadge10);
                         clickimg = img.getDrawable();
@@ -195,8 +214,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge11 :
+                    case R.id.badge11:
                         img = findViewById(R.id.imagebadge11);
                         text = findViewById(R.id.textbadge11);
                         clickimg = img.getDrawable();
@@ -207,8 +227,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge12 :
+                    case R.id.badge12:
                         img = findViewById(R.id.imagebadge12);
                         text = findViewById(R.id.textbadge12);
                         clickimg = img.getDrawable();
@@ -219,8 +240,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge13 :
+                    case R.id.badge13:
                         img = findViewById(R.id.imagebadge13);
                         text = findViewById(R.id.textbadge13);
                         clickimg = img.getDrawable();
@@ -231,8 +253,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge14 :
+                    case R.id.badge14:
                         img = findViewById(R.id.imagebadge14);
                         text = findViewById(R.id.textbadge14);
                         clickimg = img.getDrawable();
@@ -243,8 +266,9 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
-                    case R.id.badge15 :
+                    case R.id.badge15:
                         img = findViewById(R.id.imagebadge15);
                         text = findViewById(R.id.textbadge15);
                         clickimg = img.getDrawable();
@@ -255,6 +279,7 @@ public class AchieveActivity extends AppCompatActivity {
                         slideLayout.startAnimation(translateup);
                         showImg.setImageDrawable(clickimg);
                         showName.setText(str);
+                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
                         break;
                 }//switch
             }//onClick

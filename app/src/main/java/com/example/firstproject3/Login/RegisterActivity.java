@@ -78,9 +78,14 @@ public class RegisterActivity extends AppCompatActivity
 
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                             UserAccount account = new UserAccount();
-                            account.setIdToken(firebaseUser.getUid());
-                            account.setEmailId(firebaseUser.getEmail());
+                            account.setIdtoken(firebaseUser.getUid());
+                            account.setEmailid(firebaseUser.getEmail());
                             account.setPassword(strPwd);
+                            account.setNickname("안녕!");
+                            account.setCoin("200");
+                            account.setExp("1");
+                            account.setHeart("3");
+                            account.setLevel("1");
 
                             // setValue : database에 insert 행위
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);

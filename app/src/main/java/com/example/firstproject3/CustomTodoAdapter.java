@@ -3,6 +3,8 @@ package com.example.firstproject3;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,15 +39,21 @@ import java.util.Map;
 public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.CustomViewHolder> {
 
     private ArrayList<Todo_Item> arrayList;
-    static Context context;
+    private Context context;
     private FirebaseFirestore firebaseFirestore;
     private String TAG = "MainActivity";
-    private String strEmail;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
+
+    public static int achieve_point = 0;
 
     public CustomTodoAdapter(ArrayList<Todo_Item> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
+
+
+
 
     @NonNull
     @Override
@@ -47,8 +61,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_item, parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
-
-
         return holder;
     }
 
@@ -58,19 +70,24 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                 .load(arrayList.get(position).getTodo_category())
                 .into(holder.todo_category);
         holder.todo_title.setText(arrayList.get(position).getTodo_title());
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         holder.todo_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(holder.todo_checkBox.isChecked()){
+
                     firebaseFirestore = FirebaseFirestore.getInstance();
-
-                    strEmail = ((LoginActivity)LoginActivity.context_login).strEmail;
-
-                    Toast.makeText(context,strEmail,Toast.LENGTH_LONG).show();
-                    DocumentReference docRef = firebaseFirestore.collection("user").document(strEmail);
+                    DocumentReference docRef = firebaseFirestore.collection("user todo").document(arrayList.get(position).getTodo_id());
 
                     docRef.update("todo_checkbox",true);
+
+                    holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.todo_title.setTextColor(Color.GRAY);
 
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -92,19 +109,23 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                 }
                 else{
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user").document(strEmail);
+                    DocumentReference docRef = firebaseFirestore.collection("user todo").document(arrayList.get(position).getTodo_id());
 
                     docRef.update("todo_checkbox",false);
+                    holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.todo_title.setTextColor(Color.BLACK);
+
                 }
             }
         });
+
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(strEmail);
+                DocumentReference docRef = firebaseFirestore.collection("user todo").document(arrayList.get(position).getTodo_id());
 
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -139,7 +160,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return (arrayList != null ? arrayList.size() : 0);
@@ -150,14 +170,11 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
         TextView todo_title;
         CheckBox todo_checkBox;
 
-
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.todo_category = itemView.findViewById(R.id.todo_category);
             this.todo_title = itemView.findViewById(R.id.todo_title);
             this.todo_checkBox = itemView.findViewById(R.id.todo_CheckBox);
-
-
         }
     }
 }
