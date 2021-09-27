@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.firstproject3.MainActivity;
+import com.example.firstproject3.NickNameActivity;
 import com.example.firstproject3.R;
 import com.example.firstproject3.daily.CalListActivity;
 import com.example.firstproject3.usercode;
@@ -97,7 +99,7 @@ public class LoginActivity extends AppCompatActivity
                                             usercode.setUsercode(strEmail);
 
                                             // 로그인 성공
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
                                             intent.putExtra("userCode",userCode);
                                             startActivity(intent);
                                             finish(); // 현재 액티비티 파괴
@@ -122,8 +124,8 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
-        Button btn_register = findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        TextView app_register = (TextView) findViewById(R.id.app_register);
+        app_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
