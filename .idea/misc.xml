@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.19972826086956522" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_daily_cal_list.xml" value="0.14402173913043478" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_daily_calendar.xml" value="0.14402173913043478" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_daily_make.xml" value="0.13094641962944417" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_habbit_detail.xml" value="0.19655797101449277" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_habbit_make.xml" value="0.19655797101449277" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_main.xml" value="0.19972826086956522" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_notice.xml" value="0.16621376811594202" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/activity_todo_detail.xml" value="0.13094641962944417" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/fragment_challenge.xml" value="0.16621376811594202" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/fragment_character.xml" value="0.19972826086956522" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/fragment_setting_preference.xml" value="0.15806159420289856" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/fragment_test.xml" value="0.15806159420289856" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/fragment_timer.xml" value="0.19972826086956522" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/fragment_todo.xml" value="0.16802536231884058" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/layout.xml" value="0.16802536231884058" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/list_item_todo.xml" value="0.16802536231884058" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/listview_item.xml" value="0.16802536231884058" />
+        <entry key="..\:/Projects/FirstProject3/app/src/main/res/layout/timer_listview.xml" value="0.16802536231884058" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/0923/app/src/main/res/layout/activity_login.xml" value="0.23822463768115942" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/0923/app/src/main/res/layout/activity_timer.xml" value="0.23143115942028986" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/0923/app/src/main/res/layout/fragment_timer.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/0923/app/src/main/res/layout/timer_listview.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/0927/app/src/main/res/layout/fragment_challenge.xml" value="0.22418478260869565" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_achieve.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_click_trans.xml" value="0.23233695652173914" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_daily_cal_list.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_daily_calendar.xml" value="0.264" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_daily_make.xml" value="0.14743589743589744" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_daily_pop.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_deco.xml" value="0.12234042553191489" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_edit.xml" value="0.15489130434782608" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_habbit_detail.xml" value="0.2" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_habbit_make.xml" value="0.176" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_login.xml" value="0.2513586956521739" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_make_habbit.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_make_todo.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_notice.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_popup.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_register.xml" value="0.23233695652173914" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_save.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_setting.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_splash2.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_store.xml" value="0.264" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_timer.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_todo_detail.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/content_main.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragment_challenge.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragment_character.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragment_setting_preference.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragment_test.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragment_timer.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragment_todo.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/fragmenttodo.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/frgmenthabb.xml" value="0.2296195652173913" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/layout.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/listview_item.xml" value="0.2515625" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/nav_header_main.xml" value="0.12234042553191489" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/timer_listview.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/xml/setting_preference.xml" value="0.23233695652173914" />
+        <entry key="..\:/Users/kjmin/AndroidStudioProjects/0923/app/src/main/res/drawable/bin_blue.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/kjmin/AndroidStudioProjects/0923/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.1546875" />
+        <entry key="..\:/Users/kjmin/AndroidStudioProjects/0923/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/kjmin/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Users/kjmin/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/drawable/attencheckdrawble.xml" value="0.35625" />
+        <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/drawable/attendance_check.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/layout/activity_attendance_check.xml" value="0.30117753623188404" />
+        <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/menu/activity_main_drawer.xml" value="0.3359375" />
+        <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3359375" />
+        <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/menu/main.xml" value="0.3359375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

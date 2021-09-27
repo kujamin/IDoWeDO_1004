@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AchieveActivity">
+
+    <ScrollView
+        android:id="@+id/scrollEntire"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000">
+
+                <LinearLayout
+                    android:id="@+id/badge1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge1"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/daily30" />
+
+                    <TextView
+                        android:id="@+id/textBadge1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="데일리 30" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="2dp"
+                    android:padding="14dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge2"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지2"  />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="2dp"
+                    android:padding="14dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge3"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지3" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:paddingTop="2dp">
+
+                <LinearLayout
+                    android:id="@+id/badge4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge4"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지4" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge5"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지5"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge6"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지6"/>
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:paddingTop="2dp">
+
+                <LinearLayout
+                    android:id="@+id/badge7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge7"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지7" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge8"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지8"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge9"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지9" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:paddingTop="2dp">
+
+                <LinearLayout
+                    android:id="@+id/badge10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge10"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지10"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge11"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지11"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge12"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지12"/>
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:paddingTop="2dp">
+
+                <LinearLayout
+                    android:id="@+id/badge13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge13"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지13"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge14"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지14"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/badge15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginRight="2dp"
+                    android:background="#fff">
+
+                    <ImageView
+                        android:id="@+id/imagebadge15"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_background"/>
+
+                    <TextView
+                        android:id="@+id/textbadge15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="뱃지15"/>
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <!--팝업창 띄워지면 나머지 부분 어둡게 만드는 View-->
+    <View
+        android:id="@+id/DarkView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#8D000000"
+        android:visibility="invisible"/>
+
+    <!--뱃지 클릭 시 나타나는 슬라이딩 팝업창-->
+    <LinearLayout
+        android:id="@+id/slideLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="35dp"
+        android:paddingBottom="28dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="bottom"
+        android:visibility="invisible"
+        android:background="#fff">
+
+        <ImageView
+            android:id="@+id/showImgBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="21dp"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/showNameBadge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="뱃지 이름" />
+
+        <TextView
+            android:id="@+id/showExplainBadge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="17dp"
+            android:text="뱃지 설명" />
+    </LinearLayout>
+</FrameLayout>

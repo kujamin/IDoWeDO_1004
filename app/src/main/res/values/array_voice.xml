@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_voice">
+        <item>띵띵</item>
+        <item>띠링띠링</item>
+        <item>또로로로롱</item>
+        <item>통통</item>
+    </string-array>
+</resources>

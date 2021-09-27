@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/Daily"
+        android:orderInCategory="100"
+        android:title="Daily"
+        android:icon="@drawable/dailywh"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/attendence"
+        android:orderInCategory="100"
+        android:title="Attendence"
+        android:icon="@drawable/stamp"
+        app:showAsAction="always" />
+</menu>

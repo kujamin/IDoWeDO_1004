@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragment_Todo"
+        android:icon="@drawable/todo"
+        android:title="Todo"
+        />
+
+    <item
+        android:id="@+id/fragment_Timer"
+        android:icon="@drawable/timer_logo"
+        android:title="Timer"
+        />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title=""
+        />
+
+    <item
+        android:id="@+id/fragment_Challenge"
+        android:icon="@drawable/challenge"
+        android:title="Challenge" />
+
+    <item
+        android:id="@+id/fragment_Character"
+        android:icon="@drawable/bonus"
+        android:title="Character" />
+
+</menu>
