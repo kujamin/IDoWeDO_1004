@@ -7,6 +7,9 @@ public class ActivityResultEvent {
     private int resultCode;
     private Intent data;
 
+    //업로드
+    //hid
+
     public static ActivityResultEvent create(int requestCode, int resultCode, Intent intent) {
         return new ActivityResultEvent(requestCode, resultCode, intent);
     }

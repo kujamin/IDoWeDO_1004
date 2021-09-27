@@ -52,6 +52,7 @@
         <activity android:name=".DecoActivity" />
         <activity android:name=".ClickTransActivity" />
         <activity android:name=".NoticeActivity" />
+        <activity android:name=".NickNameActivity"/>
         <activity
             android:name=".PopupActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
