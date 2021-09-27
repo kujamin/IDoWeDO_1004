@@ -19,6 +19,7 @@ public class AchieveActivity extends AppCompatActivity {
     int badgeId;
 
     //업로드
+    //zzzzz
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
