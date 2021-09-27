@@ -18,11 +18,6 @@ public class AchieveActivity extends AppCompatActivity {
     TextView showName, showExplain;
     int badgeId;
 
-    //업로드
-    //zzzzz
-    //454
-    //wedkanrjdjsjjs
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
