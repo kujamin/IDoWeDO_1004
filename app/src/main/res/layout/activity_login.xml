@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginLeft="10dp"
 
         android:orientation="horizontal"
@@ -93,14 +93,14 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="14dp"
             android:layout_weight="2"
             android:background="@drawable/bin_blue"
             android:scaleX=".9"
             android:text="LOGIN"
             android:textColor="#fff"
-            android:textSize="15sp"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_register"
             app:layout_constraintHorizontal_bias="0.498"
@@ -116,7 +116,7 @@
         <Button
             android:id="@+id/btn_kakaoregister"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_marginRight="14dp"
             android:layout_weight="2"
             android:background="@drawable/bint_darkpink"
@@ -124,6 +124,7 @@
             android:scaleX=".9"
             android:text="카카오톡으로 로그인"
             android:textColor="#fff"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_login" />
