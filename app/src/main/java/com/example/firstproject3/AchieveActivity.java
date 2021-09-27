@@ -18,6 +18,7 @@ public class AchieveActivity extends AppCompatActivity {
     TextView showName, showExplain;
     int badgeId;
 
+    //hi
     //업로드
 
     @Override
