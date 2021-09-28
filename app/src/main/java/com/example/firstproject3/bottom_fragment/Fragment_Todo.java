@@ -38,6 +38,7 @@ public class Fragment_Todo extends Fragment {
     private ArrayList<Habbit_Item> habbit_list;
     int todo_count, habbit_count;
     final String TAG = "MainActivity";
+    private String userCode;
 
     @Nullable
     @Override
@@ -58,7 +59,7 @@ public class Fragment_Todo extends Fragment {
 
         todo_list = new ArrayList<Todo_Item>();
         customTodoAdapter = new CustomTodoAdapter(todo_list, view.getContext());
-//        String userCode = ((usercode)getContext()).getUsercode();
+        //userCode = ((usercode)getContext()).getUsercode();
 //        Toast.makeText(getContext(), userCode, Toast.LENGTH_SHORT).show();
 
         firebaseFirestore.collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {
