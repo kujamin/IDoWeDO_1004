@@ -31,6 +31,7 @@ import com.example.firstproject3.ActivityResultEvent;
 import com.example.firstproject3.BusProvider;
 import com.example.firstproject3.CustomChoiceListViewAdapter;
 import com.example.firstproject3.ListViewAdapter;
+import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.R;
 import com.example.firstproject3.SaveActivity;
 import com.example.firstproject3.TimerActivity;
@@ -60,6 +61,7 @@ public class Fragment_Timer extends Fragment {
     private ListViewAdapter timerAdapter;
     private ArrayList<Timer_Item> timer_list;
     private int timer_count;
+    private String strUrl;
     final String TAG = "MainActivity";
 
     @Override
@@ -83,7 +85,9 @@ public class Fragment_Timer extends Fragment {
         timer_list = new ArrayList<Timer_Item>();
         timerAdapter = new ListViewAdapter(timer_list, view.getContext());
 
-        firebaseFirestore.collection("user timer").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
+        firebaseFirestore.collection("user").document(userCode).collection("user timer").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error != null){
@@ -94,8 +98,8 @@ public class Fragment_Timer extends Fragment {
                 timer_list.clear();
 
                 for (QueryDocumentSnapshot doc : value) {
-                    if (doc.get("timer_name") != null) {
-                        timer_list.add(0,new Timer_Item(doc.getString("timer_name"), doc.getString("timer_goal"), doc.getString("timer_record"), doc.getString("timer_recImg"), doc.getString("timer_id")));
+                    if (doc.get("timer_title") != null) {
+                        timer_list.add(0,new Timer_Item(doc.getString("timer_title"), doc.getString("timer_goal"), doc.getString("timer_record"), doc.getString("timer_recImg"), doc.getString("timer_id")));
                         timer_recyclerView.setVisibility(View.VISIBLE);
                         layoutRecordPaper.setVisibility(View.GONE);
                         addTimerlist.setVisibility(View.VISIBLE);
@@ -157,8 +161,10 @@ public class Fragment_Timer extends Fragment {
         switch (requestCode) {
             case 100: {
                 if (data != null) {
-                    String str = data.getStringExtra("str");
-                    Toast.makeText(getContext(), str, Toast.LENGTH_LONG).show();
+                    String strName = data.getStringExtra("strName");
+                    String strGoal  = data.getStringExtra("strGoal");
+                    strUrl = data.getStringExtra("timerUrl");
+                    Toast.makeText(getContext(), strUrl, Toast.LENGTH_LONG).show();
                 }
             }
 //            case 101: {

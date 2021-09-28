@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.firstproject3.Login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -53,11 +54,13 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
         holder.timerGoal.setText(arrayList.get(position).getTimerGoal());
         holder.timerRecord.setText(arrayList.get(position).getTimerRecord());
 
+        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
         holder.timerImgRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user timer").document(arrayList.get(position).getTimerId());
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(arrayList.get(position).getTimerId());
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -73,6 +76,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
             }
         });
 
+        //길게 누르면 삭제됨
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -86,7 +90,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
                     public void onClick(DialogInterface dialog,int which){
                         // OK 버튼을 눌렸을 경우
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        DocumentReference docRef = firebaseFirestore.collection("user timer").document(arrayList.get(position).getTimerId());
+                        DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(arrayList.get(position).getTimerId());
 
                         docRef.delete();
                     }

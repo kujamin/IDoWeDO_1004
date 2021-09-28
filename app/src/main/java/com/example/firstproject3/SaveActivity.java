@@ -21,6 +21,7 @@ import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class SaveActivity extends AppCompatActivity {
 
@@ -38,6 +39,8 @@ public class SaveActivity extends AppCompatActivity {
         nameEdit = findViewById(R.id.editName);
         goalEdit = findViewById(R.id.editGoal);
 
+        String usercode = ((usercode)getApplication()).getUsercode();
+
         pd = new ProgressDialog(this);
 
         db = FirebaseFirestore.getInstance();
@@ -47,13 +50,17 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+                String id = UUID.randomUUID().toString();
                 String strName = nameEdit.getText().toString().trim();
                 String strGoal = goalEdit.getText().toString().trim();
+                String strUrl = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/record_button.png?alt=media&token=458bb730-97bc-4790-a4c9-3cd95034ec57";
 
-                uploadData(strName, strGoal);
+                uploadData(id, strName, strGoal, usercode, strUrl);
 
+                intent.putExtra("timer_id", id);
                 intent.putExtra("strName",strName);
                 intent.putExtra("strGoal",strGoal);
+                intent.putExtra("timerUrl", strUrl);
 
                 setResult(RESULT_OK,intent);
 
@@ -66,15 +73,20 @@ public class SaveActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void uploadData(String title, String goal) {
-        pd.setTitle("습관 생성 중...");
+    private void uploadData(String id, String title, String goal, String userCode, String strUrl) {
+        pd.setTitle("타이머 생성 중...");
 
         pd.show();
 
         Map<String, Object> doc = new HashMap<>();
-        doc.put("goal", goal);
+        doc.put("timer_id", id);
+        doc.put("timer_title", title);
+        doc.put("timer_goal", goal);
+        doc.put("timer_record", "00 : 00 : 00");
+        doc.put("timer_recImg", strUrl);
+        doc.put("userCode", userCode);
 
-        db.collection("user timer").document(title).set(doc)
+        db.collection("user").document(userCode).collection("user timer").document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -128,6 +128,8 @@ public class TodoDetailActivity extends AppCompatActivity {
             }
         });
 
+        String usercode = ((usercode)getApplication()).getUsercode();
+
         //저장 버튼 누르면
         todoDetail_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +141,7 @@ public class TodoDetailActivity extends AppCompatActivity {
                 String str_time = todoDetail_textViewTime.getText().toString().trim();
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user todo").document(todo_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(todo_id);
 
                 docRef.update("todo_title",str_title);
                 docRef.update("todo_date",str_date);
@@ -163,7 +165,7 @@ public class TodoDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user todo").document(todo_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(todo_id);
 
                 docRef.delete();
                 finish();

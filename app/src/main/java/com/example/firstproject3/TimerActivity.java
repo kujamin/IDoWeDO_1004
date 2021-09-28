@@ -57,8 +57,10 @@ public class TimerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String timer_Id = intent.getStringExtra("timer_id");
 
+        String usercode = ((usercode)getApplication()).getUsercode();
+
         firebaseFirestore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = firebaseFirestore.collection("user timer").document(timer_Id);
+        DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(timer_Id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

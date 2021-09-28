@@ -107,6 +107,8 @@ public class HabbitDetailActivity extends AppCompatActivity {
             }
         });
 
+        String usercode = ((usercode)getApplication()).getUsercode();
+
         //저장 버튼 누르면
         habbitDetail_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +119,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
                 String str_cateText = habbitDetail_textch.getText().toString().trim();
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user habbit").document(habbit_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(habbit_id);
 
                 docRef.update("habbit_title",str_title);
                 docRef.update("habbit_date",str_date);
@@ -140,7 +142,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user habbit").document(habbit_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(habbit_id);
 
                 docRef.delete();
                 finish();

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.firstproject3.CustomHabbitAdapter;
 import com.example.firstproject3.CustomTodoAdapter;
 import com.example.firstproject3.Habbit_Item;
+import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.Todo_Item;
 import com.example.firstproject3.R;
 import com.example.firstproject3.usercode;
@@ -38,7 +40,6 @@ public class Fragment_Todo extends Fragment {
     private ArrayList<Habbit_Item> habbit_list;
     int todo_count, habbit_count;
     final String TAG = "MainActivity";
-    private String userCode;
 
     @Nullable
     @Override
@@ -61,8 +62,9 @@ public class Fragment_Todo extends Fragment {
         customTodoAdapter = new CustomTodoAdapter(todo_list, view.getContext());
         //userCode = ((usercode)getContext()).getUsercode();
 //        Toast.makeText(getContext(), userCode, Toast.LENGTH_SHORT).show();
+        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
-        firebaseFirestore.collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("user").document(userCode).collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error != null){
@@ -90,7 +92,7 @@ public class Fragment_Todo extends Fragment {
 
         customTodoAdapter.notifyDataSetChanged();
 
-        firebaseFirestore.collection("user habbit").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("user").document(userCode).collection("user habbit").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error != null){

@@ -235,8 +235,8 @@ public class DailyMakeActivity extends AppCompatActivity {
                 String time = textTime.getText().toString().trim(); //습관 시간
                 String memo = textMemo.getText().toString().trim(); //습관 메모
                 String cateText = textch.getText().toString().trim();
-                String id = UUID.randomUUID().toString();
                 String category = strUrl; //습관 카테고리 텍스트
+                String id = UUID.randomUUID().toString();
                 String usercode = ((usercode)getApplication()).getUsercode();
 
                 uploadData(title, date, time, memo, category, cateText, id, usercode);

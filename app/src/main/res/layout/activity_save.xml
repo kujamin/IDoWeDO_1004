@@ -39,26 +39,41 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
 
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="타이머 일정 이름" />
+
         <EditText
             android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="이름"
+            android:layout_marginBottom="10dp"
+            android:hint="타이머 일정 이름"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
         <EditText
             android:id="@+id/editGoal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="목표치"
-            android:inputType="textPersonName" />
+            android:hint="00"
+            android:maxLength="2"
+            android:inputType="number" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

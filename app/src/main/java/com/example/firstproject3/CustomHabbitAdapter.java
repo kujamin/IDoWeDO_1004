@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.firstproject3.Login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -54,13 +55,14 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                 .into(holder.habbit_category);
         holder.habbit_title.setText(arrayList.get(position).getHabbit_title());
 
+        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
         holder.habbit_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(holder.habbit_checkBox.isChecked()){
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user habbit").document(arrayList.get(position).getHabbit_id());
-
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(arrayList.get(position).getHabbit_id());
 
                     docRef.update("habbit_checkbox",true);
 
@@ -85,7 +87,7 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                 }
                 else{
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user habbit").document(arrayList.get(position).getHabbit_id());
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(arrayList.get(position).getHabbit_id());
 
                     docRef.update("habbit_checkbox",false);
                 }
@@ -99,7 +101,7 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
 
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user habbit").document(arrayList.get(position).getHabbit_id());
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(arrayList.get(position).getHabbit_id());
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {

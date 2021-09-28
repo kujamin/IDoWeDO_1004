@@ -206,8 +206,9 @@ public class HabbitMakeActivity extends AppCompatActivity {
         doc.put("habbit_cateText", cateText);
         doc.put("habbit_id", id);
         doc.put("habbit_checkbox",false);
+        doc.put("userCode", userCode);
 
-        db.collection("user habbit").document(id).set(doc)
+        db.collection("user").document(userCode).collection("user habbit").document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

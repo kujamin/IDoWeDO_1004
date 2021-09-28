@@ -65,7 +65,7 @@ public class DecoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imgbtnHead.setBackgroundColor(Color.parseColor("#ffffff"));
-                imgbtnTorso.setBackgroundColor(Color.parseColor("#CACACA"));
+                imgbtnTorso.setBackgroundColor(Color.parseColor("#CiACACA"));
                 imgbtnLeg.setBackgroundColor(Color.parseColor("#CACACA"));
                 imgbtnArm.setBackgroundColor(Color.parseColor("#CACACA"));
 
@@ -350,6 +350,7 @@ public class DecoActivity extends AppCompatActivity {
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
                         break;
+
                     //4번 Row
                     case R.id.imageButtonHead4 :
                         drawH = imgbtnHead4.getDrawable();
@@ -362,15 +363,16 @@ public class DecoActivity extends AppCompatActivity {
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg4 :
-                        drawL = imgbtnLeg2.getDrawable();
+                        drawL = imgbtnLeg4.getDrawable();
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonArm4 :
-                        drawA = imgbtnArm2.getDrawable();
+                        drawA = imgbtnArm4.getDrawable();
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
                         break;
+
                     //5번 Row
                     case R.id.imageButtonHead5 :
                         drawH = imgbtnHead5.getDrawable();
@@ -387,6 +389,7 @@ public class DecoActivity extends AppCompatActivity {
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
+
                     //6번 Row
                     case R.id.imageButtonHead6:
                         drawH = imgbtnHead6.getDrawable();
@@ -403,6 +406,7 @@ public class DecoActivity extends AppCompatActivity {
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
+
                     //7번 Row
                     case R.id.imageButtonHead7 :
                         drawH = imgbtnHead7.getDrawable();
@@ -419,6 +423,7 @@ public class DecoActivity extends AppCompatActivity {
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
+
                     //8번 Row
                     case R.id.imageButtonTorso8 :
                         drawT = imgbtnTorse8.getDrawable();
@@ -437,10 +442,36 @@ public class DecoActivity extends AppCompatActivity {
         imgbtnHead1.setOnClickListener(ocl);
         imgbtnTorse1.setOnClickListener(ocl);
         imgbtnLeg1.setOnClickListener(ocl);
+        imgbtnArm1.setOnClickListener(ocl);
+
         imgbtnHead2.setOnClickListener(ocl);
         imgbtnTorse2.setOnClickListener(ocl);
         imgbtnLeg2.setOnClickListener(ocl);
+        imgbtnArm2.setOnClickListener(ocl);
+
+        imgbtnHead3.setOnClickListener(ocl);
+        imgbtnTorse3.setOnClickListener(ocl);
+        imgbtnLeg3.setOnClickListener(ocl);
+        imgbtnArm3.setOnClickListener(ocl);
+
+        imgbtnHead4.setOnClickListener(ocl);
         imgbtnTorse4.setOnClickListener(ocl);
         imgbtnLeg4.setOnClickListener(ocl);
+        imgbtnArm4.setOnClickListener(ocl);
+
+        imgbtnHead5.setOnClickListener(ocl);
+        imgbtnTorse5.setOnClickListener(ocl);
+        imgbtnLeg5.setOnClickListener(ocl);
+
+        imgbtnHead6.setOnClickListener(ocl);
+        imgbtnTorse6.setOnClickListener(ocl);
+        imgbtnLeg6.setOnClickListener(ocl);
+
+        imgbtnHead7.setOnClickListener(ocl);
+        imgbtnTorse7.setOnClickListener(ocl);
+        imgbtnLeg7.setOnClickListener(ocl);
+
+        imgbtnTorse8.setOnClickListener(ocl);
+        imgbtnLeg8.setOnClickListener(ocl);
     }
 }

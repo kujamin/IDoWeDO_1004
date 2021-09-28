@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,6 +74,8 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         holder.todo_checkBox.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +85,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                 if(holder.todo_checkBox.isChecked()){
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user todo").document(arrayList.get(position).getTodo_id());
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
 
                     docRef.update("todo_checkbox",true);
 
@@ -109,7 +112,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                 }
                 else{
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user todo").document(arrayList.get(position).getTodo_id());
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
 
                     docRef.update("todo_checkbox",false);
                     holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
@@ -125,7 +128,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
             public void onClick(View v) {
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user todo").document(arrayList.get(position).getTodo_id());
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
 
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
