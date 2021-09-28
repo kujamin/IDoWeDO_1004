@@ -11,6 +11,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#F4385E</item>
+        <item name="android:colorPrimaryDark">@color/colorstatus</item> <!-- statusbar color -->
     </style>
 
     <style name="AppTheme.NoActionBar">
