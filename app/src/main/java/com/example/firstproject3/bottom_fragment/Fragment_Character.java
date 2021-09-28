@@ -45,7 +45,6 @@ public class Fragment_Character extends Fragment {
     ProgressBar progressBar;
     TextView textLevel, textExp, textCoin, textNickName;
     Handler handler;
-    int maxExp;
 
     @Nullable
     @Override
@@ -54,8 +53,8 @@ public class Fragment_Character extends Fragment {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
         progressBar = (ProgressBar) rootView.findViewById(R.id.expProgressBar);
         textLevel = (TextView) rootView.findViewById(R.id.textViewLevel);
         textExp = (TextView) rootView.findViewById(R.id.textViewExp);
@@ -68,35 +67,37 @@ public class Fragment_Character extends Fragment {
         LinearLayout lachieve = rootView.findViewById(R.id.achievePage);
 
 
-        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
 
-                int currentexp = Integer.parseInt(group.getExp());
-                int coin = Integer.parseInt(group.getCoin());
-                int level = Integer.parseInt(group.getLevel());
+                int coin = group.getCoin();
+                int currentexp = group.getExp();
+                int level = group.getLevel();
+                int mexp = group.getMaxexp();
                 String nickname = (group.getNickname());
 
-                maxExp = 100 + (level);
-                textExp.setText(currentexp + " / " + maxExp);
+                mexp = 100 + (level);
+                textExp.setText(currentexp + " / " + mexp);
 
-                progressBar.setMax(maxExp);
+
+                progressBar.setMax(mexp);
                 progressBar.setProgress(currentexp);
-                if (currentexp >= maxExp) {
+                if (currentexp >= mexp) {
                     level++;
-                    currentexp = currentexp - maxExp;
+                    currentexp = currentexp - mexp;
                 }
                 textLevel.setText("Lv." + level);
                 textCoin.setText(coin + "");
                 textNickName.setText(nickname + "");
 
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(level);
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("maxexp").setValue(mexp);
 
-                String expup = Integer.toString(currentexp);
-                String levelup = Integer.toString(level);
-
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(levelup);
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(expup);
 
             }
 

@@ -14,10 +14,51 @@ public class UserAccount {
     private String repassword;  // 비밀번호 확인
     private String password;    // 비밀번호
     private String nickname;    // 어플 내 이름
-    private String level;      // 캐릭터 레벨
-    private String exp;        // 캐릭터 경험치
-    private String coin;       // 캐릭터 재화(돈)
-    private String heart;      // 캐릭터 체력
+    private int level;      // 캐릭터 레벨
+    private int exp;        // 캐릭터 경험치
+    private int coin;       // 캐릭터 재화(돈)
+    private int heart;      // 캐릭터 체력
+    private int maxexp;     // 캐릭터 최대 경험치
+
+    public int getMaxexp() {
+        return maxexp;
+    }
+
+    public void setMaxexp(int maxexp) {
+        this.maxexp = maxexp;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public int getHeart() {
+        return heart;
+    }
+
+    public void setHeart(int heart) {
+        this.heart = heart;
+    }
 
     public String getUsername() {
         return username;
@@ -70,39 +111,8 @@ public class UserAccount {
         this.nickname = nickname;
     }
 
-    public String getLevel() {
-        return level;
-    }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getExp() {
-        return exp;
-    }
-
-    public void setExp(String exp) {
-        this.exp = exp;
-    }
-
-    public String getCoin() {
-        return coin;
-    }
-
-    public void setCoin(String coin) {
-        this.coin = coin;
-    }
-
-    public String getHeart() {
-        return heart;
-    }
-
-    public void setHeart(String heart) {
-        this.heart = heart;
-    }
-
-    /*public UserAccount(String idtoken, String emailid, String repassword, String username , String password, String nickname, String level, String exp, String coin, String heart) {
+    public UserAccount(String idtoken, String emailid, String repassword, String username , String password, String nickname, int level, int exp, int coin, int heart, int maxexp) {
         this.idtoken = idtoken;
         this.emailid = emailid;
         this.password = password;
@@ -113,10 +123,11 @@ public class UserAccount {
         this.heart = heart;
         this.username = username;
         this.repassword = repassword;
+        this.maxexp = maxexp;
 
     }
 
-    public Map<String, Object> toMap() {
+    /*public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("idtoken", idtoken);
         result.put("emailid", emailid);

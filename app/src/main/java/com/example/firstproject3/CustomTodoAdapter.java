@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
+import com.example.firstproject3.bottom_fragment.Fragment_Character.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,7 +82,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
         holder.todo_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(holder.todo_checkBox.isChecked()){
 
                     firebaseFirestore = FirebaseFirestore.getInstance();

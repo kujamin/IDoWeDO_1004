@@ -24,9 +24,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -42,6 +50,9 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
     int selectYear, selectMonth, selectDay, selectHour, selectMinute;
     static final int REQ_ADD_CONTACT = 1;
+
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
 
     LinearLayout cateLayout;
     TextView textCate, textch, textDaily;
@@ -69,6 +80,10 @@ public class HabbitMakeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habbit_make);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.habbit_toolbar);
         setSupportActionBar(mToolbar);
@@ -175,6 +190,8 @@ public class HabbitMakeActivity extends AppCompatActivity {
         btnReser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 String title =  textDailyName.getText().toString().trim();//슨관 제목
                 String date = textDaily.getText().toString().trim(); //습관 날짜
                 String memo = textMemo.getText().toString().trim(); //습관 메모
@@ -185,7 +202,21 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
                 uploadData(title, date, memo, category, cateText, id, usercode);
 
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                        int currentexp = group.getExp();
+                        currentexp += 5;
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 finish();
             }
         });
