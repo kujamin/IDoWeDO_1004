@@ -46,7 +46,6 @@ public class Fragment_Todo extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_todo, container, false);
-        View view = (View) inflater.inflate(R.layout.activity_login, container, false);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -59,7 +58,7 @@ public class Fragment_Todo extends Fragment {
         habbit_recyclerView.setLayoutManager(new LinearLayoutManager(viewGroup.getContext()));
 
         todo_list = new ArrayList<Todo_Item>();
-        customTodoAdapter = new CustomTodoAdapter(todo_list, view.getContext());
+        customTodoAdapter = new CustomTodoAdapter(todo_list, viewGroup.getContext());
         //userCode = ((usercode)getContext()).getUsercode();
 //        Toast.makeText(getContext(), userCode, Toast.LENGTH_SHORT).show();
         String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;

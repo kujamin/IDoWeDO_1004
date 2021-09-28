@@ -15,17 +15,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firstproject3.Challenge_Item;
 import com.example.firstproject3.ClickTransActivity;
+import com.example.firstproject3.CustomChallengeAdapter;
 import com.example.firstproject3.HabbitMakeActivity;
 import com.example.firstproject3.R;
+import com.example.firstproject3.Todo_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -33,32 +43,36 @@ import java.util.UUID;
 public class Fragment_Challenge extends Fragment {
     private FirebaseFirestore firebaseFirestore;
     private View view;
+    private RecyclerView recyclerView;
+    private ArrayList<Challenge_Item> challenge_list;
+    private CustomChallengeAdapter customChallengeAdapter;
+    final String TAG = "MainActivity";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_challenge, container, false);
 
-        LinearLayout challenge1 = view.findViewById(R.id.challenge1);
-        LinearLayout challenge2 = view.findViewById(R.id.challenge2);
-        LinearLayout challenge3 = view.findViewById(R.id.challenge3);
-
-        TextView textChall1 = view.findViewById(R.id.textChall1);
-        String strChall1 = textChall1.getText().toString().trim();
-
-        TextView textChall2 = view.findViewById(R.id.textChall2);
-        TextView textChall3 = view.findViewById(R.id.textChall3);
         firebaseFirestore = FirebaseFirestore.getInstance();
 
+        recyclerView = view.findViewById(R.id.challenge_rec);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        challenge1.setOnClickListener(new View.OnClickListener() {
+        challenge_list = new ArrayList<Challenge_Item>();
+        customChallengeAdapter = new CustomChallengeAdapter(challenge_list, view.getContext());
+
+        firebaseFirestore.collection("challenge").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), ClickTransActivity.class);
-                intent.putExtra("textChall1", strChall1);
-                startActivity(intent);
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                challenge_list.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    challenge_list.add(0,new Challenge_Item(doc.getString("challenge_image"), doc.getString("challenge_title"), doc.getString("challenge_content")));
+                }
+                customChallengeAdapter.notifyDataSetChanged();
             }
         });
+        recyclerView.setAdapter(customChallengeAdapter);
 
 //        View.OnClickListener ocl = new View.OnClickListener() {
 //            @Override
