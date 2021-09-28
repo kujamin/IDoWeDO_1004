@@ -106,11 +106,11 @@ public class Fragment_Todo extends Fragment {
                     }
                 }
                 //어답터 갱신
-                    customHabbitAdapter.notifyDataSetChanged();
+                customHabbitAdapter.notifyDataSetChanged();
             }
         });
 
-            habbit_recyclerView.setAdapter(customHabbitAdapter);
+        habbit_recyclerView.setAdapter(customHabbitAdapter);
 
         return viewGroup;
 
