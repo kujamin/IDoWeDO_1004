@@ -36,29 +36,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class RegisterActivity extends AppCompatActivity
-{
+public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
-    private EditText mEtName, mEtEmail, mEtPwd, mEtRePwd; //회원가입 입력필드
+    private EditText mEtName, mEtRePwd, mEtEmail, mEtPwd; //회원가입 입력필드
     private TextView mTextPwdError;
     private Button mBtnRegister; // 회원가입 버튼
     private FirebaseFirestore firebaseFirestore;
     private String TAG = "MainActivity";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("idowedo");
 
-        mEtName = findViewById(R.id.et_name);
         mEtEmail = findViewById(R.id.et_email);
+        mEtName = findViewById(R.id.et_name);
         mEtPwd = findViewById(R.id.et_pwd);
         mEtRePwd = findViewById(R.id.et_repwd);
         mBtnRegister = findViewById(R.id.btn_register);
@@ -73,12 +70,12 @@ public class RegisterActivity extends AppCompatActivity
                 String strPwd = mEtPwd.getText().toString();
                 String strRePwd = mEtRePwd.getText().toString();
 
+
                 if (strPwd.equals(strRePwd)) {
                     Log.d(TAG, "등록 번호  " + strEmail + " , " + strPwd);
                     final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
                     mDialog.setMessage("가입 중입니다...");
                     mDialog.show();
-
                     // Firebase Auth 진행
                     mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -89,9 +86,9 @@ public class RegisterActivity extends AppCompatActivity
                                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                                 UserAccount account = new UserAccount();
                                 account.setIdtoken(firebaseUser.getUid());
-                                account.setUsername(firebaseUser.getDisplayName());
-                                account.setRepassword(strRePwd);
                                 account.setEmailid(firebaseUser.getEmail());
+                                account.setUsername(strName);
+                                account.setRepassword(strRePwd);
                                 account.setPassword(strPwd);
                                 account.setNickname("안녕!");
                                 account.setCoin("200");
@@ -105,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity
                                 Map<String, Object> data = new HashMap<>();
                                 data.put("id", strEmail);
                                 data.put("password", strPwd);
-                                data.put("name", strName);
 
                                 Map<String, Object> data2 = new HashMap<>();
 
@@ -150,17 +146,22 @@ public class RegisterActivity extends AppCompatActivity
                                     }
                                 });
 
+
                                 Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "회원가입에 실패하셨습니다", Toast.LENGTH_SHORT).show();
                             }
 
+
                         }
                     });
                 } else {
-                    mTextPwdError.setVisibility(View.INVISIBLE);
+                    mTextPwdError.setVisibility(View.VISIBLE);
                 }
             }
-        });
+
+            });
+
+
+        }
     }
-}

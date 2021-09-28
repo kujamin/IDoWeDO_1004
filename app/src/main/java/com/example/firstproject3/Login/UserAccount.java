@@ -4,22 +4,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * 사용자 계정 정보 모델 클래스
  */
 
 public class UserAccount {
     private String idtoken;     // Firebase Uid (고유 토큰정보)
     private String emailid;     // 이메일 아이디
+    private String username;    // 사용자 이름
+    private String repassword;  // 비밀번호 확인
     private String password;    // 비밀번호
-    private String username;        // 이름
-    private String repassword; //비밀번호 확인
     private String nickname;    // 어플 내 이름
     private String level;      // 캐릭터 레벨
     private String exp;        // 캐릭터 경험치
     private String coin;       // 캐릭터 재화(돈)
     private String heart;      // 캐릭터 체력
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
+    }
 
     public UserAccount() {
     }
@@ -31,11 +45,6 @@ public class UserAccount {
     public void setIdtoken(String idtoken) {
         this.idtoken = idtoken;
     }
-
-    public String getUserName() { return username; }
-
-    public void setUsername(String username) { this.username = username; }
-
 
     public String getEmailid() {
         return emailid;
@@ -60,11 +69,6 @@ public class UserAccount {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
-    public String getRepassword() { return repassword; }
-
-    public void setRepassword(String repassword) {this.repassword = repassword; }
-
 
     public String getLevel() {
         return level;
@@ -98,7 +102,7 @@ public class UserAccount {
         this.heart = heart;
     }
 
-    public UserAccount(String idtoken, String emailid, String password, String nickname, String level, String exp, String coin, String heart) {
+    public UserAccount(String idtoken, String emailid, String repassword, String username , String password, String nickname, String level, String exp, String coin, String heart) {
         this.idtoken = idtoken;
         this.emailid = emailid;
         this.password = password;
@@ -107,6 +111,8 @@ public class UserAccount {
         this.exp = exp;
         this.coin = coin;
         this.heart = heart;
+        this.username = username;
+        this.repassword = repassword;
 
     }
 
@@ -114,6 +120,8 @@ public class UserAccount {
         HashMap<String, Object> result = new HashMap<>();
         result.put("idtoken", idtoken);
         result.put("emailid", emailid);
+        result.put("username", username);
+        result.put("repassword", repassword);
         result.put("password", password);
         result.put("nickname", nickname);
         result.put("level", level);
