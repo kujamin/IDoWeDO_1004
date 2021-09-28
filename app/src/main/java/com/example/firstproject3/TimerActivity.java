@@ -55,22 +55,24 @@ public class TimerActivity extends AppCompatActivity {
         timerPause = findViewById(R.id.timerPause);
 
         Intent intent = getIntent();
-        String timer_Id = intent.getStringExtra("timer_id");
+        String timer_id = intent.getStringExtra("timer_id");
 
         String usercode = ((usercode)getApplication()).getUsercode();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(timer_Id);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    String recordText = (String) doc.get("timer_record");
-                    timerText.setText(recordText);
-                }
-            }
-        });
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(timer_id);
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()) {
+                                DocumentSnapshot doc = task.getResult();
+                                String recordText = (String) doc.getString("timer_record");
+                                timerText.setText(recordText);
+                            }
+                        }
+                    });
+
+
 
         //타이머 이미지 누르면
         stopStartButton.setOnClickListener(new View.OnClickListener() {
@@ -120,14 +122,14 @@ public class TimerActivity extends AppCompatActivity {
                     String str = timerText.getText().toString();
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user timer").document(timer_Id);
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode)
+                            .collection("user timer").document(timer_id);
 
-                    docRef.update("timer_record", str).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            finish();
-                        }
-                    });
+                    docRef.update("timer_record", str);
+
+
+
+                    finish();
                 }
             }
         });

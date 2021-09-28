@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +69,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
                             DocumentSnapshot document = task.getResult();
                             Intent intent = new Intent(context, TimerActivity.class);
                             intent.putExtra("timer_id", document.getString("timer_id"));
+                            Toast.makeText(context, document.getString("timer_id"), Toast.LENGTH_SHORT).show();
                             context.startActivity(intent);
                         }
                     }

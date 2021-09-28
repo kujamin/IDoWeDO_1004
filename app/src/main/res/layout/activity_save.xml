@@ -59,21 +59,51 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:layout_marginBottom="10dp"
-            android:hint="타이머 일정 이름"
+            android:hint="이름을 입력해주세요."
             android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textView30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="기록할 목표치" />
 
-        <EditText
-            android:id="@+id/editGoal"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="00"
-            android:maxLength="2"
-            android:inputType="number" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editGoalHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLength="2" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:text="시간" />
+
+            <EditText
+                android:id="@+id/editGoalMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLength="2" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="분" />
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
