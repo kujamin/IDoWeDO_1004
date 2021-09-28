@@ -102,7 +102,7 @@ public class UserAccount {
         this.heart = heart;
     }
 
-    public UserAccount(String idtoken, String emailid, String repassword, String username , String password, String nickname, String level, String exp, String coin, String heart) {
+    /*public UserAccount(String idtoken, String emailid, String repassword, String username , String password, String nickname, String level, String exp, String coin, String heart) {
         this.idtoken = idtoken;
         this.emailid = emailid;
         this.password = password;
@@ -129,5 +129,5 @@ public class UserAccount {
         result.put("coin", coin);
         result.put("heart", heart);
         return result;
-    }
+    }*/
 }

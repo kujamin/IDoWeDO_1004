@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 account.setUsername(strName);
                                 account.setRepassword(strRePwd);
                                 account.setPassword(strPwd);
-                                account.setNickname("안녕!");
+                                account.setNickname(null);
                                 account.setCoin("200");
                                 account.setExp("1");
                                 account.setHeart("3");

@@ -43,9 +43,7 @@ public class Fragment_Character extends Fragment {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     ProgressBar progressBar;
-    TextView textLevel;
-    TextView textExp;
-    TextView textCoin;
+    TextView textLevel, textExp, textCoin, textNickName;
     Handler handler;
     int maxExp;
 
@@ -62,6 +60,7 @@ public class Fragment_Character extends Fragment {
         textLevel = (TextView) rootView.findViewById(R.id.textViewLevel);
         textExp = (TextView) rootView.findViewById(R.id.textViewExp);
         textCoin = (TextView) rootView.findViewById(R.id.textview_coin);
+        textNickName = (TextView) rootView.findViewById(R.id.tv_nickname);
 
 
         LinearLayout lstore = rootView.findViewById(R.id.storePage);
@@ -77,6 +76,7 @@ public class Fragment_Character extends Fragment {
                 int currentexp = Integer.parseInt(group.getExp());
                 int coin = Integer.parseInt(group.getCoin());
                 int level = Integer.parseInt(group.getLevel());
+                String nickname = (group.getNickname());
 
                 maxExp = 100 + (level);
                 textExp.setText(currentexp + " / " + maxExp);
@@ -89,6 +89,8 @@ public class Fragment_Character extends Fragment {
                 }
                 textLevel.setText("Lv." + level);
                 textCoin.setText(coin + "");
+                textNickName.setText(nickname + "");
+
 
                 String expup = Integer.toString(currentexp);
                 String levelup = Integer.toString(level);
