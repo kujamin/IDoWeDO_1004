@@ -245,7 +245,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:background="#fff"
-                            android:src="@drawable/magician_head_01"
+                            android:src="@drawable/book_hand_01"
                             android:visibility="invisible"/>
 
                     </FrameLayout>
