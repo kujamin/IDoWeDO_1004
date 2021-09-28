@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,7 +56,7 @@ public class NickNameActivity extends AppCompatActivity {
         imageNickArrow = (ImageView) findViewById(R.id.imageNickArrow);
 
         imageNickArrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
-
+        String input = editNickName.getText().toString();
 
         editNickName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -84,6 +85,7 @@ public class NickNameActivity extends AppCompatActivity {
         imageNickArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String input = editNickName.getText().toString();
                 strNickname = editNickName.getText().toString();
 
                 mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
@@ -101,8 +103,10 @@ public class NickNameActivity extends AppCompatActivity {
                     }
                 });
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                if(input.length() < 8) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
