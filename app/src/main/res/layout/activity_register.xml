@@ -10,12 +10,12 @@
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="회원가입"
+        android:gravity="center"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,63 +26,63 @@
         android:id="@+id/linearLayout7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="60dp"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/et_name"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="8dp"
-            android:ems="15"
-            android:textSize="16sp"
             android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:ems="12"
             android:hint="이름을 입력하세요."
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="8dp"
-            android:ems="15"
-            android:textSize="16sp"
             android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:ems="12"
             android:hint="이메일을 입력하세요."
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/et_pwd"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="8dp"
-            android:ems="15"
-            android:textSize="16sp"
             android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:ems="12"
             android:hint="비밀번호를 입력하세요."
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/et_repwd"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="8dp"
-            android:ems="15"
-            android:textSize="16sp"
             android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:ems="12"
             android:hint="비밀번호를 다시 입력하세요."
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/textPwdError"
@@ -92,24 +92,38 @@
             android:layout_marginBottom="10dp"
             android:text="다시 입력해주세요."
             android:textColor="#F43636"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:textStyle="bold"
             android:visibility="invisible" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="110dp"
+        android:layout_width="252dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:text="가입하기"
-        android:textSize="13sp"
-        android:textColor="#fff"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/bin_blue"
+        android:text="가입하기"
+        android:textColor="#fff"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView26"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.653"
+        app:srcCompat="@drawable/bonus" />
 </androidx.constraintlayout.widget.ConstraintLayout>
