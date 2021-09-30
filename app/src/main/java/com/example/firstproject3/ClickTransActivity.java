@@ -60,7 +60,7 @@ public class ClickTransActivity extends AppCompatActivity {
                 Map<String, Object> doc = new HashMap<>();
                 doc.put("challenge_id", usercode);
 
-                firebaseFirestore.collection("challenge").document("매일 만보 걷기").collection("challenge list").document(usercode).set(doc)
+                firebaseFirestore.collection("challenge").document(chall_Text).collection("challenge list").document(usercode).set(doc)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
