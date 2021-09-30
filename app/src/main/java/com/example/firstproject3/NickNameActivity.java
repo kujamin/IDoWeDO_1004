@@ -94,6 +94,9 @@ public class NickNameActivity extends AppCompatActivity {
                         UserAccount group = dataSnapshot.getValue(UserAccount.class);
                         String nickname = (group.getNickname());
                         nickname = strNickname;
+                        if(nickname == null) {
+                            Toast.makeText(getApplicationContext(), "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        }
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(nickname);
                     }
 

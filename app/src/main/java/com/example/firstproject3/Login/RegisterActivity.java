@@ -83,6 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 mDialog.dismiss();
 
+
+                                //realtimer database
                                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                                 UserAccount account = new UserAccount();
                                 account.setIdtoken(firebaseUser.getUid());
@@ -100,6 +102,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 // setValue : database에 insert 행위
                                 mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 
+
+                                //firestore
                                 Map<String, Object> data = new HashMap<>();
                                 data.put("id", strEmail);
                                 data.put("password", strPwd);
