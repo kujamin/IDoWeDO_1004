@@ -65,7 +65,7 @@ public class DecoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imgbtnHead.setBackgroundColor(Color.parseColor("#ffffff"));
-                imgbtnTorso.setBackgroundColor(Color.parseColor("#CiACACA"));
+                imgbtnTorso.setBackgroundColor(Color.parseColor("#CACACA"));
                 imgbtnLeg.setBackgroundColor(Color.parseColor("#CACACA"));
                 imgbtnArm.setBackgroundColor(Color.parseColor("#CACACA"));
 
