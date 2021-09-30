@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.R;
 import com.example.firstproject3.Todo_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +45,8 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calendar);
 
+        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
         String sDY = String.valueOf(CalendarDay.today().getYear());
         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
         String sDD = String.valueOf(CalendarDay.today().getDay());
@@ -70,7 +73,7 @@ public class CalendarActivity extends AppCompatActivity {
         calAdapter = new CustomCalendar(cal_list, getApplicationContext());
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("user todo")
+        firebaseFirestore.collection("user").document(userCode).collection("user todo")
                 .whereEqualTo("todo_date", strDate)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -155,7 +158,7 @@ public class CalendarActivity extends AppCompatActivity {
                 strDate = date.getYear() + "/" + month + "/" + day;
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                firebaseFirestore.collection("user todo")
+                firebaseFirestore.collection("user").document(userCode).collection("user todo")
                         .whereEqualTo("todo_date", strDate)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
