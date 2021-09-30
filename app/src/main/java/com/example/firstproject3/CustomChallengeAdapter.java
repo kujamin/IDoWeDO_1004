@@ -1,5 +1,6 @@
 package com.example.firstproject3;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class CustomChallengeAdapter extends RecyclerView.Adapter<CustomChallenge
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHoler holder, int position) {
+    public void onBindViewHolder(@NonNull CustomViewHoler holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(holder.itemView).load(arrayList.get(position).getChallenge_image()).into(holder.challenge_image);
         holder.challenge_title.setText(arrayList.get(position).getChallenge_title());
         holder.challenge_content.setText(arrayList.get(position).getChallenge_content());

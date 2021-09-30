@@ -30,7 +30,7 @@ public class ClickTransActivity extends AppCompatActivity {
     ImageView imgarrow;
     TextView textChallAttend;
     private FirebaseFirestore firebaseFirestore;
-    private String TAG = "MainActivity", id, pw;
+    private String TAG = "MainActivity";
 
     public void onClickBack(View v) {
         finish();
@@ -44,7 +44,6 @@ public class ClickTransActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String chall_Text = intent.getStringExtra("chall_title");
         String usercode = ((usercode)getApplication()).getUsercode();
-        String randomid = UUID.randomUUID().toString();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -58,33 +57,10 @@ public class ClickTransActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                firebaseFirestore.collection("user")
-                        .whereEqualTo("id", usercode)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Log.d(TAG, document.getId() + " => " + document.getData());
-                                        Log.d(TAG, document.getId() + " => " + document.getData().get("id"));
-                                        id = (String) document.getData().get("id");
-                                        pw = (String) document.getData().get("password");
-                                    }
-                                } else {
-                                    Log.d(TAG, "Error getting documents: ", task.getException());
-                                }
-                            }
-                        });
-
-                Toast.makeText(getApplicationContext(), id + ", " + "pw", Toast.LENGTH_LONG).show();
-
                 Map<String, Object> doc = new HashMap<>();
-                doc.put("challenge_randomid", randomid);
-                doc.put("challenge_id", id);
-                doc.put("challenge_pw", pw);
+                doc.put("challenge_id", usercode);
 
-                firebaseFirestore.collection("challenge").document("매일 만보 걷기").collection("challenge list").document(id).set(doc)
+                firebaseFirestore.collection("challenge").document("매일 만보 걷기").collection("challenge list").document(usercode).set(doc)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -96,9 +72,9 @@ public class ClickTransActivity extends AppCompatActivity {
                             }
                         });
 
-                //startActivity(new Intent(ClickTransActivity.this, PopupActivity.class));
+                startActivity(new Intent(ClickTransActivity.this, PopupActivity.class));
 
-                textChallAttend.setText("참가중...");
+                textChallAttend.setText("참가 중...");
             }
         });
 
