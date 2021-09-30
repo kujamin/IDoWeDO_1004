@@ -328,6 +328,7 @@ public class DecoActivity extends AppCompatActivity {
                         drawA = imgbtnArm2.getDrawable();
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
+                        break;
 
                     //3번 Row
                     case R.id.imageButtonHead3 :
