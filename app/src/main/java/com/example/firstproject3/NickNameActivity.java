@@ -94,8 +94,9 @@ public class NickNameActivity extends AppCompatActivity {
                         UserAccount group = dataSnapshot.getValue(UserAccount.class);
                         String nickname = (group.getNickname());
                         nickname = strNickname;
+
+                        //nickname이 null일 경우도 코딩 부탁드려요!! 토스트 창 띄우는 정도면 되지 않을까 싶습니다
                         if(nickname == null) {
-                            Toast.makeText(getApplicationContext(), "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
                         }
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(nickname);
                     }
