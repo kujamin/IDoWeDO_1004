@@ -103,6 +103,7 @@ public class Fragment_Timer extends Fragment {
                         timer_recyclerView.setVisibility(View.VISIBLE);
                         layoutRecordPaper.setVisibility(View.GONE);
                         addTimerlist.setVisibility(View.VISIBLE);
+
                     }
                 }
                 //어답터 갱신

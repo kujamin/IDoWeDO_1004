@@ -100,6 +100,7 @@ public class SaveActivity extends AppCompatActivity {
         doc.put("timer_record", "00 : 00 : 00");
         doc.put("timer_recImg", strUrl);
         doc.put("userCode", userCode);
+        doc.put("timer_time","0");
 
         db.collection("user").document(userCode).collection("user timer").document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

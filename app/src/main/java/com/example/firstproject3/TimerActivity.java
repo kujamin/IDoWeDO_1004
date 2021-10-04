@@ -29,6 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,8 +40,9 @@ public class TimerActivity extends AppCompatActivity {
     Button stopStartButton;
     Timer timer;
     TimerTask timerTask;
-    int time = 0;
-    private boolean timerStarted = false, isRunning = true;
+    String str_time;
+    int time;
+    private boolean timerStarted = false, isRunning = false;
     TextView timerPause;
     private FirebaseFirestore firebaseFirestore;
     private Thread timeThread = null;
@@ -49,6 +52,7 @@ public class TimerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+
 
         timerText = (TextView) findViewById(R.id.timerText);
         stopStartButton = (Button) findViewById(R.id.startStopButton);
@@ -67,7 +71,13 @@ public class TimerActivity extends AppCompatActivity {
                             if(task.isSuccessful()) {
                                 DocumentSnapshot doc = task.getResult();
                                 String recordText = (String) doc.getString("timer_record");
+                                int timedb = Integer.parseInt(doc.getString("timer_time"));
+//                                str_time = doc.getString("timer_time");
+//                                time = Integer.parseInt(doc.getString("timer_time"));
                                 timerText.setText(recordText);
+                                time = timedb;
+
+                                Toast.makeText(getApplicationContext(),timedb+"",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -104,6 +114,8 @@ public class TimerActivity extends AppCompatActivity {
                     //timerTask.cancel();
                     timerPause.setText("초기화");
                     timerPause.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                    Toast.makeText(getApplicationContext(),time+"",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -115,6 +127,11 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(timerStarted == false) {
+
+                    firebaseFirestore = FirebaseFirestore.getInstance();
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode)
+                            .collection("user timer").document(timer_id);
+
                     time = 0;
                     timerText.setText("00 : 00 : 00");
                 }
@@ -126,6 +143,7 @@ public class TimerActivity extends AppCompatActivity {
                             .collection("user timer").document(timer_id);
 
                     docRef.update("timer_record", str);
+                    docRef.update("timer_time",String.valueOf(time));
 
 
 
@@ -136,6 +154,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
     }
+    //oncrreater
 
     private void setButtonUI(String start, int color) {
         stopStartButton.setText(start);
@@ -163,8 +182,11 @@ public class TimerActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 Message msg = new Message();
-                msg.arg1 = time++;
+                msg.arg1 = time;
+                time++;
+
                 handler.sendMessage(msg);
             }
         }
