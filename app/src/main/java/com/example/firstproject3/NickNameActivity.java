@@ -73,6 +73,12 @@ public class NickNameActivity extends AppCompatActivity {
 
                 if(input.length() < 8){
                     textNickError.setVisibility(View.INVISIBLE);
+                    textNickError.setText("닉네임은 8글자 이하로 입력해주세요.");
+                }
+
+                if(input.length() == 0) {
+                    textNickError.setVisibility(View.VISIBLE);
+                    textNickError.setText("닉네임은 1글자 이상 입력해주세요.");
                 }
             }
 
@@ -95,8 +101,8 @@ public class NickNameActivity extends AppCompatActivity {
                         String nickname = (group.getNickname());
                         nickname = strNickname;
 
-                        //nickname이 null일 경우도 코딩 부탁드려요!! 토스트 창 띄우는 정도면 되지 않을까 싶습니다
                         if(nickname == null) {
+                            Toast.makeText(getApplicationContext(), "닉네임을 입력해주세요.", Toast.LENGTH_SHORT);
                         }
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(nickname);
                     }
@@ -107,7 +113,7 @@ public class NickNameActivity extends AppCompatActivity {
                     }
                 });
 
-                if(input.length() < 8) {
+                if(input.length() < 8 && input.length() > 0) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }

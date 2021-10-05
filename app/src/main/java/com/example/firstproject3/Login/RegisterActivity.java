@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,12 +46,19 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView mTextPwdError;
     private Button mBtnRegister; // 회원가입 버튼
     private FirebaseFirestore firebaseFirestore;
+    com.example.firstproject3.Login.ProgressDialog customProgressDialog;
     private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //로딩창 객체 생성
+        customProgressDialog = new com.example.firstproject3.Login.ProgressDialog(this);
+
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("idowedo");
@@ -72,17 +81,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 if (strPwd.equals(strRePwd)) {
-                    Log.d(TAG, "등록 번호  " + strEmail + " , " + strPwd);
-                    final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
-                    mDialog.setMessage("가입 중입니다...");
-                    mDialog.show();
+                    customProgressDialog.show();
+                    customProgressDialog.setCancelable(false);
+
                     // Firebase Auth 진행
                     mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                mDialog.dismiss();
-
+                                customProgressDialog.dismiss();
 
                                 //realtimer database
                                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
@@ -155,6 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "회원가입에 실패하셨습니다", Toast.LENGTH_SHORT).show();
+                                customProgressDialog.dismiss();
                             }
 
 

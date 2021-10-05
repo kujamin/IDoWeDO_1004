@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +54,7 @@ public class LoginActivity extends AppCompatActivity
     public usercode usercode;
     public Context context;
     public static Context context_login;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,6 +73,11 @@ public class LoginActivity extends AppCompatActivity
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
 
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
         Button btn_login = findViewById(R.id.btn_login);
@@ -82,12 +90,15 @@ public class LoginActivity extends AppCompatActivity
                 strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
 
+                customProgressDialog.show();
+                customProgressDialog.setCancelable(false);
 
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>()
                 {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            customProgressDialog.dismiss();
 
                             firebaseFirestore.collection("user").whereEqualTo("id",strEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -116,6 +127,7 @@ public class LoginActivity extends AppCompatActivity
 
                         } else {
                             Toast.makeText(LoginActivity.this, "로그인 실패..!", Toast.LENGTH_SHORT).show();
+                            customProgressDialog.dismiss();
                         }
                     }
                 });
