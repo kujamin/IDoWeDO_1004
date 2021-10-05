@@ -4,8 +4,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.firstproject3.Login.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class StoreActivity extends AppCompatActivity {
     View darkView;
@@ -13,6 +22,9 @@ public class StoreActivity extends AppCompatActivity {
     LinearLayout soldoutView1, soldoutView2, soldoutView3, soldoutView4, soldoutView5, soldoutView6, soldoutView7, soldoutView8,
             soldoutView9, soldoutView10, soldoutView11, soldoutView12;
     int itemId;
+    private FirebaseFirestore firebaseFirestore;
+    private int itemCoin, myCoin;
+    private DocumentReference documentReference, documentReferenceC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +48,8 @@ public class StoreActivity extends AppCompatActivity {
         soldoutView11 = findViewById(R.id.SoldoutView11);
         soldoutView12 = findViewById(R.id.SoldoutView12);
 
+        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
 
         //팝업창 띄우는 이벤트 리스너
         View.OnClickListener ocl = new View.OnClickListener() {
@@ -44,6 +58,7 @@ public class StoreActivity extends AppCompatActivity {
                 itemId = v.getId();
                 darkView.setVisibility(View.VISIBLE);
                 popupStore.setVisibility(View.VISIBLE);
+
             }
         };
 
@@ -83,20 +98,215 @@ public class StoreActivity extends AppCompatActivity {
                 switch (itemId) {
                     case R.id.item1 :
                         soldoutView1.setVisibility(View.VISIBLE);
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state").collection("store").document("c1_torse");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
+
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                }
+                            }
+                        });
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+
+                        Toast.makeText(getApplicationContext(),String.valueOf(itemId),Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.item2 :
                         soldoutView2.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state").collection("store").document("c1_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
+
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                }
+                            }
+                        });
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+
                         break;
                     case R.id.item3 :
                         soldoutView3.setVisibility(View.VISIBLE);
+
+                        soldoutView2.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state").collection("store").document("c2_torse");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
+
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                }
+                            }
+                        });
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+
                         break;
                     case R.id.item4 :
                         soldoutView4.setVisibility(View.VISIBLE);
+
+                        soldoutView2.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state").collection("store").document("c2_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
+
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                }
+                            }
+                        });
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+
                         break;
                     case R.id.item5 :
                         soldoutView5.setVisibility(View.VISIBLE);
+
+                        soldoutView2.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state").collection("store").document("c3_torse");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
+
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                }
+                            }
+                        });
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+
                         break;
                     case R.id.item6 :
+
+                        soldoutView2.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state").collection("store").document("c3_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
+
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                }
+                            }
+                        });
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+
                         soldoutView6.setVisibility(View.VISIBLE);
                         break;
                     case R.id.item7 :
