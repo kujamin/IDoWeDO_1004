@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                             } catch (FirebaseAuthInvalidUserException e) {
                                 Toast.makeText(LoginActivity.this, "존재하지 않는 아이디 에요!", Toast.LENGTH_SHORT).show();
                             } catch (FirebaseAuthInvalidCredentialsException e) {
-                                Toast.makeText(LoginActivity.this, "이메일 형식이 맞지 않아요!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show();
                             } catch (FirebaseNetworkException e) {
                                 Toast.makeText(LoginActivity.this, "Firebase NetworkException", Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                             usercode.setUsercode(strEmail);
 
                                             // 로그인 성공
-                                            Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             intent.putExtra("userCode", userCode);
                                             startActivity(intent);
                                             finish(); // 현재 액티비티 파괴
@@ -152,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
 
 
 }

@@ -25,10 +25,17 @@
         android:label="오늘의 할 일"
         tools:layout="@layout/fragment_test" />
 
+
     <activity
         android:id="@+id/noticeActivity"
         android:name="com.example.firstproject3.NoticeActivity"
         android:label="activity_notice"
         tools:layout="@layout/activity_notice" />
+
+    <activity
+        android:id="@+id/logout"
+        android:name="com.example.firstproject3.Logout_Popup"
+        android:label="Logout_Popup"
+        tools:layout="@layout/activity_logout_popup" />
 
 </navigation>

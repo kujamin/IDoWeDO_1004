@@ -84,7 +84,16 @@ public class RegisterActivity extends AppCompatActivity {
                 String strPwd = mEtPwd.getText().toString();
                 String strRePwd = mEtRePwd.getText().toString();
 
+                if(strName.length() > 0 && strEmail.length() > 0 && strPwd.length() > 0 && strRePwd.length() > 0) {
                 joinstart(strName, strEmail, strPwd, strRePwd);
+                } else if (strName.length() == 0) {
+                    Toast.makeText(RegisterActivity.this, "이름을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                } else if (strEmail.length() == 0) {
+                    Toast.makeText(RegisterActivity.this, "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                } else if (strPwd.length() == 0) {
+                    Toast.makeText(RegisterActivity.this, "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(RegisterActivity.this, "빠진 항목이 없는지 다시 확인해주세요!", Toast.LENGTH_SHORT).show();
             }
         });
     }
