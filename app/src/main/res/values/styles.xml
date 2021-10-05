@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#F4385E</item>
@@ -11,7 +11,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#F4385E</item>
-        <item name="android:colorPrimaryDark">@color/colorstatus</item> <!-- statusbar color -->
+        <item name="android:statusBarColor" tools:targetApi="l">#ffffff</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

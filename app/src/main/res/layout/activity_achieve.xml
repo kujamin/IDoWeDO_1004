@@ -36,8 +36,8 @@
 
                     <ImageView
                         android:id="@+id/imagebadge1"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/daily30" />
 
@@ -62,8 +62,8 @@
 
                     <ImageView
                         android:id="@+id/imagebadge2"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/daily100" />
 
@@ -87,8 +87,8 @@
 
                     <ImageView
                         android:id="@+id/imagebadge3"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/pair_of_wear" />
 
@@ -123,8 +123,8 @@
 
                     <ImageView
                         android:id="@+id/imagebadge4"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/five_task" />
 
@@ -150,8 +150,8 @@
 
                     <ImageView
                         android:id="@+id/imagebadge5"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/fashion" />
 
@@ -176,8 +176,8 @@
 
                     <ImageView
                         android:id="@+id/imagebadge6"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/challange_starter" />
 
