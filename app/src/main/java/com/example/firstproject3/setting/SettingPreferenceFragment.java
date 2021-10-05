@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
@@ -33,6 +34,7 @@ public class SettingPreferenceFragment extends PreferenceFragment {
     SharedPreferences prefs;
     ProgressDialog pd;
     FirebaseFirestore db;
+    PreferenceCategory preferenceCategory;
 
     ListPreference themePreference;     //테마 변경 리스트 preference변수
     ListPreference soundChangePreference;  // 알림음 변경 리스트 preference변수

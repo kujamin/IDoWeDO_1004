@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     public usercode usercode;
     public Context context;
     public static Context context_login;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,10 @@ public class LoginActivity extends AppCompatActivity {
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
 
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -86,11 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                 strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
 
+                customProgressDialog.show();
+                customProgressDialog.setCancelable(false);
+
                 if(strEmail.length() > 0 && strPwd.length() > 0 ) {
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
+                            customProgressDialog.dismiss();
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException e) {
@@ -124,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }); } else {
+                    customProgressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
                 }
 
