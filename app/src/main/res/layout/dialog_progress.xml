@@ -6,8 +6,8 @@
     android:padding="6dp"
     android:background="@drawable/progress_bg">
     <ProgressBar
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:indeterminateDrawable="@drawable/progress_image"/>
     <TextView
         android:layout_width="match_parent"

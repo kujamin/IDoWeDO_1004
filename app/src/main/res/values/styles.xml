@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#F4385E</item>
+        <item name="colorPrimaryDark">#000</item>
         <item name="colorPrimaryVariant">#F4385E</item>
         <item name="colorOnPrimary">#000</item>
     </style>
@@ -11,7 +12,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#F4385E</item>
-        <item name="android:statusBarColor" tools:targetApi="l">#ffffff</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#fff</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
