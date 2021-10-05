@@ -11,11 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.daily.CalListActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class StoreActivity extends AppCompatActivity {
     View darkView;
@@ -24,13 +28,15 @@ public class StoreActivity extends AppCompatActivity {
             soldoutView9, soldoutView10, soldoutView11, soldoutView12;
     int itemId;
     private FirebaseFirestore firebaseFirestore;
-    private int itemCoin, myCoin;
+    private int itemCoin, myCoin, strCoin1, strCoin2, strCoin3, strCoin4, strCoin5, strCoin6;
     private DocumentReference documentReference, documentReferenceC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+
+        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
         darkView = findViewById(R.id.DarkView);
         popupStore = findViewById(R.id.popupStore);
@@ -49,7 +55,27 @@ public class StoreActivity extends AppCompatActivity {
         soldoutView11 = findViewById(R.id.SoldoutView11);
         soldoutView12 = findViewById(R.id.SoldoutView12);
 
-        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("user").document(usercode).collection("user character")
+                .document("state").collection("store")
+                .whereEqualTo("buy","O")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String str = (String) document.getData().get("name");
+                        switch (str) {
+                            case "business_torso_01" :
+                                soldoutView1.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
 
 
         //팝업창 띄우는 이벤트 리스너
@@ -89,7 +115,6 @@ public class StoreActivity extends AppCompatActivity {
         itemLayout11.setOnClickListener(ocl);
         itemLayout12.setOnClickListener(ocl);
 
-        firebaseFirestore = FirebaseFirestore.getInstance();
         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                 .document("state");
 
@@ -103,6 +128,19 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
 
+        TextView textCoin1 = findViewById(R.id.textCoin1);
+        TextView textCoin2 = findViewById(R.id.textCoin2);
+        TextView textCoin3 = findViewById(R.id.textCoin3);
+        TextView textCoin4 = findViewById(R.id.textCoin4);
+        TextView textCoin5 = findViewById(R.id.textCoin5);
+        TextView textCoin6 = findViewById(R.id.textCoin6);
+
+        strCoin1 = Integer.parseInt(textCoin1.getText().toString());
+        strCoin2 = Integer.parseInt(textCoin2.getText().toString());
+        strCoin3 = Integer.parseInt(textCoin3.getText().toString());
+        strCoin4 = Integer.parseInt(textCoin4.getText().toString());
+        strCoin5 = Integer.parseInt(textCoin5.getText().toString());
+        strCoin6 = Integer.parseInt(textCoin6.getText().toString());
 
 
         //팝업창에서 '예' 클릭 시 화면 닫힘 & SOLD OUT
@@ -115,29 +153,26 @@ public class StoreActivity extends AppCompatActivity {
                 switch (itemId) {
                     case R.id.item1 :
                         soldoutView1.setVisibility(View.VISIBLE);
+
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state").collection("store").document("c1_torse");
 
+                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                                .document("state");
 
-
-                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
-                                    Log.d("TAG",doc.getData()+"=>");
-                                    itemCoin = Integer.parseInt(doc.getString("price"));
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
                                 }
                             }
                         });
 
                         documentReference.update("buy","O");
-                        String str = String.valueOf(myCoin - itemCoin);
-                        documentReferenceC.update("coin",str);
-
-                        Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),String.valueOf(itemCoin),Toast.LENGTH_SHORT).show();
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin1));
 
                         break;
                     case R.id.item2 :
@@ -150,16 +185,6 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
 
-                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot doc = task.getResult();
-                                    itemCoin = Integer.parseInt(doc.getString("price"));
-                                }
-                            }
-                        });
-
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -171,13 +196,11 @@ public class StoreActivity extends AppCompatActivity {
                         });
 
                         documentReference.update("buy","O");
-                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin2));
 
                         break;
                     case R.id.item3 :
                         soldoutView3.setVisibility(View.VISIBLE);
-
-                        soldoutView2.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
@@ -186,16 +209,6 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
 
-                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot doc = task.getResult();
-                                    itemCoin = Integer.parseInt(doc.getString("price"));
-                                }
-                            }
-                        });
-
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -207,13 +220,11 @@ public class StoreActivity extends AppCompatActivity {
                         });
 
                         documentReference.update("buy","O");
-                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin3));
 
                         break;
                     case R.id.item4 :
                         soldoutView4.setVisibility(View.VISIBLE);
-
-                        soldoutView2.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
@@ -222,16 +233,6 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
 
-                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot doc = task.getResult();
-                                    itemCoin = Integer.parseInt(doc.getString("price"));
-                                }
-                            }
-                        });
-
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -243,13 +244,10 @@ public class StoreActivity extends AppCompatActivity {
                         });
 
                         documentReference.update("buy","O");
-                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
-
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin4));
                         break;
                     case R.id.item5 :
                         soldoutView5.setVisibility(View.VISIBLE);
-
-                        soldoutView2.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
@@ -258,16 +256,6 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
 
-                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot doc = task.getResult();
-                                    itemCoin = Integer.parseInt(doc.getString("price"));
-                                }
-                            }
-                        });
-
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -279,12 +267,11 @@ public class StoreActivity extends AppCompatActivity {
                         });
 
                         documentReference.update("buy","O");
-                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin5));
 
                         break;
                     case R.id.item6 :
-
-                        soldoutView2.setVisibility(View.VISIBLE);
+                        soldoutView6.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
@@ -293,16 +280,6 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
 
-                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot doc = task.getResult();
-                                    itemCoin = Integer.parseInt(doc.getString("price"));
-                                }
-                            }
-                        });
-
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -314,9 +291,7 @@ public class StoreActivity extends AppCompatActivity {
                         });
 
                         documentReference.update("buy","O");
-                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
-
-                        soldoutView6.setVisibility(View.VISIBLE);
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin6));
                         break;
                     case R.id.item7 :
                         soldoutView7.setVisibility(View.VISIBLE);
