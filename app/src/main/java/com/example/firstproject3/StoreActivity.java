@@ -1,6 +1,7 @@
 package com.example.firstproject3;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -88,6 +89,22 @@ public class StoreActivity extends AppCompatActivity {
         itemLayout11.setOnClickListener(ocl);
         itemLayout12.setOnClickListener(ocl);
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                .document("state");
+
+        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot doc = task.getResult();
+                    myCoin = Integer.parseInt(doc.getString("coin"));
+                }
+            }
+        });
+
+
+
         //팝업창에서 '예' 클릭 시 화면 닫힘 & SOLD OUT
         textYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,33 +119,25 @@ public class StoreActivity extends AppCompatActivity {
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state").collection("store").document("c1_torse");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
-                                .document("state");
+
 
                         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
+                                    Log.d("TAG",doc.getData()+"=>");
                                     itemCoin = Integer.parseInt(doc.getString("price"));
                                 }
                             }
                         });
 
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-                                }
-                            }
-                        });
-
                         documentReference.update("buy","O");
-                        documentReferenceC.update("coin",String.valueOf(myCoin - itemCoin));
+                        String str = String.valueOf(myCoin - itemCoin);
+                        documentReferenceC.update("coin",str);
 
-                        Toast.makeText(getApplicationContext(),String.valueOf(itemId),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),String.valueOf(itemCoin),Toast.LENGTH_SHORT).show();
 
                         break;
                     case R.id.item2 :
