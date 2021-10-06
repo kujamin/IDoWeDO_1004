@@ -2,11 +2,14 @@ package com.example.firstproject3.bottom_fragment;
 
 import android.app.AppComponentFactory;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.firstproject3.Challenge_Item;
 import com.example.firstproject3.ClickTransActivity;
 import com.example.firstproject3.CustomChallengeAdapter;
@@ -46,6 +50,7 @@ public class Fragment_Challenge extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Challenge_Item> challenge_list;
     private CustomChallengeAdapter customChallengeAdapter;
+    private ImageView imageView;
     final String TAG = "MainActivity";
 
     @Nullable
