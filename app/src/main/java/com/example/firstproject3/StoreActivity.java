@@ -67,8 +67,18 @@ public class StoreActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String str = (String) document.getData().get("name");
                         switch (str) {
-                            case "business_torso_01" :
+                            case "basic_torso_01" :
                                 soldoutView1.setVisibility(View.VISIBLE);
+                                break;
+                            case "basic_leg_01" :
+                                soldoutView2.setVisibility(View.VISIBLE);
+                                break;
+                            case "business_head_01" :
+                                soldoutView3.setVisibility(View.VISIBLE);
+                                break;
+                            case "business_torso_01" :
+                                soldoutView4.setVisibility(View.VISIBLE);
+                                break;
                         }
                     }
                 } else {

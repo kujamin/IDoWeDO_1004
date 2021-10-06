@@ -149,6 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
                         firebaseFirestore.collection("user").document(strEmail).set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+                                Log.d(TAG, "DocumentSnapshot data");
                                 firebaseFirestore.collection("user").document(strEmail).collection("user todo").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -204,13 +205,13 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                //옷 세트 1
                                 Map<String, Object> doc1 = new HashMap<>();
                                 doc1.put("buy", "X");
                                 doc1.put("category", "torse");
-                                doc1.put("name", "business_torse_01");
+                                doc1.put("name", "basic_torso_01");
                                 doc1.put("price", "100");
 
-                                //옷 세트 1
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c1_torse").set(doc1)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -228,7 +229,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Map<String, Object> doc2 = new HashMap<>();
                                 doc2.put("buy", "X");
                                 doc2.put("category", "leg");
-                                doc2.put("name", "business_leg_01");
+                                doc2.put("name", "basic_leg_01");
                                 doc2.put("price", "100");
 
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c1_leg").set(doc2)
@@ -245,14 +246,14 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                //옷 세트 2
                                 Map<String, Object> doc3 = new HashMap<>();
                                 doc3.put("buy", "X");
-                                doc3.put("category", "torso");
-                                doc3.put("name", "basic_torso_01");
+                                doc3.put("category", "head");
+                                doc3.put("name", "business_head_01");
                                 doc3.put("price", "100");
 
-                                //옷 세트 2
-                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_torse").set(doc3)
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_head").set(doc3)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -268,11 +269,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Map<String, Object> doc4 = new HashMap<>();
                                 doc4.put("buy", "X");
-                                doc4.put("category", "leg");
-                                doc4.put("name", "basic_leg_01");
+                                doc4.put("category", "torso");
+                                doc4.put("name", "business_torso_01");
                                 doc4.put("price", "100");
 
-                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_leg").set(doc4)
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_torso").set(doc4)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -288,12 +289,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Map<String, Object> doc5 = new HashMap<>();
                                 doc5.put("buy", "X");
-                                doc5.put("category", "torso");
-                                doc5.put("name", "formal_torso_01");
+                                doc5.put("category", "leg");
+                                doc5.put("name", "business_leg_01");
                                 doc5.put("price", "100");
 
-                                //옷 세트 3
-                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_torse").set(doc5)
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_leg").set(doc5)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -307,13 +307,55 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
 
+
+                                //옷 세트 3
                                 Map<String, Object> doc6 = new HashMap<>();
+                                doc6.put("buy", "X");
+                                doc6.put("category", "head");
+                                doc6.put("name", "formal_head_01");
+                                doc6.put("price", "100");
+
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_head").set(doc6)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
+                                            }
+                                        });
+
+                                Map<String, Object> doc7 = new HashMap<>();
+                                doc6.put("buy", "X");
+                                doc6.put("category", "torso");
+                                doc6.put("name", "formal_torso_01");
+                                doc6.put("price", "100");
+
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_torso").set(doc7)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
+                                            }
+                                        });
+
+                                Map<String, Object> doc8 = new HashMap<>();
                                 doc6.put("buy", "X");
                                 doc6.put("category", "leg");
                                 doc6.put("name", "formal_leg_01");
                                 doc6.put("price", "100");
 
-                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_leg").set(doc6)
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_leg").set(doc8)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -330,7 +372,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
                         Toast.makeText(RegisterActivity.this, "회원가입에 성공했어요!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }

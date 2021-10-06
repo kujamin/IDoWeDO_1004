@@ -59,8 +59,7 @@ public class Fragment_Todo extends Fragment {
 
         todo_list = new ArrayList<Todo_Item>();
         customTodoAdapter = new CustomTodoAdapter(todo_list, viewGroup.getContext());
-        //userCode = ((usercode)getContext()).getUsercode();
-//        Toast.makeText(getContext(), userCode, Toast.LENGTH_SHORT).show();
+
         String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
         firebaseFirestore.collection("user").document(userCode).collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {

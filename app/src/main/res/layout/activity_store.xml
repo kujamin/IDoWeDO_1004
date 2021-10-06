@@ -44,7 +44,7 @@
                             android:layout_height="90dp"
                             android:layout_gravity="center"
                             android:background="@drawable/store_tool"
-                            android:src="@drawable/business_torso_01" />
+                            android:src="@drawable/basic_torso_01" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -131,9 +131,9 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:paddingBottom="20dp"
+                            android:paddingBottom="10dp"
                             android:background="@drawable/store_tool"
-                            android:src="@drawable/business_leg_01" />
+                            android:src="@drawable/basic_leg_01" />
 
                         <TextView
                             android:id="@+id/textView8"
@@ -219,7 +219,8 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/formal_torso_01"
+                            android:paddingTop="20dp"
+                            android:src="@drawable/business_head_01"
                             android:background="@drawable/store_tool"/>
 
                         <TextView
@@ -317,7 +318,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/hood_torso_01"
+                            android:src="@drawable/business_torso_01"
                             android:background="@drawable/store_tool"/>
 
                         <TextView
@@ -405,7 +406,9 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:paddingBottom="20dp"
+                            android:src="@drawable/business_leg_01"
+                            android:background="@drawable/store_tool"/>
 
                         <TextView
                             android:id="@+id/textView17"
@@ -492,7 +495,9 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:src="@drawable/formal_head_01"
+                            android:paddingTop="20dp"
+                            android:background="@drawable/store_tool"/>
 
                         <TextView
                             android:id="@+id/textView22"
@@ -589,7 +594,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:src="@drawable/formal_torso_01" />
 
                         <TextView
                             android:id="@+id/textView31"
@@ -676,7 +681,9 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:src="@drawable/formal_leg_01"
+                            android:paddingBottom="20dp"
+                            android:background="@drawable/store_tool"/>
 
                         <TextView
                             android:id="@+id/textView37"
@@ -763,7 +770,8 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:background="@drawable/store_tool"
+                            android:src="@drawable/hood_torso_01" />
 
                         <TextView
                             android:id="@+id/textView42"
@@ -861,7 +869,9 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:src="@drawable/hood_leg_01"
+                            android:paddingBottom="20dp"
+                            android:background="@drawable/store_tool"/>
 
                         <TextView
                             android:id="@+id/textView47"
@@ -948,7 +958,9 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:background="@drawable/store_tool"
+                            android:paddingTop="20dp"
+                            android:src="@drawable/knight_head_01" />
 
                         <TextView
                             android:id="@+id/textView52"
@@ -1035,7 +1047,8 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:background="@drawable/store_tool"
+                            android:src="@drawable/knight_torso_01" />
 
                         <TextView
                             android:id="@+id/textView57"
