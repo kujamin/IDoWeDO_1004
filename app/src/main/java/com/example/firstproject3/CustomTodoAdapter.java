@@ -46,6 +46,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
     private String TAG = "MainActivity";
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
+    private String usercode;
 
     public static int achieve_point = 0;
 
@@ -75,9 +76,24 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                usercode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         holder.todo_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +102,19 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
+
+                    DocumentReference docRefC = firebaseFirestore.collection("user").document(usercode).collection("user character").document("state");
+                    docRefC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                int myExp = Integer.parseInt(document.getString("exp"));
+                                docRefC.update("exp",String.valueOf(myExp+10));
+
+                            }
+                        }
+                    });
 
                     docRef.update("todo_checkbox",true);
 
