@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="300dp"
-    tools:context=".Logout_Popup"
     android:background="#ffff"
+    tools:context=".Logout_Popup"
     android:orientation="vertical" >
 
 
@@ -32,7 +32,6 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -55,5 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="네!" />
+
     </LinearLayout>
+
 </LinearLayout>

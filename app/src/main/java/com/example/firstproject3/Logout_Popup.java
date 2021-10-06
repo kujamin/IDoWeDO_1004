@@ -18,6 +18,7 @@ public class Logout_Popup extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         setContentView(R.layout.activity_logout_popup);
 
         mFirebaseAuth = FirebaseAuth.getInstance();

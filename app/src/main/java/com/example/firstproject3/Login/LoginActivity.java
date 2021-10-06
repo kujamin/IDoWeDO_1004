@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException e) {
-                                Toast.makeText(LoginActivity.this, "존재하지 않는 아이디 에요!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "존재하지 않는 아이디에요!", Toast.LENGTH_SHORT).show();
                             } catch (FirebaseAuthInvalidCredentialsException e) {
                                 Toast.makeText(LoginActivity.this, "비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show();
                             } catch (FirebaseNetworkException e) {

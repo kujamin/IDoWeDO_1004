@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.firstproject3.AtCheck.Attendance_CheckActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.bottom_fragment.Fragment_Challenge;
 import com.example.firstproject3.bottom_fragment.Fragment_Character;
 import com.example.firstproject3.bottom_fragment.Fragment_Timer;
@@ -33,6 +34,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.otto.Subscribe;
@@ -59,14 +67,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //private MenuItem fragment_todo, fragment_timer;
     //private Menu fragment_todo, fragment_timer;
 
+    TextView tv_get_email, tv_get_name;
     private DrawerLayout drawerLayout;
     private FloatingActionButton fabTodo, fabHabbit;
     Intent intentD;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
     //fragment 선언
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm = getSupportFragmentManager();
@@ -89,20 +100,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
 
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
 
-        if (id == R.id.Daily){
+        if (id == R.id.Daily) {
             Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
             startActivity(intent);
-        }
-
-        else if(id == R.id.attendence){
+        } else if (id == R.id.attendence) {
             Intent intent = new Intent(getApplicationContext(), Attendance_CheckActivity.class);
             startActivity(intent);
         }
@@ -114,9 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_setting:
-                Toast.makeText(getApplicationContext(),"감사",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "감사", Toast.LENGTH_LONG).show();
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -134,19 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String userCode = intentM.getStringExtra("userCode");
 
 
-//        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View view = inflater.inflate(R.layout.activity_daily_make, null);
-//
-//        textName = view.findViewById(R.id.editTextTextPersonName);
-//        buttonReser = view.findViewById(R.id.buttonReser);
-
-
-
         //서랍장
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View navHeader = navigationView.getHeaderView(0);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -158,9 +157,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        fab = (FloatingActionButton)findViewById(R.id.fab);
-        todoFab = (FloatingActionButton)findViewById(R.id.todoFab);
-        habbitFab = (FloatingActionButton)findViewById(R.id.habbitFab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        todoFab = (FloatingActionButton) findViewById(R.id.todoFab);
+        habbitFab = (FloatingActionButton) findViewById(R.id.habbitFab);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        tv_get_email = (TextView) navHeader.findViewById(R.id.tv_get_email);
+        tv_get_name = (TextView) navHeader.findViewById(R.id.tv_get_name);
+
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                String name = (group.getUsername());
+                String email = (group.getEmailid());
+
+                tv_get_name.setText("이름: "+ name);
+                tv_get_email.setText("ID: " + email);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         todoFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         habbitFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),HabbitMakeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HabbitMakeActivity.class);
                 intent.putExtra("userCode", userCode);
                 startActivity(intent);
 
@@ -205,11 +231,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        fabOpen = AnimationUtils.loadAnimation(this,R.anim.rotate_open_anim);
-        fabClose = AnimationUtils.loadAnimation(this,R.anim.rotate_close_anim);
+        fabOpen = AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim);
+        fabClose = AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim);
 
-        rotateForward = AnimationUtils.loadAnimation(this,R.anim.from_button_anim);
-        rotateBackward = AnimationUtils.loadAnimation(this,R.anim.to_bottom_anim);
+        rotateForward = AnimationUtils.loadAnimation(this, R.anim.from_button_anim);
+        rotateBackward = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.fragment_Todo:
                         setFrag(0);
                         toolbar.setTitle("오늘의 할 일");
@@ -267,56 +293,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }//onCreate
 
 
-
-
-    private void setFrag(int n){
-        switch (n){
+    private void setFrag(int n) {
+        switch (n) {
             case 0:
-                if(fragment_todo == null) {
+                if (fragment_todo == null) {
                     fragment_todo = new Fragment_Todo();
                     fm.beginTransaction().add(R.id.frame, fragment_todo).commit();
                 }
 
-                if(fragment_todo != null) fm.beginTransaction().show(fragment_todo).commit();
-                if(fragment_timer != null) fm.beginTransaction().hide(fragment_timer).commit();
-                if(fragment_challenge != null) fm.beginTransaction().hide(fragment_challenge).commit();
-                if(fragment_character != null) fm.beginTransaction().hide(fragment_character).commit();
+                if (fragment_todo != null) fm.beginTransaction().show(fragment_todo).commit();
+                if (fragment_timer != null) fm.beginTransaction().hide(fragment_timer).commit();
+                if (fragment_challenge != null)
+                    fm.beginTransaction().hide(fragment_challenge).commit();
+                if (fragment_character != null)
+                    fm.beginTransaction().hide(fragment_character).commit();
 
                 break;
             case 1:
-                if(fragment_timer == null) {
+                if (fragment_timer == null) {
                     fragment_timer = new Fragment_Timer();
                     fm.beginTransaction().add(R.id.frame, fragment_timer).commit();
                 }
 
-                if(fragment_todo != null) fm.beginTransaction().hide(fragment_todo).commit();
-                if(fragment_timer != null) fm.beginTransaction().show(fragment_timer).commit();
-                if(fragment_challenge != null) fm.beginTransaction().hide(fragment_challenge).commit();
-                if(fragment_character != null) fm.beginTransaction().hide(fragment_character).commit();
+                if (fragment_todo != null) fm.beginTransaction().hide(fragment_todo).commit();
+                if (fragment_timer != null) fm.beginTransaction().show(fragment_timer).commit();
+                if (fragment_challenge != null)
+                    fm.beginTransaction().hide(fragment_challenge).commit();
+                if (fragment_character != null)
+                    fm.beginTransaction().hide(fragment_character).commit();
 
                 break;
             case 3:
-                if(fragment_challenge == null) {
+                if (fragment_challenge == null) {
                     fragment_challenge = new Fragment_Challenge();
                     fm.beginTransaction().add(R.id.frame, fragment_challenge).commit();
                 }
 
-                if(fragment_todo != null) fm.beginTransaction().hide(fragment_todo).commit();
-                if(fragment_timer != null) fm.beginTransaction().hide(fragment_timer).commit();
-                if(fragment_challenge != null) fm.beginTransaction().show(fragment_challenge).commit();
-                if(fragment_character != null) fm.beginTransaction().hide(fragment_character).commit();
+                if (fragment_todo != null) fm.beginTransaction().hide(fragment_todo).commit();
+                if (fragment_timer != null) fm.beginTransaction().hide(fragment_timer).commit();
+                if (fragment_challenge != null)
+                    fm.beginTransaction().show(fragment_challenge).commit();
+                if (fragment_character != null)
+                    fm.beginTransaction().hide(fragment_character).commit();
 
                 break;
             case 4:
-                if(fragment_character == null) {
+                if (fragment_character == null) {
                     fragment_character = new Fragment_Character();
                     fm.beginTransaction().add(R.id.frame, fragment_character).commit();
                 }
 
-                if(fragment_todo != null) fm.beginTransaction().hide(fragment_todo).commit();
-                if(fragment_timer != null) fm.beginTransaction().hide(fragment_timer).commit();
-                if(fragment_challenge != null) fm.beginTransaction().hide(fragment_challenge).commit();
-                if(fragment_character != null) fm.beginTransaction().show(fragment_character).commit();
+                if (fragment_todo != null) fm.beginTransaction().hide(fragment_todo).commit();
+                if (fragment_timer != null) fm.beginTransaction().hide(fragment_timer).commit();
+                if (fragment_challenge != null)
+                    fm.beginTransaction().hide(fragment_challenge).commit();
+                if (fragment_character != null)
+                    fm.beginTransaction().show(fragment_character).commit();
 
                 break;
         }
@@ -327,8 +359,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         //BusProvider.getInstance().post(new ActivityResultEvent(requestCode, resultCode, data));
 
-        if(requestCode == 101) {
-            if(resultCode == RESULT_OK) {
+        if (requestCode == 101) {
+            if (resultCode == RESULT_OK) {
                 EventBus.getInstance().post(ActivityResultEvent.create(requestCode, resultCode, data));
                 fragment_timer.onActivityResultEvent(ActivityResultEvent.create(requestCode, resultCode, data));
             }
@@ -337,8 +369,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //fab 애니메이션
-    private void animateFab(){
-        if(isOpen){
+    private void animateFab() {
+        if (isOpen) {
             fab.startAnimation(rotateForward);
             todoFab.startAnimation(fabClose);
             habbitFab.startAnimation(fabClose);
@@ -349,8 +381,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TextView textView = findViewById(R.id.textView5);
             textView.setVisibility(View.VISIBLE);
             textView.setClickable(true);
-        }
-        else {
+        } else {
             fab.startAnimation(rotateBackward);
             todoFab.startAnimation(fabOpen);
             habbitFab.startAnimation(fabOpen);
