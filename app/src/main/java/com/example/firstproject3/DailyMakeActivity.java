@@ -26,11 +26,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.bottom_fragment.Fragment_Todo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -57,6 +65,10 @@ public class DailyMakeActivity extends AppCompatActivity {
     TextView textDaily;
     View view;
 
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
+    private String userCode;
+
     Calendar myCalendar = Calendar.getInstance();
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -77,6 +89,10 @@ public class DailyMakeActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.todo_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         Button btnReser = findViewById(R.id.buttonReser);
         textDaily = findViewById(R.id.textViewDaily);
@@ -225,7 +241,17 @@ public class DailyMakeActivity extends AppCompatActivity {
             }
         });
 
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
 
         btnReser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,9 +263,9 @@ public class DailyMakeActivity extends AppCompatActivity {
                 String cateText = textch.getText().toString().trim();
                 String category = strUrl; //습관 카테고리 텍스트
                 String id = UUID.randomUUID().toString();
-                String usercode = ((usercode)getApplication()).getUsercode();
+                //String usercode = ((usercode)getApplication()).getUsercode();
 
-                uploadData(title, date, time, memo, category, cateText, id, usercode);
+                uploadData(title, date, time, memo, category, cateText, id, userCode);
 
                 finish();
             }

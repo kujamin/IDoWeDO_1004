@@ -53,6 +53,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
+    private String userCode;
 
     LinearLayout cateLayout;
     TextView textCate, textch, textDaily;
@@ -102,11 +103,9 @@ public class HabbitMakeActivity extends AppCompatActivity {
         cateLayout = findViewById(R.id.cateLayout);
         textch = findViewById(R.id.textch);
 
-
         pd = new ProgressDialog(this);
 
         db = FirebaseFirestore.getInstance();
-
 
         cateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +186,18 @@ public class HabbitMakeActivity extends AppCompatActivity {
             }
         });
 
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         btnReser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,9 +209,9 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 String category = strUrl; //습관 카테고리 텍스트
                 String cateText = textch.getText().toString().trim();
                 String id = UUID.randomUUID().toString();
-                String usercode = ((usercode)getApplication()).getUsercode();
+                //String usercode = ((usercode)getApplication()).getUsercode();
 
-                uploadData(title, date, memo, category, cateText, id, usercode);
+                uploadData(title, date, memo, category, cateText, id, userCode);
 
 //                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
 //                    @Override

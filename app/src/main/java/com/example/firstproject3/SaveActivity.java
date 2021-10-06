@@ -3,6 +3,7 @@ package com.example.firstproject3;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -10,13 +11,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
@@ -30,8 +44,10 @@ public class SaveActivity extends AppCompatActivity {
     private EditText goalEditHour, goalEditMin;
     ProgressDialog pd;
     FirebaseFirestore db;
-    private String goalHour, goalMin;
+    private String goalHour, goalMin, userCode;
     private int hour,min;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +58,11 @@ public class SaveActivity extends AppCompatActivity {
         goalEditHour = findViewById(R.id.editGoalHour);
         goalEditMin = findViewById(R.id.editGoalMin);
 
-        String usercode = ((usercode)getApplication()).getUsercode();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        //String usercode = ((usercode)getApplication()).getUsercode();
 
         pd = new ProgressDialog(this);
 
@@ -51,12 +71,20 @@ public class SaveActivity extends AppCompatActivity {
 //        goalHour = goalEditHour.getText().toString().trim();
 //        goalMin = goalEditMin.getText().toString().trim();
 
-
-
-
         //이름 목표치 null일 때때
 
 
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         saveText = findViewById(R.id.saveText);
         saveText.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +98,7 @@ public class SaveActivity extends AppCompatActivity {
                 String strGoal = goalHour + " : " + goalMin;
                 String strUrl = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/record_button.png?alt=media&token=458bb730-97bc-4790-a4c9-3cd95034ec57";
 
-                uploadData(id, strName, strGoal, usercode, strUrl);
+                uploadData(id, strName, strGoal, userCode, strUrl);
 
                 intent.putExtra("timer_id", id);
                 intent.putExtra("strName",strName);

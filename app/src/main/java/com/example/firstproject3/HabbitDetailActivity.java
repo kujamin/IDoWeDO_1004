@@ -21,8 +21,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -39,7 +47,9 @@ public class HabbitDetailActivity extends AppCompatActivity {
     private Button habbitDetail_save, habbitDetail_delete;
     private FirebaseFirestore firebaseFirestore;
     private String TAG = "MainActivity";
-    private String strUrl;
+    private String strUrl, userCode;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -61,6 +71,10 @@ public class HabbitDetailActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.habbitDetail_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         habbitDetail_title = findViewById(R.id.habbitDetail_title);
         habbitDetail_date = findViewById(R.id.habbitDetail_dateResult);
@@ -107,7 +121,18 @@ public class HabbitDetailActivity extends AppCompatActivity {
             }
         });
 
-        String usercode = ((usercode)getApplication()).getUsercode();
+        //String usercode = ((usercode)getApplication()).getUsercode();
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //저장 버튼 누르면
         habbitDetail_save.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +144,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
                 String str_cateText = habbitDetail_textch.getText().toString().trim();
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(habbit_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user habbit").document(habbit_id);
 
                 docRef.update("habbit_title",str_title);
                 docRef.update("habbit_date",str_date);
@@ -142,7 +167,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(habbit_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user habbit").document(habbit_id);
 
                 docRef.delete();
                 finish();

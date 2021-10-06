@@ -1,5 +1,6 @@
 package com.example.firstproject3;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,7 +20,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.bumptech.glide.Glide;
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -35,8 +44,10 @@ public class TodoDetailActivity extends AppCompatActivity {
     private Button todoDetail_save, todoDetail_delete;
     private FirebaseFirestore firebaseFirestore;
     private String TAG = "MainActivity";
-    private String strUrl;
+    private String strUrl, userCode;
     int selectHour, selectMinute;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -58,6 +69,10 @@ public class TodoDetailActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.todoDetail_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         todoDetail_title = findViewById(R.id.todoDetail_title);
         todoDetail_date = findViewById(R.id.todoDetail_textViewDaily);
@@ -128,7 +143,18 @@ public class TodoDetailActivity extends AppCompatActivity {
             }
         });
 
-        String usercode = ((usercode)getApplication()).getUsercode();
+        //String usercode = ((usercode)getApplication()).getUsercode();
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //저장 버튼 누르면
         todoDetail_save.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +167,7 @@ public class TodoDetailActivity extends AppCompatActivity {
                 String str_time = todoDetail_textViewTime.getText().toString().trim();
 
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(todo_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user todo").document(todo_id);
 
                 docRef.update("todo_title",str_title);
                 docRef.update("todo_date",str_date);
@@ -165,7 +191,7 @@ public class TodoDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(todo_id);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user todo").document(todo_id);
 
                 docRef.delete();
                 finish();

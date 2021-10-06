@@ -12,11 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.R;
 import com.example.firstproject3.Todo_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
@@ -39,13 +47,22 @@ public class CalendarActivity extends AppCompatActivity {
     private MaterialCalendarView calendarView;
     private String strDate;
     final String TAG = "MainActivity";
+    private String userCode;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calendar);
 
-        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
+        //String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         String sDY = String.valueOf(CalendarDay.today().getYear());
         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
@@ -72,26 +89,35 @@ public class CalendarActivity extends AppCompatActivity {
         cal_list = new ArrayList<CalListActivity>();
         calAdapter = new CustomCalendar(cal_list, getApplicationContext());
 
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("user").document(userCode).collection("user todo")
-                .whereEqualTo("todo_date", strDate)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            cal_list.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Log.d(TAG, document.getId() + " => " + document.getData().get("todo_title"));
-                                cal_list.add(0, new CalListActivity((String)document.getData().get("todo_title"),(String)document.getData().get("todo_time")));
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+
+                firebaseFirestore.collection("user").document(userCode).collection("user todo")
+                        .whereEqualTo("todo_date", strDate)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    cal_list.clear();
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        cal_list.add(0, new CalListActivity((String)document.getData().get("todo_title"),(String)document.getData().get("todo_time")));
+                                    }
+                                    calAdapter.notifyDataSetChanged();
+                                } else {
+                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                }
                             }
-                            calAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+                        });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         listcal.setAdapter(calAdapter);
 

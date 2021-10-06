@@ -11,10 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.daily.CalListActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,13 +38,19 @@ public class StoreActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private int itemCoin, myCoin, strCoin1, strCoin2, strCoin3, strCoin4, strCoin5, strCoin6;
     private DocumentReference documentReference, documentReferenceC;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
+    private String userCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+        //String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         darkView = findViewById(R.id.DarkView);
         popupStore = findViewById(R.id.popupStore);
@@ -55,9 +69,20 @@ public class StoreActivity extends AppCompatActivity {
         soldoutView11 = findViewById(R.id.SoldoutView11);
         soldoutView12 = findViewById(R.id.SoldoutView12);
 
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("user").document(usercode).collection("user character")
+        firebaseFirestore.collection("user").document(userCode).collection("user character")
                 .document("state").collection("store")
                 .whereEqualTo("buy","O")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -125,7 +150,7 @@ public class StoreActivity extends AppCompatActivity {
         itemLayout11.setOnClickListener(ocl);
         itemLayout12.setOnClickListener(ocl);
 
-        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                 .document("state");
 
         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -165,10 +190,10 @@ public class StoreActivity extends AppCompatActivity {
                         soldoutView1.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("store").document("c1_torse");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -189,10 +214,10 @@ public class StoreActivity extends AppCompatActivity {
                         soldoutView2.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("store").document("c1_leg");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -213,10 +238,10 @@ public class StoreActivity extends AppCompatActivity {
                         soldoutView3.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("store").document("c2_head");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -237,10 +262,10 @@ public class StoreActivity extends AppCompatActivity {
                         soldoutView4.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("store").document("c2_torso");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -260,10 +285,10 @@ public class StoreActivity extends AppCompatActivity {
                         soldoutView5.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("store").document("c2_leg");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -284,10 +309,10 @@ public class StoreActivity extends AppCompatActivity {
                         soldoutView6.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("store").document("c3_head");
 
-                        documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

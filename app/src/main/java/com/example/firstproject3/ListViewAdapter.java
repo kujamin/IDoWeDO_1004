@@ -20,8 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +40,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
     private ArrayList<Timer_Item> arrayList;
     private Context context;
     private FirebaseFirestore firebaseFirestore;
-    private String TAG = "MainActivity";
+    private String TAG = "MainActivity", userCode;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
 
     public ListViewAdapter(ArrayList<Timer_Item> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -55,13 +65,28 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
         holder.timerGoal.setText(arrayList.get(position).getTimerGoal());
         holder.timerRecord.setText(arrayList.get(position).getTimerRecord());
 
-        String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+        //String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         holder.timerImgRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(arrayList.get(position).getTimerId());
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user timer").document(arrayList.get(position).getTimerId());
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -92,7 +117,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
                     public void onClick(DialogInterface dialog,int which){
                         // OK 버튼을 눌렸을 경우
                         firebaseFirestore = FirebaseFirestore.getInstance();
-                        DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(arrayList.get(position).getTimerId());
+                        DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user timer").document(arrayList.get(position).getTimerId());
 
                         docRef.delete();
                     }
