@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
 
+
         //로딩창 객체 생성
         customProgressDialog = new ProgressDialog(this);
         //로딩창을 투명하게
@@ -149,6 +150,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
     }

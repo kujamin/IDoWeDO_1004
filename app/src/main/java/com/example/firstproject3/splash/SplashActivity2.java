@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity2 extends Activity {
 
@@ -53,10 +55,18 @@ public class SplashActivity2 extends Activity {
                             sleep(100);
                             waited += 100;
                         }
-                        Intent intent = new Intent(SplashActivity2.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
-                        SplashActivity2.this.finish();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null){
+                            Intent intent = new Intent(SplashActivity2.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            SplashActivity2.this.finish();
+                        } else{
+                            Intent intent = new Intent(SplashActivity2.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            SplashActivity2.this.finish();
+                        }
                     } catch (InterruptedException e) {
                         //do hothing
                     } finally {

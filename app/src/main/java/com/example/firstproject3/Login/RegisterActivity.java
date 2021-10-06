@@ -128,11 +128,6 @@ public class RegisterActivity extends AppCompatActivity {
                         account.setRepassword(strRePwd);
                         account.setPassword(strPwd);
                         account.setNickname(null);
-                        account.setCoin(200);
-                        account.setExp(1);
-                        account.setHeart(3);
-                        account.setLevel(1);
-                        account.setMaxexp(30);
 
                         // setValue : database에 insert 행위
                         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
