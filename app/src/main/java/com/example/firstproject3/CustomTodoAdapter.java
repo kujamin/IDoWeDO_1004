@@ -176,9 +176,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
                             context.startActivity(intent);
 
-                            Toast.makeText(v.getContext(),"날짜 : " + document.getString("todo_date")
-                                    + "\n메모 : " + document.getString("todo_memo")
-                                    + "\n시간 : " + document.getString("todo_time"),Toast.LENGTH_SHORT).show();
                             if (document.exists()) {
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             } else {

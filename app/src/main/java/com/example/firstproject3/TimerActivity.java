@@ -19,10 +19,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.bottom_fragment.Fragment_Timer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -46,6 +54,9 @@ public class TimerActivity extends AppCompatActivity {
     TextView timerPause;
     private FirebaseFirestore firebaseFirestore;
     private Thread timeThread = null;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
+    private String userCode;
 
 
     @Override
@@ -53,6 +64,9 @@ public class TimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         timerText = (TextView) findViewById(R.id.timerText);
         stopStartButton = (Button) findViewById(R.id.startStopButton);
@@ -61,28 +75,36 @@ public class TimerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String timer_id = intent.getStringExtra("timer_id");
 
-        String usercode = ((usercode)getApplication()).getUsercode();
-
+        //String usercode = ((usercode)getApplication()).getUsercode();
         firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user timer").document(timer_id);
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful()) {
-                                DocumentSnapshot doc = task.getResult();
-                                String recordText = (String) doc.getString("timer_record");
-                                int timedb = Integer.parseInt(doc.getString("timer_time"));
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user timer").document(timer_id);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()) {
+                            DocumentSnapshot doc = task.getResult();
+                            String recordText = (String) doc.getString("timer_record");
+                            int timedb = Integer.parseInt(doc.getString("timer_time"));
 //                                str_time = doc.getString("timer_time");
 //                                time = Integer.parseInt(doc.getString("timer_time"));
-                                timerText.setText(recordText);
-                                time = timedb;
-
-                                Toast.makeText(getApplicationContext(),timedb+"",Toast.LENGTH_SHORT).show();
-                            }
+                            timerText.setText(recordText);
+                            time = timedb;
                         }
-                    });
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-
+            }
+        });
 
         //타이머 이미지 누르면
         stopStartButton.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +136,6 @@ public class TimerActivity extends AppCompatActivity {
                     //timerTask.cancel();
                     timerPause.setText("초기화");
                     timerPause.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-                    Toast.makeText(getApplicationContext(),time+"",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -129,7 +149,7 @@ public class TimerActivity extends AppCompatActivity {
                 if(timerStarted == false) {
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode)
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode)
                             .collection("user timer").document(timer_id);
 
                     time = 0;
@@ -139,13 +159,11 @@ public class TimerActivity extends AppCompatActivity {
                     String str = timerText.getText().toString();
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
-                    DocumentReference docRef = firebaseFirestore.collection("user").document(usercode)
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode)
                             .collection("user timer").document(timer_id);
 
                     docRef.update("timer_record", str);
                     docRef.update("timer_time",String.valueOf(time));
-
-
 
                     finish();
                 }

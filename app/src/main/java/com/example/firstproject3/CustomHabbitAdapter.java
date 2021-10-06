@@ -117,8 +117,6 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
 
-                                Toast.makeText(v.getContext(),"타이틀 : " + document.getString("habbit_title"),Toast.LENGTH_SHORT).show();
-
                                 if (document.exists()) {
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 } else {
@@ -163,11 +161,6 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                             intent.putExtra("habbit_id",document.getString("habbit_id"));
 
                             context.startActivity(intent);
-
-                            Toast.makeText(v.getContext(),"날짜 : " + document.getString("habbit_date")
-                                    + arrayList.get(position).getHabbit_title()
-                                    + "/n타이틀 : " + document.getString("habbit_title")
-                                    + "\n메모 : " + document.getString("habbit_memo"),Toast.LENGTH_LONG).show();
 
                             if (document.exists()) {
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());

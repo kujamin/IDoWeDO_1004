@@ -3,17 +3,50 @@ package com.example.firstproject3;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.firstproject3.Login.UserAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class DecoActivity extends AppCompatActivity {
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
+    private String userCode;
+    private FirebaseFirestore firebaseFirestore;
+    private TextView decoSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deco);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        decoSave = findViewById(R.id.decoSave);
 
         final ImageButton imgbtnHead = findViewById(R.id.imageBtnHead);
         final ImageButton imgbtnTorso = findViewById(R.id.imageBtnTorso);
@@ -59,6 +92,58 @@ public class DecoActivity extends AppCompatActivity {
         final ImageButton imgbtnArm7 = findViewById(R.id.imageButtonArm7);
         final ImageButton imgbtnArm8 = findViewById(R.id.imageButtonArm8);
         final ImageButton imgbtnArm9 = findViewById(R.id.imageButtonArm9);
+
+        //이미지 버튼 클릭 막기
+        imgbtnHead1.setEnabled(false);
+        imgbtnHead2.setEnabled(false);
+        imgbtnHead3.setEnabled(false);
+        imgbtnHead4.setEnabled(false);
+        imgbtnHead5.setEnabled(false);
+        imgbtnHead6.setEnabled(false);
+        imgbtnHead7.setEnabled(false);
+        imgbtnHead8.setEnabled(false);
+        imgbtnHead9.setEnabled(false);
+
+        imgbtnTorse1.setEnabled(false);
+        imgbtnLeg1.setEnabled(false);
+        imgbtnArm1.setEnabled(false);
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+
+                firebaseFirestore.collection("user").document(userCode).collection("user character")
+                        .document("state").collection("store")
+                        .whereEqualTo("buy","O")
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String cloName = (String) document.getData().get("name");
+
+                                switch (cloName) {
+                                    case "formal_head_01" :
+                                        imgbtnHead1.setEnabled(true);
+                                        break;
+                                    case "business_torso_01" :
+                                        imgbtnTorse1.setEnabled(true);
+                                        break;
+                                }
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //각각의 버튼 클릭 시 색상 변경 및 이미지 변경
         imgbtnHead.setOnClickListener(new View.OnClickListener() {
