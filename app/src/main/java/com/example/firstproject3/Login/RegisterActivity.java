@@ -203,6 +203,21 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                //캐릭터 옷 상태 저장
+                                Map<String, Object> cloState = new HashMap<>();
+                                cloState.put("cloHead", "");
+                                cloState.put("cloTorso", "");
+                                cloState.put("cloLeg", "");
+                                cloState.put("cloArm", "");
+
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("deco").set(cloState)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
                                 //옷 세트 1
                                 Map<String, Object> doc1 = new HashMap<>();
                                 doc1.put("buy", "X");

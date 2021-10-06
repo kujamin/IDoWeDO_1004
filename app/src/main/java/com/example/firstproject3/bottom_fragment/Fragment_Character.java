@@ -3,6 +3,8 @@ package com.example.firstproject3.bottom_fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.firstproject3.AchieveActivity;
 import com.example.firstproject3.CustomTodoAdapter;
 import com.example.firstproject3.DecoActivity;
@@ -70,6 +73,11 @@ public class Fragment_Character extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        ImageView cloStateHead = rootView.findViewById(R.id.imageViewHeadMini);
+        ImageView cloStateTorso = rootView.findViewById(R.id.imageViewTorsoMini);
+        ImageView cloStateLeg = rootView.findViewById(R.id.imageViewLegMini);
+        ImageView cloStateArm = rootView.findViewById(R.id.imageViewArmMini);
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.expProgressBar);
         textLevel = (TextView) rootView.findViewById(R.id.textViewLevel);
@@ -126,6 +134,27 @@ public class Fragment_Character extends Fragment {
                             }
                         });
 
+        DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
+
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+
+                            Glide.with(rootView.getContext()).load(document.getString("cloHead")).into(cloStateHead);
+                            Glide.with(rootView.getContext()).load(document.getString("cloTorso")).into(cloStateTorso);
+                            Glide.with(rootView.getContext()).load(document.getString("cloLeg")).into(cloStateLeg);
+                            Glide.with(rootView.getContext()).load(document.getString("cloArm")).into(cloStateArm);
+                        }
+
+                    }
+                });
+            }
+        });
 
 
 //                        maxExp = 100+level;
@@ -226,4 +255,6 @@ public class Fragment_Character extends Fragment {
 
         return rootView;
     }
+
+
 }

@@ -1,523 +1,553 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DecoActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Deco_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title=" "
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <FrameLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/deco_saveText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#A1D1FF"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:textColor="@color/colorwhite"
+            android:text="저장"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"/>
 
-            <ImageView
-                android:id="@+id/imageView20"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:src="@drawable/chara" />
+    </androidx.appcompat.widget.Toolbar>
 
-            <ImageView
-                android:id="@+id/imageHead"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="invisible"
-                android:src="@drawable/formal_head_01" />
-
-            <ImageView
-                android:id="@+id/imageLeg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/business_leg_01"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/imageTorso"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="invisible"
-                android:src="@drawable/business_torso_01" />
-
-            <ImageView
-                android:id="@+id/imageArm"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="invisible"
-                android:src="@drawable/claw_hand_01" />
-
-            <ImageButton
-                android:id="@+id/imageReset"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_marginRight="10dp"
-                android:src="@android:drawable/ic_menu_revert"
-                android:background="@drawable/reset_tool"/>
-
-            <TextView
-                android:id="@+id/decoSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="25sp"
-                android:textColor="#000"
-                android:text="저장" />
-
-        </FrameLayout>
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Deco_toolbar"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/imageBtnHead"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="#fff"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/head_deco" />
-
-            <ImageButton
-                android:id="@+id/imageBtnTorso"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="#CACACA"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/torso_deco" />
-
-            <ImageButton
-                android:id="@+id/imageBtnLeg"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="#CACACA"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/leg_deco" />
-
-            <ImageButton
-                android:id="@+id/imageBtnArm"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#CACACA"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/arm_deco" />
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2">
-
-            <TableLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#D0D0D0">
+                android:background="#A1D1FF"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
-                <TableRow
+                <ImageView
+                    android:id="@+id/imageView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:src="@drawable/chara" />
+
+                <ImageView
+                    android:id="@+id/imageHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/formal_head_01"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imageLeg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/business_leg_01"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imageTorso"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/business_torso_01"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imageArm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/claw_hand_01"
+                    android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/imageReset"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/reset_tool"
+                    android:src="@android:drawable/ic_menu_revert" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageBtnHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:src="@drawable/head_deco" />
+
+                <ImageButton
+                    android:id="@+id/imageBtnTorso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#CACACA"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:src="@drawable/torso_deco" />
+
+                <ImageButton
+                    android:id="@+id/imageBtnLeg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#CACACA"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:src="@drawable/leg_deco" />
+
+                <ImageButton
+                    android:id="@+id/imageBtnArm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#CACACA"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:src="@drawable/arm_deco" />
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:background="#D0D0D0">
 
-                    <FrameLayout
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="2dp">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonHead1"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:src="@drawable/formal_head_01"
-                            android:background="#fff"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso1"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:src="@drawable/business_torso_01"
-                            android:background="#fff"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg1"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:src="@drawable/business_leg_01"
-                            android:background="#fff"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonArm1"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:src="@drawable/claw_hand_01"
-                            android:background="#fff"
-                            android:visibility="invisible"/>
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="2dp">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonHead2"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/business_head_01" />
-
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso2"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/basic_torso_01"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg2"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/basic_leg_01"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonArm2"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/knife_hand_01"
-                            android:visibility="invisible"/>
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="2dp">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonHead3"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/knight_head_01" />
-
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso3"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/knight_torso_01"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg3"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/knight_leg_01"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonArm3"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/book_hand_01"
-                            android:visibility="invisible"/>
-
-                    </FrameLayout>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="2dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonHead4"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/magician_head_01" />
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso4"
+                            <ImageButton
+                                android:id="@+id/imageButtonHead1"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/business_head_01" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso1"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/basic_torso_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg1"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/basic_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm1"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/claw_hand_01"
+                                android:visibility="invisible" />
+                        </FrameLayout>
+
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/hood_torso_01"
-                            android:visibility="invisible"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg4"
+                            <ImageButton
+                                android:id="@+id/imageButtonHead2"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/formal_head_01" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso2"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/business_torso_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg2"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/business_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm2"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/knife_hand_01"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/hood_leg_01"
-                            android:visibility="invisible"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonArm4"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/staff_hand_01"
-                            android:visibility="invisible"/>
+                            <ImageButton
+                                android:id="@+id/imageButtonHead3"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/knight_head_01" />
 
-                    </FrameLayout>
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso3"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/formal_torso_01"
+                                android:visibility="invisible" />
 
-                    <FrameLayout
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg3"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/formal_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm3"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/book_hand_01"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="2dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonHead5"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/rogue_head_01" />
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso5"
+                            <ImageButton
+                                android:id="@+id/imageButtonHead4"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/magician_head_01" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso4"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/hood_torso_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg4"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/hood_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm4"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/staff_hand_01"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/magician_torso_01"
-                            android:visibility="invisible"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg5"
+                            <ImageButton
+                                android:id="@+id/imageButtonHead5"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/rogue_head_01" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso5"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/magician_torso_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg5"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/magician_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm5"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+                        </FrameLayout>
+
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/magician_leg_01"
-                            android:visibility="invisible"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonArm5"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
-                    </FrameLayout>
+                            <ImageButton
+                                android:id="@+id/imageButtonHead6"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/alien_head_02" />
 
-                    <FrameLayout
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso6"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/rogue_torso_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg6"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/rogue_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm6"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="2dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonHead6"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/alien_head_02" />
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso6"
+                            <ImageButton
+                                android:id="@+id/imageButtonHead7"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/alien_head_01" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso7"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/alien_torso_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg7"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/alien_leg_01"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm7"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/rogue_torso_01"
-                            android:visibility="invisible"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg6"
+                            <ImageButton
+                                android:id="@+id/imageButtonHead8"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso8"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/alien_torso_02"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg8"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/alien_leg_02"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm8"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+                        </FrameLayout>
+
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/rogue_leg_01"
-                            android:visibility="invisible"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonArm6"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
+                            <ImageButton
+                                android:id="@+id/imageButtonHead9"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco" />
 
-                    </FrameLayout>
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso9"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
 
-                </TableRow>
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg9"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                            <ImageButton
+                                android:id="@+id/imageButtonArm9"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_weight="1">
+                        </FrameLayout>
 
-                        <ImageButton
-                            android:id="@+id/imageButtonHead7"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/alien_head_01" />
+                    </TableRow>
+                </TableLayout>
+            </ScrollView>
 
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso7"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/alien_torso_01"
-                            android:visibility="invisible"/>
+        </LinearLayout>
+    </FrameLayout>
 
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg7"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/alien_leg_01"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonArm7"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_weight="1">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonHead8"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco" />
-
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso8"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/alien_torso_02"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg8"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/alien_leg_02"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonArm8"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_weight="1">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonHead9"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco" />
-
-                        <ImageButton
-                            android:id="@+id/imageButtonTorso9"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonLeg9"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
-                            android:id="@+id/imageButtonArm9"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#fff"
-                            android:src="@drawable/head_deco"
-                            android:visibility="invisible"/>
-
-                    </FrameLayout>
-
-                </TableRow>
-            </TableLayout>
-        </ScrollView>
-
-    </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

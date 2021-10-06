@@ -1,9 +1,11 @@
 package com.example.firstproject3;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,9 +14,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,30 +27,39 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DecoActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String userCode;
     private FirebaseFirestore firebaseFirestore;
-    private TextView decoSave;
+    private TextView saveText;
+    private String cloHead, cloTorso, cloLeg, cloArm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deco);
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.Deco_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        saveText = findViewById(R.id.deco_saveText);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-
-        decoSave = findViewById(R.id.decoSave);
 
         final ImageButton imgbtnHead = findViewById(R.id.imageBtnHead);
         final ImageButton imgbtnTorso = findViewById(R.id.imageBtnTorso);
@@ -374,21 +387,25 @@ public class DecoActivity extends AppCompatActivity {
                     //1번 Row
                     case R.id.imageButtonHead1 :
                         drawH = imgbtnHead1.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/business_head_01.png?alt=media&token=52d39453-728b-40c0-86f7-ef40018d12ff";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso1 :
                         drawT = imgbtnTorse1.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/basic_torso_01.png?alt=media&token=906aa5a2-fca7-4a3a-8d6f-11fbf4992a5b";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg1 :
                         drawL = imgbtnLeg1.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/basic_leg_01.png?alt=media&token=b3522aef-f43e-46a3-ac1b-3d9ed2020fd6";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonArm1 :
                         drawA = imgbtnArm1.getDrawable();
+                        cloArm = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/claw_arm_01.png?alt=media&token=0dbd0e5c-3f28-415f-8ea6-80d7d13a57b0";
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
                         break;
@@ -559,5 +576,36 @@ public class DecoActivity extends AppCompatActivity {
 
         imgbtnTorse8.setOnClickListener(ocl);
         imgbtnLeg8.setOnClickListener(ocl);
+
+
+        //툴바 저장 버튼
+        saveText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
+
+                docRef.update("cloHead", cloHead);
+                docRef.update("cloTorso", cloTorso);
+                docRef.update("cloLeg", cloLeg);
+                docRef.update("cloArm", cloArm).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        finish();
+                    }
+                });
+            }
+        });
+    }//onCreate
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -594,6 +594,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
+                            android:background="@drawable/store_tool"
                             android:src="@drawable/formal_torso_01" />
 
                         <TextView
