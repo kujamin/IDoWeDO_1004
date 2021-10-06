@@ -52,6 +52,8 @@ public class StoreActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
         darkView = findViewById(R.id.DarkView);
         popupStore = findViewById(R.id.popupStore);
         TextView textYes = findViewById(R.id.textYes);
@@ -74,41 +76,53 @@ public class StoreActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 userCode = (group.getEmailid());
+
+                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                        .document("state");
+
+                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc = task.getResult();
+                            myCoin = Integer.parseInt(doc.getString("coin"));
+                        }
+                    }
+                });
+
+                firebaseFirestore.collection("user").document(userCode).collection("user character")
+                        .document("state").collection("store")
+                        .whereEqualTo("buy","O")
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String str = (String) document.getData().get("name");
+                                switch (str) {
+                                    case "basic_torso_01" :
+                                        soldoutView1.setVisibility(View.VISIBLE);
+                                        break;
+                                    case "basic_leg_01" :
+                                        soldoutView2.setVisibility(View.VISIBLE);
+                                        break;
+                                    case "business_head_01" :
+                                        soldoutView3.setVisibility(View.VISIBLE);
+                                        break;
+                                    case "business_torso_01" :
+                                        soldoutView4.setVisibility(View.VISIBLE);
+                                        break;
+                                }
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("user").document(userCode).collection("user character")
-                .document("state").collection("store")
-                .whereEqualTo("buy","O")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String str = (String) document.getData().get("name");
-                        switch (str) {
-                            case "basic_torso_01" :
-                                soldoutView1.setVisibility(View.VISIBLE);
-                                break;
-                            case "basic_leg_01" :
-                                soldoutView2.setVisibility(View.VISIBLE);
-                                break;
-                            case "business_head_01" :
-                                soldoutView3.setVisibility(View.VISIBLE);
-                                break;
-                            case "business_torso_01" :
-                                soldoutView4.setVisibility(View.VISIBLE);
-                                break;
-                        }
-                    }
-                } else {
-                    Log.d("TAG", "Error getting documents: ", task.getException());
-                }
             }
         });
 
@@ -150,18 +164,7 @@ public class StoreActivity extends AppCompatActivity {
         itemLayout11.setOnClickListener(ocl);
         itemLayout12.setOnClickListener(ocl);
 
-        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                .document("state");
 
-        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc = task.getResult();
-                    myCoin = Integer.parseInt(doc.getString("coin"));
-                }
-            }
-        });
 
         TextView textCoin1 = findViewById(R.id.textCoin1);
         TextView textCoin2 = findViewById(R.id.textCoin2);
