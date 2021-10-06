@@ -101,28 +101,38 @@ public class Fragment_Character extends Fragment {
                             level = Integer.parseInt(document.getString("level"));
                             maxExp = Integer.parseInt(document.getString("maxExp"));
 
-                            maxExp = 100 + level;
-                            textExp.setText(currentExp + " / " + maxExp);
-
-                            progressBar.setMax(maxExp);
-                            progressBar.setProgress(currentExp);
-                            if(currentExp >= maxExp) {
-                                level++;
-                                currentExp = currentExp - maxExp;
-                            }
-                            textLevel.setText("Lv." + level);
-                            textCoin.setText(coin + "");
-
                         }
 
+
+                    }
+                });
+
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        maxExp = maxExp++;
+
+
+                        progressBar.setMax(maxExp);
+                        progressBar.setProgress(currentExp);
+                        if(currentExp >= maxExp) {
+                            level++;
+                            currentExp = currentExp - maxExp;
+                        }
+                        textLevel.setText("Lv." + level);
+                        textCoin.setText(coin + "");
+
                         documentReference.update("coin", String.valueOf(coin));
-                        documentReference.update("exp", String.valueOf(currentExp));
-                        documentReference.update("level", String.valueOf(level));
-                        documentReference.update("maxExp", String.valueOf(maxExp)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        documentReference.update("exp", String.valueOf(currentExp)).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                textExp.setText(currentExp + " / " + maxExp);
+                                Log.d("TAG","success");
                             }
                         });
+                        documentReference.update("level", String.valueOf(level));
+                        documentReference.update("maxExp", String.valueOf(maxExp));
                     }
                 });
 
@@ -132,6 +142,9 @@ public class Fragment_Character extends Fragment {
 
             }
         });
+
+
+
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
