@@ -69,34 +69,34 @@ public class Fragment_Character extends Fragment {
 
 
 
-        /*mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
 
-                int coin = group.getCoin();
+               /* int coin = group.getCoin();
                 int currentexp = group.getExp();
                 int level = group.getLevel();
-                int mexp = group.getMaxexp();
+                int mexp = group.getMaxexp();*/
                 String nickname = (group.getNickname());
 
-                mexp = 100 + (level);
-                textExp.setText(currentexp + " / " + mexp);
+                /*mexp = 100 + (level);
+                textExp.setText(currentexp + " / " + mexp);*/
 
 
-                progressBar.setMax(mexp);
+                /*progressBar.setMax(mexp);
                 progressBar.setProgress(currentexp);
                 if (currentexp >= mexp) {
                     level++;
                     currentexp = currentexp - mexp;
                 }
                 textLevel.setText("Lv." + level);
-                textCoin.setText(coin + "");
+                textCoin.setText(coin + "");*/
                 textNickName.setText(nickname + "");
 
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(level);
+                /*mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(level);
                 mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("maxexp").setValue(mexp);
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("maxexp").setValue(mexp);*/
 
 
             }
@@ -107,7 +107,7 @@ public class Fragment_Character extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+        });
 
         lstore.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                             usercode.setUsercode(strEmail);
 
                                             // 로그인 성공
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
                                             intent.putExtra("userCode", userCode);
                                             startActivity(intent);
                                             finish(); // 현재 액티비티 파괴
