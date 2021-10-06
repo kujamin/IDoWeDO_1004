@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" id="idowedo"></string>
+    <string name="kakaoApi">6e8cf1d9838981c90c2d743d7cdf95d8</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

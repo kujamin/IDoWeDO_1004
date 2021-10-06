@@ -17,8 +17,11 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
+
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
