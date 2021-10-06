@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,11 +24,14 @@ import com.example.firstproject3.AchieveActivity;
 import com.example.firstproject3.CustomTodoAdapter;
 import com.example.firstproject3.DecoActivity;
 
+import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.R;
 import com.example.firstproject3.StoreActivity;
+import com.example.firstproject3.Timer_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,7 +40,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
 public class Fragment_Character extends Fragment {
@@ -45,6 +55,9 @@ public class Fragment_Character extends Fragment {
     ProgressBar progressBar;
     TextView textLevel, textExp, textCoin, textNickName;
     Handler handler;
+    private DocumentReference documentReference;
+    private FirebaseFirestore firebaseFirestore;
+    private int coin, level, maxExp, currentExp;
 
     @Nullable
     @Override
@@ -54,6 +67,7 @@ public class Fragment_Character extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.expProgressBar);
         textLevel = (TextView) rootView.findViewById(R.id.textViewLevel);
@@ -66,8 +80,58 @@ public class Fragment_Character extends Fragment {
         LinearLayout ldeco = rootView.findViewById(R.id.decoPage);
         LinearLayout lachieve = rootView.findViewById(R.id.achievePage);
 
+//        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                String userCode = (group.getEmailid());
 
+                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+
+                            coin = Integer.parseInt(document.getString("coin"));
+                            currentExp = Integer.parseInt(document.getString("exp"));
+                            level = Integer.parseInt(document.getString("level"));
+                            maxExp = Integer.parseInt(document.getString("maxExp"));
+
+                            maxExp = 100 + level;
+                            textExp.setText(currentExp + " / " + maxExp);
+
+                            progressBar.setMax(maxExp);
+                            progressBar.setProgress(currentExp);
+                            if(currentExp >= maxExp) {
+                                level++;
+                                currentExp = currentExp - maxExp;
+                            }
+                            textLevel.setText("Lv." + level);
+                            textCoin.setText(coin + "");
+
+                        }
+
+                        documentReference.update("coin", String.valueOf(coin));
+                        documentReference.update("exp", String.valueOf(currentExp));
+                        documentReference.update("level", String.valueOf(level));
+                        documentReference.update("maxExp", String.valueOf(maxExp)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                            }
+                        });
+                    }
+                });
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -100,8 +164,6 @@ public class Fragment_Character extends Fragment {
 
 
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

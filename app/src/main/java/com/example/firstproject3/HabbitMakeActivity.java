@@ -202,21 +202,21 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
                 uploadData(title, date, memo, category, cateText, id, usercode);
 
-                /*mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                        int currentexp = group.getExp();
-                        currentexp += 5;
-                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });*/
+//                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
+//                        int currentexp = group.getExp();
+//                        currentexp += 5;
+//                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
                 finish();
             }
         });

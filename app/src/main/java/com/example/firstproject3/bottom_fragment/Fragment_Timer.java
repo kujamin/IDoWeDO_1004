@@ -30,12 +30,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.firstproject3.ActivityResultEvent;
 import com.example.firstproject3.BusProvider;
 import com.example.firstproject3.CustomChoiceListViewAdapter;
+import com.example.firstproject3.Habbit_Item;
 import com.example.firstproject3.ListViewAdapter;
 import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.R;
 import com.example.firstproject3.SaveActivity;
 import com.example.firstproject3.TimerActivity;
 import com.example.firstproject3.Timer_Item;
+import com.example.firstproject3.Todo_Item;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -61,6 +71,8 @@ public class Fragment_Timer extends Fragment {
     private ListViewAdapter timerAdapter;
     private ArrayList<Timer_Item> timer_list;
     private int timer_count;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
     private String strUrl;
     final String TAG = "MainActivity";
 
@@ -69,6 +81,10 @@ public class Fragment_Timer extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_timer, container, false);
         viewList = inflater.inflate(R.layout.timer_listview, container, false);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         textRecord = view.findViewById(R.id.timerTextGoal);
         btnGirok = view.findViewById(R.id.girokButton);
@@ -85,31 +101,44 @@ public class Fragment_Timer extends Fragment {
         timer_list = new ArrayList<Timer_Item>();
         timerAdapter = new ListViewAdapter(timer_list, view.getContext());
 
-        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
+        //String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
-        firebaseFirestore.collection("user").document(userCode).collection("user timer").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error != null){
-                    Log.w(TAG, "Listen failed.", error);
-                    return;
-                }
-                timer_count = value.size();
-                timer_list.clear();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                String userCode = (group.getEmailid());
 
-                for (QueryDocumentSnapshot doc : value) {
-                    if (doc.get("timer_title") != null) {
-                        timer_list.add(0,new Timer_Item(doc.getString("timer_title"), doc.getString("timer_goal"), doc.getString("timer_record"), doc.getString("timer_recImg"), doc.getString("timer_id")));
-                        timer_recyclerView.setVisibility(View.VISIBLE);
-                        layoutRecordPaper.setVisibility(View.GONE);
-                        addTimerlist.setVisibility(View.VISIBLE);
+                firebaseFirestore.collection("user").document(userCode).collection("user timer").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null){
+                            Log.w(TAG, "Listen failed.", error);
+                            return;
+                        }
+                        timer_count = value.size();
+                        timer_list.clear();
 
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc.get("timer_title") != null) {
+                                timer_list.add(0,new Timer_Item(doc.getString("timer_title"), doc.getString("timer_goal"), doc.getString("timer_record"), doc.getString("timer_recImg"), doc.getString("timer_id")));
+                                timer_recyclerView.setVisibility(View.VISIBLE);
+                                layoutRecordPaper.setVisibility(View.GONE);
+                                addTimerlist.setVisibility(View.VISIBLE);
+
+                            }
+                        }
+                        //어답터 갱신
+                        timerAdapter.notifyDataSetChanged();
                     }
-                }
-                //어답터 갱신
-                timerAdapter.notifyDataSetChanged();
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
         timer_recyclerView.setAdapter(timerAdapter);
 
         btnGirok.setOnClickListener(new View.OnClickListener() {

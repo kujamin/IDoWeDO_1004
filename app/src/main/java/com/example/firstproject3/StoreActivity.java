@@ -214,7 +214,7 @@ public class StoreActivity extends AppCompatActivity {
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
-                                .document("state").collection("store").document("c2_torse");
+                                .document("state").collection("store").document("c2_head");
 
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
@@ -238,7 +238,7 @@ public class StoreActivity extends AppCompatActivity {
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
-                                .document("state").collection("store").document("c2_leg");
+                                .document("state").collection("store").document("c2_torso");
 
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
@@ -261,7 +261,7 @@ public class StoreActivity extends AppCompatActivity {
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
-                                .document("state").collection("store").document("c3_torse");
+                                .document("state").collection("store").document("c2_leg");
 
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");
@@ -285,7 +285,7 @@ public class StoreActivity extends AppCompatActivity {
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         documentReference = firebaseFirestore.collection("user").document(usercode).collection("user character")
-                                .document("state").collection("store").document("c3_leg");
+                                .document("state").collection("store").document("c3_head");
 
                         documentReferenceC = firebaseFirestore.collection("user").document(usercode).collection("user character")
                                 .document("state");

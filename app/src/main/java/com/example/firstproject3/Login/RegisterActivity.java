@@ -138,6 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
                         data.put("id", strEmail);
                         data.put("password", strPwd);
 
+
                         Map<String, Object> data2 = new HashMap<>();
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -180,12 +181,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                Map<String, Object> userState = new HashMap<>();
-                                userState.put("coin", "0");
-                                userState.put("exp", "0");
-                                userState.put("heart", "3");
-
                                 //사용자 경험치, 목숨, 코인 상태 저장
+                                Map<String, Object> userState = new HashMap<>();
+                                userState.put("coin", "200");
+                                userState.put("exp", "0");
+                                userState.put("heart" , "3");
+                                userState.put("level", "1");
+                                userState.put("maxExp", "30");
+
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").set(userState)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
