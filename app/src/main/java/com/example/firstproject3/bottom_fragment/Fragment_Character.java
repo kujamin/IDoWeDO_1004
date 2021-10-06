@@ -90,49 +90,62 @@ public class Fragment_Character extends Fragment {
 
                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
 
-                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-
-                            coin = Integer.parseInt(document.getString("coin"));
-                            currentExp = Integer.parseInt(document.getString("exp"));
-                            level = Integer.parseInt(document.getString("level"));
-                            maxExp = Integer.parseInt(document.getString("maxExp"));
-
-                        }
-
-
-                    }
-                });
-
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                        maxExp = maxExp++;
-
-
-                        progressBar.setMax(maxExp);
-                        progressBar.setProgress(currentExp);
-                        if(currentExp >= maxExp) {
-                            level++;
-                            currentExp = currentExp - maxExp;
-                        }
-                        textLevel.setText("Lv." + level);
-                        textCoin.setText(coin + "");
-
-                        documentReference.update("coin", String.valueOf(coin));
-                        documentReference.update("exp", String.valueOf(currentExp)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                textExp.setText(currentExp + " / " + maxExp);
-                                Log.d("TAG","success");
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+
+                                    coin = Integer.parseInt(document.getString("coin"));
+                                    currentExp = Integer.parseInt(document.getString("exp"));
+                                    level = Integer.parseInt(document.getString("level"));
+                                    maxExp = Integer.parseInt(document.getString("maxExp"));
+
+                                    if(currentExp >= maxExp) {
+                                        level++;
+                                        currentExp = currentExp - maxExp;
+                                        maxExp += 10;
+                                        documentReference.update("maxExp",maxExp+"");
+                                        documentReference.update("level",level+"");
+                                        documentReference.update("exp",currentExp+"");
+                                    }
+                                    progressBar.setMax(maxExp);
+                                    progressBar.setProgress(currentExp);
+
+                                    textLevel.setText("Lv." + level);
+                                    textCoin.setText(coin + "");
+                                    textExp.setText(currentExp + " / " + maxExp);
+
+                                }
                             }
                         });
-                        documentReference.update("level", String.valueOf(level));
-                        documentReference.update("maxExp", String.valueOf(maxExp));
+
+
+
+//                        maxExp = 100+level;
+//                        progressBar.setMax(maxExp);
+//                        progressBar.setProgress(currentExp);
+//                        if(currentExp >= maxExp) {
+//                            level++;
+//                            currentExp = currentExp - maxExp;
+//                        }
+//                        textLevel.setText("Lv." + level);
+//                        textCoin.setText(coin + "");
+//
+//                        documentReference.update("coin", String.valueOf(coin));
+//                        documentReference.update("exp", String.valueOf(currentExp)).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void unused) {
+//                                textExp.setText(currentExp + " / " + maxExp);
+//                                Log.d("TAG","success");
+//                            }
+//                        });
+//                        documentReference.update("level", String.valueOf(level));
+//                        documentReference.update("maxExp", String.valueOf(maxExp));
                     }
                 });
 
