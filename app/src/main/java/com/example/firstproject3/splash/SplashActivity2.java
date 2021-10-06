@@ -2,9 +2,12 @@ package com.example.firstproject3.splash;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -23,12 +26,13 @@ public class SplashActivity2 extends Activity {
             super.onAttachedToWindow();
             Window window = getWindow();
             window.setFormat(PixelFormat.RGBA_8888);
-
     }
         Thread splashTread;
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.activity_splash2);
             StartAnimation();
         }
@@ -42,6 +46,8 @@ public class SplashActivity2 extends Activity {
             anim = AnimationUtils.loadAnimation(this, R.anim.translate);
             anim.reset();
             ImageView iv = (ImageView) findViewById(R.id.splash2);
+
+            iv.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
             iv.clearAnimation();
             iv.startAnimation(anim);
 

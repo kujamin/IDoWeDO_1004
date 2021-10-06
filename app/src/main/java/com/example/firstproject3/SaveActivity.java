@@ -54,7 +54,7 @@ public class SaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
 
-        nameEdit = findViewById(R.id.editName);
+        nameEdit = findViewById(R.id.editTimerName);
         goalEditHour = findViewById(R.id.editGoalHour);
         goalEditMin = findViewById(R.id.editGoalMin);
 

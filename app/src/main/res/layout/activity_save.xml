@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorwhite"
             android:text="저장"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="end"
             android:layout_marginEnd="15dp"/>
@@ -47,26 +47,38 @@
 
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/textViewTimerTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="타이머 일정 이름" />
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:text="타이머 일정 이름"
+            android:textSize="16sp"
+            android:textColor="@color/colorwhite"
+            android:background="@color/colorAccent"
+            android:padding="4dp"
+            />
 
         <EditText
-            android:id="@+id/editName"
+            android:id="@+id/editTimerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginBottom="10dp"
+            android:ems="12"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
             android:hint="이름을 입력해주세요."
+            android:backgroundTint="@color/colorAccent"
             android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textView30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기록할 목표치" />
+            android:text="기록할 목표치"
+            android:textSize="16sp"
+            android:textColor="@color/colorwhite"
+            android:background="@color/colorAccent"
+            android:padding="4dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,6 +90,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="00"
+                android:backgroundTint="@color/colorAccent"
+                android:textSize="20sp"
+                android:textColor="#000"
                 android:inputType="number"
                 android:maxLength="2" />
 
@@ -87,13 +102,17 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_marginRight="10dp"
-                android:text="시간" />
+                android:text="시간"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editGoalMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="00"
+                android:backgroundTint="@color/colorAccent"
+                android:textSize="20sp"
+                android:textColor="#000"
                 android:inputType="number"
                 android:maxLength="2" />
 

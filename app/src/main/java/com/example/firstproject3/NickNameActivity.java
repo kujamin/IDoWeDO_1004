@@ -67,11 +67,11 @@ public class NickNameActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = editNickName.getText().toString();
-                if(input.length() >= 8){
+                if(input.length() >= 9){
                     textNickError.setVisibility(View.VISIBLE);
                 }
 
-                if(input.length() < 8){
+                if(input.length() < 9){
                     textNickError.setVisibility(View.INVISIBLE);
                     textNickError.setText("닉네임은 8글자 이하로 입력해주세요.");
                 }
@@ -113,7 +113,7 @@ public class NickNameActivity extends AppCompatActivity {
                     }
                 });
 
-                if(input.length() < 8 && input.length() > 0) {
+                if(input.length() < 9 && input.length() > 0) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }

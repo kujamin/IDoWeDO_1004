@@ -40,7 +40,7 @@
         <activity
             android:name=".Logout_Popup"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"/>
         <activity android:name=".daily.CalendarActivity" />
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".StoreActivity" />
