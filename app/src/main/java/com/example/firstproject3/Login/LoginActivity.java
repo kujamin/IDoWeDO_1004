@@ -1,6 +1,7 @@
 package com.example.firstproject3.Login;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -18,34 +19,44 @@ import android.widget.Toast;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.NickNameActivity;
 import com.example.firstproject3.R;
-import com.example.firstproject3.daily.CalListActivity;
 import com.example.firstproject3.usercode;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    private SignInButton btn_google;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private GoogleApiClient googleApiClient;    //구글 api 클라이언트 객체
+    private static final int RED_SIGN_GOOGLE = 100; // 구글로그인 결과 코드
+
     private FirebaseUser currentUser;
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd; // 로그인 입력필드
@@ -65,16 +76,36 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+                .build();
+
+
         context = this.getApplicationContext();
         context_login = this;
 
         usercode = (usercode) getApplicationContext();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("FirstProject3");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("idowedo");
 
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
+
+        btn_google = findViewById(R.id.btn_google);
+        btn_google.setOnClickListener(new View.OnClickListener() { //구글 로그인버튼 클릭시 실행
+            @Override
+            public void onClick(View v) {
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                startActivityForResult(intent, RED_SIGN_GOOGLE);
+            }
+        });
 
 
         //로딩창 객체 생성
@@ -156,6 +187,305 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { //구글 로그인 인증을 요청했을 때 결과 값을 되돌려 받는 곳.
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == RED_SIGN_GOOGLE) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if(result.isSuccess()) { //인증결과가 성공적이면...
+                GoogleSignInAccount account = result.getSignInAccount(); // account 라는 데이터는 구글로그인 정보를 담고 있다.(닉네임, 프로필사진)
+                resultLogin(account); //로그인 결과 값 출력 수행하라는 메소드
+            }
+        }
+
+
+    }
+
+    private void resultLogin(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) { //구글 로그인에 실제로 성공을 했는지
+                        if(task.isSuccessful()) { //로그인이 성공하였으면.
+                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                            UserAccount account = new UserAccount();
+                            account.setIdtoken(firebaseUser.getUid());
+                            account.setEmailid(firebaseUser.getEmail());
+                            account.setUsername(firebaseUser.getDisplayName());
+                            account.setNickname(firebaseUser.getDisplayName());
+
+                            // setValue : database에 insert 행위
+                            mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
+
+                            strEmail = firebaseUser.getEmail();
+
+                            //firestore
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("id", firebaseUser.getEmail());
+
+
+                            Map<String, Object> data2 = new HashMap<>();
+
+                            firebaseFirestore = FirebaseFirestore.getInstance();
+                            firebaseFirestore.collection("user").document(strEmail).set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Log.d(TAG, "DocumentSnapshot data");
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user todo").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user habbit").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user timer").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user challenge").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+
+                                    //사용자 경험치, 목숨, 코인 상태 저장
+                                    Map<String, Object> userState = new HashMap<>();
+                                    userState.put("coin", "200");
+                                    userState.put("exp", "0");
+                                    userState.put("heart" , "3");
+                                    userState.put("level", "1");
+                                    userState.put("maxExp", "30");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").set(userState)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    //캐릭터 옷 상태 저장
+                                    Map<String, Object> cloState = new HashMap<>();
+                                    cloState.put("cloHead", "");
+                                    cloState.put("cloTorso", "");
+                                    cloState.put("cloLeg", "");
+                                    cloState.put("cloArm", "");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("deco").set(cloState)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            });
+
+                                    //옷 세트 1
+                                    Map<String, Object> doc1 = new HashMap<>();
+                                    doc1.put("buy", "X");
+                                    doc1.put("category", "torse");
+                                    doc1.put("name", "basic_torso_01");
+                                    doc1.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c1_torse").set(doc1)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    Map<String, Object> doc2 = new HashMap<>();
+                                    doc2.put("buy", "X");
+                                    doc2.put("category", "leg");
+                                    doc2.put("name", "basic_leg_01");
+                                    doc2.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c1_leg").set(doc2)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    //옷 세트 2
+                                    Map<String, Object> doc3 = new HashMap<>();
+                                    doc3.put("buy", "X");
+                                    doc3.put("category", "head");
+                                    doc3.put("name", "business_head_01");
+                                    doc3.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_head").set(doc3)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    Map<String, Object> doc4 = new HashMap<>();
+                                    doc4.put("buy", "X");
+                                    doc4.put("category", "torso");
+                                    doc4.put("name", "business_torso_01");
+                                    doc4.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_torso").set(doc4)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    Map<String, Object> doc5 = new HashMap<>();
+                                    doc5.put("buy", "X");
+                                    doc5.put("category", "leg");
+                                    doc5.put("name", "business_leg_01");
+                                    doc5.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c2_leg").set(doc5)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+
+                                    //옷 세트 3
+                                    Map<String, Object> doc6 = new HashMap<>();
+                                    doc6.put("buy", "X");
+                                    doc6.put("category", "head");
+                                    doc6.put("name", "formal_head_01");
+                                    doc6.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_head").set(doc6)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    Map<String, Object> doc7 = new HashMap<>();
+                                    doc6.put("buy", "X");
+                                    doc6.put("category", "torso");
+                                    doc6.put("name", "formal_torso_01");
+                                    doc6.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_torso").set(doc7)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                    Map<String, Object> doc8 = new HashMap<>();
+                                    doc6.put("buy", "X");
+                                    doc6.put("category", "leg");
+                                    doc6.put("name", "formal_leg_01");
+                                    doc6.put("price", "100");
+
+                                    firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_leg").set(doc8)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+                                }
+                            });
+
+
+                            Toast.makeText(LoginActivity.this, "구글 성공", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "구글 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 
 }

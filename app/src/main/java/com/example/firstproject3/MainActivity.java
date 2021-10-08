@@ -252,12 +252,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        /*AppBarConfiguration appBarConfiguration2 = new AppBarConfiguration.Builder(R.id.fragment_Todo, R.id.fragment_Timer,
-                R.id.fragment_Challenge, R.id.fragment_Character).build();
-
-        NavController navController2 = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController2, appBarConfiguration2);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController2);*/
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -290,16 +284,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        setFrag(0);
         fragment_todo = new Fragment_Todo();
         fm.beginTransaction().replace(R.id.frame, fragment_todo).commit();
-//        intentD = getIntent();
-//        if(intentD != null) {
-//            getData();
-//        }
+
         getHashKey();
 
 
     }//onCreate
 
-    private void getHashKey(){
+    private void getHashKey(){ //해시키 가져오기
         PackageInfo packageInfo = null;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);

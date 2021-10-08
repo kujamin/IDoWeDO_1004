@@ -30,7 +30,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView21"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -111,23 +111,20 @@
             android:layout_height="40dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="OR"></TextView>
+            android:text="OR"/>
 
-        <Button
-            android:id="@+id/btn_kakaoregister"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_google"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginRight="14dp"
             android:layout_weight="2"
-            android:background="@drawable/bint_darkpink"
-            android:backgroundTint="#2196F3"
-            android:scaleX=".9"
-            android:text="카카오톡으로 로그인"
             android:textColor="#fff"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_login" />
+            app:layout_constraintStart_toEndOf="@+id/btn_login"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -149,7 +146,7 @@
             android:gravity="center"
             android:text="아이디 찾기"
             android:textColor="@color/colorgray"
-            android:textSize="15sp"></TextView>
+            android:textSize="15sp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -159,8 +156,7 @@
             android:gravity="center"
             android:text="비밀번호 찾기"
             android:textColor="@color/colorgray"
-            android:textSize="15sp"></TextView>
-
+            android:textSize="15sp"/>
         <TextView
             android:id="@+id/app_register"
             android:layout_width="0dp"

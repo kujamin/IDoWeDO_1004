@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+
 
     <application
         android:name=".usercode"
@@ -16,9 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
 
-      <!--  <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakaoApi" />-->
 
         <activity
             android:name=".HabbitDetailActivity"
@@ -45,8 +42,8 @@
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".Logout_Popup"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
-        <activity android:name=".MainActivity"/>
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".daily.CalendarActivity" />
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".StoreActivity" />
@@ -59,11 +56,11 @@
             android:name=".PopupActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".splash.SplashActivity2">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".AtCheck.Attendance_CheckActivity"

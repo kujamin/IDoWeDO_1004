@@ -45,7 +45,7 @@ public class NickNameActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_nick_name);
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference("idowedo");
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
