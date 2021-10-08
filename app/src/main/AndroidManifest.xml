@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
 
     <application
         android:name=".usercode"
@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
 
-        <meta-data
+      <!--  <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakaoApi" />
+            android:value="@string/kakaoApi" />-->
 
         <activity
             android:name=".HabbitDetailActivity"
