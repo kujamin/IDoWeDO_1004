@@ -72,7 +72,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/record_button" />
+            app:srcCompat="@drawable/record_button2" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
