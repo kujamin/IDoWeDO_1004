@@ -62,7 +62,7 @@ public class SplashActivity2 extends Activity {
                             waited += 100;
                         }
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        if (user != null){
+                        if (user != null) {
                             Intent intent = new Intent(SplashActivity2.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);

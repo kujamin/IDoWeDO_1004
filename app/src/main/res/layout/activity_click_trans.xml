@@ -57,7 +57,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textViewCallexplan"
+                android:id="@+id/textViewChallexplan"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_weight="2"

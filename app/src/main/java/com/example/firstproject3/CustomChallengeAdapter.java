@@ -66,6 +66,7 @@ public class CustomChallengeAdapter extends RecyclerView.Adapter<CustomChallenge
 
                             Intent intent = new Intent(context, ClickTransActivity.class);
                             intent.putExtra("chall_title", document.getString("challenge_title"));
+                            intent.putExtra("chall_img", document.getString("challenge_image"));
 
                             context.startActivity(intent);
                         } else {

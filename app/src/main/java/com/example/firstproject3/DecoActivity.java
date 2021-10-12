@@ -118,6 +118,15 @@ public class DecoActivity extends AppCompatActivity {
         imgbtnHead9.setEnabled(false);
 
         imgbtnTorse1.setEnabled(false);
+        imgbtnTorse2.setEnabled(false);
+        imgbtnTorse3.setEnabled(false);
+        imgbtnTorse4.setEnabled(false);
+        imgbtnTorse5.setEnabled(false);
+        imgbtnTorse6.setEnabled(false);
+        imgbtnTorse7.setEnabled(false);
+        imgbtnTorse8.setEnabled(false);
+        imgbtnTorse9.setEnabled(false);
+
         imgbtnLeg1.setEnabled(false);
         imgbtnArm1.setEnabled(false);
 
@@ -138,12 +147,13 @@ public class DecoActivity extends AppCompatActivity {
                                 String cloName = (String) document.getData().get("name");
 
                                 switch (cloName) {
-                                    case "formal_head_01" :
+                                    case "business_head_01" :
                                         imgbtnHead1.setEnabled(true);
                                         break;
-                                    case "business_torso_01" :
+                                    case "basic_torso_01" :
                                         imgbtnTorse1.setEnabled(true);
                                         break;
+
                                 }
                             }
                         } else {

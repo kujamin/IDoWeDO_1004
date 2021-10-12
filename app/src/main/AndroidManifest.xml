@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".usercode"
         android:allowBackup="true"
@@ -15,8 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
-
-
+        <activity
+            android:name=".Confirm3Activity"
+            android:exported="true" />
+        <activity
+            android:name=".Confirm2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".ConfirmActivity"
+            android:exported="true" />
+        <!--
+          <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakaoApi" />
+        -->
         <activity
             android:name=".HabbitDetailActivity"
             android:exported="true" />
@@ -32,9 +43,7 @@
         <activity
             android:name=".Login.RegisterActivity"
             android:exported="true" />
-        <activity android:name=".Login.LoginActivity">
-
-        </activity>
+        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".DailyMakeActivity" />
         <activity android:name=".SaveActivity" />
         <activity

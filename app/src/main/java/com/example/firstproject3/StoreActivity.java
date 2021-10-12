@@ -1,8 +1,11 @@
 package com.example.firstproject3;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +39,12 @@ public class StoreActivity extends AppCompatActivity {
             soldoutView9, soldoutView10, soldoutView11, soldoutView12;
     int itemId;
     private FirebaseFirestore firebaseFirestore;
-    private int itemCoin, myCoin, strCoin1, strCoin2, strCoin3, strCoin4, strCoin5, strCoin6;
+    private int itemCoin, myCoin,
+            strCoin1, strCoin2, strCoin3, strCoin4, strCoin5, strCoin6,
+            strCoin7, strCoin8, strCoin9, strCoin10, strCoin11, strCoin12,
+            strCoin13, strCoin14, strCoin15, strCoin16, strCoin17, strCoin18,
+            strCoin19, strCoin20, strCoin21, strCoin22, strCoin23, strCoin24,
+            strCoin25, strCoin26, strCoin27, strCoin28, strCoin29;
     private DocumentReference documentReference, documentReferenceC;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -70,6 +78,9 @@ public class StoreActivity extends AppCompatActivity {
         soldoutView10 = findViewById(R.id.SoldoutView10);
         soldoutView11 = findViewById(R.id.SoldoutView11);
         soldoutView12 = findViewById(R.id.SoldoutView12);
+
+        ImageView test = findViewById(R.id.imageView077);
+        test.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -157,6 +168,23 @@ public class StoreActivity extends AppCompatActivity {
         LinearLayout itemLayout10 = findViewById(R.id.item10);
         LinearLayout itemLayout11 = findViewById(R.id.item11);
         LinearLayout itemLayout12 = findViewById(R.id.item12);
+        LinearLayout itemLayout13 = findViewById(R.id.item13);
+        LinearLayout itemLayout14 = findViewById(R.id.item14);
+        LinearLayout itemLayout15 = findViewById(R.id.item15);
+        LinearLayout itemLayout16 = findViewById(R.id.item16);
+        LinearLayout itemLayout17 = findViewById(R.id.item17);
+        LinearLayout itemLayout18 = findViewById(R.id.item18);
+        LinearLayout itemLayout19 = findViewById(R.id.item19);
+        LinearLayout itemLayout20 = findViewById(R.id.item20);
+        LinearLayout itemLayout21 = findViewById(R.id.item21);
+        LinearLayout itemLayout22 = findViewById(R.id.item22);
+        LinearLayout itemLayout23 = findViewById(R.id.item23);
+        LinearLayout itemLayout24 = findViewById(R.id.item24);
+        LinearLayout itemLayout25 = findViewById(R.id.item25);
+        LinearLayout itemLayout26 = findViewById(R.id.item26);
+        LinearLayout itemLayout27 = findViewById(R.id.item27);
+        LinearLayout itemLayout28 = findViewById(R.id.item28);
+        LinearLayout itemLayout29 = findViewById(R.id.item29);
 
         itemLayout1.setOnClickListener(ocl);
         itemLayout2.setOnClickListener(ocl);
@@ -170,8 +198,23 @@ public class StoreActivity extends AppCompatActivity {
         itemLayout10.setOnClickListener(ocl);
         itemLayout11.setOnClickListener(ocl);
         itemLayout12.setOnClickListener(ocl);
-
-
+        itemLayout13.setOnClickListener(ocl);
+        itemLayout14.setOnClickListener(ocl);
+        itemLayout15.setOnClickListener(ocl);
+        itemLayout16.setOnClickListener(ocl);
+        itemLayout17.setOnClickListener(ocl);
+        itemLayout18.setOnClickListener(ocl);
+        itemLayout19.setOnClickListener(ocl);
+        itemLayout20.setOnClickListener(ocl);
+        itemLayout21.setOnClickListener(ocl);
+        itemLayout22.setOnClickListener(ocl);
+        itemLayout23.setOnClickListener(ocl);
+        itemLayout24.setOnClickListener(ocl);
+        itemLayout25.setOnClickListener(ocl);
+        itemLayout26.setOnClickListener(ocl);
+        itemLayout27.setOnClickListener(ocl);
+        itemLayout28.setOnClickListener(ocl);
+        itemLayout29.setOnClickListener(ocl);
 
         TextView textCoin1 = findViewById(R.id.textCoin1);
         TextView textCoin2 = findViewById(R.id.textCoin2);
@@ -179,6 +222,29 @@ public class StoreActivity extends AppCompatActivity {
         TextView textCoin4 = findViewById(R.id.textCoin4);
         TextView textCoin5 = findViewById(R.id.textCoin5);
         TextView textCoin6 = findViewById(R.id.textCoin6);
+        TextView textCoin7 = findViewById(R.id.textCoin7);
+        TextView textCoin8 = findViewById(R.id.textCoin8);
+        TextView textCoin9 = findViewById(R.id.textCoin9);
+        TextView textCoin10 = findViewById(R.id.textCoin10);
+        TextView textCoin11 = findViewById(R.id.textCoin11);
+        TextView textCoin12 = findViewById(R.id.textCoin12);
+        TextView textCoin13 = findViewById(R.id.textCoin13);
+        TextView textCoin14 = findViewById(R.id.textCoin14);
+        TextView textCoin15 = findViewById(R.id.textCoin15);
+        TextView textCoin16 = findViewById(R.id.textCoin16);
+        TextView textCoin17 = findViewById(R.id.textCoin17);
+        TextView textCoin18 = findViewById(R.id.textCoin18);
+        TextView textCoin19 = findViewById(R.id.textCoin19);
+        TextView textCoin20 = findViewById(R.id.textCoin20);
+        TextView textCoin21 = findViewById(R.id.textCoin21);
+        TextView textCoin22 = findViewById(R.id.textCoin22);
+        TextView textCoin23 = findViewById(R.id.textCoin23);
+        TextView textCoin24 = findViewById(R.id.textCoin24);
+        TextView textCoin25 = findViewById(R.id.textCoin25);
+        TextView textCoin26 = findViewById(R.id.textCoin26);
+        TextView textCoin27 = findViewById(R.id.textCoin27);
+        TextView textCoin28 = findViewById(R.id.textCoin28);
+        TextView textCoin29 = findViewById(R.id.textCoin29);
 
         strCoin1 = Integer.parseInt(textCoin1.getText().toString());
         strCoin2 = Integer.parseInt(textCoin2.getText().toString());
@@ -186,6 +252,30 @@ public class StoreActivity extends AppCompatActivity {
         strCoin4 = Integer.parseInt(textCoin4.getText().toString());
         strCoin5 = Integer.parseInt(textCoin5.getText().toString());
         strCoin6 = Integer.parseInt(textCoin6.getText().toString());
+        strCoin7 = Integer.parseInt(textCoin7.getText().toString());
+        strCoin8 = Integer.parseInt(textCoin8.getText().toString());
+        strCoin9 = Integer.parseInt(textCoin9.getText().toString());
+        strCoin10 = Integer.parseInt(textCoin10.getText().toString());
+        strCoin11 = Integer.parseInt(textCoin11.getText().toString());
+        strCoin12 = Integer.parseInt(textCoin12.getText().toString());
+        strCoin13 = Integer.parseInt(textCoin13.getText().toString());
+        strCoin14 = Integer.parseInt(textCoin14.getText().toString());
+        strCoin15 = Integer.parseInt(textCoin15.getText().toString());
+        strCoin16 = Integer.parseInt(textCoin16.getText().toString());
+        strCoin17 = Integer.parseInt(textCoin17.getText().toString());
+        strCoin18 = Integer.parseInt(textCoin18.getText().toString());
+        strCoin19 = Integer.parseInt(textCoin19.getText().toString());
+        strCoin20 = Integer.parseInt(textCoin20.getText().toString());
+        strCoin21 = Integer.parseInt(textCoin21.getText().toString());
+        strCoin22 = Integer.parseInt(textCoin22.getText().toString());
+        strCoin23 = Integer.parseInt(textCoin23.getText().toString());
+        strCoin24 = Integer.parseInt(textCoin24.getText().toString());
+        strCoin25 = Integer.parseInt(textCoin25.getText().toString());
+        strCoin26 = Integer.parseInt(textCoin26.getText().toString());
+        strCoin27 = Integer.parseInt(textCoin27.getText().toString());
+        strCoin28 = Integer.parseInt(textCoin28.getText().toString());
+        strCoin29 = Integer.parseInt(textCoin29.getText().toString());
+
 
 
         //팝업창에서 '예' 클릭 시 화면 닫힘 & SOLD OUT
@@ -340,9 +430,49 @@ public class StoreActivity extends AppCompatActivity {
                         break;
                     case R.id.item7 :
                         soldoutView7.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c3_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin7));
                         break;
                     case R.id.item8 :
                         soldoutView8.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c3_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin8));
                         break;
                     case R.id.item9 :
                         soldoutView9.setVisibility(View.VISIBLE);
