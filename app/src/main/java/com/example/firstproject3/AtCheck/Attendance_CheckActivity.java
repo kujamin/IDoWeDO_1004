@@ -39,17 +39,11 @@ public class Attendance_CheckActivity extends Activity {
                 .commit();
 
         calendarView.setPadding(0, -20, 0, 30);
-        calendarView.setWeekDayTextAppearance(R.style.CustomTextAppearenceWeek);
-        calendarView.setDateTextAppearance(R.style.CustomTextAppearanceDay);
 
         calendarView.addDecorators(
                 new SundayDecorator(),
                 new SaturdayDecorator()
                 );
-
-//        String[] result = {"2021,09,18", "2021,09,06", "2021,09,12", "2021,09,25"};
-
-//        new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
 
         //출석체크 버튼
         Button attenBtn = (Button) findViewById(R.id.checkbutton);
@@ -84,51 +78,4 @@ public class Attendance_CheckActivity extends Activity {
         //안드로이드 백버튼 막기
         return;
     }
-
-//    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
-//
-//        String[] Time_Result;
-//
-//        ApiSimulator(String[] Time_Result) {
-//            this.Time_Result = Time_Result;
-//        }
-//
-//        @Override
-//        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//            Calendar calendar = Calendar.getInstance();
-//            ArrayList<CalendarDay> dates = new ArrayList<>();
-//
-//            /*특정날짜 달력에 점표시해주는곳*/
-//            /*월은 0이 1월 년,일은 그대로*/
-//            //string 문자열인 Time_Result 을 받아와서 ,를 기준으로짜르고 string을 int 로 변환
-//            for (int i = 0; i < Time_Result.length; i++) {
-//                CalendarDay day = CalendarDay.from(calendar);
-//                String[] time = Time_Result[i].split(",");
-//                int year = Integer.parseInt(time[0]);
-//                int month = Integer.parseInt(time[1]);
-//                int dayy = Integer.parseInt(time[2]);
-//
-//                dates.add(day);
-//                calendar.set(year, month - 1, dayy);
-//            }
-//            return dates;
-//        }
-
-//        @Override
-//        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-//            super.onPostExecute(calendarDays);
-//
-//            if (isFinishing()) {
-//                return;
-//            }
-//
-//            calendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, Attendance_CheckActivity.this));
-//        }
-//    }
 }

@@ -113,7 +113,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-
         //로딩창 객체 생성
         customProgressDialog = new ProgressDialog(this);
         //로딩창을 투명하게
