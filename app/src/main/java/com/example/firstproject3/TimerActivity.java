@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +16,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,7 +46,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimerActivity extends AppCompatActivity {
-
+    ImageView imgarrow;
     TextView timerText;
     Button stopStartButton;
     Timer timer;
@@ -58,11 +61,17 @@ public class TimerActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String userCode;
 
+    public void onClickBack(View v) {
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_timer);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -72,6 +81,9 @@ public class TimerActivity extends AppCompatActivity {
         timerText = (TextView) findViewById(R.id.timerText);
         stopStartButton = (Button) findViewById(R.id.startStopButton);
         timerPause = findViewById(R.id.timerPause);
+        imgarrow = findViewById(R.id.imageViewarrow);
+
+        imgarrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         Intent intent = getIntent();
         String timer_id = intent.getStringExtra("timer_id");

@@ -15,9 +15,9 @@
         tools:layout="@layout/activity_main" />
 
     <activity
-        android:id="@+id/nav_setting"
-        android:name="com.example.firstproject3.setting.SettingActivity"
-        android:label="SettingActivity" />
+        android:id="@+id/nav_question"
+        android:name="com.example.firstproject3.QuestionPopupActivity"
+        android:label="문의 이메일 보내러가기" />
 
     <fragment
         android:id="@+id/test"

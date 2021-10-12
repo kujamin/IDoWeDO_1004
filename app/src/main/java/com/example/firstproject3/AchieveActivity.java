@@ -1,8 +1,14 @@
 package com.example.firstproject3;
 
 import android.app.Application;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -301,5 +307,25 @@ public class AchieveActivity extends AppCompatActivity {
         layoutBadge14.setOnClickListener(ocl);
         layoutBadge15.setOnClickListener(ocl);
 
+
+//        //특정 텍스트에 대한 스타일 적용
+//        TextView text1 = findViewById(R.id.textBadge1);
+//        TextView text2 = findViewById(R.id.textbadge2);
+//        TextView text3 = findViewById(R.id.textbadge3);
+//        TextView text4 = findViewById(R.id.textbadge4);
+//        TextView text5 = findViewById(R.id.textbadge5);
+//        TextView text6 = findViewById(R.id.textbadge6);
+//
+//        String content1 = text1.getText().toString();
+//        SpannableString spannableString = new SpannableString(content1);
+//
+//        String word = "30일";
+//        int start = content1.indexOf(word);
+//        int end = start + word.length();
+//
+//        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#F4385E")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//        text1.setText(spannableString);
     }//onCreate
 }

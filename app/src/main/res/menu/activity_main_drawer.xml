@@ -10,16 +10,15 @@
             android:icon="@drawable/outline_home_black_24"
             android:title="홈" />
 
-
-        <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/outline_settings_black_24dp"
-            android:title="@string/menu_setting" />
-
         <item
             android:id="@+id/noticeActivity"
             android:icon="@drawable/outline_campaign_black_24dp"
             android:title="공지사항" />
+
+        <item
+            android:id="@+id/nav_question"
+            android:icon="@drawable/outline_contact_support_black_24"
+            android:title="@string/menu_question" />
 
         <item
             android:id="@+id/logout"

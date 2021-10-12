@@ -2,18 +2,24 @@ package com.example.firstproject3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 public class PopupActivity extends Activity {
-
+    ImageView Challlogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         setContentView(R.layout.activity_popup);
 
+        Challlogo = findViewById(R.id.imageViewPopup);
+
+        Challlogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
     }
 
     public void onClikcPopupClose(View v){

@@ -32,7 +32,7 @@ import com.example.firstproject3.bottom_fragment.Fragment_Character;
 import com.example.firstproject3.bottom_fragment.Fragment_Timer;
 import com.example.firstproject3.bottom_fragment.Fragment_Todo;
 import com.example.firstproject3.daily.CalendarActivity;
-import com.example.firstproject3.setting.SettingActivity;
+import com.example.firstproject3.QuestionPopupActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.nav_setting:
+            case R.id.nav_question:
                 Toast.makeText(getApplicationContext(), "감사", Toast.LENGTH_LONG).show();
         }
 

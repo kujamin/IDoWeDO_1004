@@ -1,21 +1,25 @@
 package com.example.firstproject3.Login;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.firstproject3.Login.ProgressDialog;
+import com.example.firstproject3.Login.RegisterActivity;
+import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.NickNameActivity;
 import com.example.firstproject3.R;
@@ -44,11 +48,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -66,10 +68,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public String userCode;
     public String strEmail;
     private Bundle bundle;
-    public usercode usercode;
+    public com.example.firstproject3.usercode usercode;
     public Context context;
     public static Context context_login;
     ProgressDialog customProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("915511622927-5bh9gk7go846qadakl0bo5agru5i4bv0.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -97,6 +100,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
+
+        ImageView imagelogo = (ImageView) findViewById(R.id.imageLogo);
+        imagelogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         btn_google = findViewById(R.id.btn_google);
         btn_google.setOnClickListener(new View.OnClickListener() { //구글 로그인버튼 클릭시 실행
@@ -127,44 +133,44 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 customProgressDialog.setCancelable(false);
 
                 if(strEmail.length() > 0 && strPwd.length() > 0 ) {
-                mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            customProgressDialog.dismiss();
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthInvalidUserException e) {
-                                Toast.makeText(LoginActivity.this, "존재하지 않는 아이디에요!", Toast.LENGTH_SHORT).show();
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                Toast.makeText(LoginActivity.this, "비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show();
-                            } catch (FirebaseNetworkException e) {
-                                Toast.makeText(LoginActivity.this, "Firebase NetworkException", Toast.LENGTH_SHORT).show();
-                            } catch (Exception e) {
-                                Toast.makeText(LoginActivity.this, "Exception", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            firebaseFirestore.collection("user").whereEqualTo("id", strEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            Log.d(TAG, document.getId() + " => " + document.getData());
-                                            userCode = String.valueOf(document.getData().get("user code"));
-                                            usercode.setUsercode(strEmail);
+                    mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                customProgressDialog.dismiss();
+                                try {
+                                    throw task.getException();
+                                } catch (FirebaseAuthInvalidUserException e) {
+                                    Toast.makeText(LoginActivity.this, "존재하지 않는 아이디에요!", Toast.LENGTH_SHORT).show();
+                                } catch (FirebaseAuthInvalidCredentialsException e) {
+                                    Toast.makeText(LoginActivity.this, "비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show();
+                                } catch (FirebaseNetworkException e) {
+                                    Toast.makeText(LoginActivity.this, "Firebase NetworkException", Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(LoginActivity.this, "Exception", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                firebaseFirestore.collection("user").whereEqualTo("id", strEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                                userCode = String.valueOf(document.getData().get("user code"));
+                                                usercode.setUsercode(strEmail);
 
-                                            // 로그인 성공
-                                            Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
-                                            intent.putExtra("userCode", userCode);
-                                            startActivity(intent);
-                                            finish(); // 현재 액티비티 파괴
+                                                // 로그인 성공
+                                                Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
+                                                intent.putExtra("userCode", userCode);
+                                                startActivity(intent);
+                                                finish(); // 현재 액티비티 파괴
+                                            }
                                         }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
-                    }
-                }); } else {
+                    }); } else {
                     customProgressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
                 }
@@ -215,6 +221,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             account.setEmailid(firebaseUser.getEmail());
                             account.setUsername(firebaseUser.getDisplayName());
                             account.setNickname(firebaseUser.getDisplayName());
+                            account.setNickname(null);
 
                             // setValue : database에 insert 행위
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
@@ -487,5 +494,4 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
 }

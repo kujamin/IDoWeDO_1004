@@ -45,7 +45,8 @@
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".MainActivity" />
         <activity android:name=".daily.CalendarActivity" />
-        <activity android:name=".setting.SettingActivity" />
+        <activity android:name=".QuestionPopupActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
         <activity android:name=".StoreActivity" />
         <activity android:name=".AchieveActivity" />
         <activity android:name=".DecoActivity" />

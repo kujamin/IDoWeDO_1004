@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "915511622927",
+    "firebase_url": "https://graduationproject-6a8ed-default-rtdb.firebaseio.com",
     "project_id": "graduationproject-6a8ed",
     "storage_bucket": "graduationproject-6a8ed.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "915511622927-7efepr44264rqmpr5qrqhi553b4idvba.apps.googleusercontent.com",
-          "client_type": 1,
+          "client_id": "915511622927-lseg213vdjkqp35213om3nuv66dn0ds6.apps.googleusercontent.com",
+          "client_type": 3,
           "android_info": {
             "package_name": "com.example.firstproject3",
-            "certificate_hash": "42c77486752fd8c68cc8e5f094454bc0f619685c"
+            "certificate_hash": "8ab2b795edc8b855fa7e20161ea8f41016b6d93d"
           }
         },
         {

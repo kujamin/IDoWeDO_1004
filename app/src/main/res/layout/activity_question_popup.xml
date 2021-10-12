@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="300dp"
+    android:layout_width="260dp"
     android:background="#ffff"
-    tools:context=".Logout_Popup"
+    tools:context=".QuestionPopupActivity"
     android:orientation="vertical" >
 
 
@@ -13,48 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
+        android:layout_marginTop="15dp">
 
         <TextView
-            android:id="@+id/textLogoutQ"
+            android:id="@+id/TextSendToManager"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="로그아웃 하시겠습니까?"
-            android:textSize="20sp"
+            android:text="개발자에게 메일 보내기"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#000"/>
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_logout_no"
+            android:id="@+id/Btn_question_yes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="아니요!" />
+            android:background="#fff"
+            android:text="예"
+            android:textSize="16sp"/>
 
         <Button
-            android:id="@+id/btn_logout_yes"
+            android:id="@+id/Btn_question_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="네!" />
-
+            android:background="#fff"
+            android:text="아니요"
+            android:textColor="@color/colordarkgray"
+            android:textSize="16sp" />
     </LinearLayout>
-
 </LinearLayout>

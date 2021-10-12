@@ -4,9 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.firstproject3.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,5 +53,19 @@ public class Logout_Popup extends Activity {
                 finish();
             }
         });
+
+        //특정 텍스트에 대한 스타일 적용
+        TextView textLogoutQ = findViewById(R.id.textLogoutQ);
+
+        String content = textLogoutQ.getText().toString();
+        SpannableString spannableString = new SpannableString(content);
+
+        String word = "로그아웃";
+        int start = content.indexOf(word);
+        int end = start + word.length();
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#595959")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textLogoutQ.setText(spannableString);
     }
 }

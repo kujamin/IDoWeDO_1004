@@ -111,6 +111,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                                 DocumentSnapshot document = task.getResult();
                                 int myExp = Integer.parseInt(document.getString("exp"));
                                 docRefC.update("exp",String.valueOf(myExp+10));
+                                achieve_point++;
 
                             }
                         }

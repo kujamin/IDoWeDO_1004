@@ -13,6 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firstproject3.AtCheck.SaturdayDecorator;
+import com.example.firstproject3.AtCheck.SundayDecorator;
 import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.R;
@@ -35,10 +37,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -86,6 +90,21 @@ public class CalendarActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();
 
         calendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
+
+        //커스텀 달력에서 주말에만 커스텀 적용하기
+        calendarView.state().edit()
+                .setFirstDayOfWeek(Calendar.SUNDAY)
+                .setMinimumDate(CalendarDay.from(2021, 8, 1))   //달력의 시작
+                .setMaximumDate(CalendarDay.from(2030, 11, 31)) //달력의 끝
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
+
+        calendarView.addDecorators(
+                new SundayDecorator(),
+                new SaturdayDecorator()
+        );
+
+        //달력 실행될 때 오늘 날짜가 select되게 함
         calendarView.setSelectedDate(CalendarDay.today());
 
         listcal = findViewById(R.id.listcal);
