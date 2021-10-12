@@ -38,9 +38,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -210,9 +212,13 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 String category = strUrl; //습관 카테고리 텍스트
                 String cateText = textch.getText().toString().trim();
                 String id = UUID.randomUUID().toString();
+                long now = System.currentTimeMillis();
+                Date dateS = new Date(now);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                String dateStart = dateFormat.format(dateS);
                 //String usercode = ((usercode)getApplication()).getUsercode();
 
-                uploadData(title, date, memo, category, cateText, id, userCode);
+                uploadData(title, date, memo, category, cateText, id, userCode, dateStart);
 
 //                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
 //                    @Override
@@ -235,7 +241,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
     }//onCreate
 
-    private void uploadData(String title, String date, String memo, String category, String cateText, String id, String userCode) {
+    private void uploadData(String title, String date, String memo, String category, String cateText, String id, String userCode, String dateStart) {
         pd.setTitle("습관 생성 중...");
 
         pd.show();
@@ -250,6 +256,8 @@ public class HabbitMakeActivity extends AppCompatActivity {
         doc.put("habbit_id", id);
         doc.put("habbit_checkbox",false);
         doc.put("userCode", userCode);
+        doc.put("habbit_dateStart",dateStart);
+
 
         db.collection("user").document(userCode).collection("user habbit").document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

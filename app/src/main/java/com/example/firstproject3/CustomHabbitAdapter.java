@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -31,7 +32,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -44,6 +49,10 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String usercode;
+    private DocumentReference doch;
+
+//    public void startcheck(){
+
 
 
     public CustomHabbitAdapter(ArrayList<Habbit_Item> arrayList, Context context) {
@@ -57,6 +66,48 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_item, parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
+
+//        mFirebaseAuth = FirebaseAuth.getInstance();
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//
+//        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+//                usercode = (group.getEmailid());
+//
+//                firebaseFirestore = FirebaseFirestore.getInstance();
+//                firebaseFirestore.collection("user").document(usercode).collection("user habbit")
+//                        .whereEqualTo("habbit_checkbox",true)
+//                        .get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                if (task.isSuccessful()) {
+//                                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                                        if(document.getBoolean("habbit_checkbox")){
+//                                            Log.d(TAG, document.getId() + " => " + document.getData());
+//                                            holder.habbit_checkBox.setChecked(true);
+//                                            holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//                                            holder.habbit_title.setTextColor(Color.GRAY);
+//                                        }
+//
+//                                    }
+//                                }
+//                                else {
+//                                    Log.d(TAG, "Error getting documents: ", task.getException());
+//                                }
+//                            }
+//                        });
+//
+//
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         return holder;
     }
@@ -77,6 +128,7 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -85,10 +137,17 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
         });
 
 
+
+
+
+
         holder.habbit_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(holder.habbit_checkBox.isChecked()){
+
+                    holder.habbit_checkBox.setOnCheckedChangeListener(null);
+
                     firebaseFirestore = FirebaseFirestore.getInstance();
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(arrayList.get(position).getHabbit_id());
 
@@ -98,15 +157,14 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Log.d(TAG, document.getId() + " => " + document.getData());
                                 int myExp = Integer.parseInt(document.getString("exp"));
                                 docRefC.update("exp",String.valueOf(myExp+10));
 
                             }
                         }
                     });
-
                     docRef.update("habbit_checkbox",true);
-
 
                     holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     holder.habbit_title.setTextColor(Color.GRAY);
@@ -133,6 +191,7 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(arrayList.get(position).getHabbit_id());
 
                     docRef.update("habbit_checkbox",false);
+
                     holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
                     holder.habbit_title.setTextColor(Color.BLACK);
                 }

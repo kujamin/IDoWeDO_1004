@@ -22,6 +22,8 @@ import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.Todo_Item;
 import com.example.firstproject3.R;
 import com.example.firstproject3.usercode;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,13 +31,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Fragment_Todo extends Fragment {
 
@@ -50,6 +58,7 @@ public class Fragment_Todo extends Fragment {
     private ArrayList<Habbit_Item> habbit_list;
     int todo_count, habbit_count;
     final String TAG = "MainActivity";
+    private String strDate;
 
     @Nullable
     @Override
@@ -61,6 +70,20 @@ public class Fragment_Todo extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        String sDY = String.valueOf(CalendarDay.today().getYear());
+        String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
+        String sDD = String.valueOf(CalendarDay.today().getDay());
+
+        if (sDM.length() != 2) {
+            sDM = 0 + sDM;
+        }
+        if (sDD.length() != 2){
+            sDD = 0 + sDD;
+        }
+
+
+        strDate = sDY + "/" + sDM + "/" + sDD;
 
 
         todo_recyclerView = viewGroup.findViewById(R.id.rec_Todo);
@@ -83,7 +106,9 @@ public class Fragment_Todo extends Fragment {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                  String userCode = (group.getEmailid());
 
-                firebaseFirestore.collection("user").document(userCode).collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                firebaseFirestore.collection("user").document(userCode).collection("user todo")
+                        .whereEqualTo("todo_date", strDate)
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null) {
@@ -93,10 +118,22 @@ public class Fragment_Todo extends Fragment {
                         todo_count = value.size();
                         todo_list.clear();
 
+                        String sDY = String.valueOf(CalendarDay.today().getYear());
+                        String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
+                        String sDD = String.valueOf(CalendarDay.today().getDay());
+
+                        if (sDM.length() != 2) {
+                            sDM = 0 + sDM;
+                        }
+                        if (sDD.length() != 2){
+                            sDD = 0 + sDD;
+                        }
+
+
+                        strDate = sDY + "/" + sDM + "/" + sDD;
+
                         for (QueryDocumentSnapshot doc : value) {
-                            if (doc.get("todo_title") != null) {
                                 todo_list.add(0, new Todo_Item(doc.getString("todo_category"), doc.getString("todo_title"), doc.getString("todo_id")));
-                            }
                         }
                         //어답터 갱신
                         customTodoAdapter.notifyDataSetChanged();
@@ -106,6 +143,7 @@ public class Fragment_Todo extends Fragment {
                 firebaseFirestore.collection("user").document(userCode).collection("user habbit").addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
                         if (error != null) {
                             Log.w(TAG, "Listen failed.", error);
                             return;
@@ -115,11 +153,88 @@ public class Fragment_Todo extends Fragment {
 
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.get("habbit_title") != null) {
+
+
+                            doc.getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+
+                                        String habbit_id = document.getString("habbit_id");
+
+                                        if (habbit_id != null) {
+                                            DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user habbit").document(habbit_id);
+
+                                            long now = System.currentTimeMillis();
+                                            Date dateC = new Date(now);
+                                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+                                            Date dateE = null;
+                                            Date dateRC = null;
+                                            Date dateS = null;
+
+                                            String strE = document.getString("habbit_date");
+                                            String strS = document.getString("habbit_dateStart");
+
+                                            String strC = dateFormat.format(dateC);
+
+                                            if (strS != strC) {
+                                                docRef.update("habbit_dateStart", strC);
+                                            }
+
+                                            try {
+                                                dateE = dateFormat.parse(strE);
+                                                dateRC = dateFormat.parse(strC);
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            int compare = dateRC.compareTo(dateE);
+
+                                            if (compare > 0) {
+                                                docRef.delete();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+
+//                            long now = System.currentTimeMillis();
+//
+//                            Date dateE = null;
+//                            Date dateC = new Date(now);
+//                            Date dateRC = null;
+//
+//                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//
+//                            String strE = doc.getString("habbit_date");
+//                            String dateStart = dateFormat.format(dateC);
+//
+//
+//                            try {
+//                                dateE = dateFormat.parse(strE);
+//                                dateRC = dateFormat.parse(dateStart);
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            int compare = dateRC.compareTo(dateE);
+//
+//                            if (compare > 0){
+//                                String habbit_id = doc.getString("habbit_id");
+//                                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user habbit").document(habbit_id);
+//                                docRef.delete();
+//                            }
+//                            else{
+//                                habbit_list.add(0, new Habbit_Item(doc.getString("habbit_category"), doc.getString("habbit_title"), doc.getString("habbit_id")));
+//                            }
                                 habbit_list.add(0, new Habbit_Item(doc.getString("habbit_category"), doc.getString("habbit_title"), doc.getString("habbit_id")));
+
                             }
+                            //어답터 갱신
+                            customHabbitAdapter.notifyDataSetChanged();
                         }
-                        //어답터 갱신
-                        customHabbitAdapter.notifyDataSetChanged();
                     }
                 });
             }
