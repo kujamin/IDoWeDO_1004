@@ -25,7 +25,7 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo3"
+            android:src="@drawable/logo3"
             android:padding="10dp"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"

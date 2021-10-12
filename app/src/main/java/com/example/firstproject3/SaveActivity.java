@@ -96,7 +96,7 @@ public class SaveActivity extends AppCompatActivity {
                 String id = UUID.randomUUID().toString();
                 String strName = nameEdit.getText().toString().trim();
                 String strGoal = goalHour + " : " + goalMin;
-                String strUrl = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/record_button.png?alt=media&token=458bb730-97bc-4790-a4c9-3cd95034ec57";
+                String strUrl = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/record_button3.png?alt=media&token=c679fa0b-f416-44ed-867f-c8969daeab7f";
 
                 uploadData(id, strName, strGoal, userCode, strUrl);
 
@@ -117,7 +117,7 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     private void uploadData(String id, String title, String goal, String userCode, String strUrl) {
-        pd.setTitle("타이머 생성 중...");
+        pd.setTitle("스톱워치 생성 중...");
 
         pd.show();
 
