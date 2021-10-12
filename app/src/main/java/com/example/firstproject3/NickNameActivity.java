@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firstproject3.Login.UserAccount;
+import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,10 +33,9 @@ public class NickNameActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase; //실시간 데이터베이스
-    public String strNickname;
 
     EditText editNickName;
-    TextView textNickError;
+    TextView textNickError, textgogo;
     ImageView imageNickArrow;
 
     @Override
@@ -54,9 +54,9 @@ public class NickNameActivity extends AppCompatActivity {
         editNickName = (EditText) findViewById(R.id.editNickName);
         textNickError = (TextView) findViewById(R.id.textNickError);
         imageNickArrow = (ImageView) findViewById(R.id.imageNickArrow);
-
+        textgogo = (TextView) findViewById(R.id.textgogo);
         imageNickArrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
-        String input = editNickName.getText().toString();
+
 
         editNickName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,17 +67,44 @@ public class NickNameActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = editNickName.getText().toString();
-                if(input.length() >= 9){
+                if (input.length() >= 9) {
                     textNickError.setVisibility(View.VISIBLE);
+                    imageNickArrow.setVisibility(View.INVISIBLE);
+                    textgogo.setVisibility(View.INVISIBLE);
                 }
 
-                if(input.length() < 9){
+                if (input.length() < 9) {
                     textNickError.setVisibility(View.INVISIBLE);
                     textNickError.setText("닉네임은 8글자 이하로 입력해주세요.");
+
+                    imageNickArrow.setVisibility(View.VISIBLE);
+                    textgogo.setVisibility(View.VISIBLE);
+
+                    imageNickArrow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(NickNameActivity.this, "ImageView 입니다.", Toast.LENGTH_SHORT).show();
+                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(editNickName.getText().toString());
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+
+                        }
+                    });
                 }
 
-                if(input.length() == 0) {
+                if (input.length() == 0) {
                     textNickError.setVisibility(View.VISIBLE);
+                    imageNickArrow.setVisibility(View.INVISIBLE);
+                    textgogo.setVisibility(View.INVISIBLE);
                     textNickError.setText("닉네임은 1글자 이상 입력해주세요.");
                 }
             }
@@ -88,37 +115,7 @@ public class NickNameActivity extends AppCompatActivity {
             }
         });
 
-        imageNickArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String input = editNickName.getText().toString();
-                strNickname = editNickName.getText().toString();
 
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                        String nickname = (group.getNickname());
-                        nickname = strNickname;
-
-                        if(nickname == null) {
-                            Toast.makeText(getApplicationContext(), "닉네임을 입력해주세요.", Toast.LENGTH_SHORT);
-                        }
-                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(nickname);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-                if(input.length() < 9 && input.length() > 0) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
 

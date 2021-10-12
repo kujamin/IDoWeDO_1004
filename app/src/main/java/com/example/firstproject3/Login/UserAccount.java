@@ -15,6 +15,10 @@ public class UserAccount {
     private String password;    // 비밀번호
     private String nickname;    // 어플 내 이름
 
+    public UserAccount() {
+
+    }
+
     public String getUsername() {
         return username;
     }
@@ -29,9 +33,6 @@ public class UserAccount {
 
     public void setRepassword(String repassword) {
         this.repassword = repassword;
-    }
-
-    public UserAccount() {
     }
 
     public String getIdtoken() {
@@ -58,9 +59,7 @@ public class UserAccount {
         this.password = password;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
+    public String getNickname() { return nickname; }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;

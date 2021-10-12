@@ -73,11 +73,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public static Context context_login;
     ProgressDialog customProgressDialog;
 
+    ImageView imagelogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        imagelogo = (ImageView) findViewById(R.id.imageLogo);
+        imagelogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("915511622927-5bh9gk7go846qadakl0bo5agru5i4bv0.apps.googleusercontent.com")
@@ -90,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
 
+
         context = this.getApplicationContext();
         context_login = this;
 
@@ -100,9 +105,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
-
-        ImageView imagelogo = (ImageView) findViewById(R.id.imageLogo);
-        imagelogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         btn_google = findViewById(R.id.btn_google);
         btn_google.setOnClickListener(new View.OnClickListener() { //구글 로그인버튼 클릭시 실행
@@ -220,7 +222,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             account.setEmailid(firebaseUser.getEmail());
                             account.setUsername(firebaseUser.getDisplayName());
                             account.setNickname(firebaseUser.getDisplayName());
-                            account.setNickname(null);
 
                             // setValue : database에 insert 행위
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);

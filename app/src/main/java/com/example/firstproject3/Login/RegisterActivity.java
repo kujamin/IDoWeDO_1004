@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     com.example.firstproject3.Login.ProgressDialog customProgressDialog;
     private String TAG = "MainActivity";
+    private String strNick = "null";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         mEtRePwd = findViewById(R.id.et_repwd); //비밀번호 확인
         mBtnRegister = findViewById(R.id.btn_register); // 등록버튼
         mTextPwdError = findViewById(R.id.textPwdError);  //비밀번호 재입력 오류메세지
+
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                         account.setUsername(strName);
                         account.setRepassword(strRePwd);
                         account.setPassword(strPwd);
-                        account.setNickname(null);
+                        account.setNickname(strNick);
 
                         // setValue : database에 insert 행위
                         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);

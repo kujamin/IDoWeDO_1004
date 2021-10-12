@@ -8,12 +8,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextNickName"
-        android:maxLength="9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:maxLength="9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             app:layout_constraintHorizontal_bias="0.432"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textNickTitle"
-            app:layout_constraintVertical_bias="0.052"/>
+            app:layout_constraintVertical_bias="0.052" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,25 +59,44 @@
         android:id="@+id/textNickTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
-        android:text="닉네임"
+        android:layout_marginTop="104dp"
+        android:text="당신의 멋진 닉네임은?"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.325"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageNickArrow"
-        android:layout_width="18dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="16dp"
+    <TextView
+        android:id="@+id/textgogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:text="시작하기!!"
+        android:textColor="@color/colorAccent"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/TextNickName"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253" />
+
+    <ImageView
+        android:id="@+id/imageNickArrow"
+        android:layout_width="75dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.452"
         app:srcCompat="@drawable/rightarrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
