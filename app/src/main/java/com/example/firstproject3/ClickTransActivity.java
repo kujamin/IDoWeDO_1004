@@ -192,25 +192,6 @@ public class ClickTransActivity extends AppCompatActivity {
                             }
                         });
 
-                //현재 날짜 가져오기
-                long now = System.currentTimeMillis();
-                Date mDate = new Date(now);
-                SimpleDateFormat simpleDate = new SimpleDateFormat("MM월 dd일");
-                getTime = simpleDate.format(mDate);
-
-                Map<String, Object> challState = new HashMap<>();
-                challState.put("today_date", getTime);
-                challState.put("userChallStudy_OX", "X");
-                challState.put("userCode", usercode);
-
-                firebaseFirestore.collection("user").document(usercode).collection("user challenge").document(chall_Text).collection("OX").document(getTime).set(challState)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                            }
-                        });
-
                 startActivity(new Intent(ClickTransActivity.this, PopupActivity.class));
 
                 textChallAttend.setText("참가 중...");
@@ -260,6 +241,25 @@ public class ClickTransActivity extends AppCompatActivity {
 
         if(str1 != null) {
             notificationManager.notify(1, notification1);
+
+            //현재 날짜 가져오기
+            long now = System.currentTimeMillis();
+            Date mDate = new Date(now);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("YY-MM-dd");
+            getTime = simpleDate.format(mDate);
+
+            Map<String, Object> challState = new HashMap<>();
+            challState.put("today_date", getTime);
+            challState.put("userChallStudy_OX", "X");
+            challState.put("userCode", usercode);
+
+            firebaseFirestore.collection("user").document(usercode).collection("user challenge").document(str1).collection("OX").document(getTime).set(challState)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
         }
 
 
@@ -292,6 +292,25 @@ public class ClickTransActivity extends AppCompatActivity {
 
         if(str2 != null) {
             notificationManager.notify(2, notification2);
+
+            //현재 날짜 가져오기
+            long now = System.currentTimeMillis();
+            Date mDate = new Date(now);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("YY-MM-dd");
+            getTime = simpleDate.format(mDate);
+
+            Map<String, Object> challState = new HashMap<>();
+            challState.put("today_date", getTime);
+            challState.put("userChallStudy_OX", "X");
+            challState.put("userCode", usercode);
+
+            firebaseFirestore.collection("user").document(usercode).collection("user challenge").document(str2).collection("OX").document(getTime).set(challState)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
         }
 
 
@@ -324,6 +343,25 @@ public class ClickTransActivity extends AppCompatActivity {
 
         if(str3 != null) {
             notificationManager.notify(3, notification3);
+
+            //현재 날짜 가져오기
+            long now = System.currentTimeMillis();
+            Date mDate = new Date(now);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("YY-MM-dd");
+            getTime = simpleDate.format(mDate);
+
+            Map<String, Object> challState = new HashMap<>();
+            challState.put("today_date", getTime);
+            challState.put("userChallStudy_OX", "X");
+            challState.put("userCode", usercode);
+
+            firebaseFirestore.collection("user").document(usercode).collection("user challenge").document(str3).collection("OX").document(getTime).set(challState)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
         }
 
      }

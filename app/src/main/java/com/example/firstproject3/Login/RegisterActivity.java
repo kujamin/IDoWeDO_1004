@@ -39,6 +39,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     com.example.firstproject3.Login.ProgressDialog customProgressDialog;
     private String TAG = "MainActivity";
-    private String strNick = "null";
+    private String strNick = "null", dateR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,6 +185,32 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     }
                                 });
+                                ////출첵 생성////
+                                String year = String.valueOf(CalendarDay.today().getYear());
+                                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+                                String day = String.valueOf(CalendarDay.today().getDay());
+
+                                if (month.length() != 2) {
+                                    month = 0 + month;
+                                }
+                                if (day.length() != 2){
+                                    day = 0 + day;
+                                }
+
+                                dateR = year + "-" + month + "-" + day;
+
+                                Map<String, Object> doc = new HashMap<>();
+                                doc.put("checkOX", "O");
+                                doc.put("usercode", strEmail);
+                                doc.put("checkDate", dateR);
+
+                                firebaseFirestore.collection("user").document(strEmail).collection("user Check").document(dateR).set(doc)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
 
                                 //유저별 업적 달성 여부 확인
                                 Map<String, Object> userAchieve = new HashMap<>();

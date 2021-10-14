@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -124,21 +125,10 @@ public class Attendance_CheckActivity extends Activity {
                 }
 
                 dateR = year + "-" + month + "-" + day;
-                Toast.makeText(getApplicationContext(), dateR, Toast.LENGTH_SHORT).show();
 
-                Map<String, Object> doc = new HashMap<>();
-                doc.put("checkOX", "O");
-                doc.put("usercode", usercode);
-                doc.put("checkDate", dateR);
+                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user Check").document(dateR);
 
-                firebaseFirestore.collection("user").document(usercode).collection("user Check").document(dateR).set(doc)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                            }
-                        });
-
+                docRef.update("checkOX", "O");
             }
         });
 
