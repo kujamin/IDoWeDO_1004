@@ -25,18 +25,6 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="?attr/homeAsUpIndicator" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView"-->
-<!--            android:layout_width="408dp"-->
-<!--            android:layout_height="433dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.051"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.0"-->
-<!--            app:srcCompat="@drawable/timer_clock"-->
-<!--            app:tint="@color/colorAccent" />-->
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,7 +43,8 @@
             android:layout_gravity="center"
             android:text="00:00:00"
             android:textColor="@color/colorPrimary"
-            android:textSize="55sp"
+            android:textSize="45sp"
+            android:fontFamily="@font/nanumbarunpenr"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.46"
@@ -82,7 +71,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginVertical="100dp"
+                    android:layout_marginVertical="65dp"
                     android:background="#00ff0000"
                     android:text="시작"
                     android:textColor="@color/colorPrimary"
@@ -94,10 +83,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginVertical="110dp"
+                    android:layout_marginVertical="170dp"
                     android:text="일시정지"
                     android:textSize="20sp"
                     android:visibility="gone"
+                    android:fontFamily="@font/nanumbarunpenr"
                     android:textColor="@color/colorwhite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
