@@ -35,8 +35,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class StoreActivity extends AppCompatActivity {
     View darkView;
     LinearLayout popupStore;
-    LinearLayout soldoutView1, soldoutView2, soldoutView3, soldoutView4, soldoutView5, soldoutView6, soldoutView7, soldoutView8,
-            soldoutView9, soldoutView10, soldoutView11, soldoutView12;
+    LinearLayout soldoutView1, soldoutView2, soldoutView3, soldoutView4, soldoutView5,
+            soldoutView6, soldoutView7, soldoutView8, soldoutView9, soldoutView10,
+            soldoutView11, soldoutView12, soldoutView13, soldoutView14, soldoutView15,
+            soldoutView16, soldoutView17, soldoutView18, soldoutView19, soldoutView20,
+            soldoutView21, soldoutView22, soldoutView23, soldoutView24, soldoutView25,
+            soldoutView26, soldoutView27, soldoutView28, soldoutView29;
     int itemId;
     private FirebaseFirestore firebaseFirestore;
     private int itemCoin, myCoin,
@@ -78,6 +82,53 @@ public class StoreActivity extends AppCompatActivity {
         soldoutView10 = findViewById(R.id.SoldoutView10);
         soldoutView11 = findViewById(R.id.SoldoutView11);
         soldoutView12 = findViewById(R.id.SoldoutView12);
+        soldoutView13 = findViewById(R.id.SoldoutView13);
+        soldoutView14 = findViewById(R.id.SoldoutView14);
+        soldoutView15 = findViewById(R.id.SoldoutView15);
+        soldoutView16 = findViewById(R.id.SoldoutView16);
+        soldoutView17 = findViewById(R.id.SoldoutView17);
+        soldoutView18 = findViewById(R.id.SoldoutView18);
+        soldoutView19 = findViewById(R.id.SoldoutView19);
+        soldoutView20 = findViewById(R.id.SoldoutView20);
+        soldoutView21 = findViewById(R.id.SoldoutView21);
+        soldoutView22 = findViewById(R.id.SoldoutView22);
+        soldoutView23 = findViewById(R.id.SoldoutView23);
+        soldoutView24 = findViewById(R.id.SoldoutView24);
+        soldoutView25 = findViewById(R.id.SoldoutView25);
+        soldoutView26 = findViewById(R.id.SoldoutView26);
+        soldoutView27 = findViewById(R.id.SoldoutView27);
+        soldoutView28 = findViewById(R.id.SoldoutView28);
+        soldoutView29 = findViewById(R.id.SoldoutView29);
+
+        LinearLayout itemLayout1 = findViewById(R.id.item1);
+        LinearLayout itemLayout2 = findViewById(R.id.item2);
+        LinearLayout itemLayout3 = findViewById(R.id.item3);
+        LinearLayout itemLayout4 = findViewById(R.id.item4);
+        LinearLayout itemLayout5 = findViewById(R.id.item5);
+        LinearLayout itemLayout6 = findViewById(R.id.item6);
+        LinearLayout itemLayout7 = findViewById(R.id.item7);
+        LinearLayout itemLayout8 = findViewById(R.id.item8);
+        LinearLayout itemLayout9 = findViewById(R.id.item9);
+        LinearLayout itemLayout10 = findViewById(R.id.item10);
+        LinearLayout itemLayout11 = findViewById(R.id.item11);
+        LinearLayout itemLayout12 = findViewById(R.id.item12);
+        LinearLayout itemLayout13 = findViewById(R.id.item13);
+        LinearLayout itemLayout14 = findViewById(R.id.item14);
+        LinearLayout itemLayout15 = findViewById(R.id.item15);
+        LinearLayout itemLayout16 = findViewById(R.id.item16);
+        LinearLayout itemLayout17 = findViewById(R.id.item17);
+        LinearLayout itemLayout18 = findViewById(R.id.item18);
+        LinearLayout itemLayout19 = findViewById(R.id.item19);
+        LinearLayout itemLayout20 = findViewById(R.id.item20);
+        LinearLayout itemLayout21 = findViewById(R.id.item21);
+        LinearLayout itemLayout22 = findViewById(R.id.item22);
+        LinearLayout itemLayout23 = findViewById(R.id.item23);
+        LinearLayout itemLayout24 = findViewById(R.id.item24);
+        LinearLayout itemLayout25 = findViewById(R.id.item25);
+        LinearLayout itemLayout26 = findViewById(R.id.item26);
+        LinearLayout itemLayout27 = findViewById(R.id.item27);
+        LinearLayout itemLayout28 = findViewById(R.id.item28);
+        LinearLayout itemLayout29 = findViewById(R.id.item29);
 
         ImageView test = findViewById(R.id.imageView077);
         test.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
@@ -111,24 +162,132 @@ public class StoreActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String str = (String) document.getData().get("name");
                                 switch (str) {
-                                    //basic
+                                    //1 basic
                                     case "basic_torso_01" :
                                         soldoutView1.setVisibility(View.VISIBLE);
+                                        itemLayout1.setEnabled(false);
                                         break;
                                     case "basic_leg_01" :
                                         soldoutView2.setVisibility(View.VISIBLE);
+                                        itemLayout2.setEnabled(false);
                                         break;
-                                    //business
+                                    //2 business
                                     case "business_head_01" :
                                         soldoutView3.setVisibility(View.VISIBLE);
+                                        itemLayout3.setEnabled(false);
                                         break;
                                     case "business_torso_01" :
                                         soldoutView4.setVisibility(View.VISIBLE);
+                                        itemLayout4.setEnabled(false);
                                         break;
                                     case "business_leg_01" :
                                         soldoutView5.setVisibility(View.VISIBLE);
+                                        itemLayout5.setEnabled(false);
                                         break;
-
+                                    //3 formal
+                                    case "formal_head_01" :
+                                        soldoutView6.setVisibility(View.VISIBLE);
+                                        itemLayout6.setEnabled(false);
+                                        break;
+                                    case "formal_torso_01" :
+                                        soldoutView7.setVisibility(View.VISIBLE);
+                                        itemLayout7.setEnabled(false);
+                                        break;
+                                    case "formal_leg_01" :
+                                        soldoutView8.setVisibility(View.VISIBLE);
+                                        itemLayout8.setEnabled(false);
+                                        break;
+                                    //4 hood
+                                    case "hood_torso_01" :
+                                        soldoutView9.setVisibility(View.VISIBLE);
+                                        itemLayout9.setEnabled(false);
+                                        break;
+                                    case "hood_leg_01" :
+                                        soldoutView10.setVisibility(View.VISIBLE);
+                                        itemLayout10.setEnabled(false);
+                                        break;
+                                    //5 knight
+                                    case "knight_head_01" :
+                                        soldoutView11.setVisibility(View.VISIBLE);
+                                        itemLayout11.setEnabled(false);
+                                        break;
+                                    case "knight_torso_01" :
+                                        soldoutView12.setVisibility(View.VISIBLE);
+                                        itemLayout12.setEnabled(false);
+                                        break;
+                                    case "knight_leg_01" :
+                                        soldoutView13.setVisibility(View.VISIBLE);
+                                        itemLayout13.setEnabled(false);
+                                        break;
+                                    //6 magician
+                                    case "magician_head_01" :
+                                        soldoutView14.setVisibility(View.VISIBLE);
+                                        itemLayout14.setEnabled(false);
+                                        break;
+                                    case "magician_torso_01" :
+                                        soldoutView15.setVisibility(View.VISIBLE);
+                                        itemLayout15.setEnabled(false);
+                                        break;
+                                    case "magician_leg_01" :
+                                        soldoutView16.setVisibility(View.VISIBLE);
+                                        itemLayout16.setEnabled(false);
+                                        break;
+                                    //7 rogue
+                                    case "rogue_head_01" :
+                                        soldoutView17.setVisibility(View.VISIBLE);
+                                        itemLayout17.setEnabled(false);
+                                        break;
+                                    case "rogue_torso_01" :
+                                        soldoutView18.setVisibility(View.VISIBLE);
+                                        itemLayout18.setEnabled(false);
+                                        break;
+                                    case "rogue_leg_01" :
+                                        soldoutView19.setVisibility(View.VISIBLE);
+                                        itemLayout19.setEnabled(false);
+                                        break;
+                                    //7 alien1
+                                    case "alien_head_01" :
+                                        soldoutView20.setVisibility(View.VISIBLE);
+                                        itemLayout20.setEnabled(false);
+                                        break;
+                                    case "alien_torso_01" :
+                                        soldoutView21.setVisibility(View.VISIBLE);
+                                        itemLayout21.setEnabled(false);
+                                        break;
+                                    case "alien_leg_01" :
+                                        soldoutView22.setVisibility(View.VISIBLE);
+                                        itemLayout22.setEnabled(false);
+                                        break;
+                                    //8 alien2
+                                    case "alien_head_02" :
+                                        soldoutView23.setVisibility(View.VISIBLE);
+                                        itemLayout23.setEnabled(false);
+                                        break;
+                                    case "alien_torso_02" :
+                                        soldoutView24.setVisibility(View.VISIBLE);
+                                        itemLayout24.setEnabled(false);
+                                        break;
+                                    case "alien_leg_02" :
+                                        soldoutView25.setVisibility(View.VISIBLE);
+                                        itemLayout25.setEnabled(false);
+                                        break;
+                                    //9 hand 4개
+                                    case "book_hand_01" :
+                                        soldoutView26.setVisibility(View.VISIBLE);
+                                        itemLayout26.setEnabled(false);
+                                        break;
+                                    case "claw_hand_01" :
+                                        soldoutView27.setVisibility(View.VISIBLE);
+                                        itemLayout27.setEnabled(false);
+                                        break;
+                                    case "knife_hand_01" :
+                                        soldoutView28.setVisibility(View.VISIBLE);
+                                        itemLayout28.setEnabled(false);
+                                        break;
+                                    case "staff_hand_01" :
+                                        soldoutView29.setVisibility(View.VISIBLE);
+                                        itemLayout29.setEnabled(false);
+                                        break;
 
                                 }
                             }
@@ -155,36 +314,6 @@ public class StoreActivity extends AppCompatActivity {
 
             }
         };
-
-        LinearLayout itemLayout1 = findViewById(R.id.item1);
-        LinearLayout itemLayout2 = findViewById(R.id.item2);
-        LinearLayout itemLayout3 = findViewById(R.id.item3);
-        LinearLayout itemLayout4 = findViewById(R.id.item4);
-        LinearLayout itemLayout5 = findViewById(R.id.item5);
-        LinearLayout itemLayout6 = findViewById(R.id.item6);
-        LinearLayout itemLayout7 = findViewById(R.id.item7);
-        LinearLayout itemLayout8 = findViewById(R.id.item8);
-        LinearLayout itemLayout9 = findViewById(R.id.item9);
-        LinearLayout itemLayout10 = findViewById(R.id.item10);
-        LinearLayout itemLayout11 = findViewById(R.id.item11);
-        LinearLayout itemLayout12 = findViewById(R.id.item12);
-        LinearLayout itemLayout13 = findViewById(R.id.item13);
-        LinearLayout itemLayout14 = findViewById(R.id.item14);
-        LinearLayout itemLayout15 = findViewById(R.id.item15);
-        LinearLayout itemLayout16 = findViewById(R.id.item16);
-        LinearLayout itemLayout17 = findViewById(R.id.item17);
-        LinearLayout itemLayout18 = findViewById(R.id.item18);
-        LinearLayout itemLayout19 = findViewById(R.id.item19);
-        LinearLayout itemLayout20 = findViewById(R.id.item20);
-        LinearLayout itemLayout21 = findViewById(R.id.item21);
-        LinearLayout itemLayout22 = findViewById(R.id.item22);
-        LinearLayout itemLayout23 = findViewById(R.id.item23);
-        LinearLayout itemLayout24 = findViewById(R.id.item24);
-        LinearLayout itemLayout25 = findViewById(R.id.item25);
-        LinearLayout itemLayout26 = findViewById(R.id.item26);
-        LinearLayout itemLayout27 = findViewById(R.id.item27);
-        LinearLayout itemLayout28 = findViewById(R.id.item28);
-        LinearLayout itemLayout29 = findViewById(R.id.item29);
 
         itemLayout1.setOnClickListener(ocl);
         itemLayout2.setOnClickListener(ocl);
@@ -286,6 +415,7 @@ public class StoreActivity extends AppCompatActivity {
                 popupStore.setVisibility(View.INVISIBLE);
 
                 switch (itemId) {
+                    //c1
                     case R.id.item1 :
                         soldoutView1.setVisibility(View.VISIBLE);
 
@@ -334,6 +464,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.update("coin", String.valueOf(myCoin-strCoin2));
 
                         break;
+                        //c2
                     case R.id.item3 :
                         soldoutView3.setVisibility(View.VISIBLE);
 
@@ -405,6 +536,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.update("coin", String.valueOf(myCoin-strCoin5));
 
                         break;
+                        //c3
                     case R.id.item6 :
                         soldoutView6.setVisibility(View.VISIBLE);
 
@@ -474,17 +606,495 @@ public class StoreActivity extends AppCompatActivity {
                         documentReference.update("buy","O");
                         documentReferenceC.update("coin", String.valueOf(myCoin-strCoin8));
                         break;
+                        //c4
                     case R.id.item9 :
                         soldoutView9.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c4_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin9));
                         break;
                     case R.id.item10 :
                         soldoutView10.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c4_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin10));
                         break;
+                        //c5
                     case R.id.item11 :
                         soldoutView11.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c5_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin11));
                         break;
                     case R.id.item12 :
                         soldoutView12.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c5_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin12));
+                        break;
+                    case R.id.item13 :
+                        soldoutView13.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c5_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin13));
+                        break;
+                        //c6
+                    case R.id.item14 :
+                        soldoutView14.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c6_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin14));
+                        break;
+                    case R.id.item15 :
+                        soldoutView15.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c6_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin15));
+                        break;
+                    case R.id.item16 :
+                        soldoutView16.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c6_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin16));
+                        break;
+                        //c7
+                    case R.id.item17 :
+                        soldoutView17.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c7_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin17));
+                        break;
+                    case R.id.item18 :
+                        soldoutView18.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c7_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin18));
+                        break;
+                    case R.id.item19 :
+                        soldoutView19.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c7_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin19));
+                        break;
+                    //c8
+                    case R.id.item20 :
+                        soldoutView20.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c8_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin20));
+                        break;
+                    case R.id.item21 :
+                        soldoutView21.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c8_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin21));
+                        break;
+                    case R.id.item22 :
+                        soldoutView22.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c8_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin22));
+                        break;
+                    //c9
+                    case R.id.item23 :
+                        soldoutView23.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c9_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin23));
+                        break;
+                    case R.id.item24 :
+                        soldoutView24.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c9_torso");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin24));
+                        break;
+                    case R.id.item25 :
+                        soldoutView25.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c9_leg");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin25));
+                        break;
+                    //c10~c13
+                    case R.id.item26 :
+                        soldoutView26.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c10_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin26));
+                        break;
+                    case R.id.item27 :
+                        soldoutView27.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c11_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin27));
+                        break;
+                    case R.id.item28 :
+                        soldoutView28.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c12_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin28));
+                        break;
+                    case R.id.item29 :
+                        soldoutView29.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore = FirebaseFirestore.getInstance();
+                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state").collection("store").document("c13_head");
+
+                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                .document("state");
+
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    myCoin = Integer.parseInt(doc.getString("coin"));
+                                }
+                            }
+                        });
+
+                        documentReference.update("buy","O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin29));
                         break;
                 }
             }

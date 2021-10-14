@@ -2691,6 +2691,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/store_tool"
                         android:orientation="vertical"
+                        android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingRight="10dp"
@@ -2702,7 +2703,6 @@
                             android:layout_height="90dp"
                             android:layout_gravity="center"
                             android:padding="20dp"
-                            android:background="@drawable/store_tool"
                             android:src="@drawable/logo3" />
 
                         <TextView
@@ -2711,42 +2711,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:gravity="center"
-                            android:text="아이템 이름"
-                            android:textSize="15dp"
+                            android:text="준비 중입니다!"
+                            android:textSize="13dp"
                             android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/textView079"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"
-                            android:text="아이템 분류"
-                            android:textSize="12dp" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="7dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/textCoin30"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="3dp"
-                                android:layout_weight="2"
-                                android:text="100" />
-
-                            <ImageView
-                                android:id="@+id/imageView080"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_weight="1"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/coin_export" />
-                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout

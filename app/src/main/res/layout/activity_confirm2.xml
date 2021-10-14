@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/challConfirmTitle"
         app:layout_constraintVertical_bias="0.20999998"
-        app:srcCompat="@drawable/study_jagyeock" />
+        app:srcCompat="@drawable/wake_up_6_export" />
 
     <Button
         android:id="@+id/challConfirmBtn"

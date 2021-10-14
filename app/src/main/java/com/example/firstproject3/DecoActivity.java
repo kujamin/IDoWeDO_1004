@@ -128,7 +128,25 @@ public class DecoActivity extends AppCompatActivity {
         imgbtnTorse9.setEnabled(false);
 
         imgbtnLeg1.setEnabled(false);
+        imgbtnLeg2.setEnabled(false);
+        imgbtnLeg3.setEnabled(false);
+        imgbtnLeg4.setEnabled(false);
+        imgbtnLeg5.setEnabled(false);
+        imgbtnLeg6.setEnabled(false);
+        imgbtnLeg7.setEnabled(false);
+        imgbtnLeg8.setEnabled(false);
+        imgbtnLeg9.setEnabled(false);
+
         imgbtnArm1.setEnabled(false);
+        imgbtnArm2.setEnabled(false);
+        imgbtnArm3.setEnabled(false);
+        imgbtnArm4.setEnabled(false);
+        imgbtnArm5.setEnabled(false);
+        imgbtnArm6.setEnabled(false);
+        imgbtnArm7.setEnabled(false);
+        imgbtnArm8.setEnabled(false);
+        imgbtnArm9.setEnabled(false);
+
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -136,6 +154,22 @@ public class DecoActivity extends AppCompatActivity {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 userCode = (group.getEmailid());
 
+                //사용자가 저장했던 옷 띄워주기
+                firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco")
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+//                            for(QueryDocumentSnapshot document : task.getResult()) {
+//                                String head = document.getString("cloHead");
+//                                String torso = document.getString("cloTorso");
+//                            }
+                        }
+                    }
+                });
+
+
+                //버튼 활성화
                 firebaseFirestore.collection("user").document(userCode).collection("user character")
                         .document("state").collection("store")
                         .whereEqualTo("buy","O")
@@ -147,13 +181,99 @@ public class DecoActivity extends AppCompatActivity {
                                 String cloName = (String) document.getData().get("name");
 
                                 switch (cloName) {
+                                    //첫번째 버튼
                                     case "business_head_01" :
                                         imgbtnHead1.setEnabled(true);
                                         break;
                                     case "basic_torso_01" :
                                         imgbtnTorse1.setEnabled(true);
                                         break;
+                                    case "basic_leg_01" :
+                                        imgbtnLeg1.setEnabled(true);
+                                        break;
+                                    case "claw_hand_01" :
+                                        imgbtnArm1.setEnabled(true);
+                                        break;
+                                    //두번째 버튼
+                                    case "formal_head_01" :
+                                        imgbtnHead2.setEnabled(true);
+                                        break;
+                                    case "business_torso_01" :
+                                        imgbtnTorse2.setEnabled(true);
+                                        break;
+                                    case "business_leg_01" :
+                                        imgbtnLeg2.setEnabled(true);
+                                        break;
+                                    case "knife_hand_01" :
+                                        imgbtnArm2.setEnabled(true);
+                                        break;
+                                    //세번째 버튼
+                                    case "knight_head_01" :
+                                        imgbtnHead3.setEnabled(true);
+                                        break;
+                                    case "formal_torso_01" :
+                                        imgbtnTorse3.setEnabled(true);
+                                        break;
+                                    case "formal_leg_01" :
+                                        imgbtnLeg3.setEnabled(true);
+                                        break;
+                                    case "book_hand_01" :
+                                        imgbtnArm3.setEnabled(true);
+                                        break;
+                                    //네번째 버튼
+                                    case "magician_head_01" :
+                                        imgbtnHead4.setEnabled(true);
+                                        break;
+                                    case "hood_torso_01" :
+                                        imgbtnTorse4.setEnabled(true);
+                                        break;
+                                    case "hood_leg_01" :
+                                        imgbtnLeg4.setEnabled(true);
+                                        break;
+                                    case "staff_hand_01" :
+                                        imgbtnArm4.setEnabled(true);
+                                        break;
+                                    //다섯번째 버튼
+                                    case "rogue_head_01" :
+                                        imgbtnHead5.setEnabled(true);
+                                        break;
+                                    case "magician_torso_01" :
+                                        imgbtnTorse5.setEnabled(true);
+                                        break;
+                                    case "magician_leg_01" :
+                                        imgbtnLeg5.setEnabled(true);
+                                        break;
+                                    //여섯번째 버튼
+                                    case "alien_head_02" :
+                                        imgbtnHead6.setEnabled(true);
+                                        break;
+                                    case "rogue_torso_01" :
+                                        imgbtnTorse6.setEnabled(true);
+                                        break;
+                                    case "rogue_leg_01" :
+                                        imgbtnLeg6.setEnabled(true);
+                                        break;
+                                    //일곱번째 버튼
+                                    case "alien_head_01" :
+                                        imgbtnHead7.setEnabled(true);
+                                        break;
+                                    case "alien_torso_01" :
+                                        imgbtnTorse7.setEnabled(true);
+                                        break;
+                                    case "alien_leg_01" :
+                                        imgbtnLeg7.setEnabled(true);
+                                        break;
+                                    //여덟번째 버튼
+                                    case "alien_torso_02" :
+                                        imgbtnHead8.setEnabled(true);
+                                        break;
+                                    case "alien_leg_02" :
+                                        imgbtnTorse8.setEnabled(true);
+                                        break;
 
+                                    default :
+                                        Toast.makeText(getApplicationContext(), "아직 구매하지 않은 제품입니다!", Toast.LENGTH_SHORT).show();
+                                        break;
                                 }
                             }
                         } else {
@@ -423,21 +543,25 @@ public class DecoActivity extends AppCompatActivity {
                     //2번 Row
                     case R.id.imageButtonHead2 :
                         drawH = imgbtnHead2.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/formal_head_01.png?alt=media&token=61b34547-ef73-4d3b-905b-7aeb1076d736";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso2 :
                         drawT = imgbtnTorse2.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/business_torso_01.png?alt=media&token=5ec8c372-dc9b-44d2-b6d5-41921df8d027";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg2 :
                         drawL = imgbtnLeg2.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/business_leg_01.png?alt=media&token=426c17d3-917e-4758-a959-ccc29973da53";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonArm2 :
                         drawA = imgbtnArm2.getDrawable();
+                        cloArm = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/knife_hand_01.png?alt=media&token=a90b099e-a7c7-44de-9482-892b26285fcb";
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
                         break;
@@ -445,21 +569,25 @@ public class DecoActivity extends AppCompatActivity {
                     //3번 Row
                     case R.id.imageButtonHead3 :
                         drawH = imgbtnHead3.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/knight_head_01.png?alt=media&token=8b21a272-54a9-4fe1-a3c2-92708d34ee4f";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso3 :
                         drawT = imgbtnTorse3.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/formal_torso_01.png?alt=media&token=6734f7b7-37ed-4547-8db7-2480a11a77d6";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg3 :
                         drawL = imgbtnLeg3.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/formal_leg_01.png?alt=media&token=5aa56e1d-18b6-40b8-babe-4d2e09c80143";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonArm3 :
                         drawA = imgbtnArm3.getDrawable();
+                        cloArm = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/book_hand_01.png?alt=media&token=8f8e4dab-fee2-4f07-ad3f-14f627a958fa";
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
                         break;
@@ -467,21 +595,25 @@ public class DecoActivity extends AppCompatActivity {
                     //4번 Row
                     case R.id.imageButtonHead4 :
                         drawH = imgbtnHead4.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/magician_head_01.png?alt=media&token=d04b4319-1f71-4b97-84c4-e9e1e7d61f9a";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso4 :
                         drawT = imgbtnTorse4.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/hood_torso_01.png?alt=media&token=37e0bffa-abcf-40f3-ba44-76eca5caa4e1";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg4 :
                         drawL = imgbtnLeg4.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/hood_leg_01.png?alt=media&token=5daf5e48-6a5a-4f00-91d0-23030085e082";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonArm4 :
                         drawA = imgbtnArm4.getDrawable();
+                        cloArm = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/staff_hand_01.png?alt=media&token=e15e7548-9d6e-4860-9913-3479922f492d";
                         imgArm.setImageDrawable(drawA);
                         imgArm.setVisibility(View.VISIBLE);
                         break;
@@ -489,16 +621,19 @@ public class DecoActivity extends AppCompatActivity {
                     //5번 Row
                     case R.id.imageButtonHead5 :
                         drawH = imgbtnHead5.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/rogue_head_01.png?alt=media&token=c349637a-333a-49b9-81e0-725d82903426";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso5 :
                         drawT = imgbtnTorse5.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/magician_torso_01.png?alt=media&token=1256c333-5eaa-407e-92a5-7ccc9394bea3";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg5 :
                         drawL = imgbtnLeg5.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/magician_leg_01.png?alt=media&token=a3e9edac-e375-4131-9675-e2ff45c7452c";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
@@ -506,16 +641,19 @@ public class DecoActivity extends AppCompatActivity {
                     //6번 Row
                     case R.id.imageButtonHead6:
                         drawH = imgbtnHead6.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/alien_head_02.png?alt=media&token=3881075b-1528-45f4-b5d4-51d0a7179ce1";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso6 :
                         drawT = imgbtnTorse6.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/rogue_torso_01.png?alt=media&token=70ae343c-01a9-4663-b235-be222e998d1e";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg6 :
                         drawL = imgbtnLeg6.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/rogue_leg_01.png?alt=media&token=8fc22700-2140-405e-9c10-6a13d88d9885";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
@@ -523,16 +661,19 @@ public class DecoActivity extends AppCompatActivity {
                     //7번 Row
                     case R.id.imageButtonHead7 :
                         drawH = imgbtnHead7.getDrawable();
+                        cloHead = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/alien_head_01.png?alt=media&token=10929595-ef3c-4899-be74-2928f07b9d8f";
                         imgHead.setImageDrawable(drawH);
                         imgHead.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonTorso7 :
                         drawT = imgbtnTorse7.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/alien_torso_01.png?alt=media&token=cabd9b15-84c8-414a-b5c9-a57c883c5675";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg7 :
                         drawL = imgbtnLeg7.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/alien_leg_01.png?alt=media&token=b750874d-43de-4df6-b9ea-aa3235c560cb";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
@@ -540,11 +681,13 @@ public class DecoActivity extends AppCompatActivity {
                     //8번 Row
                     case R.id.imageButtonTorso8 :
                         drawT = imgbtnTorse8.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/alien_torso_02.png?alt=media&token=1feac206-4ff1-4f85-9144-a48d9ff1df61";
                         imgTorso.setImageDrawable(drawT);
                         imgTorso.setVisibility(View.VISIBLE);
                         break;
                     case R.id.imageButtonLeg8 :
                         drawL = imgbtnLeg8.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/alien_leg_02.png?alt=media&token=d258be48-309f-401b-bc19-8b721f9e53ec";
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
