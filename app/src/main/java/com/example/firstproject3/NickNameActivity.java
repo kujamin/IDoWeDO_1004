@@ -90,6 +90,7 @@ public class NickNameActivity extends AppCompatActivity {
                                     mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(editNickName.getText().toString());
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                                 @Override

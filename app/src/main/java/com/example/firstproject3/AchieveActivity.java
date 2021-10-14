@@ -9,6 +9,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,7 +20,20 @@ import android.widget.Toast;
 
 import static com.example.firstproject3.CustomTodoAdapter.achieve_point;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AchieveActivity extends AppCompatActivity {
     LinearLayout slideLayout;
@@ -27,12 +41,22 @@ public class AchieveActivity extends AppCompatActivity {
     ImageView showImg;
     TextView showName, showExplain;
     int badgeId;
-
+    private FirebaseFirestore firebaseFirestore;
+    private DocumentReference documentReference, documentReferenceC;
+    private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
+    private DatabaseReference mDatabase;
+    private String userCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achieve);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         slideLayout = findViewById(R.id.slideLayout);
         darkView = findViewById(R.id.DarkView);
@@ -73,6 +97,7 @@ public class AchieveActivity extends AppCompatActivity {
         {
 
         };*/
+
         //뱃지 클릭 시 팝업창에 띄움
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
@@ -92,12 +117,42 @@ public class AchieveActivity extends AppCompatActivity {
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
-                        showExplain.setText("연속 출석체크 30일 달성");
+                        firebaseFirestore.collection("user Check").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    int count = 3;
+                                    for (DocumentSnapshot document : task.getResult()) {
+                                        count++;
+                                    }
+                                    if (count >= 30)
+                                    {
+                                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                .document("achieve");
+                                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot doc = task.getResult();
+                                                    slideLayout.setVisibility(View.VISIBLE);
+                                                    darkView.setVisibility(View.VISIBLE);
+                                                    slideLayout.startAnimation(translateup);
+                                                    showImg.setImageDrawable(clickimg);
+                                                    showName.setText(str);
+                                                    showExplain.setText("연속 출석체크 30일 달성");
+                                                }
+                                            }
+                                        });
+                                        documentReference.update("100일 달성", "1");
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "현재까지" + count + "일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } else {
+                                    Log.d("TAG", "Error getting documents: ", task.getException());
+                                }
+                            }
+                        });
                         break;
 
                     case R.id.badge2:
@@ -127,7 +182,7 @@ public class AchieveActivity extends AppCompatActivity {
                         showExplain.setText("상점에서 부위별 의상 2개이상 구매하기");
                         break;
                     case R.id.badge4:
-                        if(achieve_point >= 5) {
+                        if (achieve_point >= 5) {
                             img = findViewById(R.id.imagebadge4);
                             text = findViewById(R.id.textbadge4);
                             clickimg = img.getDrawable();
@@ -140,7 +195,7 @@ public class AchieveActivity extends AppCompatActivity {
                             showName.setText(str);
                             showExplain.setText("5가지 이상의 To-Do 계획 후 완료하기");
                         } else {
-                            Toast.makeText(getApplicationContext(),"아직 달성하지 못한 업적입니다!",Toast.LENGTH_SHORT).show();;
+                            Toast.makeText(getApplicationContext(), "아직 달성하지 못한 업적입니다!", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case R.id.badge5:

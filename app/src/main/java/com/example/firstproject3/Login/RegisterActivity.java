@@ -185,6 +185,30 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
+                                //유저별 업적 달성 여부 확인
+                                Map<String, Object> userAchieve = new HashMap<>();
+                                userAchieve.put("30일 달성", "0");
+                                userAchieve.put("100일 달성", "0");
+                                userAchieve.put("패션 꿈나무", "0");
+                                userAchieve.put("워커 홀릭", "0");
+                                userAchieve.put("패션피플", "0");
+                                userAchieve.put("챌린지 스타터", "0");
+
+                                firebaseFirestore.collection("user").document(strEmail).collection("user character").document("achieve").set(userAchieve)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
+                                            }
+                                        });
+
+
                                 //사용자 경험치, 목숨, 코인 상태 저장
                                 Map<String, Object> userState = new HashMap<>();
                                 userState.put("coin", "200");
