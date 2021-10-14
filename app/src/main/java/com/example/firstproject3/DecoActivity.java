@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +44,7 @@ public class DecoActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private TextView saveText;
     private String cloHead, cloTorso, cloLeg, cloArm;
+    private int imgId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,11 @@ public class DecoActivity extends AppCompatActivity {
         final ImageButton imgbtnTorso = findViewById(R.id.imageBtnTorso);
         final ImageButton imgbtnLeg = findViewById(R.id.imageBtnLeg);
         final ImageButton imgbtnArm = findViewById(R.id.imageBtnArm);
+
+        final ImageView imgHead = findViewById(R.id.imageHead);
+        final ImageView imgTorso = findViewById(R.id.imageTorso);
+        final ImageView imgLeg = findViewById(R.id.imageLeg);
+        final ImageView imgArm = findViewById(R.id.imageArm);
 
         final ImageButton imgbtnHead1 = findViewById(R.id.imageButtonHead1);
         final ImageButton imgbtnHead2 = findViewById(R.id.imageButtonHead2);
@@ -160,10 +167,25 @@ public class DecoActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
-//                            for(QueryDocumentSnapshot document : task.getResult()) {
-//                                String head = document.getString("cloHead");
-//                                String torso = document.getString("cloTorso");
-//                            }
+                            DocumentSnapshot document = task.getResult();
+
+                            Glide.with(getApplicationContext()).load(document.getString("cloHead")).into(imgHead);
+                            Glide.with(getApplicationContext()).load(document.getString("cloTorso")).into(imgTorso);
+                            Glide.with(getApplicationContext()).load(document.getString("cloLeg")).into(imgLeg);
+                            Glide.with(getApplicationContext()).load(document.getString("cloArm")).into(imgArm);
+
+                            if(document.getString("cloHead") != null)
+                                imgHead.setVisibility(View.VISIBLE);
+
+                            if(document.getString("cloTorso") != null)
+                                imgTorso.setVisibility(View.VISIBLE);
+
+                            if(document.getString("cloLeg") != null)
+                                imgLeg.setVisibility(View.VISIBLE);
+
+                            if(document.getString("cloArm") != null)
+                                imgArm.setVisibility(View.VISIBLE);
+
                         }
                     }
                 });
@@ -490,10 +512,6 @@ public class DecoActivity extends AppCompatActivity {
             }
         });
 
-        final ImageView imgHead = findViewById(R.id.imageHead);
-        final ImageView imgTorso = findViewById(R.id.imageTorso);
-        final ImageView imgLeg = findViewById(R.id.imageLeg);
-        final ImageView imgArm = findViewById(R.id.imageArm);
         ImageButton btnReset = findViewById(R.id.imageReset);
 
         //새로고침 메소드
@@ -511,7 +529,7 @@ public class DecoActivity extends AppCompatActivity {
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int imgId = v.getId();
+                imgId = v.getId();
                 Drawable drawH, drawT, drawL, drawA;
                 switch (imgId) {
                     //1번 Row
@@ -735,7 +753,11 @@ public class DecoActivity extends AppCompatActivity {
         saveText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //변경사항 없을 시 저장 버튼 막기
+                if(imgId == 0) {
+                    Toast.makeText(getApplicationContext(), "변경된 부분이 없습니다!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
 
                 docRef.update("cloHead", cloHead);
