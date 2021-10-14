@@ -68,6 +68,8 @@ public class Attendance_CheckActivity extends Activity {
                 .commit();
 
         calendarView.setPadding(0, -20, 0, 30);
+        calendarView.setArrowColor(000000);
+        calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
         calendarView.addDecorators(
                 new SundayDecorator(),
