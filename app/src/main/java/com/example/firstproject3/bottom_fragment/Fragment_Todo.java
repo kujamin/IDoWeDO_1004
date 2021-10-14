@@ -237,7 +237,7 @@ public class Fragment_Todo extends Fragment {
                                         DocumentSnapshot document = task.getResult();
 
                                         int heartC = Integer.parseInt(document.getString("heart"));
-                                        documentReference.update("heart",String.valueOf(heartC-0.5));
+                                        documentReference.update("heart",String.valueOf(heartC-1));
                                     }
                                     else {
                                         Log.d(TAG, "get failed with ", task.getException());
