@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
                     case R.id.fragment_Timer:
                         setFrag(1);
-                        toolbar.setTitle("타이머");
+                        toolbar.setTitle("스톱워치");
                         break;
                     case R.id.fragment_Challenge:
                         setFrag(3);

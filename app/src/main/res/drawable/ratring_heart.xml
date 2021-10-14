@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background"
-        android:drawable="@drawable/heart_empty" />
+        android:drawable="@drawable/heart_empty_24" />
     <item android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/heart_half" />
+        android:drawable="@drawable/heart_half_24" />
     <item android:id="@android:id/progress"
-        android:drawable="@drawable/heart_full" />
+        android:drawable="@drawable/heart_full_24" />
 </layer-list>

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
     private String strUrl, userCode;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
+    private View view;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -68,6 +70,12 @@ public class HabbitDetailActivity extends AppCompatActivity {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habbit_detail);
+
+        final TableRow row1 = findViewById(R.id.habbitDetail_table1);
+        final TableRow row2 = findViewById(R.id.habbitDetail_table2);
+        final TableRow row3 = findViewById(R.id.habbitDetail_table3);
+        final TableRow row4 = findViewById(R.id.habbitDetail_table4);
+
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.habbitDetail_toolbar);
         setSupportActionBar(mToolbar);
@@ -105,11 +113,42 @@ public class HabbitDetailActivity extends AppCompatActivity {
         habbitDetail_textch.setText(habbit_cateText);
         habbitDetail_cateLayout.setVisibility(View.VISIBLE);
 
+        habbitDetail_title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                row1.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymclickline));
+                row2.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+
+            }
+        });
+
         //달력 팝업
         habbitDetail_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                view = getCurrentFocus();
+                if(view != null) {
+                    view.clearFocus();
+                }
+
+
+                row1.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymclickline));
+                row3.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
                 new DatePickerDialog(HabbitDetailActivity.this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        habbitDetail_memo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                row1.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymclickline));
+                row4.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
             }
         });
 
@@ -117,6 +156,18 @@ public class HabbitDetailActivity extends AppCompatActivity {
         habbitDetail_cateTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                view = getCurrentFocus();
+                if(view != null) {
+                    view.clearFocus();
+                }
+
+
+                row1.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymclickline));
+
                 Intent intent = new Intent(HabbitDetailActivity.this, DailyPopActivity.class);
                 startActivityForResult(intent, 1);
             }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -48,6 +49,7 @@ public class TodoDetailActivity extends AppCompatActivity {
     int selectHour, selectMinute;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
+    private View view;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -66,6 +68,15 @@ public class TodoDetailActivity extends AppCompatActivity {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_detail);
+
+        final TableRow row1 = findViewById(R.id.todoDetail_table1);
+        final TableRow row2 = findViewById(R.id.todoDetail_table2);
+        final TableRow row3 = findViewById(R.id.todoDetail_table4);
+        final TableRow row4 = findViewById(R.id.todoDetail_table6);
+        final TableRow time = findViewById(R.id.todoDetail_table5);
+        final TableRow row5 = findViewById(R.id.todoDetail_table7);
+
+        time.setVisibility(View.GONE);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.todoDetail_toolbar);
         setSupportActionBar(mToolbar);
@@ -108,11 +119,51 @@ public class TodoDetailActivity extends AppCompatActivity {
 
         todoDetail_cateLayout.setVisibility(View.VISIBLE);
 
+        todoDetail_title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                time.setVisibility(View.GONE);
+
+                row1.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymclickline));
+                row2.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row5.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+            }
+        });
+
         //달력 팝업
         todoDetail_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                view = getCurrentFocus();
+                if(view != null) {
+                    view.clearFocus();
+                }
+
+                time.setVisibility(View.GONE);
+
+                row1.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymclickline));
+                row3.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row5.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+
                 new DatePickerDialog(TodoDetailActivity.this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        todoDetail_memo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                time.setVisibility(View.GONE);
+
+                row1.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymclickline));
+                row5.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
             }
         });
 
@@ -120,6 +171,20 @@ public class TodoDetailActivity extends AppCompatActivity {
         todoDetail_cateTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                view = getCurrentFocus();
+                if(view != null) {
+                    view.clearFocus();
+                }
+
+                time.setVisibility(View.GONE);
+
+                row1.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row4.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row5.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymclickline));
+
                 Intent intent = new Intent(TodoDetailActivity.this, DailyPopActivity.class);
                 startActivityForResult(intent, 1);
             }
@@ -129,7 +194,18 @@ public class TodoDetailActivity extends AppCompatActivity {
         todoDetail_textViewTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                view = getCurrentFocus();
+                if(view != null) {
+                    view.clearFocus();
+                }
 
+                time.setVisibility(View.VISIBLE);
+
+                row1.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row2.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row3.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymclickline));
+                row4.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
+                row5.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
             }
         });
 

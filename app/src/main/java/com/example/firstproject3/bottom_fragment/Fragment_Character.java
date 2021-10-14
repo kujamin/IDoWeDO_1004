@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Fragment_Character extends Fragment {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -63,6 +67,7 @@ public class Fragment_Character extends Fragment {
     private DocumentReference documentReference;
     private FirebaseFirestore firebaseFirestore;
     private int coin, level, maxExp, currentExp;
+    private RatingBar ratingBar;
 
     @Nullable
     @Override
@@ -84,6 +89,7 @@ public class Fragment_Character extends Fragment {
         textExp = (TextView) rootView.findViewById(R.id.textViewExp);
         textCoin = (TextView) rootView.findViewById(R.id.textview_coin);
         textNickName = (TextView) rootView.findViewById(R.id.tv_nickname);
+        ratingBar = rootView.findViewById(R.id.ratingBar2);
 
 
         LinearLayout lstore = rootView.findViewById(R.id.storePage);
@@ -97,6 +103,22 @@ public class Fragment_Character extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 String userCode = (group.getEmailid());
+
+                firebaseFirestore.collection("user").document(userCode).collection("user todo")
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (error != null) {
+                                    Log.w("TAG", "Listen failed.", error);
+                                    return;
+                                }
+                                for (QueryDocumentSnapshot doc : value) {
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                                    Date today = new Date ( );
+                                    Date tomorrow = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 ) );
+                                }
+                            }
+                        });
 
                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
 

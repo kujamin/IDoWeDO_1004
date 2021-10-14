@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,10 +74,30 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                 .load(arrayList.get(position).getTodo_category())
                 .into(holder.todo_category);
         holder.todo_title.setText(arrayList.get(position).getTodo_title());
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        holder.todo_checkBox.setChecked(arrayList.get(position).getTodo_checkbox());
 
+        if(holder.todo_checkBox.isChecked()){
+            holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.todo_title.setTextColor(Color.GRAY);
+        }
+        else {
+            holder.todo_title.setPaintFlags(0);
+            holder.todo_title.setTextColor(Color.BLACK);
+        }
 
+        holder.todo_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(holder.todo_checkBox.isChecked()){
+                    holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.todo_title.setTextColor(Color.GRAY);
+                }
+                else {
+                    holder.todo_title.setPaintFlags(0);
+                    holder.todo_title.setTextColor(Color.BLACK);
+                }
+            }
+        });
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -119,9 +140,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
                     docRef.update("todo_checkbox",true);
 
-                    holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    holder.todo_title.setTextColor(Color.GRAY);
-
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -145,8 +163,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
 
                     docRef.update("todo_checkbox",false);
-                    holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
-                    holder.todo_title.setTextColor(Color.BLACK);
 
                 }
             }

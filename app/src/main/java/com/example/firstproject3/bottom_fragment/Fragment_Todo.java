@@ -59,6 +59,7 @@ public class Fragment_Todo extends Fragment {
     int todo_count, habbit_count;
     final String TAG = "MainActivity";
     private String strDate;
+    private int i = 0;
 
     @Nullable
     @Override
@@ -96,6 +97,9 @@ public class Fragment_Todo extends Fragment {
 
         todo_list = new ArrayList<Todo_Item>();
         customTodoAdapter = new CustomTodoAdapter(todo_list, viewGroup.getContext());
+
+
+
         //habbit
         habbit_list = new ArrayList<Habbit_Item>();
         customHabbitAdapter = new CustomHabbitAdapter(habbit_list, viewGroup.getContext());
@@ -122,6 +126,8 @@ public class Fragment_Todo extends Fragment {
                         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
                         String sDD = String.valueOf(CalendarDay.today().getDay());
 
+                        String sDD2 = String.valueOf(CalendarDay.today().getDay()+1);
+
                         if (sDM.length() != 2) {
                             sDM = 0 + sDM;
                         }
@@ -129,11 +135,9 @@ public class Fragment_Todo extends Fragment {
                             sDD = 0 + sDD;
                         }
 
-
-                        strDate = sDY + "/" + sDM + "/" + sDD;
-
                         for (QueryDocumentSnapshot doc : value) {
-                                todo_list.add(0, new Todo_Item(doc.getString("todo_category"), doc.getString("todo_title"), doc.getString("todo_id")));
+                                todo_list.add(0, new Todo_Item(doc.getString("todo_category"), doc.getString("todo_title"), doc.getString("todo_id"), doc.getBoolean("todo_checkbox")));
+                                doc.getString("todo_date");
                         }
                         //어답터 갱신
                         customTodoAdapter.notifyDataSetChanged();
@@ -179,8 +183,26 @@ public class Fragment_Todo extends Fragment {
 
                                             String strC = dateFormat.format(dateC);
 
-                                            if (strS != strC) {
+                                            Date date1 = null;
+                                            Date date2 = null;
+
+                                            try {
+                                                date1 = dateFormat.parse(strS);
+                                                date2 = dateFormat.parse(strC);
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            int compare1 = date1.compareTo(date2);
+
+                                            if(compare1 < 0){
+
+                                                if(document.getBoolean("habbit_checkbox") == false){
+                                                    i++;
+                                                }
+
                                                 docRef.update("habbit_dateStart", strC);
+                                                docRef.update("habbit_checkbox",false);
                                             }
 
                                             try {
@@ -199,41 +221,30 @@ public class Fragment_Todo extends Fragment {
                                     }
                                 }
                             });
-
-//                            long now = System.currentTimeMillis();
-//
-//                            Date dateE = null;
-//                            Date dateC = new Date(now);
-//                            Date dateRC = null;
-//
-//                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//
-//                            String strE = doc.getString("habbit_date");
-//                            String dateStart = dateFormat.format(dateC);
-//
-//
-//                            try {
-//                                dateE = dateFormat.parse(strE);
-//                                dateRC = dateFormat.parse(dateStart);
-//                            } catch (ParseException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            int compare = dateRC.compareTo(dateE);
-//
-//                            if (compare > 0){
-//                                String habbit_id = doc.getString("habbit_id");
-//                                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user habbit").document(habbit_id);
-//                                docRef.delete();
-//                            }
-//                            else{
-//                                habbit_list.add(0, new Habbit_Item(doc.getString("habbit_category"), doc.getString("habbit_title"), doc.getString("habbit_id")));
-//                            }
-                                habbit_list.add(0, new Habbit_Item(doc.getString("habbit_category"), doc.getString("habbit_title"), doc.getString("habbit_id")));
+                                habbit_list.add(0, new Habbit_Item(doc.getString("habbit_category"), doc.getString("habbit_title"), doc.getString("habbit_id"), doc.getBoolean("habbit_checkbox")));
 
                             }
                             //어답터 갱신
                             customHabbitAdapter.notifyDataSetChanged();
+                        }
+
+                        if(i!=0){
+                            DocumentReference documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+                            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+
+                                        int heartC = Integer.parseInt(document.getString("heart"));
+                                        documentReference.update("heart",String.valueOf(heartC-0.5));
+                                    }
+                                    else {
+                                        Log.d(TAG, "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+                            i=0;
                         }
                     }
                 });

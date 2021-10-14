@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,47 +68,6 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_item, parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-//
-//        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                UserAccount group = dataSnapshot.getValue(UserAccount.class);
-//                usercode = (group.getEmailid());
-//
-//                firebaseFirestore = FirebaseFirestore.getInstance();
-//                firebaseFirestore.collection("user").document(usercode).collection("user habbit")
-//                        .whereEqualTo("habbit_checkbox",true)
-//                        .get()
-//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                if (task.isSuccessful()) {
-//                                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                                        if(document.getBoolean("habbit_checkbox")){
-//                                            Log.d(TAG, document.getId() + " => " + document.getData());
-//                                            holder.habbit_checkBox.setChecked(true);
-//                                            holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//                                            holder.habbit_title.setTextColor(Color.GRAY);
-//                                        }
-//
-//                                    }
-//                                }
-//                                else {
-//                                    Log.d(TAG, "Error getting documents: ", task.getException());
-//                                }
-//                            }
-//                        });
-//
-//
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
         return holder;
     }
@@ -118,6 +78,39 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                 .load(arrayList.get(position).getHabbit_category())
                 .into(holder.habbit_category);
         holder.habbit_title.setText(arrayList.get(position).getHabbit_title());
+        holder.habbit_checkBox.setChecked(arrayList.get(position).getHabbit_checkbox());
+
+        if(holder.habbit_checkBox.isChecked()){
+            holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.habbit_title.setTextColor(Color.GRAY);
+        }
+        else {
+            holder.habbit_title.setPaintFlags(0);
+            holder.habbit_title.setTextColor(Color.BLACK);
+        }
+
+        holder.habbit_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(holder.habbit_checkBox.isChecked()){
+                    holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.habbit_title.setTextColor(Color.GRAY);
+                }
+                else {
+                    holder.habbit_title.setPaintFlags(0);
+                    holder.habbit_title.setTextColor(Color.BLACK);
+        }
+            }
+        });
+
+//        if(holder.habbit_checkBox.isChecked()){
+//            holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//            holder.habbit_title.setTextColor(Color.GRAY);
+//        }
+//        else {
+//            holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+//            holder.habbit_title.setTextColor(Color.BLACK);
+//        }
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -146,8 +139,6 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
             public void onClick(View v) {
                 if(holder.habbit_checkBox.isChecked()){
 
-                    holder.habbit_checkBox.setOnCheckedChangeListener(null);
-
                     firebaseFirestore = FirebaseFirestore.getInstance();
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user habbit").document(arrayList.get(position).getHabbit_id());
 
@@ -166,8 +157,8 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                     });
                     docRef.update("habbit_checkbox",true);
 
-                    holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    holder.habbit_title.setTextColor(Color.GRAY);
+//                    holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//                    holder.habbit_title.setTextColor(Color.GRAY);
 
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -192,8 +183,8 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
 
                     docRef.update("habbit_checkbox",false);
 
-                    holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
-                    holder.habbit_title.setTextColor(Color.BLACK);
+//                    holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+//                    holder.habbit_title.setTextColor(Color.BLACK);
                 }
             }
         });
