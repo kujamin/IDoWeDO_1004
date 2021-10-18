@@ -3,6 +3,8 @@ package com.example.firstproject3;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,33 +76,51 @@ public class ConfirmActivity extends AppCompatActivity {
         challBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String year = String.valueOf(CalendarDay.today().getYear());
-                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
-                String day = String.valueOf(CalendarDay.today().getDay());
+                AlertDialog.Builder myAlertBuilder =
+                        new AlertDialog.Builder(v.getContext());
+                // alert의 Messege 세팅
+                myAlertBuilder.setMessage("오늘 자격증 취득하기 챌린지 달성하셨나요?");
+                // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
+                myAlertBuilder.setPositiveButton("네!",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        // OK 버튼을 눌렸을 경우
+                        String year = String.valueOf(CalendarDay.today().getYear());
+                        String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+                        String day = String.valueOf(CalendarDay.today().getDay());
 
-                if (month.length() != 2) {
-                    month = 0 + month;
-                }
-                if (day.length() != 2){
-                    day = 0 + day;
-                }
+                        if (month.length() != 2) {
+                            month = 0 + month;
+                        }
+                        if (day.length() != 2){
+                            day = 0 + day;
+                        }
 
-                dateR = year + "-" + month + "-" + day;
+                        dateR = year + "-" + month + "-" + day;
 
-                Map<String, Object> doc = new HashMap<>();
-                doc.put("userChallStudy_OX", "O");
-                doc.put("userCode", usercode);
-                doc.put("today_date", dateR);
+                        Map<String, Object> doc = new HashMap<>();
+                        doc.put("userChallStudy_OX", "O");
+                        doc.put("userCode", usercode);
+                        doc.put("today_date", dateR);
 
-                firebaseFirestore.collection("user").document(usercode)
-                        .collection("user challenge").document("자격증 취득하기").collection("OX").document(dateR).set(doc)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        });
+                        firebaseFirestore.collection("user").document(usercode)
+                                .collection("user challenge").document("자격증 취득하기").collection("OX").document(dateR).set(doc)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                    }
+                });
+                myAlertBuilder.setNegativeButton("아니요..", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                // Alert를 생성해주고 보여주는 메소드(show를 선언해야 Alert가 생성됨)
+                myAlertBuilder.show();
+
 
             }
         });

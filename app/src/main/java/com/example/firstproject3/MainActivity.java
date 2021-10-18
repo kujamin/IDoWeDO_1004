@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -212,21 +213,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             }//for
                             AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
                             Intent intent = new Intent(MainActivity.this, MyReceiver.class);
+//                            intent.setClass(MainActivity.this, MyReceiver.class);
+//                            intent.setFlags(Integer.parseInt(Intent.ACTION_DATE_CHANGED));
                             intent.putExtra("chall1", str1);
                             intent.putExtra("chall2", str2);
                             intent.putExtra("chall3", str3);
+
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
 
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, 20);
-                            calendar.set(Calendar.MINUTE, 30);
+                            calendar.set(Calendar.HOUR_OF_DAY, 17);
+                            calendar.set(Calendar.MINUTE, 20);
 //                            calendar.set(2021, 9, 18, 14, 17);//알림창 바로 뜨는 거 보고 싶을 때 시간 조정 후 주석 풀기1
 
                             //알람 예약
                             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                                    AlarmManager.INTERVAL_DAY, pendingIntent);
+                                    AlarmManager.INTERVAL_DAY, pendingIntent);//24시간 이후 반복
+                            if (alarmManager == null) {
+                                Toast.makeText(getApplicationContext(), "알람 off", Toast.LENGTH_LONG).show();
+                                alarmManager.cancel(pendingIntent);
+                            }
 //                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);//알림창 바로 뜨는 거 보고 싶을 때 주석 풀기2
                         }//if
                     }

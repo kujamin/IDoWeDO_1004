@@ -109,7 +109,6 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.Custom
                 AlertDialog.Builder myAlertBuilder =
                         new AlertDialog.Builder(v.getContext());
                 // alert의 title과 Messege 세팅
-                myAlertBuilder.setTitle("타이머 삭제");
                 myAlertBuilder.setMessage("타이머 일정을 삭제하겠습니까?");
                 // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
                 myAlertBuilder.setPositiveButton("예",new DialogInterface.OnClickListener(){
