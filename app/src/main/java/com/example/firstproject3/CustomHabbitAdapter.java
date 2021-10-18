@@ -157,6 +157,25 @@ public class CustomHabbitAdapter extends RecyclerView.Adapter<CustomHabbitAdapte
                     });
                     docRef.update("habbit_checkbox",true);
 
+                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int value = snapshot.getValue(Integer.class);
+                            value += 1;
+                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").setValue(value);
+                            if(value == 30)
+                            {
+                                Toast.makeText(context.getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
 //                    holder.habbit_title.setPaintFlags(holder.habbit_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 //                    holder.habbit_title.setTextColor(Color.GRAY);
 

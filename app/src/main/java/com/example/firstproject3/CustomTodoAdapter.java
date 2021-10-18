@@ -132,13 +132,31 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                                 DocumentSnapshot document = task.getResult();
                                 int myExp = Integer.parseInt(document.getString("exp"));
                                 docRefC.update("exp",String.valueOf(myExp+10));
-                                achieve_point++;
 
                             }
                         }
                     });
 
                     docRef.update("todo_checkbox",true);
+
+                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int value = snapshot.getValue(Integer.class);
+                            value += 1;
+                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").setValue(value);
+                            if(value == 30)
+                            {
+                                Toast.makeText(context.getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
 
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override

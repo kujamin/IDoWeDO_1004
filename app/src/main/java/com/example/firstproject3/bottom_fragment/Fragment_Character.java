@@ -1,25 +1,16 @@
 package com.example.firstproject3.bottom_fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,17 +18,13 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.firstproject3.AchieveActivity;
-import com.example.firstproject3.CustomTodoAdapter;
 import com.example.firstproject3.DecoActivity;
 
-import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
-import com.example.firstproject3.MainActivity;
+import com.example.firstproject3.NickPopup;
 import com.example.firstproject3.R;
 import com.example.firstproject3.StoreActivity;
-import com.example.firstproject3.Timer_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,12 +38,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Fragment_Character extends Fragment {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
@@ -230,37 +211,25 @@ public class Fragment_Character extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
-
-               /* int coin = group.getCoin();
-                int currentexp = group.getExp();
-                int level = group.getLevel();
-                int mexp = group.getMaxexp();*/
                 String nickname = (group.getNickname());
 
-                /*mexp = 100 + (level);
-                textExp.setText(currentexp + " / " + mexp);*/
-
-
-                /*progressBar.setMax(mexp);
-                progressBar.setProgress(currentexp);
-                if (currentexp >= mexp) {
-                    level++;
-                    currentexp = currentexp - mexp;
-                }
-                textLevel.setText("Lv." + level);
-                textCoin.setText(coin + "");*/
                 textNickName.setText(nickname + "");
-
-                /*mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(level);
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("maxexp").setValue(mexp);*/
-
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        //닉네임 변경 꾹눌렀을때때
+        textNickName.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                Intent i = new Intent(rootView.getContext(), NickPopup.class);
+                startActivity(i);
+
+                return false;
             }
         });
 

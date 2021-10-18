@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.firstproject3.Login.RegisterActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NickNameActivity extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class NickNameActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase; //실시간 데이터베이스
+    private DocumentReference documentReferenceC;
+    private String userCode;
 
     EditText editNickName;
     TextView textNickError, textgogo;
@@ -48,6 +52,7 @@ public class NickNameActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("idowedo");
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         createGUI();
 
@@ -56,6 +61,23 @@ public class NickNameActivity extends AppCompatActivity {
         imageNickArrow = (ImageView) findViewById(R.id.imageNickArrow);
         textgogo = (TextView) findViewById(R.id.textgogo);
         imageNickArrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                if (value != null) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         editNickName.addTextChangedListener(new TextWatcher() {
@@ -83,10 +105,10 @@ public class NickNameActivity extends AppCompatActivity {
                     imageNickArrow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(NickNameActivity.this, "ImageView 입니다.", Toast.LENGTH_SHORT).show();
-                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addValueEventListener(new ValueEventListener() {
+                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    Toast.makeText(getApplicationContext(), "닉네임 설정 완료!!", Toast.LENGTH_SHORT).show();
                                     mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(editNickName.getText().toString());
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);

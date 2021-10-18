@@ -61,8 +61,9 @@ public class Attendance_CheckActivity extends Activity {
         setContentView(R.layout.activity_attendance_check);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -135,6 +136,24 @@ public class Attendance_CheckActivity extends Activity {
                 if (day.length() != 2){
                     day = 0 + day;
                 }
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int value = snapshot.getValue(Integer.class);
+                        value += 1;
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").setValue(value);
+                        if(value == 30 || value == 100)
+                        {
+                            Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 dateR = year + "-" + month + "-" + day;
 
@@ -150,6 +169,7 @@ public class Attendance_CheckActivity extends Activity {
 
                             }
                         });
+
             }
         });
     }
