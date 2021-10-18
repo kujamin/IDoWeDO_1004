@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.firstproject3.Login.UserAccount;
@@ -50,6 +52,7 @@ public class TodoDetailActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private View view;
+    private ProgressDialog pd;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -68,6 +71,8 @@ public class TodoDetailActivity extends AppCompatActivity {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_detail);
+
+        pd = new ProgressDialog(this);
 
         final TableRow row1 = findViewById(R.id.todoDetail_table1);
         final TableRow row2 = findViewById(R.id.todoDetail_table2);
@@ -243,23 +248,31 @@ public class TodoDetailActivity extends AppCompatActivity {
                 String str_cateText = todoDetail_textch.getText().toString().trim();
                 String str_time = todoDetail_textViewTime.getText().toString().trim();
 
-                firebaseFirestore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user todo").document(todo_id);
+                if(str_title.length() == 0){
+                    Toast.makeText(getApplicationContext(),"일정 이름을 입력하세요!",Toast.LENGTH_SHORT).show();
+                }
+                else{
 
-                docRef.update("todo_title",str_title);
-                docRef.update("todo_date",str_date);
-                docRef.update("todo_memo",str_memo);
-                docRef.update("todo_category",strUrl);
-                docRef.update("todo_time", str_time);
-                docRef.update("todo_cateText",str_cateText).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        finish();
-                    }
-                });
+                    pd.setTitle("저장중...");
+                    pd.show();
 
+                    firebaseFirestore = FirebaseFirestore.getInstance();
+                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user todo").document(todo_id);
 
-
+                    docRef.update("todo_title",str_title);
+                    docRef.update("todo_date",str_date);
+                    docRef.update("todo_memo",str_memo);
+                    docRef.update("todo_category",strUrl);
+                    docRef.update("todo_time", str_time);
+                    docRef.update("todo_cateText",str_cateText).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            pd.dismiss();
+                            Toast.makeText(getApplicationContext(),"변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
             }
         });
 
@@ -274,6 +287,16 @@ public class TodoDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(pd != null && pd.isShowing()){
+            pd.dismiss();
+        }
+
     }
 
     private void updateLabel() {

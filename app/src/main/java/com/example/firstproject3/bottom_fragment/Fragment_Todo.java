@@ -200,7 +200,6 @@ public class Fragment_Todo extends Fragment {
                                                         if (document.getBoolean("todo_checkbox") == false) {
                                                             j++;
                                                         }
-                                                        Toast.makeText(viewGroup.getContext(),"넘어감",Toast.LENGTH_SHORT).show();
                                                         docRef.update("todo_pass", true);
                                                         docRef.update("todo_checkbox", false);
                                                     }

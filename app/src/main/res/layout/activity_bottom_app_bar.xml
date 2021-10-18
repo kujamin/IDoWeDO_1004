@@ -44,15 +44,9 @@
             android:text=""
             android:background="@color/colorblack"
             android:alpha="0.6"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:clickable="false"
-            app:layout_anchor="@+id/constraintLayout"
-            app:layout_anchorGravity="center" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/todoFab"
@@ -60,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
+                android:layout_marginTop="180dp"
                 android:backgroundTint="#F87791"
                 android:clickable="false"
                 android:focusable="true"
@@ -69,27 +64,30 @@
                 app:srcCompat="@drawable/challenge"
                 app:tint="#fff" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#F4385E"
-                android:clickable="true"
-                android:focusable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.943"
-                app:srcCompat="@drawable/ic_baseline_add_24"
-                app:tint="#fff" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F4385E"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_anchor="@+id/bottomAppBar"
+            app:layout_anchorGravity="top|center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.943"
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            app:tint="#fff" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/habbitFab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="300dp"
                 android:backgroundTint="#F87791"
                 android:clickable="false"
                 android:focusable="true"
@@ -98,7 +96,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/fab"
                 app:srcCompat="@drawable/bonus"
                 app:tint="#fff" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

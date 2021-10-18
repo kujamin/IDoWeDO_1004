@@ -266,9 +266,23 @@ public class DailyMakeActivity extends AppCompatActivity {
                 String id = UUID.randomUUID().toString();
                 //String usercode = ((usercode)getApplication()).getUsercode();
 
-                uploadData(title, date, time, memo, category, cateText, id, userCode);
+                if(title.length() == 0){
+                    Toast.makeText(getApplicationContext(),"일정 이름을 입력하세요!",Toast.LENGTH_SHORT).show();
+                }
+                else if(date == ""){
+                    Toast.makeText(getApplicationContext(),"날짜를 설정하세요!",Toast.LENGTH_SHORT).show();
+                }
+                else if(time == ""){
+                    Toast.makeText(getApplicationContext(),"시간을 설정하세요!",Toast.LENGTH_SHORT).show();
+                }
+                else if(category == null){
+                    Toast.makeText(getApplicationContext(),"분류를 설정하세요!",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadData(title, date, time, memo, category, cateText, id, userCode);
+                    finish();
+                }
 
-                finish();
             }
         });
 
@@ -308,7 +322,7 @@ public class DailyMakeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pd.dismiss();
-                        Toast.makeText(DailyMakeActivity.this, title + " 일정이 설정되었습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(DailyMakeActivity.this, title + " 일정이 설정되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

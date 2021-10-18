@@ -71,7 +71,6 @@
                     android:ems="20"
                     android:hint="습관 이름을 입력하세요."
                     android:inputType="textPersonName"
-                    android:backgroundTint="@color/colorAccent"
                     android:textColor="#000"
                     android:textSize="16sp" />
             </TableRow>
@@ -91,7 +90,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:padding="12dp"
-                    android:text="날짜"
+                    android:text="기한"
                     android:textSize="16sp" />
 
                 <TextView
@@ -99,8 +98,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="30dp"
                     android:hint="" />
+
+                <TextView
+                    android:id="@+id/habbitDetail_until"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="까지"
+                    android:visibility="visible"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -115,22 +123,22 @@
 
                 <TextView
                     android:id="@+id/habbitDetail_memo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/colorAccent"
                     android:padding="12dp"
                     android:text="메모"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/habbitDetail_memoResult"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:ems="11"
+                    android:ems="10"
                     android:inputType="textPersonName"
-                    android:backgroundTint="@color/colorAccent"
                     android:textSize="14dp" />
             </TableRow>
 
