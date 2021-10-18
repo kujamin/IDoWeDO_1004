@@ -109,7 +109,6 @@ public class Attendance_CheckActivity extends Activity {
 
                                 sumCount = sumCount + 1;
                             }
-                            Toast.makeText(getApplicationContext(),sumCount+"", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

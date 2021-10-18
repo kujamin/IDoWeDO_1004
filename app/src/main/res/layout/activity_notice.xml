@@ -221,6 +221,74 @@
                         android:text="레벨업 보상, 챌린지 보상으로 얻은 코인은\n\n상점에서 캐릭터 아이템을 구매할 때 사용할 수 있습니다.\n\n구매한 캐릭터 아이템은 꾸미기 페이지에서 입힐 수 있습니다.\n" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:orientation="vertical"
+                android:background="#fff">
+
+                <LinearLayout
+                    android:id="@+id/notice4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView56"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="13sp"
+                            android:text="21/09/18"
+                            android:textColor="#777777"
+                            android:fontFamily="@font/nanumbarunpenr"/>
+
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:text="닉네임 변경 방법"
+                            android:fontFamily="@font/nanumbarunpenb"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageNotice4"
+                        android:layout_width="0dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:src="@drawable/down_arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/noticeContent4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#eee"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:fontFamily="@font/nanumbarunpenr"
+                        android:textSize="15dp"
+                        android:textColor="#575757"
+                        android:text="닉네임이 적혀있는 부분을 길게 누르세요\n\n변경을 위해서는 30코인을 지불해야합니다.\n\n30코인 지불로 닉네임 변경을 원하시면 변경 팝업에서\n\n예를 누르면 뜨는 화면에서 바꿀 닉네임을 다시 입력하세요\n" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
