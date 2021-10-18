@@ -1,6 +1,7 @@
 package com.example.firstproject3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.firstproject3.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Logout_Popup extends Activity {
 
@@ -29,6 +31,7 @@ public class Logout_Popup extends Activity {
         setContentView(R.layout.activity_logout_popup);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
         Button btn_logout_yes = findViewById(R.id.btn_logout_yes);
         Button btn_logout_no = findViewById(R.id.btn_logout_no);
@@ -50,7 +53,8 @@ public class Logout_Popup extends Activity {
 
                 Intent intent = new Intent(Logout_Popup.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
+                System.exit(0);
+
             }
         });
 

@@ -25,12 +25,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.firstproject3.Login.UserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -116,47 +120,48 @@ public class AchieveActivity extends AppCompatActivity {
                 showExplain = findViewById(R.id.showExplainBadge);
 
 
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                        userCode = (group.getEmailid());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 switch (badgeId) {
                     case R.id.badge1:
                         img = findViewById(R.id.imagebadge1);
                         text = findViewById(R.id.textBadge1);
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
-
-                        firebaseFirestore.collection("user Check").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    int count = 3;
-                                    for (DocumentSnapshot document : task.getResult()) {
-                                        count++;
-                                    }
-                                    if (count >= 30)
-                                    {
-                                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                                .document("achieve");
-                                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    DocumentSnapshot doc = task.getResult();
-                                                    slideLayout.setVisibility(View.VISIBLE);
-                                                    darkView.setVisibility(View.VISIBLE);
-                                                    slideLayout.startAnimation(translateup);
-                                                    showImg.setImageDrawable(clickimg);
-                                                    showName.setText(str);
-                                                    showExplain.setText("연속 출석체크 30일 달성");
-                                                }
-                                            }
-                                        });
-                                        documentReference.update("100일 달성", "1");
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "현재까지" + count + "일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value < 30) {
+                                    Toast.makeText(getApplicationContext(), "현재까지 " + value + "일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Log.d("TAG", "Error getting documents: ", task.getException());
+                                    /*documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                            .document("achieve");
+                                    documentReference.update("30일 달성", "1");*/
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("출석체크 30일 달성");
                                 }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
                         });
                         break;
@@ -166,69 +171,146 @@ public class AchieveActivity extends AppCompatActivity {
                         text = findViewById(R.id.textbadge2);
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value < 100) {
+                                    Toast.makeText(getApplicationContext(), "현재까지 " + value + " 일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("출석체크 100일 달성");
+                                }
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
-                        showExplain.setText("연속 출석체크 100일 달성");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         break;
+
                     case R.id.badge3:
                         img = findViewById(R.id.imagebadge3);
                         text = findViewById(R.id.textbadge3);
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
-                        showExplain.setText("상점에서 부위별 의상 2개이상 구매하기");
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value < 5) {
+                                    Toast.makeText(getApplicationContext(), "상점에서 더 많은 아이템을 구매해보세요!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("상점에서 부위별 의상 2개이상 구매하기");
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
                         break;
                     case R.id.badge4:
-                        if (achieve_point >= 5) {
-                            img = findViewById(R.id.imagebadge4);
-                            text = findViewById(R.id.textbadge4);
-                            clickimg = img.getDrawable();
-                            str = (String) text.getText();
+                        img = findViewById(R.id.imagebadge4);
+                        text = findViewById(R.id.textbadge4);
+                        clickimg = img.getDrawable();
+                        str = (String) text.getText();
 
-                            slideLayout.setVisibility(View.VISIBLE);
-                            darkView.setVisibility(View.VISIBLE);
-                            slideLayout.startAnimation(translateup);
-                            showImg.setImageDrawable(clickimg);
-                            showName.setText(str);
-                            showExplain.setText("5가지 이상의 To-Do 계획 후 완료하기");
-                        } else {
-                            Toast.makeText(getApplicationContext(), "아직 달성하지 못한 업적입니다!", Toast.LENGTH_SHORT).show();
-                        }
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value < 30) {
+                                    Toast.makeText(getApplicationContext(), "더 많은 계획을 달성해보세요", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("30가지의 업무 수행 완료!");
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         break;
+
                     case R.id.badge5:
                         img = findViewById(R.id.imagebadge5);
                         text = findViewById(R.id.textbadge5);
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
-                        showExplain.setText("상점에 있는 모든 패션아이템 구매하기");
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value < 29) {
+                                    Toast.makeText(getApplicationContext(), "코인을 더 모아 아이템을 구매해보세요!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("상점에 있는 모든 패션아이템 구매하기");
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         break;
                     case R.id.badge6:
                         img = findViewById(R.id.imagebadge6);
                         text = findViewById(R.id.textbadge6);
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value == 0) {
+                                    Toast.makeText(getApplicationContext(), "아직 챌린지에 참여하지 않았어요!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("최초의 챌린지 참가 신청하기");
+                                }
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
-                        showExplain.setText("챌린지 참가 신창하기");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         break;
                     case R.id.badge7:
                         img = findViewById(R.id.imagebadge7);
@@ -392,8 +474,8 @@ public class AchieveActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+        switch (item.getItemId()) {
+            case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
                 finish();
                 return true;
             }

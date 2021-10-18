@@ -136,7 +136,7 @@ public class ClickTransActivity extends AppCompatActivity {
                                                                         break;
                                                                 }
                                                             }
-                                                       }
+                                                        }
                                                     }
                                                 });
 
@@ -168,6 +168,24 @@ public class ClickTransActivity extends AppCompatActivity {
 
                 Map<String, Object> doc = new HashMap<>();
                 doc.put("challenge_id", usercode);
+
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int value = snapshot.getValue(Integer.class);
+                        value += 1;
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").setValue(value);
+                        if(value == 1)
+                        {
+                            Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 firebaseFirestore.collection("challenge").document(chall_Text).collection("challenge list").document(usercode).set(doc)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

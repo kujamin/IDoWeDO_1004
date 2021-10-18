@@ -132,10 +132,13 @@ public class RegisterActivity extends AppCompatActivity {
                         account.setRepassword(strRePwd);
                         account.setPassword(strPwd);
                         account.setNickname(strNick);
+                        account.setdatecnt(0);
+                        account.setchallengepoint(0);
+                        account.setDotodo(0);
+                        account.setStorepoint(0);
 
                         // setValue : database에 insert 행위
                         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
-
 
                         //firestore
                         Map<String, Object> data = new HashMap<>();

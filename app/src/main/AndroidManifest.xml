@@ -19,11 +19,7 @@
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.DATE_CHANGED"/>
-            </intent-filter>
-        </receiver>
+            android:exported="false"></receiver>
 
         <activity
             android:name=".Confirm3Activity"

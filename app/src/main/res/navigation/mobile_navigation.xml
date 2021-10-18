@@ -38,4 +38,10 @@
         android:label="Logout_Popup"
         tools:layout="@layout/activity_logout_popup" />
 
+    <activity
+        android:id="@+id/deleteuser"
+        android:name="com.example.firstproject3.DeleteUser"
+        android:label="DeleteUser"
+        tools:layout="@layout/activity_delete_user" />
+
 </navigation>

@@ -435,6 +435,26 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
                                 }
                             }
                         });
@@ -459,6 +479,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -484,6 +523,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -508,6 +566,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -531,6 +608,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -556,6 +652,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -579,6 +694,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -602,6 +736,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -626,6 +779,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -649,6 +821,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -673,6 +864,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -696,6 +906,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -719,6 +948,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -743,6 +991,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -766,6 +1033,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -789,6 +1075,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -813,6 +1118,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -836,6 +1160,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -859,6 +1202,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -883,6 +1245,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -906,6 +1287,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -929,6 +1329,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -953,6 +1372,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -976,6 +1414,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -999,6 +1456,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -1023,6 +1499,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -1046,6 +1541,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -1069,6 +1583,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -1092,6 +1625,25 @@ public class StoreActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            value += 1;
+                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                            if(value == 5 || value == 29)
+                                            {
+                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                             }
                         });
