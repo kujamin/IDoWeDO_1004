@@ -37,7 +37,10 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +56,9 @@ public class Attendance_CheckActivity extends Activity {
     private DatabaseReference mDatabase;
     private String usercode, dateR, datee;
     private FirebaseFirestore firebaseFirestore;
+    int sumCount = 0;
+    String[] dateqd;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +82,8 @@ public class Attendance_CheckActivity extends Activity {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
-        String[] result = {"2021,10,18", "2021,10,17", "2021,10,16", "2021,10,15", "2021,10,14"};
-        new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
-
         calendarView.setPadding(0, -20, 0, 30);
-        calendarView.setArrowColor(000000);
+        calendarView.setArrowColor(Color.rgb(244,56,94));
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
         calendarView.addDecorators(
@@ -94,6 +97,23 @@ public class Attendance_CheckActivity extends Activity {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
 
+                firebaseFirestore.collection("user").document(usercode).collection("user Check")
+                        .whereEqualTo("checkCount", "1")
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String intNum = document.getString("checkCount");
+                                int ant = Integer.parseInt(intNum);
+
+                                sumCount = sumCount + 1;
+                            }
+                            Toast.makeText(getApplicationContext(),sumCount+"", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
                 //달력에 동그라미 남기기
                 firebaseFirestore.collection("user").document(usercode).collection("user Check")
                         .whereEqualTo("checkOX", "O")
@@ -101,11 +121,17 @@ public class Attendance_CheckActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
+                            dateqd = new String[sumCount];
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                datee = document.getString("checkDate");
-                                Date d = Date.valueOf(datee);
-                                calendarView.setSelectedDate(d);
+                                datee = document.getString("checkDate");//체크된 날짜 얻어옴
+
+                                if(datee != null) {
+                                    dateqd[i] = datee;
+                                    i++;
+                                }
                             }
+                            new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
                         }
                     }
                 });
@@ -116,6 +142,8 @@ public class Attendance_CheckActivity extends Activity {
             }
         });
 
+//        String [] dateee = {"2021,10,15", "2021,10,16", "2021,10,17", "2021,10,19", "2021,10,20"};
+//        new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
 
         //출석체크 버튼
         Button attenBtn = (Button) findViewById(R.id.checkbutton);
@@ -143,8 +171,8 @@ public class Attendance_CheckActivity extends Activity {
                         value += 1;
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").setValue(value);
                         if(value == 30 || value == 100)
-                        {
-                            Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                            {
+                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -155,12 +183,13 @@ public class Attendance_CheckActivity extends Activity {
                     }
                 });
 
-                dateR = year + "-" + month + "-" + day;
+                dateR = year + "," + month + "," + day;
 
                 Map<String, Object> doc = new HashMap<>();
                 doc.put("checkOX", "O");
                 doc.put("usercode", usercode);
                 doc.put("checkDate", dateR);
+                doc.put("checkCount", "1");
 
                 firebaseFirestore.collection("user").document(usercode).collection("user Check").document(dateR).set(doc)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
