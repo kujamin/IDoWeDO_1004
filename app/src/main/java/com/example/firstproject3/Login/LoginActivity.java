@@ -67,7 +67,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleSignInClient googleSignInClient;    //구글 api 클라이언트 객체
     private static final int RED_SIGN_GOOGLE = 100; // 구글로그인 결과 코드
 
-    private FirebaseUser currentUser;
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd; // 로그인 입력필드
     private FirebaseFirestore firebaseFirestore;
@@ -106,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-        currentUser = mFirebaseAuth.getCurrentUser();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
@@ -165,18 +164,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                 userCode = String.valueOf(document.getData().get("user code"));
                                                 usercode.setUsercode(strEmail);
 
-                                                mDatabaseRef.child("idowedo").child("UserAccount").child(currentUser.getUid()).child("username").addValueEventListener(new ValueEventListener() {
+                                                mDatabaseRef.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         String value = snapshot.getValue(String.class);
                                                         nick = value;
-                                                        if (nick == null) {
-                                                            Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
+                                                        if (nick != null) {
+                                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                             intent.putExtra("userCode", userCode);
                                                             startActivity(intent);
                                                             finish(); // 현재 액티비티 파괴
                                                         } else {
-                                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                            Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
                                                             intent.putExtra("userCode", userCode);
                                                             startActivity(intent);
                                                             finish(); // 현재 액티비티 파괴
@@ -189,8 +188,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                                                     }
                                                 });
-
-
 
                                             }
                                         }
@@ -315,7 +312,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                         Map<String, Object> userState = new HashMap<>();
                                         userState.put("coin", "200");
                                         userState.put("exp", "0");
-                                        userState.put("heart", "3");
+                                        userState.put("heart", "5");
                                         userState.put("level", "1");
                                         userState.put("maxExp", "30");
 

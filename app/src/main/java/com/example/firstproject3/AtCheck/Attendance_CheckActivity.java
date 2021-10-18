@@ -103,6 +103,8 @@ public class Attendance_CheckActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
+                            dateqd = new String[sumCount];
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String intNum = document.getString("checkCount");
                                 int ant = Integer.parseInt(intNum);

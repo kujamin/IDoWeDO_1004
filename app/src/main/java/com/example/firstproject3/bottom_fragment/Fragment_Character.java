@@ -129,7 +129,7 @@ public class Fragment_Character extends Fragment {
                                         documentReference.update("coin",String.valueOf(coin+100));
                                         documentReference.update("heart","5");
                                         documentReference.update("exp",currentExp+"");
-                                        Toast.makeText(rootView.getContext(),"레벨업!",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "레벨업! 현재 "+level+"입니다!" , Toast.LENGTH_SHORT).show();
                                     }
 
                                     if(heart <= 0){
