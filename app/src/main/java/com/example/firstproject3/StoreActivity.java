@@ -136,9 +136,6 @@ public class StoreActivity extends AppCompatActivity {
         LinearLayout itemLayout28 = findViewById(R.id.item28);
         LinearLayout itemLayout29 = findViewById(R.id.item29);
 
-        ImageView test = findViewById(R.id.imageView077);
-        test.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
-
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

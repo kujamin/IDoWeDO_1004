@@ -1,6 +1,8 @@
 package com.example.firstproject3;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -8,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,8 +36,10 @@ import com.example.firstproject3.bottom_fragment.Fragment_Timer;
 import com.example.firstproject3.bottom_fragment.Fragment_Todo;
 import com.example.firstproject3.daily.CalendarActivity;
 import com.example.firstproject3.QuestionPopupActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -47,6 +52,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.squareup.otto.Subscribe;
 
 import androidx.annotation.NonNull;
@@ -69,19 +77,16 @@ import org.w3c.dom.Text;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //private MenuItem fragment_todo, fragment_timer;
-    //private Menu fragment_todo, fragment_timer;
 
     TextView tv_get_email, tv_get_name;
-    private DrawerLayout drawerLayout;
-    private FloatingActionButton fabTodo, fabHabbit;
-    Intent intentD;
+    private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     //fragment 선언
@@ -93,18 +98,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment_Challenge fragment_challenge;
     private Fragment_Character fragment_character;
     private Intent intentM;
-
+    private String userCode;
     private AppBarConfiguration mAppBarConfiguration;
-    Company company;
-    ArrayList<Person> persons;
-    private ArrayList<HashMap<String, String>> arraydata;
-    private int mISelectedItem = -1;
-    Button buttonReser;
     boolean isOpen = true;
-    TextView textName;
     FloatingActionButton fab, todoFab, habbitFab;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
+    private String str1 = null, str2 = null, str3 = null;
 
+
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.nav_question:
+                Toast.makeText(getApplicationContext(), "감사", Toast.LENGTH_LONG).show();
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -124,27 +139,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.nav_question:
-                Toast.makeText(getApplicationContext(), "감사", Toast.LENGTH_LONG).show();
-        }
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         intentM = getIntent();
-        String userCode = intentM.getStringExtra("userCode");
+        //String userCode = intentM.getStringExtra("userCode");
 
 
         //서랍장
@@ -172,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
         tv_get_email = (TextView) navHeader.findViewById(R.id.tv_get_email);
         tv_get_name = (TextView) navHeader.findViewById(R.id.tv_get_name);
 
@@ -182,9 +185,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 String name = (group.getUsername());
                 String email = (group.getEmailid());
+                userCode = (group.getEmailid());
 
                 tv_get_name.setText("이름: "+ name);
                 tv_get_email.setText("ID: " + email);
+
+                //특정 시간에 챌린지 참가 여부 묻는 알림창 띄우기
+                firebaseFirestore.collection("user").document(userCode).collection("user challenge")
+                        .whereEqualTo("userCode", userCode)
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for(QueryDocumentSnapshot document : task.getResult()) {
+                                String title = document.getString("userChall_title");
+                                switch (title) {
+                                    case "자격증 취득하기" :
+                                        str1 = "자격증 취득하기";
+                                        break;
+                                    case "아침 6시 기상하기" :
+                                        str2 = "아침 6시 기상하기";
+                                        break;
+                                    case "매일 만보 걷기" :
+                                        str3 = "매일 만보 걷기";
+                                        break;
+                                }
+                            }//for
+                            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                            Intent intent = new Intent(MainActivity.this, MyReceiver.class);
+                            intent.putExtra("chall1", str1);
+                            intent.putExtra("chall2", str2);
+                            intent.putExtra("chall3", str3);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            calendar.set(Calendar.HOUR_OF_DAY, 20);
+
+                            //알람 예약
+                            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                                    AlarmManager.INTERVAL_DAY, pendingIntent);
+                        }//if
+                    }
+                });
 
             }
 
@@ -199,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), DailyMakeActivity.class);
-                intent.putExtra("userCode", userCode);
+                //intent.putExtra("userCode", userCode);
                 startActivity(intent);
 
                 fab.startAnimation(rotateBackward);
@@ -220,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HabbitMakeActivity.class);
-                intent.putExtra("userCode", userCode);
+                //intent.putExtra("userCode", userCode);
                 startActivity(intent);
 
                 fab.startAnimation(rotateBackward);

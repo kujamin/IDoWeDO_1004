@@ -234,7 +234,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
         String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-        habbitDetail_date.setText(sdf.format(myCalendar.getTime()));
+        habbitDetail_date.setText(sdf.format(myCalendar.getTime()) + "까지 반복");
     }
 
     @Override

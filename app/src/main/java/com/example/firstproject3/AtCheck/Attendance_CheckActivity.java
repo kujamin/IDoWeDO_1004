@@ -126,9 +126,18 @@ public class Attendance_CheckActivity extends Activity {
 
                 dateR = year + "-" + month + "-" + day;
 
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user Check").document(dateR);
+                Map<String, Object> doc = new HashMap<>();
+                doc.put("checkOX", "O");
+                doc.put("usercode", usercode);
+                doc.put("checkDate", dateR);
 
-                docRef.update("checkOX", "O");
+                firebaseFirestore.collection("user").document(usercode).collection("user Check").document(dateR).set(doc)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                            }
+                        });
             }
         });
 

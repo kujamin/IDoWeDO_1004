@@ -204,8 +204,6 @@ public class HabbitMakeActivity extends AppCompatActivity {
         btnReser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 String title =  textDailyName.getText().toString().trim();//슨관 제목
                 String date = textDaily.getText().toString().trim(); //습관 날짜
                 String memo = textMemo.getText().toString().trim(); //습관 메모
@@ -217,8 +215,6 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
                 String dateStart = dateFormat.format(dateS);
                 //String usercode = ((usercode)getApplication()).getUsercode();
-
-                uploadData(title, date, memo, category, cateText, id, userCode, dateStart);
 
 //                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
 //                    @Override
@@ -235,7 +231,6 @@ public class HabbitMakeActivity extends AppCompatActivity {
 //
 //                    }
 //                });
-                finish();
             }
         });
 
@@ -328,7 +323,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
         String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-        textDaily.setText(sdf.format(myCalendar.getTime()));
+        textDaily.setText(sdf.format(myCalendar.getTime()) + "까지 반복");
     }
 
     @Override

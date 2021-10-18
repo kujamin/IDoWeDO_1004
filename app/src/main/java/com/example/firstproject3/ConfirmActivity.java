@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,13 +36,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConfirmActivity extends AppCompatActivity {
-    private TextView challTitle;
-    private ImageView challImg;
     private Button challBtn;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private FirebaseFirestore firebaseFirestore;
-    private String usercode, id, TAG = "MainActivity", getchallTitle, getchallImg, date;
+    private String usercode, dateR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +53,7 @@ public class ConfirmActivity extends AppCompatActivity {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        challTitle = findViewById(R.id.challConfirmTitle);
-        challImg = findViewById(R.id.challConfirmImg);
         challBtn = findViewById(R.id.challConfirmBtn);
-
-        Intent intent = getIntent();
-        date = intent.getStringExtra("date");
 
         //usercode 얻어오기
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -80,16 +74,33 @@ public class ConfirmActivity extends AppCompatActivity {
         challBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String year = String.valueOf(CalendarDay.today().getYear());
+                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+                String day = String.valueOf(CalendarDay.today().getDay());
 
-                DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX").document(date);
+                if (month.length() != 2) {
+                    month = 0 + month;
+                }
+                if (day.length() != 2){
+                    day = 0 + day;
+                }
 
-                docRef.update("userChallStudy_OX", "O").addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(getApplicationContext(), "참여 완료되었습니다!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
+                dateR = year + "-" + month + "-" + day;
+
+                Map<String, Object> doc = new HashMap<>();
+                doc.put("userChallStudy_OX", "O");
+                doc.put("userCode", usercode);
+                doc.put("today_date", dateR);
+
+                firebaseFirestore.collection("user").document(usercode)
+                        .collection("user challenge").document("자격증 취득하기").collection("OX").document(dateR).set(doc)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
 
             }
         });

@@ -179,6 +179,28 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     }
                                 });
+                                ///챌린지 자격증////
+                                firebaseFirestore.collection("user").document(strEmail).collection("user challenge").document("자격증 취득하기").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
+                                ////챌린지 6시기상///
+                                firebaseFirestore.collection("user").document(strEmail).collection("user challenge").document("아침 6시 기상하기").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
+                                ////챌린지 만보///
+                                firebaseFirestore.collection("user").document(strEmail).collection("user challenge").document("매일 만보 걷기").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
+
                                 ////캐릭터 생성////
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -186,32 +208,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     }
                                 });
-                                ////출첵 생성////
-                                String year = String.valueOf(CalendarDay.today().getYear());
-                                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
-                                String day = String.valueOf(CalendarDay.today().getDay());
-
-                                if (month.length() != 2) {
-                                    month = 0 + month;
-                                }
-                                if (day.length() != 2){
-                                    day = 0 + day;
-                                }
-
-                                dateR = year + "-" + month + "-" + day;
-
-                                Map<String, Object> doc = new HashMap<>();
-                                doc.put("checkOX", "O");
-                                doc.put("usercode", strEmail);
-                                doc.put("checkDate", dateR);
-
-                                firebaseFirestore.collection("user").document(strEmail).collection("user Check").document(dateR).set(doc)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                            }
-                                        });
 
                                 //유저별 업적 달성 여부 확인
                                 Map<String, Object> userAchieve = new HashMap<>();

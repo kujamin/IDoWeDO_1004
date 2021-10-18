@@ -1,9 +1,11 @@
 package com.example.firstproject3;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -45,6 +47,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -159,8 +162,6 @@ public class ClickTransActivity extends AppCompatActivity {
             }
         });
 
-
-
         textChallname.setText(chall_Text);
         Glide.with(getApplicationContext()).load(chall_Img).into(imgChall);
 
@@ -228,13 +229,13 @@ public class ClickTransActivity extends AppCompatActivity {
 
         Intent intent1 = new Intent(this, ConfirmActivity.class);
         intent1.putExtra("str1", str1);
-        intent1.putExtra("date", getTime);
         PendingIntent pendingIntent1 = PendingIntent.getActivity(this, 101, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder1.setContentTitle("CATODO");
         builder1.setContentText("오늘 " + str1 + " 챌린지를 달성하셨나요?");
         builder1.setSmallIcon(R.drawable.logo3);
         builder1.setAutoCancel(true);
+        builder1.setNotificationSilent();
         builder1.setContentIntent(pendingIntent1);
 
         Notification notification1 = builder1.build();
@@ -282,13 +283,14 @@ public class ClickTransActivity extends AppCompatActivity {
         intent2.putExtra("str2", str2);
         PendingIntent pendingIntent2 = PendingIntent.getActivity(this, 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder1.setContentTitle("CATODO");
-        builder1.setContentText("오늘 " + str2 + " 챌린지를 달성하셨나요?");
-        builder1.setSmallIcon(R.drawable.logo3);
-        builder1.setAutoCancel(true);
-        builder1.setContentIntent(pendingIntent2);
+        builder2.setContentTitle("CATODO");
+        builder2.setContentText("오늘 " + str2 + " 챌린지를 달성하셨나요?");
+        builder2.setSmallIcon(R.drawable.logo3);
+        builder2.setAutoCancel(true);
+        builder2.setNotificationSilent();
+        builder2.setContentIntent(pendingIntent2);
 
-        Notification notification2 = builder1.build();
+        Notification notification2 = builder2.build();
 
         if(str2 != null) {
             notificationManager.notify(2, notification2);
@@ -333,13 +335,14 @@ public class ClickTransActivity extends AppCompatActivity {
         intent3.putExtra("str3", str3);
         PendingIntent pendingIntent3 = PendingIntent.getActivity(this, 101, intent3, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder1.setContentTitle("CATODO");
-        builder1.setContentText("오늘 " + str3 + " 챌린지를 달성하셨나요?");
-        builder1.setSmallIcon(R.drawable.logo3);
-        builder1.setAutoCancel(true);
-        builder1.setContentIntent(pendingIntent3);
+        builder3.setContentTitle("CATODO");
+        builder3.setContentText("오늘 " + str3 + " 챌린지를 달성하셨나요?");
+        builder3.setSmallIcon(R.drawable.logo3);
+        builder3.setAutoCancel(true);
+        builder3.setNotificationSilent();
+        builder3.setContentIntent(pendingIntent3);
 
-        Notification notification3 = builder1.build();
+        Notification notification3 = builder3.build();
 
         if(str3 != null) {
             notificationManager.notify(3, notification3);

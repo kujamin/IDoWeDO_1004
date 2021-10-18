@@ -69,7 +69,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:ems="20"
-                    android:hint="일정 이름을 입력하세요."
+                    android:hint="습관 이름을 입력하세요."
                     android:inputType="textPersonName"
                     android:backgroundTint="@color/colorAccent"
                     android:textColor="#000"
