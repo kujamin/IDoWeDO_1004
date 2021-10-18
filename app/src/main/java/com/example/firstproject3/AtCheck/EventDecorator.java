@@ -21,7 +21,7 @@ public class EventDecorator implements DayViewDecorator {
     private HashSet<CalendarDay> dates;
 
     public EventDecorator(int color, Collection<CalendarDay> dates,Activity context) {
-        drawable = context.getResources().getDrawable(R.drawable.icon_test);
+        drawable = context.getResources().getDrawable(R.drawable.moreday);
         this.color = color;
         this.dates = new HashSet<>(dates);
     }
@@ -37,4 +37,3 @@ public class EventDecorator implements DayViewDecorator {
         //view.addSpan(new DotSpan(5, color)); // 날자밑에 점
     }
 }
-
