@@ -66,7 +66,7 @@ public class Fragment_Character extends Fragment {
     Handler handler;
     private DocumentReference documentReference;
     private FirebaseFirestore firebaseFirestore;
-    private int coin, level, maxExp, currentExp;
+    private int coin, level, maxExp, currentExp, heart;
     private RatingBar ratingBar;
 
     @Nullable
@@ -104,21 +104,21 @@ public class Fragment_Character extends Fragment {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 String userCode = (group.getEmailid());
 
-                firebaseFirestore.collection("user").document(userCode).collection("user todo")
-                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                if (error != null) {
-                                    Log.w("TAG", "Listen failed.", error);
-                                    return;
-                                }
-                                for (QueryDocumentSnapshot doc : value) {
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                                    Date today = new Date ( );
-                                    Date tomorrow = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 ) );
-                                }
-                            }
-                        });
+//                firebaseFirestore.collection("user").document(userCode).collection("user todo")
+//                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                                if (error != null) {
+//                                    Log.w("TAG", "Listen failed.", error);
+//                                    return;
+//                                }
+//                                for (QueryDocumentSnapshot doc : value) {
+//                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//                                    Date today = new Date ( );
+//                                    Date tomorrow = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 ) );
+//                                }
+//                            }
+//                        });
 
                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
 
@@ -136,6 +136,7 @@ public class Fragment_Character extends Fragment {
                                     currentExp = Integer.parseInt(document.getString("exp"));
                                     level = Integer.parseInt(document.getString("level"));
                                     maxExp = Integer.parseInt(document.getString("maxExp"));
+                                    heart = Integer.parseInt(document.getString("heart"));
 
                                     if(currentExp >= maxExp) {
                                         level++;
@@ -143,10 +144,23 @@ public class Fragment_Character extends Fragment {
                                         maxExp += 10;
                                         documentReference.update("maxExp",maxExp+"");
                                         documentReference.update("level",level+"");
+                                        documentReference.update("coin",String.valueOf(coin+100));
                                         documentReference.update("exp",currentExp+"");
                                     }
+
+                                    if(heart <= 0){
+                                        documentReference.update("heart","5");
+                                        documentReference.update("coin",String.valueOf(coin - 50));
+                                    }
+
+                                    if(coin < 0){
+                                        documentReference.update("coin","0");
+                                    }
+
                                     progressBar.setMax(maxExp);
                                     progressBar.setProgress(currentExp);
+
+                                    ratingBar.setRating(heart);
 
                                     textLevel.setText("Lv." + level);
                                     textCoin.setText(coin + "");

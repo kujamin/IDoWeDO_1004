@@ -301,6 +301,7 @@ public class DailyMakeActivity extends AppCompatActivity {
         doc.put("todo_id", id);
         doc.put("todo_checkbox", false);
         doc.put("userCode", userCode);
+        doc.put("todo_pass",false);
 
         db.collection("user").document(userCode).collection("user todo").document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -43,6 +43,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Fragment_Todo extends Fragment {
@@ -60,6 +61,7 @@ public class Fragment_Todo extends Fragment {
     final String TAG = "MainActivity";
     private String strDate;
     private int i = 0;
+    private int j = 0;
 
     @Nullable
     @Override
@@ -126,8 +128,6 @@ public class Fragment_Todo extends Fragment {
                         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
                         String sDD = String.valueOf(CalendarDay.today().getDay());
 
-                        String sDD2 = String.valueOf(CalendarDay.today().getDay()+1);
-
                         if (sDM.length() != 2) {
                             sDM = 0 + sDM;
                         }
@@ -135,12 +135,103 @@ public class Fragment_Todo extends Fragment {
                             sDD = 0 + sDD;
                         }
 
+                        strDate = sDY + "/" + sDM + "/" + sDD;
+
                         for (QueryDocumentSnapshot doc : value) {
                                 todo_list.add(0, new Todo_Item(doc.getString("todo_category"), doc.getString("todo_title"), doc.getString("todo_id"), doc.getBoolean("todo_checkbox")));
-                                doc.getString("todo_date");
+                                String date1 = doc.getString("todo_date");
                         }
                         //어답터 갱신
                         customTodoAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                firebaseFirestore.collection("user").document(userCode).collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc.get("todo_title") != null) {
+
+                                doc.getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+
+                                            String todo_id = document.getString("todo_id");
+
+                                            if (todo_id != null) {
+                                                DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user todo").document(todo_id);
+
+                                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+                                                Date todoDate = null;
+                                                long now = System.currentTimeMillis();
+                                                Date dateC = new Date(now);
+
+                                                String strDate = document.getString("todo_date");
+
+                                                try {
+                                                    todoDate = dateFormat.parse(strDate);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+
+                                                Date todoTom = new Date(todoDate.getTime() + (long) (1000 * 60 * 60 * 24));
+                                                String strTom = dateFormat.format(todoTom);
+                                                String strC = dateFormat.format(dateC);
+
+                                                Date date1 = null;
+                                                Date date2 = null;
+                                                try {
+                                                    date1 = dateFormat.parse(strTom);
+                                                    date2 = dateFormat.parse(strC);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+
+                                                int compare1 = date1.compareTo(date2);
+
+
+                                                if (compare1 == 0) {
+                                                    if(document.getBoolean("todo_pass") == false) {
+
+                                                        if (document.getBoolean("todo_checkbox") == false) {
+                                                            j++;
+                                                        }
+                                                        Toast.makeText(viewGroup.getContext(),"넘어감",Toast.LENGTH_SHORT).show();
+                                                        docRef.update("todo_pass", true);
+                                                        docRef.update("todo_checkbox", false);
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                });
+
+
+                            }
+                        }
+
+                        if (j != 0) {
+                            DocumentReference documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+                            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+
+                                        int heartC = Integer.parseInt(document.getString("heart"));
+                                        documentReference.update("heart", String.valueOf(heartC - 1));
+                                    } else {
+                                        Log.d(TAG, "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+                            j = 0;
+                        }
                     }
                 });
 
