@@ -221,10 +221,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(System.currentTimeMillis());
                             calendar.set(Calendar.HOUR_OF_DAY, 20);
+                            calendar.set(Calendar.MINUTE, 30);
+//                            calendar.set(2021, 9, 18, 14, 17);//알림창 바로 뜨는 거 보고 싶을 때 시간 조정 후 주석 풀기1
 
                             //알람 예약
                             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                                     AlarmManager.INTERVAL_DAY, pendingIntent);
+//                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);//알림창 바로 뜨는 거 보고 싶을 때 주석 풀기2
                         }//if
                     }
                 });
