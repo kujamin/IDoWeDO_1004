@@ -1,5 +1,7 @@
 package com.example.firstproject3.daily;
 
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,10 +15,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firstproject3.AtCheck.EventDecorator;
 import com.example.firstproject3.AtCheck.SaturdayDecorator;
 import com.example.firstproject3.AtCheck.SundayDecorator;
 import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
+import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.R;
 import com.example.firstproject3.Todo_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,6 +47,7 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -146,52 +151,6 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         listcal.setAdapter(calAdapter);
-
-//        firebaseFirestore = FirebaseFirestore.getInstance();
-//        firebaseFirestore.collection("user todo").whereEqualTo("todo_date", strDate).addSnapshotListener(new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                cal_list.clear();
-//
-//                for (QueryDocumentSnapshot doc : value) {
-//                    cal_list.add(0, new CalListActivity(doc.getString("todo_title"), doc.getString("todo_time")));
-//                }
-//                calAdapter.notifyDataSetChanged();
-//            }
-//        });
-//        CollectionReference collectionReference = firebaseFirestore.collection("user todo");
-//        collectionReference.whereEqualTo("todo_date", strDate).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    //컬렉션 아래에 있는 모든 정보를 가져온다.
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        cal_list.add(0, new CalListActivity(document.getString("todo_title"), document.getString("todo_time")));
-//                        //document.getData() or document.getId() 등등 여러 방법으로
-//                        //데이터를 가져올 수 있다.
-//                    }
-//                    //그렇지 않을때
-//                } else {
-//
-//                }
-//            }
-//        });
-//        collectionReference.whereEqualTo("todo_date", strDate).addSnapshotListener(new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                if(error != null){
-//                    Log.w(TAG, "Listen failed.", error);
-//                    return;
-//                }
-//                cal_list.clear();
-//                for (QueryDocumentSnapshot doc : value){
-//                    cal_list.add(0,new CalListActivity(doc.getString("todo_title"), doc.getString("todo_time")));
-//                }
-//                calAdapter.notifyDataSetChanged();
-//            }
-//        });
-
-//        listcal.setAdapter(calAdapter);
 
         //캘린더뷰 클릭 시 이벤트
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {

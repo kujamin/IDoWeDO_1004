@@ -11,7 +11,7 @@
     <item
         android:id="@+id/fragment_Timer"
         android:icon="@drawable/timer_logo"
-        android:title="Timer"
+        android:title="Stopwatch"
         />
 
     <item
