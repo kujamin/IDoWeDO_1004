@@ -81,23 +81,6 @@ public class CustomChallengeAdapter extends RecyclerView.Adapter<CustomChallenge
                             intent.putExtra("chall_title", document.getString("challenge_title"));
                             intent.putExtra("chall_img", document.getString("challenge_image"));
 
-                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    int value = snapshot.getValue(Integer.class);
-                                    value += 1;
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").setValue(value);
-                                    if(value == 1)
-                                    {
-                                        Toast.makeText(context.getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
                             context.startActivity(intent);
                         } else {
                             Log.d(TAG, "get failed with ", task.getException());
