@@ -72,6 +72,8 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="우리 벌써 30일!"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -98,6 +100,8 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="100일 기념일"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -123,6 +127,8 @@
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:text="패션 꿈나무"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </TableRow>
@@ -159,6 +165,8 @@
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:text="워커 홀릭"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -186,6 +194,8 @@
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:text="★패션피플★"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -212,6 +222,8 @@
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:text="챌린지 스타터"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </TableRow>
@@ -247,7 +259,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -274,7 +288,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -300,7 +316,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </TableRow>
@@ -336,7 +354,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -362,7 +382,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -388,7 +410,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </TableRow>
@@ -424,7 +448,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -450,7 +476,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -476,7 +504,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="준비중입니다!"
+                            android:text="준비 중"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -520,7 +550,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="뱃지 이름"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -530,7 +560,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="뱃지 설명"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:textSize="17sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

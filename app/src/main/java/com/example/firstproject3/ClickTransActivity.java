@@ -9,9 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -158,8 +163,35 @@ public class ClickTransActivity extends AppCompatActivity {
         });
 
         textChallname.setText(chall_Text);
+
+        if(chall_Text.equals("자격증 취득하기")){
+            textChallplan.setText("한 달 동안 자격증 하나 취득해보세요!\n자격증 취득 후 취득결과를 사진으로 찍어주세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("보상 : 100코인 지급\n");
+        }
+        else if(chall_Text.equals("아침 6시 기상하기")){
+            textChallplan.setText("한 달 동안 아침 6시에 뜨는 알림 팝업으로 어플에 들어와서\n미션 완료 버튼을 클릭해보세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("보상 : 100코인 + 레어 의상(선택 O) 지급");
+        }
+        else {
+            textChallplan.setText("한 달 동안 매일 만보씩 걸어보세요!\n만보를 채운 후 미션 완료 버튼을 클릭해주세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("보상 : 100코인 지급");
+        }
         Glide.with(getApplicationContext()).load(chall_Img).into(imgChall);
 
+        //코인 색상
+        TextView textSendTonotice = findViewById(R.id.textViewChallnotice);
+
+        String content = textSendTonotice.getText().toString();
+        SpannableString spannableString = new SpannableString(content);
+
+        String word_coin = "코인";
+        int start = content.indexOf(word_coin);
+        int end = start + word_coin.length();
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ece342")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textSendTonotice.setText(spannableString);
 
         //참가하기 버튼 누르면
         textChallAttend.setOnClickListener(new View.OnClickListener() {

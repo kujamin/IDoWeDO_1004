@@ -49,33 +49,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="2"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="챌린지 이름"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="23sp"
+                android:textColor="@color/colorblack"
+                android:fontFamily="@font/nanumbarunpenb" />
 
             <TextView
                 android:id="@+id/textViewChallexplan"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="130dp"
                 android:layout_weight="2"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="챌린지에 대한 짧은 설명"
-                android:textSize="18sp" />
+                android:fontFamily="@font/nanumbarunpenr"
+                android:textColor="#000"
+                android:textSize="19sp" />
 
             <TextView
                 android:id="@+id/textViewChallnotice"
                 android:layout_width="match_parent"
-                android:layout_height="145dp"
+                android:layout_height="100dp"
                 android:layout_weight="2"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="주의사항과 보상 설명"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
@@ -88,9 +93,9 @@
         android:layout_gravity="bottom"
         android:gravity="center"
         android:text="참가하기"
+        android:fontFamily="@font/nanumbarunpenb"
         android:textColor="#F4385E"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:textSize="26sp"
         android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -82,8 +82,8 @@ public class Attendance_CheckActivity extends Activity {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
-        calendarView.setPadding(0, -20, 0, 30);
-        calendarView.setArrowColor(Color.rgb(244,56,94));
+        calendarView.setPadding(0, -20, 0, 30);        calendarView.setArrowColor(Color.rgb(244,56,94));
+
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
         calendarView.addDecorators(

@@ -85,8 +85,9 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:text="Lv.1"
+                        android:fontFamily="@font/nanumbarunpenb"
                         android:textColor="#000"
-                        android:textSize="16sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tv_nickname"
@@ -96,8 +97,9 @@
                         android:layout_gravity="left|bottom"
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
+                        android:fontFamily="@font/nanumbarunpenb"
                         android:textColor="#000"
-                        android:textSize="16sp" />
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <RatingBar
@@ -134,7 +136,9 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="9"
-                        android:textColor="#000" />
+                        android:textColor="#000"
+                        android:fontFamily="@font/nanumbarunpenb"
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -178,7 +182,8 @@
                         android:layout_marginLeft="40dp"
                         android:layout_weight="1"
                         android:text="0 / 100"
-                        android:textSize="12sp" />
+                        android:fontFamily="@font/nanumbarunpenr"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/textView35"
@@ -188,7 +193,8 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="경험치"
-                        android:textSize="12sp" />
+                        android:fontFamily="@font/nanumbarunpenr"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -227,8 +233,8 @@
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="상점"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:textSize="25sp" />
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -264,8 +270,8 @@
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="업적"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:textSize="25sp" />
 
                 <ImageView
                     android:id="@+id/imageView23"
@@ -300,8 +306,8 @@
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="꾸미기"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:textSize="25sp" />
 
                 <ImageView
                     android:id="@+id/imageView35"

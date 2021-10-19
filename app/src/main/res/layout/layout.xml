@@ -38,9 +38,10 @@
                     android:layout_height="wrap_content"
                     android:ems="20"
                     android:hint="일정 이름을 입력하세요."
+                    android:fontFamily="@font/nanumbarunpenr"
                     android:inputType="textPersonName"
                     android:textColor="#000"
-                    android:textSize="16sp"
+                    android:textSize="19sp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"/>
             </TableRow>
@@ -64,7 +65,8 @@
                     android:layout_weight="1"
                     android:padding="12dp"
                     android:text="분류"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/nanumbarunpenr"
+                    android:textSize="19sp" />
 
                 <ImageView
                     android:id="@+id/imageViewChange"
