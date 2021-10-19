@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     TextView tv_get_email, tv_get_name;
+    private DrawerLayout drawerLayout;
+    private FloatingActionButton fabTodo, fabHabbit;
+    Intent intentD;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -99,8 +102,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment_Challenge fragment_challenge;
     private Fragment_Character fragment_character;
     private Intent intentM;
-    private String userCode;
+    private TextView textView;
+    private long backpressedTime = 0;
+    private String usercode;
     private AppBarConfiguration mAppBarConfiguration;
+    Company company;
+    ArrayList<Person> persons;
+    private ArrayList<HashMap<String, String>> arraydata;
+    private int mISelectedItem = -1;
+    Button buttonReser;
+    TextView textName;
     boolean isOpen = true;
     FloatingActionButton fab, todoFab, habbitFab;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
@@ -147,7 +158,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         intentM = getIntent();
-        //String userCode = intentM.getStringExtra("userCode");
+        String userCode = intentM.getStringExtra("userCode");
+
+        textView = findViewById(R.id.textView5);
 
 
         //서랍장
@@ -187,14 +200,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 String name = (group.getUsername());
                 String email = (group.getEmailid());
-                userCode = (group.getEmailid());
+                usercode = (group.getEmailid());
 
                 tv_get_name.setText("이름: "+ name);
                 tv_get_email.setText("ID: " + email);
 
                 //특정 시간에 챌린지 참가 여부 묻는 알림창 띄우기
-                firebaseFirestore.collection("user").document(userCode).collection("user challenge")
-                        .whereEqualTo("userCode", userCode)
+                firebaseFirestore.collection("user").document(usercode).collection("user challenge")
+                        .whereEqualTo("userCode", usercode)
                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -230,16 +243,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), DailyMakeActivity.class);
-                //intent.putExtra("userCode", userCode);
+                intent.putExtra("userCode", userCode);
                 startActivity(intent);
 
-                fab.startAnimation(rotateBackward);
+//                fab.startAnimation(rotateBackward);
                 todoFab.startAnimation(fabOpen);
                 habbitFab.startAnimation(fabOpen);
                 todoFab.setClickable(false);
                 habbitFab.setClickable(false);
                 isOpen = true;
+                fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_add_24));
 
+                todoFab.setVisibility(View.GONE);
+                habbitFab.setVisibility(View.GONE);
                 TextView textView = findViewById(R.id.textView5);
                 textView.setVisibility(View.INVISIBLE);
                 textView.setClickable(false);
@@ -251,16 +267,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HabbitMakeActivity.class);
-                //intent.putExtra("userCode", userCode);
+                intent.putExtra("userCode", userCode);
                 startActivity(intent);
 
-                fab.startAnimation(rotateBackward);
+//                fab.startAnimation(rotateBackward);
                 todoFab.startAnimation(fabOpen);
                 habbitFab.startAnimation(fabOpen);
                 todoFab.setClickable(false);
                 habbitFab.setClickable(false);
                 isOpen = true;
+                fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_add_24));
 
+                todoFab.setVisibility(View.GONE);
+                habbitFab.setVisibility(View.GONE);
                 TextView textView = findViewById(R.id.textView5);
                 textView.setVisibility(View.INVISIBLE);
                 textView.setClickable(false);
@@ -319,7 +338,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getHashKey();
 
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                fab.startAnimation(rotateBackward);
+                todoFab.startAnimation(fabOpen);
+                habbitFab.startAnimation(fabOpen);
+                todoFab.setClickable(false);
+                habbitFab.setClickable(false);
+                isOpen = true;
+                fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_add_24));
 
+                todoFab.setVisibility(View.GONE);
+                habbitFab.setVisibility(View.GONE);
+
+                textView.setVisibility(View.GONE);
+                textView.setClickable(false);
+            }
+        });
     }//onCreate
 
     //새로운 특정 시간에 알람 울리는 코드 위치..허이짜
@@ -456,24 +492,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //fab 애니메이션
     private void animateFab() {
         if (isOpen) {
-            fab.startAnimation(rotateForward);
+//            fab.startAnimation(rotateForward);
             todoFab.startAnimation(fabClose);
             habbitFab.startAnimation(fabClose);
             todoFab.setClickable(true);
             habbitFab.setClickable(true);
             isOpen = false;
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.outline_multiplication_white_24dp));
 
+            todoFab.setVisibility(View.VISIBLE);
+            habbitFab.setVisibility(View.VISIBLE);
             TextView textView = findViewById(R.id.textView5);
             textView.setVisibility(View.VISIBLE);
             textView.setClickable(true);
         } else {
-            fab.startAnimation(rotateBackward);
+//            fab.startAnimation(rotateBackward);
             todoFab.startAnimation(fabOpen);
             habbitFab.startAnimation(fabOpen);
             todoFab.setClickable(false);
             habbitFab.setClickable(false);
             isOpen = true;
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_add_24));
 
+            todoFab.setVisibility(View.GONE);
+            habbitFab.setVisibility(View.GONE);
+
+            textView.setVisibility(View.GONE);
             TextView textView = findViewById(R.id.textView5);
             textView.setVisibility(View.INVISIBLE);
             textView.setClickable(false);
@@ -497,7 +541,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 || super.onSupportNavigateUp();
 
     }
+    @Override
+    public void onBackPressed() {
 
+        if (System.currentTimeMillis() > backpressedTime + 2000) {
+            backpressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+            finish();
+        }
+
+    }
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 

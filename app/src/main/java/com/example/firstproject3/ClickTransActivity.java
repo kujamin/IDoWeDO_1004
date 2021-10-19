@@ -50,6 +50,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,10 +66,12 @@ public class ClickTransActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
-    private String usercode, chall_Text, id, title, str1= null, str2 = null, str3 = null, getTime;
+    private String usercode, chall_Text, id, dateR, endDate;
     public void onClickBack(View v) {
         finish();
     }
+    private Calendar calendar;
+    private int Eyear, Emonth, Edayy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,35 +120,6 @@ public class ClickTransActivity extends AppCompatActivity {
                                     if (usercode.equals(id)) {
                                         textChallAttend.setText("참가 중...");
                                         textChallAttend.setEnabled(false);
-
-
-                                        ///사용자가 참여한 챌린지 이름 가져오기///
-                                        firebaseFirestore.collection("user").document(usercode).collection("user challenge")
-                                                .whereEqualTo("userCode", usercode)
-                                                .get()
-                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                        if(task.isSuccessful()) {
-                                                            for(QueryDocumentSnapshot document : task.getResult()) {
-                                                                title = (String) document.getData().get("userChall_title");
-                                                                switch (title) {
-                                                                    case "자격증 취득하기" :
-                                                                        str1 = "자격증 취득하기";
-                                                                        break;
-                                                                    case "아침 6시 기상하기" :
-                                                                        str2 = "아침 6시 기상하기";
-                                                                        break;
-                                                                    case "매일 만보 걷기" :
-                                                                        str3 = "매일 만보 걷기";
-                                                                        break;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                });
-
-
                                     } else {
                                         textChallAttend.setText("참가하기");
                                         textChallAttend.setEnabled(true);
@@ -197,10 +171,6 @@ public class ClickTransActivity extends AppCompatActivity {
         textChallAttend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Map<String, Object> doc = new HashMap<>();
-                doc.put("challenge_id", usercode);
-
                 mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -218,6 +188,41 @@ public class ClickTransActivity extends AppCompatActivity {
 
                     }
                 });
+
+                String year = String.valueOf(CalendarDay.today().getYear());
+                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+                String day = String.valueOf(CalendarDay.today().getDay());
+
+                if (month.length() != 2) {
+                    month = 0 + month;
+                }
+                if (day.length() != 2){
+                    day = 0 + day;
+                }
+
+                //시작 날짜
+                dateR = year + "-" + month + "-" + day;
+
+                //종료 날짜
+                calendar = Calendar.getInstance();
+
+                String[] time = dateR.split("-");
+                Eyear = Integer.parseInt(time[0]);
+                Emonth = Integer.parseInt(time[1]);
+                Edayy = Integer.parseInt(time[2]);
+
+                calendar.set(Eyear, Emonth-1, Edayy);
+                calendar.add(Calendar.DATE, 30);
+
+                Date getTime = calendar.getTime();
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                endDate = simpleDateFormat.format(getTime);
+
+                Map<String, Object> doc = new HashMap<>();
+                doc.put("challenge_id", usercode);
+                doc.put("chall_StartDate", dateR);
+                doc.put("chall_EndDate", endDate);
 
                 firebaseFirestore.collection("challenge").document(chall_Text).collection("challenge list").document(usercode).set(doc)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

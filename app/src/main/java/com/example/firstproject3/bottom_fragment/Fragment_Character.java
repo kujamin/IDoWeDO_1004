@@ -129,7 +129,7 @@ public class Fragment_Character extends Fragment {
                                         documentReference.update("coin",String.valueOf(coin+100));
                                         documentReference.update("heart","5");
                                         documentReference.update("exp",currentExp+"");
-                                        Toast.makeText(getContext(), "레벨업! 현재 "+level+"입니다!" , Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(rootView.getContext(),"레벨업!",Toast.LENGTH_SHORT).show();
                                     }
 
                                     if(heart <= 0){
@@ -154,27 +154,27 @@ public class Fragment_Character extends Fragment {
                             }
                         });
 
-        DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
+                        DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
 
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
+                        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
 
-                            Glide.with(rootView.getContext()).load(document.getString("cloHead")).into(cloStateHead);
-                            Glide.with(rootView.getContext()).load(document.getString("cloTorso")).into(cloStateTorso);
-                            Glide.with(rootView.getContext()).load(document.getString("cloLeg")).into(cloStateLeg);
-                            Glide.with(rootView.getContext()).load(document.getString("cloArm")).into(cloStateArm);
-                        }
+                                            Glide.with(rootView.getContext()).load(document.getString("cloHead")).into(cloStateHead);
+                                            Glide.with(rootView.getContext()).load(document.getString("cloTorso")).into(cloStateTorso);
+                                            Glide.with(rootView.getContext()).load(document.getString("cloLeg")).into(cloStateLeg);
+                                            Glide.with(rootView.getContext()).load(document.getString("cloArm")).into(cloStateArm);
+                                        }
 
-                    }
-                });
-            }
-        });
+                                    }
+                                });
+                            }
+                        });
 
 
 //                        maxExp = 100+level;

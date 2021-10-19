@@ -68,7 +68,7 @@ public class Confirm3Activity extends AppCompatActivity {
                 AlertDialog.Builder myAlertBuilder =
                         new AlertDialog.Builder(v.getContext());
                 // alert의 title과 Messege 세팅
-                myAlertBuilder.setMessage("오늘 매일 만보 걷기 챌린지 달성하셨나요?");
+                myAlertBuilder.setMessage("정말 달성하셨나요?");
                 // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
                 myAlertBuilder.setPositiveButton("네!",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which){

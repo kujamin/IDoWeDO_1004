@@ -27,14 +27,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ConfirmActivity extends AppCompatActivity {
@@ -42,7 +45,9 @@ public class ConfirmActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private FirebaseFirestore firebaseFirestore;
-    private String usercode, dateR;
+    private String usercode, dateR, startDate, endDate;
+    private int year, month, dayy, count = 0;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,41 @@ public class ConfirmActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
+
+                firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            startDate = document.getString("chall_StartDate");
+                            endDate = document.getString("chall_EndDate");
+                        }
+                    }
+                });
+
+                firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
+                        .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                count = count + 1;//사용자의 챌린지 참여 횟수
+                            }//for
+                            Toast.makeText(getApplicationContext(), Calendar.getInstance().after(calendar) + "", Toast.LENGTH_LONG).show();
+                            //시작 기간으로부터 30일이 지나면 참여 완료 버튼 막기
+                            if(Calendar.getInstance().after(calendar)) {
+                                challBtn.setEnabled(false);
+                                Toast.makeText(getApplicationContext(), "챌린지 기간이 종료되었습니다!", Toast.LENGTH_LONG).show();
+                                if(count == 30) { //챌린지 성공 시
+                                    Toast.makeText(getApplicationContext(), "축하합니다! 자격증 취득하기 챌린지를 성공했습니다!", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "아쉽게도 챌린지 성공에 실패했습니다!", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }//if
+                    }//onComplete
+                });
             }
 
             @Override
@@ -76,10 +116,11 @@ public class ConfirmActivity extends AppCompatActivity {
         challBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), startDate+"/"+ endDate, Toast.LENGTH_LONG).show();
                 AlertDialog.Builder myAlertBuilder =
                         new AlertDialog.Builder(v.getContext());
                 // alert의 Messege 세팅
-                myAlertBuilder.setMessage("오늘 자격증 취득하기 챌린지 달성하셨나요?");
+                myAlertBuilder.setMessage("정말 달성하셨나요?!");
                 // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
                 myAlertBuilder.setPositiveButton("네!",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
