@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     com.example.firstproject3.Login.ProgressDialog customProgressDialog;
     private String TAG = "MainActivity";
-    private String strNick = "null", dateR;
+    private String strNick = null, dateR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,7 +240,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Map<String, Object> userState = new HashMap<>();
                                 userState.put("coin", "200");
                                 userState.put("exp", "0");
-                                userState.put("heart" , "3");
+                                userState.put("heart" , "5");
                                 userState.put("level", "1");
                                 userState.put("maxExp", "30");
 

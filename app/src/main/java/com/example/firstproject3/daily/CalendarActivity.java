@@ -105,6 +105,8 @@ public class CalendarActivity extends AppCompatActivity {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
+        calendarView.setArrowColor(Color.rgb(244,56,94));
+
         calendarView.addDecorators(
                 new SundayDecorator(),
                 new SaturdayDecorator()

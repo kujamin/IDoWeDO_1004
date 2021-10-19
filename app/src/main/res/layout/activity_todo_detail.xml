@@ -170,10 +170,9 @@
 
                 <EditText
                     android:id="@+id/todoDetail_EdittextMemo"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:ems="11"
+                    android:ems="9"
                     android:inputType="textPersonName"
                     android:textSize="14dp" />
             </TableRow>

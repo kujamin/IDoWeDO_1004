@@ -4,10 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PopupActivity extends Activity {
     ImageView Challlogo;
@@ -20,6 +26,21 @@ public class PopupActivity extends Activity {
         Challlogo = findViewById(R.id.imageViewPopup);
 
         Challlogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
+
+        //특정 텍스트에 대한 스타일 적용
+        TextView textSendToTitle = findViewById(R.id.textViewCheck);
+
+        String content = textSendToTitle.getText().toString();
+        SpannableString spannableString = new SpannableString(content);
+
+        String word_check = "체크";
+        int start = content.indexOf(word_check);
+        int end = start + word_check.length();
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#F4385E")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textSendToTitle.setText(spannableString);
     }
 
     public void onClikcPopupClose(View v){

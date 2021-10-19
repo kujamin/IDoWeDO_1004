@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton fab, todoFab, habbitFab;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private String str1 = null, str2 = null, str3 = null;
+    private AlarmManager alarmManager;
 
 
 
@@ -212,31 +213,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         break;
                                 }
                             }//for
-                            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-                            Intent intent = new Intent(MainActivity.this, MyReceiver.class);
-//                            intent.setClass(MainActivity.this, MyReceiver.class);
-//                            intent.setFlags(Integer.parseInt(Intent.ACTION_DATE_CHANGED));
-                            intent.putExtra("chall1", str1);
-                            intent.putExtra("chall2", str2);
-                            intent.putExtra("chall3", str3);
-
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, 17);
-                            calendar.set(Calendar.MINUTE, 20);
-//                            calendar.set(2021, 9, 18, 14, 17);//알림창 바로 뜨는 거 보고 싶을 때 시간 조정 후 주석 풀기1
-
-                            //알람 예약
-                            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                                    AlarmManager.INTERVAL_DAY, pendingIntent);//24시간 이후 반복
-                            if (alarmManager == null) {
-                                Toast.makeText(getApplicationContext(), "알람 off", Toast.LENGTH_LONG).show();
-                                alarmManager.cancel(pendingIntent);
-                            }
-//                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);//알림창 바로 뜨는 거 보고 싶을 때 주석 풀기2
                         }//if
                     }
                 });
@@ -345,6 +321,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }//onCreate
+
+    //새로운 특정 시간에 알람 울리는 코드 위치..허이짜
+    public void regist(View view) {
+        Intent intent = new Intent(MainActivity.this, MyReceiver.class);
+//                            intent.setClass(MainActivity.this, MyReceiver.class);
+//                            intent.setFlags(Integer.parseInt(Intent.ACTION_DATE_CHANGED));
+        intent.putExtra("chall1", str1);
+        intent.putExtra("chall2", str2);
+        intent.putExtra("chall3", str3);
+
+        PendingIntent pIntent  = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+        //시간 설정
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.MINUTE, 6);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        //  AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //  알람 예약
+        //  alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+        //  AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        // 지정한 시간에 매일 알림
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+    }//regist() 끝
+
+    public void unregist (View view){
+        Intent intent = new Intent(this, Alarm.class);
+        PendingIntent pIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+        alarmManager.cancel(pIntent);
+    }//unregist() 끝
 
     private void getHashKey(){ //해시키 가져오기
         PackageInfo packageInfo = null;

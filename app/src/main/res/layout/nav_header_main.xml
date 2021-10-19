@@ -6,7 +6,7 @@
     android:layout_height="@dimen/nav_header_height"
     android:background="@color/colorAccent"
     android:gravity="center"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,9 +15,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal|center_vertical"
         android:contentDescription="@string/nav_header_desc"
         app:srcCompat="@drawable/logo3" />
@@ -27,16 +27,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginLeft="16dp">
+        android:layout_marginLeft="15dp">
 
         <TextView
             android:id="@+id/tv_get_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="3dp"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:padding="5dp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
-            android:textSize="12sp"
-            android:padding="8dp"/>
+            android:textSize="15sp"
+            android:padding="5dp"/>
     </LinearLayout>
 </LinearLayout>

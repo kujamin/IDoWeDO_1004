@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="260dp"
-    android:background="#ffff"
+    android:layout_width="240dp"
+    android:background="@drawable/popbackground_layout"
     tools:context=".QuestionPopupActivity"
     android:orientation="vertical" >
 
@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/TextSendToManager"
@@ -21,7 +22,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="개발자에게 메일 보내기"
-            android:textSize="18sp"
+            android:fontFamily="@font/nanumbarunpenb"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#000"/>
     </LinearLayout>
@@ -30,15 +32,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp">
 
         <Button
             android:id="@+id/Btn_question_yes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#fff"
-            android:text="예"
+            android:background="@drawable/right_line"
+            android:text="네"
+            android:fontFamily="@font/nanumbarunpenr"
             android:textSize="16sp"/>
 
         <Button
@@ -48,6 +53,7 @@
             android:layout_weight="1"
             android:background="#fff"
             android:text="아니요"
+            android:fontFamily="@font/nanumbarunpenb"
             android:textColor="@color/colordarkgray"
             android:textSize="16sp" />
     </LinearLayout>

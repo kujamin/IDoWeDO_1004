@@ -21,6 +21,8 @@
             android:enabled="true"
             android:exported="false"></receiver>
 
+        <receiver android:name=".Alarm"></receiver>
+
         <activity
             android:name=".Confirm3Activity"
             android:exported="true" />

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -126,7 +127,9 @@ public class Fragment_Character extends Fragment {
                                         documentReference.update("maxExp",maxExp+"");
                                         documentReference.update("level",level+"");
                                         documentReference.update("coin",String.valueOf(coin+100));
+                                        documentReference.update("heart","5");
                                         documentReference.update("exp",currentExp+"");
+                                        Toast.makeText(getContext(), "레벨업! 현재 "+level+"입니다!" , Toast.LENGTH_SHORT).show();
                                     }
 
                                     if(heart <= 0){

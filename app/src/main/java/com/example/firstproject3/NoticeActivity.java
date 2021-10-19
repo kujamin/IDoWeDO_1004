@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class NoticeActivity extends AppCompatActivity {
     int noticeId;
-    boolean closeType1 = false, closeType2 = false, closeType3 = false;
+    boolean closeType1 = false, closeType2 = false, closeType3 = false, closeType4 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class NoticeActivity extends AppCompatActivity {
         LinearLayout notice1 = findViewById(R.id.notice1);
         LinearLayout notice2 = findViewById(R.id.notice2);
         LinearLayout notice3 = findViewById(R.id.notice3);
+        LinearLayout notice4 = findViewById(R.id.notice4);
 
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
@@ -67,6 +68,19 @@ public class NoticeActivity extends AppCompatActivity {
                             closeType3 = true;
                         }
                         break;
+                    case R.id.notice4 :
+                        img = findViewById(R.id.imageNotice4);
+                        content = findViewById(R.id.noticeContent4);
+                        if(closeType4) { //closeType이 1일 때 공지 내용 숨기기
+                            content.setVisibility(View.GONE);
+                            img.setImageResource(R.drawable.down_arrow);
+                            closeType4 = false;
+                        } else { //closeType이 0일 때 공지 내용 보이기
+                            content.setVisibility(View.VISIBLE);
+                            img.setImageResource(R.drawable.up_arrow);
+                            closeType4 = true;
+                        }
+                        break;
                 }//switch
             }//onClick
         };//ocl
@@ -74,6 +88,7 @@ public class NoticeActivity extends AppCompatActivity {
         notice1.setOnClickListener(ocl);
         notice2.setOnClickListener(ocl);
         notice3.setOnClickListener(ocl);
+        notice4.setOnClickListener(ocl);
 
     }//onCreeate
 }

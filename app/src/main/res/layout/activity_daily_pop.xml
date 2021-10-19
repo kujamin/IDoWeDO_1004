@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="학업"
-            android:onClick="onClickClose"
+            android:textSize="16sp"
+            android:fontFamily="@font/nanumbarunpenb"
             android:layout_gravity="center"/>
     </LinearLayout>
 
@@ -57,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="타이머"
-            android:onClick="onClickClose"
+            android:textSize="16sp"
+            android:fontFamily="@font/nanumbarunpenb"
             android:layout_gravity="center"/>
     </LinearLayout>
 
@@ -83,7 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="의료"
-            android:onClick="onClickClose"
+            android:textSize="16sp"
+            android:fontFamily="@font/nanumbarunpenb"
             android:layout_gravity="center"/>
     </LinearLayout>
 
@@ -108,7 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="특별한 날"
-            android:onClick="onClickClose"
+            android:textSize="16sp"
+            android:fontFamily="@font/nanumbarunpenb"
             android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>
