@@ -108,7 +108,7 @@ public class NickNameActivity extends AppCompatActivity {
                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Toast.makeText(getApplicationContext(), "닉네임 설정 완료!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "닉네임 설정 완료!", Toast.LENGTH_SHORT).show();
                                     mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(editNickName.getText().toString());
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);

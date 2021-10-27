@@ -257,7 +257,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 account.setStorepoint(0);
 
                                 // setValue : database에 insert 행위
-                                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
+                                mDatabaseRef.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 
                                 strEmail = firebaseUser.getEmail();
 

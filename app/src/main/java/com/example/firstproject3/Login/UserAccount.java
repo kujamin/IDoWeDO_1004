@@ -84,7 +84,7 @@ public class UserAccount {
     public void setStorepoint(int storepoint) {this.storepoint = storepoint;}
 
 
-    public UserAccount(String idtoken, String emailid, String repassword, String username , String password, String nickname, int datecnt, int challengepoint, int dotodo, int storepoint) {
+    public UserAccount(String idtoken, String emailid, String repassword, String username, String password, String nickname, int datecnt, int challengepoint, int dotodo, int storepoint) {
         this.idtoken = idtoken;
         this.emailid = emailid;
         this.password = password;
