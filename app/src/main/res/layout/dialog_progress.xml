@@ -8,7 +8,7 @@
     <ProgressBar
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:indeterminateDrawable="@drawable/progress_image"/>
+        android:indeterminateDrawable="@drawable/loding_gif_64"/>
 <!--    <TextView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->

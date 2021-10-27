@@ -1,6 +1,7 @@
 package com.example.firstproject3.AtCheck;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -51,6 +52,7 @@ public class Attendance_CheckActivity extends Activity {
     String time, kcal, menu;
     private CalendarDay date;
     Cursor cursor;
+    Button attenBtn;
     MaterialCalendarView calendarView;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -123,6 +125,7 @@ public class Attendance_CheckActivity extends Activity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
                             dateqd = new String[sumCount];
+                            Toast.makeText(getApplicationContext(), sumCount+"", Toast.LENGTH_SHORT).show();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 datee = document.getString("checkDate");//체크된 날짜 얻어옴
@@ -133,6 +136,11 @@ public class Attendance_CheckActivity extends Activity {
                                 }
                             }
                             new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
+
+                            if(attenBtn.isSelected()){
+                                attenBtn.setEnabled(false); //버튼 비활성화
+                                attenBtn.setText("출석완료");
+                            }
                         }
                     }
                 });
@@ -143,14 +151,13 @@ public class Attendance_CheckActivity extends Activity {
             }
         });
 
-//        String [] dateee = {"2021,10,15", "2021,10,16", "2021,10,17", "2021,10,19", "2021,10,20"};
-//        new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
-
         //출석체크 버튼
-        Button attenBtn = (Button) findViewById(R.id.checkbutton);
+        attenBtn = findViewById(R.id.checkbutton);
         attenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                attenBtn.setEnabled(false); //버튼 비활성화
+                attenBtn.setText("출석완료");
                 calendarView.setSelectedDate(CalendarDay.today());
 //                ArrayList<CalendarDay> dates = new ArrayList<>();
 //                dates = CalendarDay.today();
@@ -203,6 +210,8 @@ public class Attendance_CheckActivity extends Activity {
             }
         });
     }
+
+
 
     //특정 날짜에 dot
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
