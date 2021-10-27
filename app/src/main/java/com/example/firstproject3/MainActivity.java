@@ -3,6 +3,7 @@ package com.example.firstproject3;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -52,6 +53,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -87,9 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     TextView tv_get_email, tv_get_name;
-    private DrawerLayout drawerLayout;
-    private FloatingActionButton fabTodo, fabHabbit;
-    Intent intentD;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -106,18 +105,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private long backpressedTime = 0;
     private String usercode;
     private AppBarConfiguration mAppBarConfiguration;
-    Company company;
-    ArrayList<Person> persons;
-    private ArrayList<HashMap<String, String>> arraydata;
-    private int mISelectedItem = -1;
-    Button buttonReser;
-    TextView textName;
     boolean isOpen = true;
     FloatingActionButton fab, todoFab, habbitFab;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private String str1 = null, str2 = null, str3 = null;
+    private String startDate, endDate;
     private AlarmManager alarmManager;
-
+    private Calendar calendarStart, calendarEnd;
+    private int count;
 
 
 
@@ -162,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         textView = findViewById(R.id.textView5);
 
+        alarmManager = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
 
         //서랍장
         final Toolbar toolbar = findViewById(R.id.toolbar);
@@ -226,11 +222,85 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         break;
                                 }
                             }//for
+
+                            Intent intent = new Intent(MainActivity.this, MyReceiver.class);
+//                            intent.setClass(MainActivity.this, MyReceiver.class);
+//                            intent.setFlags(Integer.parseInt(Intent.ACTION_DATE_CHANGED));
+                            intent.putExtra("chall1", str1);
+                            intent.putExtra("chall2", str2);
+                            intent.putExtra("chall3", str3);
+
+                            PendingIntent pIntent  = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+                            //시간 설정
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            calendar.set(Calendar.HOUR_OF_DAY, 16);
+                            calendar.set(Calendar.MINUTE, 31);
+                            calendar.set(Calendar.SECOND, 0);
+                            calendar.set(Calendar.MILLISECOND, 0);
+
+                            //  알람 예약
+                            //  alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                            //  AlarmManager.INTERVAL_DAY, pendingIntent);
+
+                            // 지정한 시간에 매일 알림
+                            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
                         }//if
-                    }
+                    }//onComplete
                 });
 
-            }
+                //챌린지 시작 30일 경과 시
+                firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                startDate = document.getString("chall_StartDate");
+                                endDate = document.getString("chall_EndDate");
+
+                                String[] time = endDate.split("-");
+                                int year = Integer.parseInt(time[0]);
+                                int month = Integer.parseInt(time[1]);
+                                int dayy = Integer.parseInt(time[2]);
+
+                                calendarEnd = Calendar.getInstance();
+                                calendarEnd.setTimeInMillis(System.currentTimeMillis());
+                                calendarEnd.set(year, month, dayy);
+                                calendarEnd.add(Calendar.DATE, 1);
+
+                                Toast.makeText(getApplicationContext(), String.valueOf(calendarEnd) , Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                    });
+
+                    firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
+                            .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    count = count + 1;//사용자의 챌린지 참여 횟수
+                                }//for
+                                Toast.makeText(getApplicationContext(), Calendar.getInstance().after(calendarEnd) + "", Toast.LENGTH_LONG).show();
+                                //시작 기간으로부터 30일이 지나면 참여 완료 버튼 막기
+                                if(Calendar.getInstance().after(calendarEnd)) {
+                                    Toast.makeText(getApplicationContext(), "챌린지 기간이 종료되었습니다!", Toast.LENGTH_LONG).show();
+                                    if(count == 30) { //챌린지 성공 시
+                                        Toast.makeText(getApplicationContext(), "축하합니다! 자격증 취득하기 챌린지를 성공했습니다!", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "아쉽게도 챌린지 성공에 실패했습니다!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }//if
+                        }//onComplete
+                    });
+                }
+
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -356,6 +426,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 textView.setClickable(false);
             }
         });
+
     }//onCreate
 
     //새로운 특정 시간에 알람 울리는 코드 위치..허이짜
@@ -372,12 +443,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //시간 설정
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
-        calendar.set(Calendar.MINUTE, 6);
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 41);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-        //  AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
         //  알람 예약
         //  alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
         //  AlarmManager.INTERVAL_DAY, pendingIntent);
@@ -387,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }//regist() 끝
 
     public void unregist (View view){
-        Intent intent = new Intent(this, Alarm.class);
+        Intent intent = new Intent(this, MyReceiver.class);
         PendingIntent pIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
         alarmManager.cancel(pIntent);
     }//unregist() 끝

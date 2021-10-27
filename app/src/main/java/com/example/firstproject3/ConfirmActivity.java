@@ -77,6 +77,19 @@ public class ConfirmActivity extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             startDate = document.getString("chall_StartDate");
                             endDate = document.getString("chall_EndDate");
+
+                            calendar = Calendar.getInstance();
+
+                            String[] time = endDate.split("-");
+                            int year = Integer.parseInt(time[0]);
+                            int month = Integer.parseInt(time[1]);
+                            int dayy = Integer.parseInt(time[2]);
+
+                            calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            calendar.set(year, month, dayy);
+                            calendar.add(Calendar.DATE, 1);
+
                         }
                     }
                 });
