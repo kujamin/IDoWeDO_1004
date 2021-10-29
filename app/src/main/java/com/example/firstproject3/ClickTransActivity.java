@@ -94,10 +94,9 @@ public class ClickTransActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         imgarrow = findViewById(R.id.imageViewarrow);
-        textChallAttend = findViewById(R.id.textViewAttend);
-
         imgarrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
+        textChallAttend = findViewById(R.id.textViewAttend);
         //usercode 얻어오기
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
         <activity
+            android:name=".Findpassword"
+            android:exported="false" />
+        <activity
             android:name=".NickPopup"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
@@ -24,12 +27,12 @@
             android:name=".DeleteUser"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
-
-        <receiver android:name=".Alarm"></receiver>
+            android:exported="false" />
+        <receiver android:name=".Alarm" />
 
         <activity
             android:name=".Confirm3Activity"

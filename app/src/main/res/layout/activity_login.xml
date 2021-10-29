@@ -46,6 +46,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanumbarunpenb"
             android:id="@+id/et_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +68,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanumbarunpenb"
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,9 +92,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            android:fontFamily="@font/nanumbarunpenb"
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="14dp"
             android:layout_weight="2"
             android:background="@drawable/bin_blue"
@@ -106,8 +109,9 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:fontFamily="@font/nanumbarunpenb"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_weight="2"
             android:gravity="center"
             android:text="OR"/>
@@ -115,7 +119,7 @@
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_google"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
             android:layout_marginRight="14dp"
             android:layout_weight="2"
             android:textColor="#fff"
@@ -133,30 +137,22 @@
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
-        android:weightSum="15"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="-32dp">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:text="아이디 찾기"
-            android:textColor="@color/colorgray"
-            android:textSize="15sp"/>
-
-        <TextView
+            android:id="@+id/tv_findPW"
+            android:fontFamily="@font/nanumbarunpenb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="5"
             android:gravity="center"
             android:text="비밀번호 찾기"
-            android:textColor="@color/colorgray"
+            android:textColor="@color/colorblack"
             android:textSize="15sp"/>
         <TextView
+            android:fontFamily="@font/nanumbarunpenb"
             android:id="@+id/app_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

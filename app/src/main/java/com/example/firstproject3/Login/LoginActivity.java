@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.firstproject3.Findpassword;
 import com.example.firstproject3.Login.ProgressDialog;
 import com.example.firstproject3.Login.RegisterActivity;
 import com.example.firstproject3.Login.UserAccount;
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         imagelogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("915511622927-5bh9gk7go846qadakl0bo5agru5i4bv0.apps.googleusercontent.com")
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -210,6 +211,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onClick(View v) {
                 // 회원가입 화면으로 이동
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        TextView tv_findPW = (TextView) findViewById(R.id.tv_findPW);
+        tv_findPW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 비밀번호 찾는 화면으로 이동
+                Intent intent = new Intent(LoginActivity.this, Findpassword.class);
                 startActivity(intent);
                 finish();
             }

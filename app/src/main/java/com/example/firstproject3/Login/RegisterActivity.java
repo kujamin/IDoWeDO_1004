@@ -7,15 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firstproject3.Findpassword;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.NickNameActivity;
 import com.example.firstproject3.R;
@@ -47,6 +50,7 @@ import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    ImageView imgarrow;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
     private EditText mEtName, mEtRePwd, mEtEmail, mEtPwd; //회원가입 입력필드
@@ -63,6 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        imgarrow = findViewById(R.id.imageViewarrow);
+        imgarrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
+
         //로딩창 객체 생성
         customProgressDialog = new com.example.firstproject3.Login.ProgressDialog(this);
         //로딩창을 투명하게
@@ -77,6 +84,15 @@ public class RegisterActivity extends AppCompatActivity {
         mEtRePwd = findViewById(R.id.et_repwd); //비밀번호 확인
         mBtnRegister = findViewById(R.id.btn_register); // 등록버튼
         mTextPwdError = findViewById(R.id.textPwdError);  //비밀번호 재입력 오류메세지
+
+        imgarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
