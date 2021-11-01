@@ -49,11 +49,12 @@ public class Logout_Popup extends Activity {
             public void onClick(View v) {
 
                 //로그아웃 하기
+                FirebaseAuth.getInstance().signOut();
                 mFirebaseAuth.signOut();
-
+                finishAffinity();
                 Intent intent = new Intent(Logout_Popup.this, LoginActivity.class);
                 startActivity(intent);
-                System.exit(0);
+                finish();
 
             }
         });

@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private SignInButton btn_google;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private GoogleSignInClient googleSignInClient;    //구글 api 클라이언트 객체
-    private static final int RED_SIGN_GOOGLE = 100; // 구글로그인 결과 코드
+    private static final int RED_SIGN_GOOGLE = 9001; // 구글로그인 결과 코드
 
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd; // 로그인 입력필드
@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         imagelogo = (ImageView) findViewById(R.id.imageLogo);
         imagelogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
+        //구글 로그인을 위한 인증 서비스
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -525,11 +526,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 });
 
                             Toast.makeText(LoginActivity.this, "구글 성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            updateUI(firebaseUser);
                         } else {
                             Toast.makeText(LoginActivity.this, "구글 실패", Toast.LENGTH_SHORT).show();
+                            updateUI(null);
                         }
                     }
                 });
@@ -538,5 +538,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

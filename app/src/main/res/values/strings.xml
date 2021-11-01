@@ -16,6 +16,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_make_todo">MakeTodo</string>
+   <!--<string name="default_web_client_id" translatable="false">237047375768-ma9cm63bn9goidlu99jl3fen5f6mieru.apps.googleusercontent.com</string>-->
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

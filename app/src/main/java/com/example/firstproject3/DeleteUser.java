@@ -30,7 +30,7 @@ public class DeleteUser extends Activity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseDatabase mDatabase;
-    private DatabaseReference dataRef;
+    private DatabaseReference mdatabase = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,7 @@ public class DeleteUser extends Activity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
-        FirebaseUser firebaseUser = mFirebaseAuth.getInstance().getCurrentUser();
-        dataRef = mDatabase.getReference(firebaseUser.getUid());
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Button btn_delete_yes = findViewById(R.id.btn_delete_yes);
         Button btn_delete_no = findViewById(R.id.btn_delete_no);
@@ -58,22 +57,30 @@ public class DeleteUser extends Activity {
         btn_delete_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "회원 탈퇴가 성공했습니다.", Toast.LENGTH_SHORT).show();
 
-                            dataRef.removeValue();
+                            FirebaseAuth.getInstance().signOut();
+                            mFirebaseAuth.signOut();
+                            finishAffinity();
+
                             Intent intent = new Intent(DeleteUser.this, LoginActivity.class);
                             startActivity(intent);
-                            System.exit(0);
+                            finish();
+
                         } else {
                             Toast.makeText(getApplicationContext(), "회원 탈퇴를 진행하기 위해선 다시 로그인이 필요합니다!!", Toast.LENGTH_SHORT).show();
+                            FirebaseAuth.getInstance().signOut();
                             mFirebaseAuth.signOut();
+                            finishAffinity();
+
                             Intent intent = new Intent(DeleteUser.this, LoginActivity.class);
                             startActivity(intent);
-                            System.exit(0);
+                            finish();
                         }
                     }
                 });

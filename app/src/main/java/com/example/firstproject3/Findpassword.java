@@ -49,12 +49,12 @@ public class Findpassword extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Findpassword.this, "이메일 보냈습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Findpassword.this, "해당 메일로 이메일을 보냈습니다 확인해주세요!", Toast.LENGTH_SHORT).show();
                                     Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Findpassword.this, "이메일 보내기 실패.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Findpassword.this, "메일이 올바른지 다시 확인해주세요!", Toast.LENGTH_SHORT).show();
 
                                 }
                             }
