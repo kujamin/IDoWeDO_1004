@@ -54,14 +54,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:layout_marginTop="180dp"
-                android:backgroundTint="#F87791"
+                android:layout_marginTop="350dp"
+                android:backgroundTint="#FA6A87"
                 android:clickable="false"
                 android:focusable="true"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/habbitFab"
                 app:layout_constraintEnd_toEndOf="@+id/habbitFab"
-                app:srcCompat="@drawable/challenge"
+                app:srcCompat="@drawable/todo_float"
                 app:tint="#fff" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -87,14 +87,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="300dp"
-                android:backgroundTint="#F87791"
+                android:layout_marginTop="470dp"
+                android:backgroundTint="#FA6A87"
                 android:clickable="false"
                 android:focusable="true"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/fab"
                 app:layout_constraintEnd_toEndOf="@+id/fab"
-                app:srcCompat="@drawable/bonus"
+                app:srcCompat="@drawable/habit_float"
                 app:tint="#fff" />
 
 

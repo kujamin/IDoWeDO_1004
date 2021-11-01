@@ -9,20 +9,21 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Decorate several days with a dot
  */
 public class EventDecorator implements DayViewDecorator {
 
-    private final Drawable drawable;
     private int color;
     private HashSet<CalendarDay> dates;
 
-    public EventDecorator(int color, List<CalendarDay> dates, Activity context) {
-        drawable = context.getResources().getDrawable(R.drawable.moreday);
+    public EventDecorator(int color, Collection<CalendarDay> dates) {
         this.color = color;
         this.dates = new HashSet<>(dates);
     }
@@ -34,7 +35,7 @@ public class EventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.setSelectionDrawable(drawable);
+        view.addSpan(new DotSpan(7,color));
 //        view.addSpan(new DotSpan(5, color)); // 날자밑에 점
     }
 }

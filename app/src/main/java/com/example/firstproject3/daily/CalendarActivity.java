@@ -45,8 +45,13 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity {
@@ -67,6 +72,7 @@ public class CalendarActivity extends AppCompatActivity {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calendar);
+
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.Calendar_toolbar);
         setSupportActionBar(mToolbar);
@@ -107,13 +113,10 @@ public class CalendarActivity extends AppCompatActivity {
 
         calendarView.setArrowColor(Color.rgb(244,56,94));
 
-        calendarView.addDecorators(
-                new SundayDecorator(),
-                new SaturdayDecorator()
-        );
 
         //달력 실행될 때 오늘 날짜가 select되게 함
         calendarView.setSelectedDate(CalendarDay.today());
+
 
         listcal = findViewById(R.id.listcal);
         listcal.setHasFixedSize(true);
@@ -141,6 +144,34 @@ public class CalendarActivity extends AppCompatActivity {
                                     }
                                     calAdapter.notifyDataSetChanged();
                                 } else {
+                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                }
+                            }
+                        });
+
+                firebaseFirestore.collection("user").document(userCode).collection("user todo")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document.getString("todo_title") != null) {
+                                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                                            String strd = document.getString("todo_date");
+                                            Date dated = null;
+
+                                            try {
+                                                dated = dateFormat.parse(strd);
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                            CalendarDay day = CalendarDay.from(dated);
+                                            calendarView.addDecorator(new EventDecorator(Color.RED, Collections.singleton(day)));
+                                        }
+                                    }
+                                }
+                                else{
                                     Log.d(TAG, "Error getting documents: ", task.getException());
                                 }
                             }
@@ -192,8 +223,6 @@ public class CalendarActivity extends AppCompatActivity {
                         });
 
                 listcal.setAdapter(calAdapter);
-
-                Toast.makeText(getApplicationContext(), strDate, Toast.LENGTH_SHORT).show();
             }
         });
     }

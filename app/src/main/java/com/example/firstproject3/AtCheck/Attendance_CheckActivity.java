@@ -84,7 +84,8 @@ public class Attendance_CheckActivity extends Activity {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
-        calendarView.setPadding(0, -20, 0, 30);        calendarView.setArrowColor(Color.rgb(244,56,94));
+        calendarView.setPadding(0, -20, 0, 30);
+        calendarView.setArrowColor(Color.rgb(244,56,94));
 
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
@@ -253,7 +254,7 @@ public class Attendance_CheckActivity extends Activity {
                 return;
             }
 
-            calendarView.addDecorator(new EventDecorator(Color.RED, calendarDays, Attendance_CheckActivity.this));
+            calendarView.addDecorator(new EventDecorator(Color.RED,Collections.singleton(CalendarDay.today())));
         }
     }
 

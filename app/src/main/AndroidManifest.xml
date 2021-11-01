@@ -43,6 +43,15 @@
         <activity
             android:name=".ConfirmActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".NickPopup"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".DeleteUser"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <!--
           <meta-data
             android:name="com.kakao.sdk.AppKey"

@@ -70,7 +70,6 @@
                     android:layout_marginRight="8dp"
                     android:ems="20"
                     android:hint="습관 이름을 입력하세요."
-                    android:backgroundTint="@color/colorAccent"
                     android:inputType="textPersonName"
                     android:textColor="#000"
                     android:textSize="16sp" />
