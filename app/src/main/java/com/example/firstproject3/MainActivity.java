@@ -11,7 +11,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Base64;
@@ -127,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
-
         return true;
     }
 
@@ -153,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         intentM = getIntent();
         String userCode = intentM.getStringExtra("userCode");
@@ -191,7 +188,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tv_get_email = (TextView) navHeader.findViewById(R.id.tv_get_email);
         tv_get_name = (TextView) navHeader.findViewById(R.id.tv_get_name);
-
 
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -254,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }//onComplete
                 });
 
-                /*//챌린지 시작 30일 경과 시
+                //챌린지 시작 30일 경과 시
                 firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -278,9 +274,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             }
                         }
-                    });*/
+                    });
 
-                    /*firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
+                    firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                             .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -300,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             }//if
                         }//onComplete
-                    });*/
+                    });
                 }
 
 

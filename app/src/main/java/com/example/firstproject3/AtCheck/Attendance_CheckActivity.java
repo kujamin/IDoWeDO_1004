@@ -138,10 +138,10 @@ public class Attendance_CheckActivity extends Activity {
                             }
                             new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
 
-                            if(attenBtn.isSelected()){
-                                attenBtn.setEnabled(false); //버튼 비활성화
-                                attenBtn.setText("출석완료");
-                            }
+//                            if(attenBtn.isSelected()){
+//                                attenBtn.setEnabled(false); //버튼 비활성화
+//                                attenBtn.setText("출석완료");
+//                            }
                         }
                     }
                 });
@@ -157,7 +157,7 @@ public class Attendance_CheckActivity extends Activity {
         attenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attenBtn.setEnabled(false); //버튼 비활성화
+                attenBtn.setEnabled(false);
                 attenBtn.setText("출석완료");
                 calendarView.setSelectedDate(CalendarDay.today());
 //                ArrayList<CalendarDay> dates = new ArrayList<>();
@@ -180,8 +180,8 @@ public class Attendance_CheckActivity extends Activity {
                         value += 1;
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").setValue(value);
                         if(value == 30 || value == 100)
-                            {
-                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                        {
+                            Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
                         }
 
                     }

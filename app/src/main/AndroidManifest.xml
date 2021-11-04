@@ -17,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
         <activity
+            android:name=".AchievementPopupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LevelupActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
             android:name=".Findpassword"
             android:exported="false" />
         <activity
@@ -43,15 +50,6 @@
         <activity
             android:name=".ConfirmActivity"
             android:exported="true" />
-
-        <activity
-            android:name=".NickPopup"
-            android:exported="false"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity
-            android:name=".DeleteUser"
-            android:exported="false"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <!--
           <meta-data
             android:name="com.kakao.sdk.AppKey"

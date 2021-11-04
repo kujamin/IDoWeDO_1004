@@ -39,4 +39,3 @@ public class EventDecorator implements DayViewDecorator {
 //        view.addSpan(new DotSpan(5, color)); // 날자밑에 점
     }
 }
-
