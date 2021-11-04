@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title=""
+        app:title=" "
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay">
     </androidx.appcompat.widget.Toolbar>
@@ -73,12 +73,12 @@
                                 android:src="@drawable/basic_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView5"
+                                android:id="@+id/tv_item1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="평범한 반팔"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -162,12 +162,12 @@
                                 android:src="@drawable/basic_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/tv_item2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="평범한 반바지"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -177,7 +177,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -250,12 +250,12 @@
                                 android:src="@drawable/business_head_01" />
 
                             <TextView
-                                android:id="@+id/textView11"
+                                android:id="@+id/tv_item3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="동글 안경"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -265,7 +265,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="악세사리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -348,12 +348,12 @@
                                 android:src="@drawable/business_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView14"
+                                android:id="@+id/tv_item4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="깔끔한 셔츠"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -363,7 +363,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -437,12 +437,12 @@
                                 android:src="@drawable/business_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView17"
+                                android:id="@+id/tv_item5"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="깔끔한 바지"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -452,7 +452,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -526,12 +526,12 @@
                                 android:src="@drawable/formal_head_01" />
 
                             <TextView
-                                android:id="@+id/textView22"
+                                android:id="@+id/tv_item6"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="지적인 안경"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -541,7 +541,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="악세사리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -624,12 +624,12 @@
                                 android:src="@drawable/formal_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView31"
+                                android:id="@+id/tv_item7"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="킹스맨 상의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -639,7 +639,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -713,12 +713,12 @@
                                 android:src="@drawable/formal_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView37"
+                                android:id="@+id/tv_item8"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="킹스맨 하의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -728,7 +728,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -801,12 +801,12 @@
                                 android:src="@drawable/hood_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView42"
+                                android:id="@+id/tv_item9"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="큐트 후드"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -816,7 +816,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -901,12 +901,12 @@
                                 android:src="@drawable/hood_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView47"
+                                android:id="@+id/tv_item10"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="큐트 청바지"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -916,7 +916,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -990,12 +990,12 @@
                                 android:src="@drawable/knight_head_01" />
 
                             <TextView
-                                android:id="@+id/textView52"
+                                android:id="@+id/tv_item11"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="일당백 모자"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1005,7 +1005,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="머리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1078,12 +1078,12 @@
                                 android:src="@drawable/knight_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView57"
+                                android:id="@+id/tv_item12"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="일당백 갑옷"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1093,7 +1093,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1178,12 +1178,12 @@
                                 android:src="@drawable/knight_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView407"
+                                android:id="@+id/tv_item13"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="일당백 하의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1193,7 +1193,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1267,12 +1267,12 @@
                                 android:src="@drawable/magician_head_01" />
 
                             <TextView
-                                android:id="@+id/textView512"
+                                android:id="@+id/tv_item14"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="마력의 오브"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1282,7 +1282,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="머리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1355,12 +1355,12 @@
                                 android:src="@drawable/magician_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView527"
+                                android:id="@+id/tv_item15"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="마력의 로브"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1370,7 +1370,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1454,12 +1454,12 @@
                                 android:src="@drawable/magician_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView002"
+                                android:id="@+id/tv_item16"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="마력의 하의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1469,7 +1469,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1543,12 +1543,12 @@
                                 android:src="@drawable/rogue_head_01" />
 
                             <TextView
-                                android:id="@+id/textView010"
+                                android:id="@+id/tv_item17"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="약탈의 머리띠"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1558,7 +1558,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="머리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1631,12 +1631,12 @@
                                 android:src="@drawable/rogue_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView014"
+                                android:id="@+id/tv_item18"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="약탈의 갑주"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1646,7 +1646,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1730,12 +1730,12 @@
                                 android:src="@drawable/rogue_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView019"
+                                android:id="@+id/tv_item19"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="약탈의 하의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1745,7 +1745,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1819,12 +1819,12 @@
                                 android:src="@drawable/alien_head_01" />
 
                             <TextView
-                                android:id="@+id/textView023"
+                                android:id="@+id/tv_item20"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="파란우주 헬멧"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1834,7 +1834,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="머리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -1907,12 +1907,12 @@
                                 android:src="@drawable/alien_torso_01" />
 
                             <TextView
-                                android:id="@+id/textView029"
+                                android:id="@+id/tv_item21"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="파란우주 상의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -1922,7 +1922,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2006,12 +2006,12 @@
                                 android:src="@drawable/alien_leg_01" />
 
                             <TextView
-                                android:id="@+id/textView037"
+                                android:id="@+id/tv_item22"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="파란우주 하의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2021,7 +2021,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2095,12 +2095,12 @@
                                 android:src="@drawable/alien_head_02" />
 
                             <TextView
-                                android:id="@+id/textView042"
+                                android:id="@+id/tv_item23"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="초록우주 헬멧"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2110,7 +2110,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="머리"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2183,12 +2183,12 @@
                                 android:src="@drawable/alien_torso_02" />
 
                             <TextView
-                                android:id="@+id/textView046"
+                                android:id="@+id/tv_item24"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="초록우주 상의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2198,7 +2198,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="상의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2282,12 +2282,12 @@
                                 android:src="@drawable/alien_leg_02" />
 
                             <TextView
-                                android:id="@+id/textView053"
+                                android:id="@+id/tv_item25"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="초록우주 하의"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2297,7 +2297,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="하의"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2371,12 +2371,12 @@
                                 android:src="@drawable/book_hand_01" />
 
                             <TextView
-                                android:id="@+id/textView060"
+                                android:id="@+id/tv_item26"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="고대의 마도서"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2386,7 +2386,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="무기"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2460,12 +2460,12 @@
                                 android:src="@drawable/claw_hand_01" />
 
                             <TextView
-                                android:id="@+id/textView064"
+                                android:id="@+id/tv_item27"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="예리한 클로"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2475,7 +2475,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="무기"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2559,12 +2559,12 @@
                                 android:src="@drawable/knife_hand_01" />
 
                             <TextView
-                                android:id="@+id/textView068"
+                                android:id="@+id/tv_item28"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="승리의 검"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2574,7 +2574,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="무기"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2648,12 +2648,12 @@
                                 android:src="@drawable/staff_hand_01" />
 
                             <TextView
-                                android:id="@+id/textView074"
+                                android:id="@+id/tv_item29"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
-                                android:text="아이템 이름"
+                                android:text="현자의 지팡이"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
 
@@ -2663,7 +2663,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="아이템 분류"
+                                android:text="무기"
                                 android:textSize="12dp" />
 
                             <LinearLayout
@@ -2793,10 +2793,10 @@
             android:visibility="invisible">
 
             <TextView
-                android:id="@+id/textExplain"
+                android:id="@+id/textview_popup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="item_name을 구매하시겠습니까?"
+                android:text=""
                 android:textSize="18dp"
                 android:textStyle="bold" />
 

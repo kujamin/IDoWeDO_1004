@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.firstproject3.AtCheck.Attendance_CheckActivity;
 import com.example.firstproject3.Login.LoginActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.bottom_fragment.Fragment_Character.*;
@@ -147,7 +148,8 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").setValue(value);
                             if(value == 30)
                             {
-                                Toast.makeText(context.getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                context.startActivity(new Intent(context, AchievementPopupActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
                             }
 
                         }

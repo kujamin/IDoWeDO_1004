@@ -178,8 +178,7 @@ public class ClickTransActivity extends AppCompatActivity {
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").setValue(value);
                         if(value == 1)
                         {
-                            Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
-                        }
+                            startActivity(new Intent(ClickTransActivity.this, AchievementPopupActivity.class));                        }
                     }
 
                     @Override

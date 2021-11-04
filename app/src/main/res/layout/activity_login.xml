@@ -52,6 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="#fff"
+            android:textCursorDrawable="@null"
+            android:textColor="#ff6000"
             android:hint="비밀번호"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,6 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="#fff"
+            android:textColor="#ff6000"
+            android:textCursorDrawable="@null"
             android:hint="이메일"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>

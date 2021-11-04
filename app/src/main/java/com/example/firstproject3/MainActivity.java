@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }//onComplete
                 });
 
-                //챌린지 시작 30일 경과 시
+                /*//챌린지 시작 30일 경과 시
 //                firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
 //                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //                        @Override
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             }//if
                         }//onComplete
-                    });
+                    });*/
                 }
 
 

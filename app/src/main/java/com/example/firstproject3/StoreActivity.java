@@ -1,5 +1,6 @@
 package com.example.firstproject3;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -55,6 +56,9 @@ public class StoreActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String userCode;
+
+    TextView tv_popup, tv_Item1, tv_Item2, tv_Item3, tv_Item4, tv_Item5, tv_Item6, tv_Item7, tv_Item8, tv_Item9, tv_Item10, tv_Item11, tv_Item12, tv_Item13, tv_Item14, tv_Item15, tv_Item16, tv_Item17, tv_Item18, tv_Item19, tv_Item20, tv_Item21, tv_Item22, tv_Item23, tv_Item24, tv_Item25, tv_Item26, tv_Item27, tv_Item28, tv_Item29;
+    String tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvItem7, tvItem8, tvItem9, tvItem10, tvItem11, tvItem12, tvItem13, tvItem14, tvItem15, tvItem16, tvItem17, tvItem18, tvItem19, tvItem20, tvItem21, tvItem22, tvItem23, tvItem24, tvItem25, tvItem26, tvItem27, tvItem28, tvItem29;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +141,38 @@ public class StoreActivity extends AppCompatActivity {
         LinearLayout itemLayout28 = findViewById(R.id.item28);
         LinearLayout itemLayout29 = findViewById(R.id.item29);
 
+        tv_popup = findViewById(R.id.textview_popup);
+        tv_Item1 = findViewById(R.id.tv_item1);
+        tv_Item2 = findViewById(R.id.tv_item2);
+        tv_Item3 = findViewById(R.id.tv_item3);
+        tv_Item4 = findViewById(R.id.tv_item4);
+        tv_Item5 = findViewById(R.id.tv_item5);
+        tv_Item6 = findViewById(R.id.tv_item6);
+        tv_Item7 = findViewById(R.id.tv_item7);
+        tv_Item8 = findViewById(R.id.tv_item8);
+        tv_Item9 = findViewById(R.id.tv_item9);
+        tv_Item10 = findViewById(R.id.tv_item10);
+        tv_Item11 = findViewById(R.id.tv_item11);
+        tv_Item12 = findViewById(R.id.tv_item12);
+        tv_Item13 = findViewById(R.id.tv_item13);
+        tv_Item14 = findViewById(R.id.tv_item14);
+        tv_Item15 = findViewById(R.id.tv_item15);
+        tv_Item16 = findViewById(R.id.tv_item16);
+        tv_Item17 = findViewById(R.id.tv_item17);
+        tv_Item18 = findViewById(R.id.tv_item18);
+        tv_Item19 = findViewById(R.id.tv_item19);
+        tv_Item20 = findViewById(R.id.tv_item20);
+        tv_Item21 = findViewById(R.id.tv_item21);
+        tv_Item22 = findViewById(R.id.tv_item22);
+        tv_Item23 = findViewById(R.id.tv_item23);
+        tv_Item24 = findViewById(R.id.tv_item24);
+        tv_Item25 = findViewById(R.id.tv_item25);
+        tv_Item26 = findViewById(R.id.tv_item26);
+        tv_Item27 = findViewById(R.id.tv_item27);
+        tv_Item28 = findViewById(R.id.tv_item28);
+        tv_Item29 = findViewById(R.id.tv_item29);
+
+
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -149,7 +185,7 @@ public class StoreActivity extends AppCompatActivity {
                 documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             DocumentSnapshot doc = task.getResult();
                             myCoin = Integer.parseInt(doc.getString("coin"));
                         }
@@ -158,7 +194,7 @@ public class StoreActivity extends AppCompatActivity {
 
                 firebaseFirestore.collection("user").document(userCode).collection("user character")
                         .document("state").collection("store")
-                        .whereEqualTo("buy","O")
+                        .whereEqualTo("buy", "O")
                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -167,128 +203,128 @@ public class StoreActivity extends AppCompatActivity {
                                 String str = (String) document.getData().get("name");
                                 switch (str) {
                                     //1 basic
-                                    case "basic_torso_01" :
+                                    case "basic_torso_01":
                                         soldoutView1.setVisibility(View.VISIBLE);
                                         itemLayout1.setEnabled(false);
                                         break;
-                                    case "basic_leg_01" :
+                                    case "basic_leg_01":
                                         soldoutView2.setVisibility(View.VISIBLE);
                                         itemLayout2.setEnabled(false);
                                         break;
                                     //2 business
-                                    case "business_head_01" :
+                                    case "business_head_01":
                                         soldoutView3.setVisibility(View.VISIBLE);
                                         itemLayout3.setEnabled(false);
                                         break;
-                                    case "business_torso_01" :
+                                    case "business_torso_01":
                                         soldoutView4.setVisibility(View.VISIBLE);
                                         itemLayout4.setEnabled(false);
                                         break;
-                                    case "business_leg_01" :
+                                    case "business_leg_01":
                                         soldoutView5.setVisibility(View.VISIBLE);
                                         itemLayout5.setEnabled(false);
                                         break;
                                     //3 formal
-                                    case "formal_head_01" :
+                                    case "formal_head_01":
                                         soldoutView6.setVisibility(View.VISIBLE);
                                         itemLayout6.setEnabled(false);
                                         break;
-                                    case "formal_torso_01" :
+                                    case "formal_torso_01":
                                         soldoutView7.setVisibility(View.VISIBLE);
                                         itemLayout7.setEnabled(false);
                                         break;
-                                    case "formal_leg_01" :
+                                    case "formal_leg_01":
                                         soldoutView8.setVisibility(View.VISIBLE);
                                         itemLayout8.setEnabled(false);
                                         break;
                                     //4 hood
-                                    case "hood_torso_01" :
+                                    case "hood_torso_01":
                                         soldoutView9.setVisibility(View.VISIBLE);
                                         itemLayout9.setEnabled(false);
                                         break;
-                                    case "hood_leg_01" :
+                                    case "hood_leg_01":
                                         soldoutView10.setVisibility(View.VISIBLE);
                                         itemLayout10.setEnabled(false);
                                         break;
                                     //5 knight
-                                    case "knight_head_01" :
+                                    case "knight_head_01":
                                         soldoutView11.setVisibility(View.VISIBLE);
                                         itemLayout11.setEnabled(false);
                                         break;
-                                    case "knight_torso_01" :
+                                    case "knight_torso_01":
                                         soldoutView12.setVisibility(View.VISIBLE);
                                         itemLayout12.setEnabled(false);
                                         break;
-                                    case "knight_leg_01" :
+                                    case "knight_leg_01":
                                         soldoutView13.setVisibility(View.VISIBLE);
                                         itemLayout13.setEnabled(false);
                                         break;
                                     //6 magician
-                                    case "magician_head_01" :
+                                    case "magician_head_01":
                                         soldoutView14.setVisibility(View.VISIBLE);
                                         itemLayout14.setEnabled(false);
                                         break;
-                                    case "magician_torso_01" :
+                                    case "magician_torso_01":
                                         soldoutView15.setVisibility(View.VISIBLE);
                                         itemLayout15.setEnabled(false);
                                         break;
-                                    case "magician_leg_01" :
+                                    case "magician_leg_01":
                                         soldoutView16.setVisibility(View.VISIBLE);
                                         itemLayout16.setEnabled(false);
                                         break;
                                     //7 rogue
-                                    case "rogue_head_01" :
+                                    case "rogue_head_01":
                                         soldoutView17.setVisibility(View.VISIBLE);
                                         itemLayout17.setEnabled(false);
                                         break;
-                                    case "rogue_torso_01" :
+                                    case "rogue_torso_01":
                                         soldoutView18.setVisibility(View.VISIBLE);
                                         itemLayout18.setEnabled(false);
                                         break;
-                                    case "rogue_leg_01" :
+                                    case "rogue_leg_01":
                                         soldoutView19.setVisibility(View.VISIBLE);
                                         itemLayout19.setEnabled(false);
                                         break;
                                     //7 alien1
-                                    case "alien_head_01" :
+                                    case "alien_head_01":
                                         soldoutView20.setVisibility(View.VISIBLE);
                                         itemLayout20.setEnabled(false);
                                         break;
-                                    case "alien_torso_01" :
+                                    case "alien_torso_01":
                                         soldoutView21.setVisibility(View.VISIBLE);
                                         itemLayout21.setEnabled(false);
                                         break;
-                                    case "alien_leg_01" :
+                                    case "alien_leg_01":
                                         soldoutView22.setVisibility(View.VISIBLE);
                                         itemLayout22.setEnabled(false);
                                         break;
                                     //8 alien2
-                                    case "alien_head_02" :
+                                    case "alien_head_02":
                                         soldoutView23.setVisibility(View.VISIBLE);
                                         itemLayout23.setEnabled(false);
                                         break;
-                                    case "alien_torso_02" :
+                                    case "alien_torso_02":
                                         soldoutView24.setVisibility(View.VISIBLE);
                                         itemLayout24.setEnabled(false);
                                         break;
-                                    case "alien_leg_02" :
+                                    case "alien_leg_02":
                                         soldoutView25.setVisibility(View.VISIBLE);
                                         itemLayout25.setEnabled(false);
                                         break;
                                     //9 hand 4개
-                                    case "book_hand_01" :
+                                    case "book_hand_01":
                                         soldoutView26.setVisibility(View.VISIBLE);
                                         itemLayout26.setEnabled(false);
                                         break;
-                                    case "claw_hand_01" :
+                                    case "claw_hand_01":
                                         soldoutView27.setVisibility(View.VISIBLE);
                                         itemLayout27.setEnabled(false);
                                         break;
-                                    case "knife_hand_01" :
+                                    case "knife_hand_01":
                                         soldoutView28.setVisibility(View.VISIBLE);
                                         itemLayout28.setEnabled(false);
                                         break;
-                                    case "staff_hand_01" :
+                                    case "staff_hand_01":
                                         soldoutView29.setVisibility(View.VISIBLE);
                                         itemLayout29.setEnabled(false);
                                         break;
@@ -301,6 +337,7 @@ public class StoreActivity extends AppCompatActivity {
                     }
                 });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -315,6 +352,154 @@ public class StoreActivity extends AppCompatActivity {
                 itemId = v.getId();
                 darkView.setVisibility(View.VISIBLE);
                 popupStore.setVisibility(View.VISIBLE);
+                switch (itemId) {
+                    case R.id.item1:
+                        tvItem1 = tv_Item1.getText().toString();
+                        tv_popup.setText("'" + tvItem1 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item2:
+                        tvItem2 = tv_Item2.getText().toString();
+                        tv_popup.setText("'" + tvItem2 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item3:
+                        tvItem3 = tv_Item3.getText().toString();
+                        tv_popup.setText("'" + tvItem3 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item4:
+                        tvItem4 = tv_Item4.getText().toString();
+                        tv_popup.setText("'" + tvItem4 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item5:
+                        tvItem5 = tv_Item5.getText().toString();
+                        tv_popup.setText("'" + tvItem5 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item6:
+                        tvItem6 = tv_Item6.getText().toString();
+                        tv_popup.setText("'" + tvItem6 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item7:
+                        tvItem7 = tv_Item7.getText().toString();
+                        tv_popup.setText("'" + tvItem7 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item8:
+                        tvItem8 = tv_Item8.getText().toString();
+                        tv_popup.setText("'" + tvItem8 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item9:
+                        tvItem9 = tv_Item9.getText().toString();
+                        tv_popup.setText("'" + tvItem9 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item10:
+                        tvItem10 = tv_Item10.getText().toString();
+                        tv_popup.setText("'" + tvItem10 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item11:
+                        tvItem11 = tv_Item11.getText().toString();
+                        tv_popup.setText("'" + tvItem11 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item12:
+                        tvItem12 = tv_Item12.getText().toString();
+                        tv_popup.setText("'" + tvItem12 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item13:
+                        tvItem13 = tv_Item13.getText().toString();
+                        tv_popup.setText("'" + tvItem13 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item14:
+                        tvItem14 = tv_Item14.getText().toString();
+                        tv_popup.setText("'" + tvItem14 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item15:
+                        tvItem15 = tv_Item15.getText().toString();
+                        tv_popup.setText("'" + tvItem15 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item16:
+                        tvItem16 = tv_Item16.getText().toString();
+                        tv_popup.setText("'" + tvItem16 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item17:
+                        tvItem17 = tv_Item17.getText().toString();
+                        tv_popup.setText("'" + tvItem17 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item18:
+                        tvItem18 = tv_Item18.getText().toString();
+                        tv_popup.setText("'" + tvItem18 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item19:
+                        tvItem19 = tv_Item19.getText().toString();
+                        tv_popup.setText("'" + tvItem19 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item20:
+                        tvItem20 = tv_Item20.getText().toString();
+                        tv_popup.setText("'" + tvItem20 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item21:
+                        tvItem21 = tv_Item21.getText().toString();
+                        tv_popup.setText("'" + tvItem21 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item22:
+                        tvItem22 = tv_Item22.getText().toString();
+                        tv_popup.setText("'" + tvItem22 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item23:
+                        tvItem23 = tv_Item23.getText().toString();
+                        tv_popup.setText("'" + tvItem23 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item24:
+                        tvItem24 = tv_Item24.getText().toString();
+                        tv_popup.setText("'" + tvItem24 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item25:
+                        tvItem25 = tv_Item25.getText().toString();
+                        tv_popup.setText("'" + tvItem25 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item26:
+                        tvItem26 = tv_Item26.getText().toString();
+                        tv_popup.setText("'" + tvItem26 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item27:
+                        tvItem27 = tv_Item27.getText().toString();
+                        tv_popup.setText("'" + tvItem27 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item28:
+                        tvItem28 = tv_Item28.getText().toString();
+                        tv_popup.setText("'" + tvItem28 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+                    case R.id.item29:
+                        tvItem29 = tv_Item29.getText().toString();
+                        tv_popup.setText("'" + tvItem29 + "'" + " 을 구매하시겠습니까??");
+
+                        break;
+
+                }
 
             }
         };
@@ -410,7 +595,6 @@ public class StoreActivity extends AppCompatActivity {
         strCoin29 = Integer.parseInt(textCoin29.getText().toString());
 
 
-
         //팝업창에서 '예' 클릭 시 화면 닫힘 & SOLD OUT
         textYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -420,7 +604,7 @@ public class StoreActivity extends AppCompatActivity {
 
                 switch (itemId) {
                     //c1
-                    case R.id.item1 :
+                    case R.id.item1:
                         soldoutView1.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -433,7 +617,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -443,9 +627,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -460,11 +643,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin1));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin1));
 
                         break;
-                    case R.id.item2 :
+                    case R.id.item2:
                         soldoutView2.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -477,7 +660,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -487,9 +670,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -503,12 +685,12 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin2));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin2));
 
                         break;
-                        //c2
-                    case R.id.item3 :
+                    //c2
+                    case R.id.item3:
                         soldoutView3.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -521,7 +703,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -531,9 +713,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -547,11 +728,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin3));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin3));
 
                         break;
-                    case R.id.item4 :
+                    case R.id.item4:
                         soldoutView4.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -564,7 +745,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -574,9 +755,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -590,10 +770,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin4));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin4));
                         break;
-                    case R.id.item5 :
+                    case R.id.item5:
                         soldoutView5.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -606,7 +786,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -616,9 +796,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -632,12 +811,12 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin5));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin5));
 
                         break;
-                        //c3
-                    case R.id.item6 :
+                    //c3
+                    case R.id.item6:
                         soldoutView6.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -650,7 +829,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -660,9 +839,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -676,10 +854,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin6));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin6));
                         break;
-                    case R.id.item7 :
+                    case R.id.item7:
                         soldoutView7.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -692,7 +870,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -702,9 +880,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -718,10 +895,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin7));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin7));
                         break;
-                    case R.id.item8 :
+                    case R.id.item8:
                         soldoutView8.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -734,7 +911,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -744,9 +921,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -760,11 +936,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin8));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin8));
                         break;
-                        //c4
-                    case R.id.item9 :
+                    //c4
+                    case R.id.item9:
                         soldoutView9.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -777,7 +953,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -787,9 +963,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -803,10 +978,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin9));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin9));
                         break;
-                    case R.id.item10 :
+                    case R.id.item10:
                         soldoutView10.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -819,7 +994,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -829,9 +1004,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -845,11 +1019,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin10));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin10));
                         break;
-                        //c5
-                    case R.id.item11 :
+                    //c5
+                    case R.id.item11:
                         soldoutView11.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -862,7 +1036,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -872,9 +1046,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -888,10 +1061,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin11));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin11));
                         break;
-                    case R.id.item12 :
+                    case R.id.item12:
                         soldoutView12.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -904,7 +1077,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -914,9 +1087,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -930,10 +1102,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin12));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin12));
                         break;
-                    case R.id.item13 :
+                    case R.id.item13:
                         soldoutView13.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -946,7 +1118,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -956,9 +1128,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -972,11 +1143,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin13));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin13));
                         break;
-                        //c6
-                    case R.id.item14 :
+                    //c6
+                    case R.id.item14:
                         soldoutView14.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -989,7 +1160,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -999,9 +1170,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1015,10 +1185,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin14));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin14));
                         break;
-                    case R.id.item15 :
+                    case R.id.item15:
                         soldoutView15.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1031,7 +1201,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1041,9 +1211,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1057,10 +1226,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin15));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin15));
                         break;
-                    case R.id.item16 :
+                    case R.id.item16:
                         soldoutView16.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1073,7 +1242,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1083,9 +1252,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1099,11 +1267,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin16));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin16));
                         break;
-                        //c7
-                    case R.id.item17 :
+                    //c7
+                    case R.id.item17:
                         soldoutView17.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1116,7 +1284,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1126,9 +1294,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1142,10 +1309,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin17));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin17));
                         break;
-                    case R.id.item18 :
+                    case R.id.item18:
                         soldoutView18.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1158,7 +1325,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1168,9 +1335,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1184,10 +1350,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin18));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin18));
                         break;
-                    case R.id.item19 :
+                    case R.id.item19:
                         soldoutView19.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1200,7 +1366,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1210,9 +1376,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1226,11 +1391,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin19));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin19));
                         break;
                     //c8
-                    case R.id.item20 :
+                    case R.id.item20:
                         soldoutView20.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1243,7 +1408,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1253,9 +1418,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1269,10 +1433,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin20));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin20));
                         break;
-                    case R.id.item21 :
+                    case R.id.item21:
                         soldoutView21.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1285,7 +1449,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1295,9 +1459,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1311,10 +1474,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin21));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin21));
                         break;
-                    case R.id.item22 :
+                    case R.id.item22:
                         soldoutView22.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1327,7 +1490,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1337,9 +1500,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1353,11 +1515,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin22));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin22));
                         break;
                     //c9
-                    case R.id.item23 :
+                    case R.id.item23:
                         soldoutView23.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1370,7 +1532,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1380,9 +1542,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1396,10 +1557,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin23));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin23));
                         break;
-                    case R.id.item24 :
+                    case R.id.item24:
                         soldoutView24.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1412,7 +1573,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1422,9 +1583,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1438,10 +1598,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin24));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin24));
                         break;
-                    case R.id.item25 :
+                    case R.id.item25:
                         soldoutView25.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1454,7 +1614,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1464,9 +1624,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1480,11 +1639,11 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin25));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin25));
                         break;
                     //c10~c13
-                    case R.id.item26 :
+                    case R.id.item26:
                         soldoutView26.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1497,7 +1656,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1507,9 +1666,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1523,10 +1681,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin26));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin26));
                         break;
-                    case R.id.item27 :
+                    case R.id.item27:
                         soldoutView27.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1539,7 +1697,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1549,9 +1707,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1565,10 +1722,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin27));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin27));
                         break;
-                    case R.id.item28 :
+                    case R.id.item28:
                         soldoutView28.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1581,7 +1738,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1591,9 +1748,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1607,10 +1763,10 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin28));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin28));
                         break;
-                    case R.id.item29 :
+                    case R.id.item29:
                         soldoutView29.setVisibility(View.VISIBLE);
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1623,7 +1779,7 @@ public class StoreActivity extends AppCompatActivity {
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
 
@@ -1633,9 +1789,8 @@ public class StoreActivity extends AppCompatActivity {
                                             int value = snapshot.getValue(Integer.class);
                                             value += 1;
                                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if(value == 5 || value == 29)
-                                            {
-                                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
+                                            if (value == 5 || value == 29) {
+                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
                                             }
 
                                         }
@@ -1649,8 +1804,8 @@ public class StoreActivity extends AppCompatActivity {
                             }
                         });
 
-                        documentReference.update("buy","O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin-strCoin29));
+                        documentReference.update("buy", "O");
+                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin29));
                         break;
                 }
             }
@@ -1668,8 +1823,8 @@ public class StoreActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+        switch (item.getItemId()) {
+            case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
                 finish();
                 return true;
             }

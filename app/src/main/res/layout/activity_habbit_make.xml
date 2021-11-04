@@ -145,6 +145,7 @@
                         android:ems="10"
                         android:layout_marginRight="10dp"
                         android:hint="메모를 입력하세요."
+                        android:textColor="#000"
                         android:inputType="textPersonName"
                         android:textSize="14dp" />
                 </LinearLayout>

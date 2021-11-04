@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.firstproject3.AchievementPopupActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.R;
+import com.example.firstproject3.StoreActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -181,8 +183,7 @@ public class Attendance_CheckActivity extends Activity {
                         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").setValue(value);
                         if(value == 30 || value == 100)
                         {
-                            Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요",Toast.LENGTH_SHORT).show();
-                        }
+                            startActivity(new Intent(Attendance_CheckActivity.this, AchievementPopupActivity.class));                        }
 
                     }
 
