@@ -26,6 +26,8 @@
             android:layout_marginStart="16dp"
             android:background="#fff"
             android:ems="12"
+            android:textCursorDrawable="@null"
+            android:textColor="#4A4846"
             android:hint="닉네임을 입력하세요."
             android:inputType="textPersonName"
             android:fontFamily="@font/nanumbarunpenr"

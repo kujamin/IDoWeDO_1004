@@ -67,6 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="#fff"
+                android:textCursorDrawable="@null"
+                android:textColor="#4A4846"
                 android:hint="이름"
                 android:fontFamily="@font/nanumbarunpenb"
                 android:inputType="textEmailAddress" />
@@ -88,6 +90,8 @@
                 android:layout_marginStart="16dp"
                 android:background="#fff"
                 android:hint="이메일"
+                android:textCursorDrawable="@null"
+                android:textColor="#4A4846"
                 android:fontFamily="@font/nanumbarunpenb"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -107,6 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="#fff"
+                android:textCursorDrawable="@null"
+                android:textColor="#4A4846"
                 android:hint="비밀번호"
                 android:fontFamily="@font/nanumbarunpenb"
                 android:inputType="textPassword" />
@@ -127,6 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="#fff"
+                android:textCursorDrawable="@null"
+                android:textColor="#4A4846"
                 android:hint="비밀번호 확인"
                 android:fontFamily="@font/nanumbarunpenb"
                 android:inputType="textPassword" />

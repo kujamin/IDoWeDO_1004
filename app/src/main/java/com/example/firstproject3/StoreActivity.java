@@ -602,15 +602,10 @@ public class StoreActivity extends AppCompatActivity {
                 darkView.setVisibility(View.INVISIBLE);
                 popupStore.setVisibility(View.INVISIBLE);
 
-                switch (itemId) {
-                    //c1
-                    case R.id.item1:
-                        soldoutView1.setVisibility(View.VISIBLE);
 
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c1_torse");
-
+                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
@@ -620,1194 +615,1229 @@ public class StoreActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
+                                    if(myCoin >= 100) {
+                                        switch (itemId) {
+                                            //c1
+                                            case R.id.item1:
+                                                soldoutView1.setVisibility(View.VISIBLE);
 
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c1_torse");
 
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin1));
+
+                                                break;
+                                            case R.id.item2:
+                                                soldoutView2.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c1_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin2));
+
+                                                break;
+                                            //c2
+                                            case R.id.item3:
+                                                soldoutView3.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c2_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin3));
+
+                                                break;
+                                            case R.id.item4:
+                                                soldoutView4.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c2_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin4));
+                                                break;
+                                            case R.id.item5:
+                                                soldoutView5.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c2_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin5));
+
+                                                break;
+                                            //c3
+                                            case R.id.item6:
+                                                soldoutView6.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c3_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin6));
+                                                break;
+                                            case R.id.item7:
+                                                soldoutView7.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c3_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin7));
+                                                break;
+                                            case R.id.item8:
+                                                soldoutView8.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c3_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin8));
+                                                break;
+                                            //c4
+                                            case R.id.item9:
+                                                soldoutView9.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c4_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin9));
+                                                break;
+                                            case R.id.item10:
+                                                soldoutView10.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c4_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin10));
+                                                break;
+                                            //c5
+                                            case R.id.item11:
+                                                soldoutView11.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c5_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin11));
+                                                break;
+                                            case R.id.item12:
+                                                soldoutView12.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c5_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin12));
+                                                break;
+                                            case R.id.item13:
+                                                soldoutView13.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c5_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin13));
+                                                break;
+                                            //c6
+                                            case R.id.item14:
+                                                soldoutView14.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c6_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin14));
+                                                break;
+                                            case R.id.item15:
+                                                soldoutView15.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c6_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin15));
+                                                break;
+                                            case R.id.item16:
+                                                soldoutView16.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c6_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin16));
+                                                break;
+                                            //c7
+                                            case R.id.item17:
+                                                soldoutView17.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c7_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin17));
+                                                break;
+                                            case R.id.item18:
+                                                soldoutView18.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c7_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin18));
+                                                break;
+                                            case R.id.item19:
+                                                soldoutView19.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c7_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin19));
+                                                break;
+                                            //c8
+                                            case R.id.item20:
+                                                soldoutView20.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c8_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin20));
+                                                break;
+                                            case R.id.item21:
+                                                soldoutView21.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c8_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin21));
+                                                break;
+                                            case R.id.item22:
+                                                soldoutView22.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c8_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin22));
+                                                break;
+                                            //c9
+                                            case R.id.item23:
+                                                soldoutView23.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c9_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin23));
+                                                break;
+                                            case R.id.item24:
+                                                soldoutView24.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c9_torso");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin24));
+                                                break;
+                                            case R.id.item25:
+                                                soldoutView25.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c9_leg");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin25));
+                                                break;
+                                            //c10~c13
+                                            case R.id.item26:
+                                                soldoutView26.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c10_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin26));
+                                                break;
+                                            case R.id.item27:
+                                                soldoutView27.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c11_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin27));
+                                                break;
+                                            case R.id.item28:
+                                                soldoutView28.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c12_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin28));
+                                                break;
+                                            case R.id.item29:
+                                                soldoutView29.setVisibility(View.VISIBLE);
+
+                                                firebaseFirestore = FirebaseFirestore.getInstance();
+                                                documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state").collection("store").document("c13_head");
+
+                                                documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
+                                                        .document("state");
+
+                                                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            DocumentSnapshot doc = task.getResult();
+                                                            myCoin = Integer.parseInt(doc.getString("coin"));
+
+                                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    int value = snapshot.getValue(Integer.class);
+                                                                    value += 1;
+                                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
+                                                                    if (value == 5 || value == 29) {
+                                                                        startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+                                                documentReference.update("buy", "O");
+                                                documentReferenceC.update("coin", String.valueOf(myCoin - strCoin29));
+                                                break;
                                         }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
+                                    }
+                                    else {
+                                        Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                    }
 
                                 }
                             }
                         });
+                    }
 
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin1));
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        break;
-                    case R.id.item2:
-                        soldoutView2.setVisibility(View.VISIBLE);
+                    }
+                });
 
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c1_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin2));
-
-                        break;
-                    //c2
-                    case R.id.item3:
-                        soldoutView3.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c2_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin3));
-
-                        break;
-                    case R.id.item4:
-                        soldoutView4.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c2_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin4));
-                        break;
-                    case R.id.item5:
-                        soldoutView5.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c2_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin5));
-
-                        break;
-                    //c3
-                    case R.id.item6:
-                        soldoutView6.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c3_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin6));
-                        break;
-                    case R.id.item7:
-                        soldoutView7.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c3_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin7));
-                        break;
-                    case R.id.item8:
-                        soldoutView8.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c3_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin8));
-                        break;
-                    //c4
-                    case R.id.item9:
-                        soldoutView9.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c4_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin9));
-                        break;
-                    case R.id.item10:
-                        soldoutView10.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c4_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin10));
-                        break;
-                    //c5
-                    case R.id.item11:
-                        soldoutView11.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c5_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin11));
-                        break;
-                    case R.id.item12:
-                        soldoutView12.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c5_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin12));
-                        break;
-                    case R.id.item13:
-                        soldoutView13.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c5_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin13));
-                        break;
-                    //c6
-                    case R.id.item14:
-                        soldoutView14.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c6_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin14));
-                        break;
-                    case R.id.item15:
-                        soldoutView15.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c6_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin15));
-                        break;
-                    case R.id.item16:
-                        soldoutView16.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c6_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin16));
-                        break;
-                    //c7
-                    case R.id.item17:
-                        soldoutView17.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c7_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin17));
-                        break;
-                    case R.id.item18:
-                        soldoutView18.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c7_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin18));
-                        break;
-                    case R.id.item19:
-                        soldoutView19.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c7_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin19));
-                        break;
-                    //c8
-                    case R.id.item20:
-                        soldoutView20.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c8_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin20));
-                        break;
-                    case R.id.item21:
-                        soldoutView21.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c8_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin21));
-                        break;
-                    case R.id.item22:
-                        soldoutView22.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c8_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin22));
-                        break;
-                    //c9
-                    case R.id.item23:
-                        soldoutView23.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c9_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin23));
-                        break;
-                    case R.id.item24:
-                        soldoutView24.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c9_torso");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin24));
-                        break;
-                    case R.id.item25:
-                        soldoutView25.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c9_leg");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin25));
-                        break;
-                    //c10~c13
-                    case R.id.item26:
-                        soldoutView26.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c10_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin26));
-                        break;
-                    case R.id.item27:
-                        soldoutView27.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c11_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin27));
-                        break;
-                    case R.id.item28:
-                        soldoutView28.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c12_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin28));
-                        break;
-                    case R.id.item29:
-                        soldoutView29.setVisibility(View.VISIBLE);
-
-                        firebaseFirestore = FirebaseFirestore.getInstance();
-                        documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("store").document("c13_head");
-
-                        documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state");
-
-                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot doc = task.getResult();
-                                    myCoin = Integer.parseInt(doc.getString("coin"));
-
-                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            int value = snapshot.getValue(Integer.class);
-                                            value += 1;
-                                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").setValue(value);
-                                            if (value == 5 || value == 29) {
-                                                startActivity(new Intent(StoreActivity.this, AchievementPopupActivity.class));
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        documentReference.update("buy", "O");
-                        documentReferenceC.update("coin", String.valueOf(myCoin - strCoin29));
-                        break;
-                }
             }
         });
 
@@ -1829,6 +1859,6 @@ public class StoreActivity extends AppCompatActivity {
                 return true;
             }
         }
-        return super.onOptionsItemSelected(item);
+        return onOptionsItemSelected(item);
     }
 }

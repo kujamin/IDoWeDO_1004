@@ -19,8 +19,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.firstproject3.AchieveActivity;
+import com.example.firstproject3.AchievementPopupActivity;
+import com.example.firstproject3.AtCheck.Attendance_CheckActivity;
 import com.example.firstproject3.DecoActivity;
 
+import com.example.firstproject3.LevelupActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.NickPopup;
 import com.example.firstproject3.R;
@@ -39,6 +42,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.util.logging.Level;
 
 public class Fragment_Character extends Fragment {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
@@ -126,10 +131,10 @@ public class Fragment_Character extends Fragment {
                                         maxExp += 10;
                                         documentReference.update("maxExp",maxExp+"");
                                         documentReference.update("level",level+"");
-                                        documentReference.update("coin",String.valueOf(coin+100));
+                                        documentReference.update("coin",String.valueOf(coin+20));
                                         documentReference.update("heart","5");
                                         documentReference.update("exp",currentExp+"");
-                                        Toast.makeText(rootView.getContext(),"레벨업!",Toast.LENGTH_SHORT).show();
+                                        getActivity().startActivity(new Intent(getActivity(), LevelupActivity.class));
                                     }
 
                                     if(heart <= 0){
