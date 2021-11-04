@@ -251,30 +251,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
                 //챌린지 시작 30일 경과 시
-                firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
-                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                startDate = document.getString("chall_StartDate");
-                                endDate = document.getString("chall_EndDate");
-
-                                String[] time = endDate.split("-");
-                                int year = Integer.parseInt(time[0]);
-                                int month = Integer.parseInt(time[1]);
-                                int dayy = Integer.parseInt(time[2]);
-
-                                calendarEnd = Calendar.getInstance();
-                                calendarEnd.setTimeInMillis(System.currentTimeMillis());
-                                calendarEnd.set(year, month, dayy);
-                                calendarEnd.add(Calendar.DATE, 1);
-
-                                Toast.makeText(getApplicationContext(), String.valueOf(calendarEnd) , Toast.LENGTH_LONG).show();
-
-                            }
-                        }
-                    });
+//                firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
+//                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                            if(task.isSuccessful()) {
+//                                DocumentSnapshot document = task.getResult();
+//                                startDate = document.getString("chall_StartDate");
+//                                endDate = document.getString("chall_EndDate");
+//
+//                                String[] time = endDate.split("-");
+//                                int year = Integer.parseInt(time[0]);
+//                                int month = Integer.parseInt(time[1]);
+//                                int dayy = Integer.parseInt(time[2]);
+//
+//                                calendarEnd = Calendar.getInstance();
+//                                calendarEnd.setTimeInMillis(System.currentTimeMillis());
+//                                calendarEnd.set(year, month, dayy);
+//                                calendarEnd.add(Calendar.DATE, 1);
+//
+//                                Toast.makeText(getApplicationContext(), String.valueOf(calendarEnd) , Toast.LENGTH_LONG).show();
+//
+//                            }
+//                        }
+//                    });
 
                     firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                             .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
