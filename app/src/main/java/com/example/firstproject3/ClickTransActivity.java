@@ -242,7 +242,6 @@ public class ClickTransActivity extends AppCompatActivity {
                         });
 
                 startActivity(new Intent(ClickTransActivity.this, PopupActivity.class));
-                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
 
                 textChallAttend.setText("참가 중...");
             }

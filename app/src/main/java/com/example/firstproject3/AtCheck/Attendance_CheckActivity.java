@@ -95,6 +95,8 @@ public class Attendance_CheckActivity extends Activity {
                 new SundayDecorator(),
                 new SaturdayDecorator());
 
+        String[] result = {"2021,11,02","2021,11,03","2021,11,05","2021,11,06"};
+
         //usercode 얻어오기
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -127,18 +129,19 @@ public class Attendance_CheckActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
-                            dateqd = new String[sumCount];
-                            Toast.makeText(getApplicationContext(), sumCount+"", Toast.LENGTH_SHORT).show();
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                datee = document.getString("checkDate");//체크된 날짜 얻어옴
-
-                                if(datee != null) {
-                                    dateqd[i] = datee;
-                                    i++;
-                                }
-                            }
-                            new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
+//                            dateqd = new String[sumCount];
+//                            Toast.makeText(getApplicationContext(), sumCount+"", Toast.LENGTH_SHORT).show();
+//
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                datee = document.getString("checkDate");//체크된 날짜 얻어옴
+//
+//                                if(datee != null) {
+//                                    dateqd[i] = datee;
+//                                    i++;
+//                                }
+//                                Toast.makeText(getApplicationContext(), datee, Toast.LENGTH_SHORT).show();
+//                            }
+                            new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
 
 //                            if(attenBtn.isSelected()){
 //                                attenBtn.setEnabled(false); //버튼 비활성화

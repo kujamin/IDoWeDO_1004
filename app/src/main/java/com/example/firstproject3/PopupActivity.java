@@ -49,7 +49,6 @@ public class PopupActivity extends Activity {
         setResult(RESULT_OK, intent);
 
         finish();
-        overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_top);
     }
 
     @Override

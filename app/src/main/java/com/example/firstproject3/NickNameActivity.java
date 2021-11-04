@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.firstproject3.Login.ProgressDialog;
 import com.example.firstproject3.Login.RegisterActivity;
 import com.example.firstproject3.Login.UserAccount;
 import com.firebase.ui.auth.data.model.User;
@@ -37,6 +39,7 @@ public class NickNameActivity extends AppCompatActivity {
     private DatabaseReference mDatabase; //실시간 데이터베이스
     private DocumentReference documentReferenceC;
     private String userCode;
+    ProgressDialog customProgressDialog;
 
     EditText editNickName;
     TextView textNickError, textgogo;
@@ -55,6 +58,11 @@ public class NickNameActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         createGUI();
+
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         editNickName = (EditText) findViewById(R.id.editNickName);
         textNickError = (TextView) findViewById(R.id.textNickError);
@@ -105,10 +113,14 @@ public class NickNameActivity extends AppCompatActivity {
                     imageNickArrow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            customProgressDialog.show();
+                            customProgressDialog.setCancelable(false);
+
                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Toast.makeText(getApplicationContext(), "닉네임 설정 완료!", Toast.LENGTH_SHORT).show();
+                                    customProgressDialog.dismiss();
+
                                     mDatabase.child("UserAccount").child(firebaseUser.getUid()).child("nickname").setValue(editNickName.getText().toString());
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
