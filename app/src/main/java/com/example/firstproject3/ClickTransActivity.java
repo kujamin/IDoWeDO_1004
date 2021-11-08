@@ -72,6 +72,7 @@ public class ClickTransActivity extends AppCompatActivity {
     }
     private Calendar calendar;
     private int Eyear, Emonth, Edayy;
+    private String string1 = "참가 중...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,8 @@ public class ClickTransActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         ImageView imgChall = findViewById(R.id.imageViewChall);
+        ImageView imageViewChall = findViewById(R.id.imageViewChall);
+
         TextView textChallname = findViewById(R.id.textViewChallname);
         TextView textChallplan = findViewById(R.id.textViewChallexplan);
         TextView textChallnotice = findViewById(R.id.textViewChallnotice);
@@ -117,7 +120,7 @@ public class ClickTransActivity extends AppCompatActivity {
                                         id = document.getString("challenge_id");
                                     }
                                     if (usercode.equals(id)) {
-                                        textChallAttend.setText("참가 중...");
+                                        textChallAttend.setText(string1);
                                         textChallAttend.setEnabled(false);
                                     } else {
                                         textChallAttend.setText("참가하기");
@@ -146,10 +149,28 @@ public class ClickTransActivity extends AppCompatActivity {
             textChallnotice.setText("보상 : 100코인 + 레어 의상(선택 O) 지급");
         }
         else {
-            textChallplan.setText("한 달 동안 매일 만보씩 걸어보세요!\n만보를 채운 후 미션 완료 버튼을 클릭해주세요.\n\n챌린지 기간 : 30일");
+            textChallplan.setText("한 달 동안 매일 만보씩 걸어보세요!\n만보를 채운 후 미션 완료 버튼을 클릭해주세요.\n첼린지 현황을 보려면 이미지를 클릭하세요!\n\n챌린지 기간 : 30일");
             textChallnotice.setText("보상 : 100코인 지급");
         }
         Glide.with(getApplicationContext()).load(chall_Img).into(imgChall);
+
+
+        imageViewChall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chall_Text.equals("자격증 취득하기")) {
+                    Intent intent = new Intent(ClickTransActivity.this, Challenge_Study_Activity.class);
+                    startActivity(intent);
+                } else if (chall_Text.equals("아침 6시 기상하기")) {
+                    Intent intent = new Intent(ClickTransActivity.this, Challenge_Wakeup_Activity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(ClickTransActivity.this, Challenge_CheckActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
 
         //코인 색상
         TextView textSendTonotice = findViewById(R.id.textViewChallnotice);
