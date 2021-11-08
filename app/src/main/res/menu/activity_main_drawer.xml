@@ -5,11 +5,11 @@
     >
 
 
-        <item
+        <!--<item
             android:id="@+id/test2"
             android:icon="@drawable/outline_home_black_24"
             android:title="홈" />
-
+-->
         <item
             android:id="@+id/noticeActivity"
             android:icon="@drawable/outline_campaign_black_24dp"

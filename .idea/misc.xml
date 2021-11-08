@@ -68,101 +68,44 @@
         <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/timer_listview.xml" value="0.213768115942029" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/FirstProject3/app/src/main/res/xml/setting_preference.xml" value="0.23233695652173914" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_achieve.xml" value="0.2085747392815759" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_achievement_popup.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.16983695652173914" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_click_trans.xml" value="0.24954710144927536" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm.xml" value="0.18840579710144928" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm2.xml" value="0.22192028985507245" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm3.xml" value="0.22192028985507245" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_daily_pop.xml" value="0.1" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_chall_succ_pop.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_deco.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_main.xml" value="0.16983695652173914" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_nick_name.xml" value="0.1" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_popup.xml" value="0.1" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_register.xml" value="0.2128623188405797" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_reward_chall.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_save.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_setting.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_splash.xml" value="0.20878623188405798" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_splash2.xml" value="0.12234042553191489" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_store.xml" value="0.2" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_store.xml" value="0.264" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/app_bar_main.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/challenge_item.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/content_main.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_challenge.xml" value="0.1716485507246377" />
-        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_character.xml" value="0.264" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_character.xml" value="0.24592391304347827" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_setting_preference.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/listview_item.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/nav_header_main.xml" value="0.20878623188405798" />
+        <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/timer_listview.xml" value="0.1" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/menu/activity_main_drawer.xml" value="0.2515625" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2515625" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/menu/main.xml" value="0.2515625" />
         <entry key="..\:/Users/Second/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/xml/setting_preference.xml" value="0.24592391304347827" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/attencheckdrawble.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/attendance_check.xml" value="0.1" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/bin_blue.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/buttons_layout.xml" value="0.19322916666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1685185185185185" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/moreday.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/popbackground_layout.xml" value="0.19322916666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/progress_bg.xml" value="0.17760416666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/progressbar_custom.xml" value="0.17760416666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/right_line.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/drawable/shape_charcterline.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/font/font.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_achieve.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_attendance_check.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_click_trans.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm2.xml" value="0.17708333333333334" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm3.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_daily_cal_list.xml" value="0.17708333333333334" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_daily_calendar.xml" value="0.11141304347826086" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_daily_pop.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_deco.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_delete_user.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_habbit_detail.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_habbit_make.xml" value="0.10507246376811594" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_logout_popup.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_main.xml" value="0.20186697782963828" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_nick_name.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_nick_popup.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_notice.xml" value="0.38596491228070173" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_popup.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_question_popup.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_register.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_save.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_splash.xml" value="0.12364130434782608" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_splash2.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_store.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_timer.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_todo_detail.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/challenge_item.xml" value="0.12364130434782608" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/content_main.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/dialog_progress.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_challenge.xml" value="0.12364130434782608" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_character.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_test.xml" value="0.12364130434782608" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_timer.xml" value="0.22" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_todo.xml" value="0.12364130434782608" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/layout.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/listview_item.xml" value="0.16145833333333334" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/loading_advance.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/loading_layout.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/nav_header_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/timer_listview.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/menu/activity_main_drawer.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_nick_name.xml" value="0.1" />
+        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_register.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_character.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/0923/app/src/main/res/drawable/bin_blue.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/0923/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.1546875" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/0923/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/FirstProject3/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_achieve.xml" value="0.1" />
-        <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm3.xml" value="0.1" />
-        <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_deco.xml" value="0.1" />
-        <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_findpassword.xml" value="0.12135416666666667" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_main.xml" value="0.3079710144927536" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_register.xml" value="0.18697916666666667" />
@@ -181,7 +124,7 @@
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_test.xml" value="0.11354166666666667" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_timer.xml" value="0.11354166666666667" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/listview_item.xml" value="0.11354166666666667" />
-        <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/nav_header_main.xml" value="0.11354166666666667" />
+        <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/timer_listview.xml" value="0.11354166666666667" />
         <entry key="..\:/Users/kjmin/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/xml/setting_preference.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/0923/app/src/main/res/drawable/attencheckdrawble.xml" value="0.35625" />
@@ -202,7 +145,6 @@
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_habbit_detail.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_habbit_make.xml" value="0.3016304347826087" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_logout_popup.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_nick_name.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_notice.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_popup.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_register.xml" value="0.36614583333333334" />
@@ -219,7 +161,6 @@
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_character.xml" value="0.3016304347826087" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_setting_preference.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_test.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_timer.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/fragment_todo.xml" value="0.3016304347826087" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/layout.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sec/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/listview_item.xml" value="0.3016304347826087" />

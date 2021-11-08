@@ -166,11 +166,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                 userCode = String.valueOf(document.getData().get("user code"));
                                                 usercode.setUsercode(strEmail);
 
-                                                mDatabaseRef.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+                                                mDatabaseRef.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
-                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        String value = snapshot.getValue(String.class);
-                                                        nick = value;
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                                                        String nickname = (group.getNickname());
+                                                        nick = nickname;
+
                                                         if (nick != null) {
                                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                             intent.putExtra("userCode", userCode);
