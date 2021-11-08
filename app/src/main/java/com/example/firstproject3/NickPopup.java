@@ -81,8 +81,9 @@ public class NickPopup extends Activity {
                                     if(myCoin >= 30) {
                                         documentReferenceC.update("coin", String.valueOf(myCoin - nickcoin));
                                         Intent intent = new Intent(NickPopup.this, NickNameActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
-                                        System.exit(0);
                                     } else {
                                         Toast.makeText(getApplicationContext(),"코인이 부족합니다!", Toast.LENGTH_SHORT).show();
                                     }

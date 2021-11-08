@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title=" ">
+        app:title="습관 수정하기">
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView

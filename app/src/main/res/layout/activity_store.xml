@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title=" "
+        app:title="상점"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay">
     </androidx.appcompat.widget.Toolbar>
@@ -2834,7 +2834,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="25dp"
-                android:gravity="right"
                 android:orientation="horizontal">
 
                 <TextView
@@ -2844,6 +2843,11 @@
                     android:padding="5dp"
                     android:text="아니오"
                     android:textSize="15dp" />
+
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textYes"

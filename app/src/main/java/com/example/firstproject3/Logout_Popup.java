@@ -15,6 +15,7 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.firstproject3.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,12 +50,13 @@ public class Logout_Popup extends Activity {
             public void onClick(View v) {
 
                 //로그아웃 하기
+                Toast.makeText(getApplicationContext(), "로그아웃에 성공했습니다!", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
                 mFirebaseAuth.signOut();
-                finishAffinity();
                 Intent intent = new Intent(Logout_Popup.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish();
 
             }
         });

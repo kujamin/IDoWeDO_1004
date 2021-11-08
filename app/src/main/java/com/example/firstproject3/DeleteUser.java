@@ -66,21 +66,22 @@ public class DeleteUser extends Activity {
 
                             FirebaseAuth.getInstance().signOut();
                             mFirebaseAuth.signOut();
-                            finishAffinity();
 
                             Intent intent = new Intent(DeleteUser.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                            finish();
+                            onDestroy();
 
                         } else {
                             Toast.makeText(getApplicationContext(), "회원 탈퇴를 진행하기 위해선 다시 로그인이 필요합니다!!", Toast.LENGTH_SHORT).show();
                             FirebaseAuth.getInstance().signOut();
                             mFirebaseAuth.signOut();
-                            finishAffinity();
 
                             Intent intent = new Intent(DeleteUser.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                            finish();
                         }
                     }
                 });
