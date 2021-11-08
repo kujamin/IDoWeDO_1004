@@ -67,13 +67,6 @@
                     android:src="@drawable/chara" />
 
                 <ImageView
-                    android:id="@+id/imageHead"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/formal_head_01"
-                    android:visibility="invisible" />
-
-                <ImageView
                     android:id="@+id/imageLeg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -84,7 +77,14 @@
                     android:id="@+id/imageTorso"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/business_torso_01"
+                    android:src="@drawable/hood_torso_01"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imageHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/rogue_head_01"
                     android:visibility="invisible" />
 
                 <ImageView
@@ -523,7 +523,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:background="#fff"
-                                android:src="@drawable/head_deco"
+                                android:src="@drawable/knight_torso_01"
                                 android:visibility="invisible" />
 
                             <ImageButton
@@ -531,7 +531,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:background="#fff"
-                                android:src="@drawable/head_deco"
+                                android:src="@drawable/knight_leg_01"
                                 android:visibility="invisible" />
 
                             <ImageButton

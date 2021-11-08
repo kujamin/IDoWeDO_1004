@@ -41,25 +41,29 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/character" />
                 <ImageView
-                    android:id="@+id/imageViewHeadMini"
+                    android:id="@+id/imageViewLegMini"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/alien_head_01" />
+                    android:src="@drawable/alien_leg_01"
+                    android:visibility="invisible"/>
                 <ImageView
                     android:id="@+id/imageViewTorsoMini"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/alien_torso_01" />
+                    android:src="@drawable/alien_torso_01"
+                    android:visibility="invisible"/>
                 <ImageView
-                    android:id="@+id/imageViewLegMini"
+                    android:id="@+id/imageViewHeadMini"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/alien_leg_01" />
+                    android:src="@drawable/alien_head_01"
+                    android:visibility="invisible"/>
                 <ImageView
                     android:id="@+id/imageViewArmMini"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/book_hand_01" />
+                    android:src="@drawable/book_hand_01"
+                    android:visibility="invisible"/>
             </FrameLayout>
 
             <LinearLayout

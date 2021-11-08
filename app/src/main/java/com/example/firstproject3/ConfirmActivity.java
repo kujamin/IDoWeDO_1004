@@ -87,9 +87,9 @@ public class ConfirmActivity extends AppCompatActivity {
 
                             calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(year, month, dayy);
-                            calendar.add(Calendar.DATE, 1);
+                            calendar.set(year, month + 1, dayy + 1);
 
+                            Toast.makeText(getApplicationContext(), year + "/" +month+1 +"/"+dayy+1, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -100,13 +100,13 @@ public class ConfirmActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                count = count + 1;//사용자의 챌린지 참여 횟수
+                                count += 1;//사용자의 챌린지 참여 횟수
                             }//for
                             Toast.makeText(getApplicationContext(), Calendar.getInstance().after(calendar) + "", Toast.LENGTH_LONG).show();
                             //시작 기간으로부터 30일이 지나면 참여 완료 버튼 막기
                             if(Calendar.getInstance().after(calendar)) {
                                 challBtn.setEnabled(false);
-                                Toast.makeText(getApplicationContext(), "챌린지 기간이 종료되었습니다!", Toast.LENGTH_LONG).show();
+                                challBtn.setText("챌린지 기간 종료");
                                 if(count == 30) { //챌린지 성공 시
                                     Toast.makeText(getApplicationContext(), "축하합니다! 자격증 취득하기 챌린지를 성공했습니다!", Toast.LENGTH_LONG).show();
                                 } else {

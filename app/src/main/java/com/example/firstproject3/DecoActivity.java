@@ -44,7 +44,7 @@ public class DecoActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private TextView saveText;
     private String cloHead, cloTorso, cloLeg, cloArm;
-    private int imgId;
+    private int imgId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +168,10 @@ public class DecoActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
                             DocumentSnapshot document = task.getResult();
+                            cloHead = document.getString("cloHead");
+                            cloTorso = document.getString("cloTorso");
+                            cloLeg = document.getString("cloLeg");
+                            cloArm = document.getString("cloArm");
 
                             Glide.with(getApplicationContext()).load(document.getString("cloHead")).into(imgHead);
                             Glide.with(getApplicationContext()).load(document.getString("cloTorso")).into(imgTorso);
@@ -287,22 +291,24 @@ public class DecoActivity extends AppCompatActivity {
                                         break;
                                     //여덟번째 버튼
                                     case "alien_torso_02" :
-                                        imgbtnHead8.setEnabled(true);
-                                        break;
-                                    case "alien_leg_02" :
                                         imgbtnTorse8.setEnabled(true);
                                         break;
-
-                                    default :
-                                        Toast.makeText(getApplicationContext(), "아직 구매하지 않은 제품입니다!", Toast.LENGTH_SHORT).show();
+                                    case "alien_leg_02" :
+                                        imgbtnLeg8.setEnabled(true);
                                         break;
-                                }
-                            }
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
+                                    //아홉번째 버튼
+                                    case "knight_torso_01" :
+                                        imgbtnTorse9.setEnabled(true);
+                                        break;
+                                    case "knight_leg_01" :
+                                        imgbtnLeg9.setEnabled(true);
+                                        break;
+                                }//switch
+                            }//for
+                        }//if
+                    }//oncomplete
                 });
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -522,6 +528,13 @@ public class DecoActivity extends AppCompatActivity {
                 imgTorso.setVisibility(View.INVISIBLE);
                 imgLeg.setVisibility(View.INVISIBLE);
                 imgArm.setVisibility(View.INVISIBLE);
+
+                cloHead = "";
+                cloTorso = "";
+                cloLeg = "";
+                cloArm = "";
+
+                imgId = 1;
             }
         });
 
@@ -709,6 +722,20 @@ public class DecoActivity extends AppCompatActivity {
                         imgLeg.setImageDrawable(drawL);
                         imgLeg.setVisibility(View.VISIBLE);
                         break;
+
+                    //9번 Row
+                    case R.id.imageButtonTorso9 :
+                        drawT = imgbtnTorse9.getDrawable();
+                        cloTorso = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/knight_torso_01.png?alt=media&token=436ffb5e-ce0c-45c2-b2e4-94e21dfd8291";
+                        imgTorso.setImageDrawable(drawT);
+                        imgTorso.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.imageButtonLeg9 :
+                        drawL = imgbtnLeg9.getDrawable();
+                        cloLeg = "https://firebasestorage.googleapis.com/v0/b/graduationproject-6a8ed.appspot.com/o/knight_leg_01.png?alt=media&token=59539f93-38c7-42af-b6bb-dfca471b9a35";
+                        imgLeg.setImageDrawable(drawL);
+                        imgLeg.setVisibility(View.VISIBLE);
+                        break;
                 }//switch
             }//onClick
         };//ocl
@@ -748,6 +775,9 @@ public class DecoActivity extends AppCompatActivity {
         imgbtnTorse8.setOnClickListener(ocl);
         imgbtnLeg8.setOnClickListener(ocl);
 
+        imgbtnTorse9.setOnClickListener(ocl);
+        imgbtnLeg9.setOnClickListener(ocl);
+
 
         //툴바 저장 버튼
         saveText.setOnClickListener(new View.OnClickListener() {
@@ -755,9 +785,10 @@ public class DecoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //변경사항 없을 시 저장 버튼 막기
                 if(imgId == 0) {
-                    Toast.makeText(getApplicationContext(), "변경된 부분이 없습니다!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "변경된 사항이 없습니다!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
 
                 docRef.update("cloHead", cloHead);

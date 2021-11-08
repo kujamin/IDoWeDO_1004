@@ -174,6 +174,12 @@ public class Fragment_Character extends Fragment {
                                             Glide.with(rootView.getContext()).load(document.getString("cloTorso")).into(cloStateTorso);
                                             Glide.with(rootView.getContext()).load(document.getString("cloLeg")).into(cloStateLeg);
                                             Glide.with(rootView.getContext()).load(document.getString("cloArm")).into(cloStateArm);
+
+                                            cloStateHead.setVisibility(View.VISIBLE);
+                                            cloStateTorso.setVisibility(View.VISIBLE);
+                                            cloStateLeg.setVisibility(View.VISIBLE);
+                                            cloStateArm.setVisibility(View.VISIBLE);
+
                                         }
 
                                     }

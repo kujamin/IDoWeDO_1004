@@ -286,6 +286,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Log.d(TAG, "DocumentSnapshot data");
+
+                                        //할 일
                                         firebaseFirestore.collection("user").document(strEmail).collection("user todo").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -293,6 +295,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             }
                                         });
 
+                                        //습관
                                         firebaseFirestore.collection("user").document(strEmail).collection("user habbit").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -300,6 +303,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             }
                                         });
 
+                                        //타이머
                                         firebaseFirestore.collection("user").document(strEmail).collection("user timer").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -307,6 +311,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             }
                                         });
 
+                                        //챌린지
                                         firebaseFirestore.collection("user").document(strEmail).collection("user challenge").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -314,7 +319,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             }
                                         });
 
+                                        //캐릭터
                                         firebaseFirestore.collection("user").document(strEmail).collection("user character").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        //출석체크
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user Check").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
@@ -358,7 +372,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                     }
                                                 });
 
-                                        //옷 세트 1
+                                        //챌린지 보상 의상
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("store").document("reward").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        //옷 세트 1 basic
                                         Map<String, Object> doc1 = new HashMap<>();
                                         doc1.put("buy", "X");
                                         doc1.put("category", "torse");
@@ -399,7 +422,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                     }
                                                 });
 
-                                        //옷 세트 2
+                                        //옷 세트 2 business
                                         Map<String, Object> doc3 = new HashMap<>();
                                         doc3.put("buy", "X");
                                         doc3.put("category", "head");
@@ -461,7 +484,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                 });
 
 
-                                        //옷 세트 3
+                                        //////옷 세트 3 formal/////
                                         Map<String, Object> doc6 = new HashMap<>();
                                         doc6.put("buy", "X");
                                         doc6.put("category", "head");
@@ -483,10 +506,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                 });
 
                                         Map<String, Object> doc7 = new HashMap<>();
-                                        doc6.put("buy", "X");
-                                        doc6.put("category", "torso");
-                                        doc6.put("name", "formal_torso_01");
-                                        doc6.put("price", "100");
+                                        doc7.put("buy", "X");
+                                        doc7.put("category", "torso");
+                                        doc7.put("name", "formal_torso_01");
+                                        doc7.put("price", "100");
 
                                         firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_torso").set(doc7)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -503,12 +526,439 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                 });
 
                                         Map<String, Object> doc8 = new HashMap<>();
-                                        doc6.put("buy", "X");
-                                        doc6.put("category", "leg");
-                                        doc6.put("name", "formal_leg_01");
-                                        doc6.put("price", "100");
+                                        doc8.put("buy", "X");
+                                        doc8.put("category", "leg");
+                                        doc8.put("name", "formal_leg_01");
+                                        doc8.put("price", "100");
 
                                         firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c3_leg").set(doc8)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        //////옷 세트 4 hood/////
+                                        Map<String, Object> doc9 = new HashMap<>();
+                                        doc9.put("buy", "X");
+                                        doc9.put("category", "torso");
+                                        doc9.put("name", "hood_torso_01");
+                                        doc9.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c4_torso").set(doc9)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc10 = new HashMap<>();
+                                        doc10.put("buy", "X");
+                                        doc10.put("category", "leg");
+                                        doc10.put("name", "hood_leg_01");
+                                        doc10.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c4_leg").set(doc10)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        //////옷 세트 5 kinght/////
+                                        Map<String, Object> doc11 = new HashMap<>();
+                                        doc11.put("buy", "X");
+                                        doc11.put("category", "head");
+                                        doc11.put("name", "knight_head_01");
+                                        doc11.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c5_head").set(doc11)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc12 = new HashMap<>();
+                                        doc12.put("buy", "X");
+                                        doc12.put("category", "torso");
+                                        doc12.put("name", "knight_torso_01");
+                                        doc12.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c5_torso").set(doc12)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc13 = new HashMap<>();
+                                        doc13.put("buy", "X");
+                                        doc13.put("category", "leg");
+                                        doc13.put("name", "knight_leg_01");
+                                        doc13.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c5_leg").set(doc13)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        ////옷 세트 6 magician////
+                                        Map<String, Object> doc14 = new HashMap<>();
+                                        doc14.put("buy", "X");
+                                        doc14.put("category", "head");
+                                        doc14.put("name", "magician_head_01");
+                                        doc14.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c6_head").set(doc14)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc15 = new HashMap<>();
+                                        doc15.put("buy", "X");
+                                        doc15.put("category", "torso");
+                                        doc15.put("name", "magician_torso_01");
+                                        doc15.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c6_torso").set(doc15)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc16 = new HashMap<>();
+                                        doc16.put("buy", "X");
+                                        doc16.put("category", "leg");
+                                        doc16.put("name", "magician_leg_01");
+                                        doc16.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c6_leg").set(doc16)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        ////옷 세트 7 rogue////
+                                        Map<String, Object> doc17 = new HashMap<>();
+                                        doc17.put("buy", "X");
+                                        doc17.put("category", "head");
+                                        doc17.put("name", "rogue_head_01");
+                                        doc17.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c7_head").set(doc17)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc18 = new HashMap<>();
+                                        doc18.put("buy", "X");
+                                        doc18.put("category", "torso");
+                                        doc18.put("name", "rogue_torso_01");
+                                        doc18.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c7_torso").set(doc18)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc19 = new HashMap<>();
+                                        doc19.put("buy", "X");
+                                        doc19.put("category", "leg");
+                                        doc19.put("name", "rogue_leg_01");
+                                        doc19.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c7_leg").set(doc19)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        ////////옷 세트 8 alien1////
+                                        Map<String, Object> doc20 = new HashMap<>();
+                                        doc20.put("buy", "X");
+                                        doc20.put("category", "head");
+                                        doc20.put("name", "alien_head_01");
+                                        doc20.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c8_head").set(doc20)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc21 = new HashMap<>();
+                                        doc21.put("buy", "X");
+                                        doc21.put("category", "torso");
+                                        doc21.put("name", "alien_torso_01");
+                                        doc21.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c8_torso").set(doc21)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc22 = new HashMap<>();
+                                        doc22.put("buy", "X");
+                                        doc22.put("category", "leg");
+                                        doc22.put("name", "alien_leg_01");
+                                        doc22.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c8_leg").set(doc22)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        ////////옷 세트 9 alien2////
+                                        Map<String, Object> doc23 = new HashMap<>();
+                                        doc23.put("buy", "X");
+                                        doc23.put("category", "head");
+                                        doc23.put("name", "alien_head_02");
+                                        doc23.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c9_head").set(doc23)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc24 = new HashMap<>();
+                                        doc24.put("buy", "X");
+                                        doc24.put("category", "torso");
+                                        doc24.put("name", "alien_torso_02");
+                                        doc24.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c9_torso").set(doc24)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc25 = new HashMap<>();
+                                        doc25.put("buy", "X");
+                                        doc25.put("category", "leg");
+                                        doc25.put("name", "alien_leg_02");
+                                        doc25.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c9_leg").set(doc25)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        //////10 무기 세트  hand 4개
+                                        Map<String, Object> doc26 = new HashMap<>();
+                                        doc26.put("buy", "X");
+                                        doc26.put("category", "hand");
+                                        doc26.put("name", "book_hand_01");
+                                        doc26.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c10_hand").set(doc26)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc27 = new HashMap<>();
+                                        doc27.put("buy", "X");
+                                        doc27.put("category", "hand");
+                                        doc27.put("name", "claw_hand_01");
+                                        doc27.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c11_hand").set(doc27)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc28 = new HashMap<>();
+                                        doc28.put("buy", "X");
+                                        doc28.put("category", "hand");
+                                        doc28.put("name", "knife_hand_01");
+                                        doc28.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c12_hand").set(doc28)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                    }
+                                                });
+
+                                        Map<String, Object> doc29 = new HashMap<>();
+                                        doc29.put("buy", "X");
+                                        doc29.put("category", "hand");
+                                        doc29.put("name", "staff_hand_01");
+                                        doc29.put("price", "100");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character").document("state").collection("store").document("c13_hand").set(doc29)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
