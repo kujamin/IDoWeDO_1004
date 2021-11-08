@@ -20,6 +20,7 @@
             android:gravity="left"
             android:onClick="onClickBack"
             app:srcCompat="?attr/homeAsUpIndicator" />
+
     </LinearLayout>
 
     <ScrollView

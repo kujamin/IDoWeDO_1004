@@ -1,24 +1,29 @@
-package com.example.firstproject3.AtCheck;
+package com.example.firstproject3;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.example.firstproject3.EventDecorator;
+import com.example.firstproject3.AtCheck.SaturdayDecorator;
+import com.example.firstproject3.AtCheck.SundayDecorator;
+import com.example.firstproject3.Login.ProgressDialog;
 import com.example.firstproject3.Login.UserAccount;
-import com.example.firstproject3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,22 +42,18 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Executors;
 
-public class Attendance_CheckActivity extends Activity {
+public class Challenge_Study_Activity extends Activity {
     private TextView monthYearText;
     String time, kcal, menu;
     private CalendarDay date;
     Cursor cursor;
-    Button attenBtn;
+    Button chall_checkBtn;
     MaterialCalendarView calendarView;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -64,14 +65,14 @@ public class Attendance_CheckActivity extends Activity {
     int i = 0;
     private int btnstate = 0;
     final String TAG = "MainActivity";
+    ProgressDialog customProgressDialog;
+    ImageView imageViewX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_attendance_check);
-
-        attenBtn = findViewById(R.id.checkbutton);
+        setContentView(R.layout.activity_challenge_study);
 
         String sDY = String.valueOf(CalendarDay.today().getYear());
         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
@@ -84,14 +85,22 @@ public class Attendance_CheckActivity extends Activity {
             sDD = 0 + sDD;
         }
 
-        strDate = sDY + "/" + sDM + "/" + sDD;
+        strDate = sDY + "-" + sDM + "-" + sDD;
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        chall_checkBtn = findViewById(R.id.chall_checkbutton);
+
+        imageViewX = (ImageView) findViewById(R.id.imageView3);
+        imageViewX.setColorFilter(Color.parseColor("#132F7E"), PorterDuff.Mode.SRC_IN);
+
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         calendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
@@ -103,7 +112,7 @@ public class Attendance_CheckActivity extends Activity {
                 .commit();
 
         calendarView.setPadding(0, -20, 0, 30);
-        calendarView.setArrowColor(Color.rgb(244,56,94));
+        calendarView.setArrowColor(Color.rgb(19, 47, 126));
 
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
@@ -111,23 +120,25 @@ public class Attendance_CheckActivity extends Activity {
                 new SundayDecorator(),
                 new SaturdayDecorator());
 
-        //usercode 얻어오기
+//        customProgressDialog.show();
+//        customProgressDialog.setCancelable(false);
+
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
 
-                firebaseFirestore.collection("user").document(usercode).collection("user attendance")
+                firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                        if (document.getString("checkOX") != null) {
-                                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                                            String strd = document.getString("checkDate");
+                                        if (document.getString("today_date") != null) {
+                                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                            String strd = document.getString("today_date");
                                             Date dated = null;
 
                                             try {
@@ -136,7 +147,7 @@ public class Attendance_CheckActivity extends Activity {
                                                 e.printStackTrace();
                                             }
                                             CalendarDay day = CalendarDay.from(dated);
-                                            calendarView.addDecorator(new Attend_EventDecorator(Color.RED, Collections.singleton(day),Attendance_CheckActivity.this));
+                                            calendarView.addDecorator(new Challenge_EventDecorator(Color.BLACK, Collections.singleton(day),Challenge_Study_Activity.this));
                                         }
                                     }
                                 }
@@ -146,18 +157,18 @@ public class Attendance_CheckActivity extends Activity {
                             }
                         });
 
-                firebaseFirestore.collection("user").document(usercode).collection("user attendance")
-                        .whereEqualTo("checkDate",strDate)
+                firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
+                        .whereEqualTo("today_date",strDate)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                        if(document.getString("checkDate") != null){
+                                        if(document.getString("today_date") != null){
                                             btnstate = 1;
-                                            attenBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
-                                            attenBtn.setText("출석완료");
+                                            chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
+                                            chall_checkBtn.setText("인증완료");
                                         }
                                         else{
                                             Toast.makeText(getApplicationContext(), "안됨", Toast.LENGTH_SHORT).show();
@@ -174,61 +185,71 @@ public class Attendance_CheckActivity extends Activity {
             }
         });
 
-        //출석체크 버튼
-        attenBtn.setOnClickListener(new View.OnClickListener() {
+        //챌린지 인증 버튼
+        chall_checkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (btnstate == 0) {
-                    btnstate = 1;
-                    attenBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
-                    attenBtn.setText("출석완료");
-                    calendarView.addDecorator(new Attend_EventDecorator(Color.RED, Collections.singleton(CalendarDay.today()),Attendance_CheckActivity.this));
 
-                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            int value = snapshot.getValue(Integer.class);
-                            value += 1;
-                            mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").setValue(value);
-                            if (value == 30 || value == 100) {
-                                Toast.makeText(getApplicationContext(), "획득한 배지가 있어요! 확인하러 가세요", Toast.LENGTH_SHORT).show();
+
+                    AlertDialog.Builder myAlertBuilder =
+                            new AlertDialog.Builder(v.getContext());
+                    // alert의 title과 Messege 세팅
+                    myAlertBuilder.setMessage("정말 달성하셨나요?");
+                    // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
+                    myAlertBuilder.setPositiveButton("네!",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog,int which){
+                            // OK 버튼을 눌렸을 경우
+
+                            btnstate = 1;
+                            chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
+                            chall_checkBtn.setText("인증완료");
+                            calendarView.addDecorator(new Challenge_EventDecorator(Color.BLACK, Collections.singleton(CalendarDay.today()),Challenge_Study_Activity.this));
+
+                            String year = String.valueOf(CalendarDay.today().getYear());
+                            String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+                            String day = String.valueOf(CalendarDay.today().getDay());
+
+                            if (month.length() != 2) {
+                                month = 0 + month;
+                            }
+                            if (day.length() != 2){
+                                day = 0 + day;
                             }
 
-                        }
+                            dateR = year + "-" + month + "-" + day;
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            Map<String, Object> doc = new HashMap<>();
+                            doc.put("userChallWakeup_OX", "O");
+                            doc.put("userCode", usercode);
+                            doc.put("today_date", dateR);
 
+                            firebaseFirestore.collection("user").document(usercode)
+                                    .collection("user challenge").document("자격증 취득하기").collection("OX").document(dateR).set(doc)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    });
                         }
                     });
-
-//                dateR = year + "," + month + "," + day;
-
-                    String id = UUID.randomUUID().toString();
-
-                    Map<String, Object> doc = new HashMap<>();
-                    doc.put("checkOX", "O");
-                    doc.put("id",id);
-                    doc.put("usercode", usercode);
-                    doc.put("checkDate", strDate);
-                    doc.put("checkCount", "1");
-
-                    firebaseFirestore.collection("user").document(usercode).collection("user attendance").document(id).set(doc)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                }
-                            });
-
+                    myAlertBuilder.setNegativeButton("아니요..", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    // Alert를 생성해주고 보여주는 메소드(show를 선언해야 Alert가 생성됨)
+                    myAlertBuilder.show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"이미 오늘은 출석체크가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"이미 오늘은 인증이 완료되었습니다.",Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }
-
 
     public void onClikcPopupClose(View v) {
         Intent intent = new Intent();
@@ -252,5 +273,4 @@ public class Attendance_CheckActivity extends Activity {
         //안드로이드 백버튼 막기
         return;
     }
-
 }

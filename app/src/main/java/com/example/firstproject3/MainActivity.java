@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         str3 = "매일 만보 걷기";
                                         break;
                                 }
-                         }//for
+                            }//for
 
                             Intent intent = new Intent(MainActivity.this, MyReceiver.class);
 //                            intent.setClass(MainActivity.this, MyReceiver.class);
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(System.currentTimeMillis());
                             calendar.set(Calendar.HOUR_OF_DAY, 13);
-                            calendar.set(Calendar.MINUTE, 53);
+                            calendar.set(Calendar.MINUTE, 50);
                             calendar.set(Calendar.SECOND, 0);
                             calendar.set(Calendar.MILLISECOND, 0);
 
@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     calendarEnd.setTimeInMillis(System.currentTimeMillis());
                                     calendarEnd.set(Calendar.YEAR, 2021);
                                     calendarEnd.set(Calendar.MONTH, 11);
-                                    calendarEnd.set(Calendar.DATE, 7);
+                                    calendarEnd.set(Calendar.DATE, 3);
 
                                     firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                                             .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

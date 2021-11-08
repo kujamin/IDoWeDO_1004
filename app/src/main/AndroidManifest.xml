@@ -17,7 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
         <activity
+            android:name=".Challenge_Wakeup_Activity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+        <activity
+            android:name=".Challenge_Study_Activity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+        <activity
             android:name=".AchievementPopupActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".Challenge_CheckActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
@@ -26,7 +38,7 @@
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".RewardChallActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />/>
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".ChallSuccPopActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
