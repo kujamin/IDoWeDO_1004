@@ -394,15 +394,6 @@
                                     android:src="@drawable/coin_export" />
                             </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/textView28"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="SOLD\nOUT"
-                                android:textColor="#fff"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -413,6 +404,16 @@
                             android:orientation="vertical"
                             android:clickable="true"
                             android:visibility="invisible">
+
+                            <TextView
+                                android:id="@+id/textView28"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="SOLD\nOUT"
+                                android:textColor="#fff"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
                     </FrameLayout>
