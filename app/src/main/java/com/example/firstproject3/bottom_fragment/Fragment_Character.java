@@ -131,7 +131,7 @@ public class Fragment_Character extends Fragment {
                                         maxExp += 10;
                                         documentReference.update("maxExp",maxExp+"");
                                         documentReference.update("level",level+"");
-                                        documentReference.update("coin",String.valueOf(coin+20));
+                                        documentReference.update("coin",String.valueOf(coin+5));
                                         documentReference.update("heart","5");
                                         documentReference.update("exp",currentExp+"");
                                         getActivity().startActivity(new Intent(getActivity(), LevelupActivity.class));

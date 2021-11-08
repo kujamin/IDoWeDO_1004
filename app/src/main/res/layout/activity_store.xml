@@ -229,7 +229,8 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp">
 
                         <LinearLayout
                             android:id="@+id/item3"
@@ -382,7 +383,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="150" />
 
                                 <ImageView
                                     android:id="@+id/imageView15"
@@ -392,6 +393,16 @@
                                     android:layout_weight="1"
                                     android:src="@drawable/coin_export" />
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textView28"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="SOLD\nOUT"
+                                android:textColor="#fff"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -403,15 +414,6 @@
                             android:clickable="true"
                             android:visibility="invisible">
 
-                            <TextView
-                                android:id="@+id/textView28"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="SOLD\nOUT"
-                                android:textColor="#fff"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
                         </LinearLayout>
                     </FrameLayout>
 
@@ -472,7 +474,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="150" />
 
                                 <ImageView
                                     android:id="@+id/imageView17"
@@ -562,7 +564,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="200" />
 
                                 <ImageView
                                     android:id="@+id/imageView19"
@@ -661,7 +663,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="200" />
 
                                 <ImageView
                                     android:id="@+id/imageView35"
@@ -751,7 +753,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="200" />
 
                                 <ImageView
                                     android:id="@+id/imageView40"
@@ -840,7 +842,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="250" />
 
                                 <ImageView
                                     android:id="@+id/imageView45"
@@ -941,7 +943,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="250" />
 
                                 <ImageView
                                     android:id="@+id/imageView50"
@@ -1031,7 +1033,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="300" />
 
                                 <ImageView
                                     android:id="@+id/imageView55"
@@ -1120,7 +1122,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="450" />
 
                                 <ImageView
                                     android:id="@+id/imageView60"
@@ -1221,7 +1223,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView500"
@@ -1311,7 +1313,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="300" />
 
                                 <ImageView
                                     android:id="@+id/imageView515"
@@ -1400,7 +1402,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="550" />
 
                                 <ImageView
                                     android:id="@+id/imageView630"
@@ -1500,7 +1502,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView007"
@@ -1590,7 +1592,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView012"
@@ -1679,7 +1681,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="450" />
 
                                 <ImageView
                                     android:id="@+id/imageView016"
@@ -1779,7 +1781,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="350" />
 
                                 <ImageView
                                     android:id="@+id/imageView021"
@@ -1869,7 +1871,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView025"
@@ -1958,7 +1960,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="450" />
 
                                 <ImageView
                                     android:id="@+id/imageView031"
@@ -2058,7 +2060,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView039"
@@ -2148,7 +2150,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView044"
@@ -2237,7 +2239,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="450" />
 
                                 <ImageView
                                     android:id="@+id/imageView047"
@@ -2337,7 +2339,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="400" />
 
                                 <ImageView
                                     android:id="@+id/imageView055"
@@ -2427,7 +2429,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="500" />
 
                                 <ImageView
                                     android:id="@+id/imageView062"
@@ -2517,7 +2519,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="500" />
 
                                 <ImageView
                                     android:id="@+id/imageView065"
@@ -2617,7 +2619,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="500" />
 
                                 <ImageView
                                     android:id="@+id/imageView071"
@@ -2707,7 +2709,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="3dp"
                                     android:layout_weight="2"
-                                    android:text="100" />
+                                    android:text="500" />
 
                                 <ImageView
                                     android:id="@+id/imageView075"
