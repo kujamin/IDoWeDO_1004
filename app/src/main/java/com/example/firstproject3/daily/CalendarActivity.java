@@ -1,30 +1,22 @@
 package com.example.firstproject3.daily;
 
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.firstproject3.AtCheck.EventDecorator;
-import com.example.firstproject3.AtCheck.SaturdayDecorator;
-import com.example.firstproject3.AtCheck.SundayDecorator;
-import com.example.firstproject3.Login.LoginActivity;
+import com.example.firstproject3.AtCheck.Attend_EventDecorator;
+import com.example.firstproject3.EventDecorator;
 import com.example.firstproject3.Login.UserAccount;
-import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.R;
-import com.example.firstproject3.Todo_Item;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,11 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -49,10 +37,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -97,9 +83,8 @@ public class CalendarActivity extends AppCompatActivity {
             sDD = 0 + sDD;
         }
 
-
         strDate = sDY + "/" + sDM + "/" + sDD;
-        Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();
 
         calendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 

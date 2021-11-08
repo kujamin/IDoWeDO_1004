@@ -112,8 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String startDate, endDate;
     private AlarmManager alarmManager;
     private Calendar calendarStart, calendarEnd;
-    private int count1 = 0, count2 = 0, count3 = 0;
-    private String[] time30 = null;
+    private int count;
 
 
 
@@ -236,8 +235,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             //시간 설정
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, 11);
-                            calendar.set(Calendar.MINUTE, 8);
+                            calendar.set(Calendar.HOUR_OF_DAY, 16);
+                            calendar.set(Calendar.MINUTE, 31);
                             calendar.set(Calendar.SECOND, 0);
                             calendar.set(Calendar.MILLISECOND, 0);
 
@@ -251,96 +250,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }//onComplete
                 });
 
-
-                /////챌린지 시작 30일 경과 시//////
-                ///////자격증 취득하기
-                DocumentReference docRef1 = firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode);
-
-                        docRef1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                //챌린지 시작 30일 경과 시
+                firebaseFirestore.collection("challenge").document("자격증 취득하기").collection("challenge list").document(usercode)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                startDate = document.getString("chall_StartDate");
+                                endDate = document.getString("chall_EndDate");
 
-                                if(document.getString("challenge_id") != null) {
-                                    calendarEnd = Calendar.getInstance();
-                                    calendarEnd.setTimeInMillis(System.currentTimeMillis());
-                                    calendarEnd.set(Calendar.YEAR, 2021);
-                                    calendarEnd.set(Calendar.MONTH, 11);
-                                    calendarEnd.set(Calendar.DATE, 3);
+                                String[] time = endDate.split("-");
+                                int year = Integer.parseInt(time[0]);
+                                int month = Integer.parseInt(time[1]);
+                                int dayy = Integer.parseInt(time[2]);
 
-                                    firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
-                                            .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if(task.isSuccessful()){
-                                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    count1 = count1 + 1;//사용자의 챌린지 참여 횟수
-                                                }//for
-
-                                                //시작 기간으로부터 30일이 지나면 참여 완료 버튼 막기
-                                                if(Calendar.getInstance().after(calendarEnd)) {
-                                                    if(count1 == 30) { //챌린지 성공 시
-                                                        Intent intent = new Intent(MainActivity.this, ChallSuccPopActivity.class);
-                                                        intent.putExtra("challSuccTitle", "자격증 취득하기");
-                                                        startActivity(intent);
-                                                    } else {
-                                                        Intent intent = new Intent(MainActivity.this, ChallSuccPopActivity.class);
-                                                        intent.putExtra("challSuccTitle", "자격증 취득하기");
-                                                        startActivity(intent);
-                                                    }
-                                                }
-                                            }//if
-                                        }//onComplete
-                                    });
-                                }
-                             }
-                        }
-                    });//doRef1
-
-                /////////아침 6시 기상하기
-                DocumentReference docRef2 = firebaseFirestore.collection("challenge").document("아침 6시 기상하기").collection("challenge list").document(usercode);
-
-                docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-
-                            if(document.getString("challenge_id") != null) {
                                 calendarEnd = Calendar.getInstance();
                                 calendarEnd.setTimeInMillis(System.currentTimeMillis());
-                                calendarEnd.set(Calendar.YEAR, 2021);
-                                calendarEnd.set(Calendar.MONTH, 11);
-                                calendarEnd.set(Calendar.DATE, 7);
+                                calendarEnd.set(year, month, dayy);
+                                calendarEnd.add(Calendar.DATE, 1);
 
-                                firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("아침 6시 기상하기").collection("OX")
-                                        .whereEqualTo("userChallWakeup_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if(task.isSuccessful()){
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                                count2 = count2 + 1;//사용자의 챌린지 참여 횟수
-                                            }//for
+                                Toast.makeText(getApplicationContext(), String.valueOf(calendarEnd) , Toast.LENGTH_LONG).show();
 
-                                            //시작 기간으로부터 30일이 지나면 참여 완료 버튼 막기
-                                            if(Calendar.getInstance().after(calendarEnd)) {                if(count2 == 30) { //챌린지 성공 시
-                                                    Intent intent = new Intent(MainActivity.this, ChallSuccPopActivity.class);
-                                                    intent.putExtra("challSuccTitle", "아침 6시 기상하기");
-                                                    startActivity(intent);
-                                                } else {
-                                                    Intent intent = new Intent(MainActivity.this, ChallSuccPopActivity.class);
-                                                    intent.putExtra("challSuccTitle", "아침 6시 기상하기");
-                                                    startActivity(intent);
-                                                }
-                                            }
-                                        }//if
-                                    }//onComplete
-                                });
                             }
                         }
-                    }
-                });//doRef1
+                    });
+
+                    firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
+                            .whereEqualTo("userChallStudy_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    count = count + 1;//사용자의 챌린지 참여 횟수
+                                }//for
+                                Toast.makeText(getApplicationContext(), Calendar.getInstance().after(calendarEnd) + "", Toast.LENGTH_LONG).show();
+                                //시작 기간으로부터 30일이 지나면 참여 완료 버튼 막기
+                                if(Calendar.getInstance().after(calendarEnd)) {
+                                    Toast.makeText(getApplicationContext(), "챌린지 기간이 종료되었습니다!", Toast.LENGTH_LONG).show();
+                                    if(count == 30) { //챌린지 성공 시
+                                        Toast.makeText(getApplicationContext(), "축하합니다! 자격증 취득하기 챌린지를 성공했습니다!", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "아쉽게도 챌린지 성공에 실패했습니다!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }//if
+                        }//onComplete
+                    });
                 }
 
 

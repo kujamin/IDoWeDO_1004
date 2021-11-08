@@ -1,7 +1,14 @@
 package com.example.firstproject3.AtCheck;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firstproject3.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -18,12 +25,16 @@ import java.util.Set;
 /**
  * Decorate several days with a dot
  */
-public class EventDecorator implements DayViewDecorator {
+public class Attend_EventDecorator extends AppCompatActivity implements DayViewDecorator {
 
     private int color;
     private HashSet<CalendarDay> dates;
+    private Drawable drawable;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
+
+
+    public Attend_EventDecorator(int color, Collection<CalendarDay> dates, Activity context) {
+        drawable = context.getResources().getDrawable(R.drawable.daily_check);
         this.color = color;
         this.dates = new HashSet<>(dates);
     }
@@ -35,7 +46,11 @@ public class EventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(7,color));
+//        view.addSpan(new DotSpan(7,color));
+//        view.addSpan(new BackgroundColorSpan(Color.RED));
+        view.setBackgroundDrawable(drawable);
+        view.addSpan(new ForegroundColorSpan(color));
+//        view.setBackgroundDrawable(view2.getContext().getResources().getDrawable(R.drawable.ic_baseline_add_24));
 //        view.addSpan(new DotSpan(5, color)); // 날자밑에 점
     }
 }

@@ -1,5 +1,9 @@
 package com.example.firstproject3;
 
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
@@ -9,7 +13,9 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class EventDecorator implements DayViewDecorator {
+public class EventDecorator extends AppCompatActivity implements DayViewDecorator {
+
+    private View view;
     private final int color;
     private final HashSet<CalendarDay> dates;
 
@@ -25,6 +31,6 @@ public class EventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(5,color));
+        view.addSpan(new DotSpan(7,color));
     }
 }

@@ -177,6 +177,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     }
                                 });
+
+                                ////출석체크 생성////
+                                firebaseFirestore.collection("user").document(strEmail).collection("user attendance").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
+
                                 ////습관 생성///
                                 firebaseFirestore.collection("user").document(strEmail).collection("user habbit").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
