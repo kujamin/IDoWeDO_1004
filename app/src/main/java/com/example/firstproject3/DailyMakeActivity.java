@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
@@ -64,6 +65,7 @@ public class DailyMakeActivity extends AppCompatActivity {
     String strUrl;
     TextView textDaily;
     View view;
+    InputMethodManager imm;
 
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
@@ -116,6 +118,8 @@ public class DailyMakeActivity extends AppCompatActivity {
         pd = new ProgressDialog(this);
 
         db = FirebaseFirestore.getInstance();
+
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
         time.setVisibility(View.GONE);
         daily.setVisibility(View.GONE);
@@ -170,6 +174,9 @@ public class DailyMakeActivity extends AppCompatActivity {
                     view.clearFocus();
                 }
 
+                imm.hideSoftInputFromWindow(textDailyName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(textMemo.getWindowToken(), 0);
+
                 time.setVisibility(View.GONE);
                 daily.setVisibility(View.VISIBLE);
 
@@ -190,6 +197,9 @@ public class DailyMakeActivity extends AppCompatActivity {
                 if(view != null) {
                     view.clearFocus();
                 }
+
+                imm.hideSoftInputFromWindow(textDailyName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(textMemo.getWindowToken(), 0);
 
                 time.setVisibility(View.VISIBLE);
                 daily.setVisibility(View.GONE);
@@ -226,6 +236,9 @@ public class DailyMakeActivity extends AppCompatActivity {
                 if(view != null) {
                     view.clearFocus();
                 }
+
+                imm.hideSoftInputFromWindow(textDailyName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(textMemo.getWindowToken(), 0);
 
                 time.setVisibility(View.GONE);
                 daily.setVisibility(View.GONE);

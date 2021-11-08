@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -55,6 +56,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private View view;
     private ProgressDialog pd;
+    InputMethodManager imm;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -118,6 +120,8 @@ public class HabbitDetailActivity extends AppCompatActivity {
         habbitDetail_textch.setText(habbit_cateText);
         habbitDetail_cateLayout.setVisibility(View.VISIBLE);
 
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+
         habbitDetail_title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -137,6 +141,9 @@ public class HabbitDetailActivity extends AppCompatActivity {
                 if(view != null) {
                     view.clearFocus();
                 }
+
+                imm.hideSoftInputFromWindow(habbitDetail_title.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(habbitDetail_memo.getWindowToken(), 0);
 
 
                 row1.setBackground(ContextCompat.getDrawable(HabbitDetailActivity.this, R.drawable.dailymakeline));

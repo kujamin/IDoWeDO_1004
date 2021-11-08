@@ -122,6 +122,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -211,6 +212,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -299,6 +301,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -397,6 +400,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -486,6 +490,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -573,6 +578,7 @@
                             android:id="@+id/SoldoutView6"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:clickable="true"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
                             android:visibility="invisible">
@@ -671,6 +677,7 @@
                             android:id="@+id/SoldoutView7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:clickable="true"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
                             android:visibility="invisible">
@@ -762,6 +769,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -850,6 +858,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -950,6 +959,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1039,6 +1049,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1127,6 +1138,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1227,6 +1239,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1316,6 +1329,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1404,6 +1418,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1503,6 +1518,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1592,6 +1608,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1680,6 +1697,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1779,6 +1797,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1868,6 +1887,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -1956,6 +1976,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2055,6 +2076,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2144,6 +2166,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2232,6 +2255,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2331,6 +2355,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2420,6 +2445,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2509,6 +2535,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2608,6 +2635,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2697,6 +2725,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView
@@ -2753,6 +2782,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/soldout_tool"
                             android:orientation="vertical"
+                            android:clickable="true"
                             android:visibility="invisible">
 
                             <TextView

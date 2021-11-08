@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
@@ -67,6 +68,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
     String strUrl;
     View view;
     TextView text10;
+    InputMethodManager imm;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -112,6 +114,8 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+
         cateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +156,8 @@ public class HabbitMakeActivity extends AppCompatActivity {
                     view.clearFocus();
                 }
 
+                imm.hideSoftInputFromWindow(textDailyName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(textMemo.getWindowToken(), 0);
 
                 dailycal.setBackground(ContextCompat.getDrawable(HabbitMakeActivity.this, R.drawable.dailymclickline));
                 dailyname.setBackground(ContextCompat.getDrawable(HabbitMakeActivity.this, R.drawable.dailymakeline));

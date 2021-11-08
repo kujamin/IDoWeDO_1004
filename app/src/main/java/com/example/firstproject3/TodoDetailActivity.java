@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -53,6 +54,7 @@ public class TodoDetailActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private View view;
     private ProgressDialog pd;
+    InputMethodManager imm;
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -73,6 +75,8 @@ public class TodoDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_detail);
 
         pd = new ProgressDialog(this);
+
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
         final TableRow row1 = findViewById(R.id.todoDetail_table1);
         final TableRow row2 = findViewById(R.id.todoDetail_table2);
@@ -147,6 +151,9 @@ public class TodoDetailActivity extends AppCompatActivity {
                     view.clearFocus();
                 }
 
+                imm.hideSoftInputFromWindow(todoDetail_title.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(todoDetail_memo.getWindowToken(), 0);
+
                 time.setVisibility(View.GONE);
 
                 row1.setBackground(ContextCompat.getDrawable(TodoDetailActivity.this, R.drawable.dailymakeline));
@@ -203,6 +210,9 @@ public class TodoDetailActivity extends AppCompatActivity {
                 if(view != null) {
                     view.clearFocus();
                 }
+
+                imm.hideSoftInputFromWindow(todoDetail_title.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(todoDetail_memo.getWindowToken(), 0);
 
                 time.setVisibility(View.VISIBLE);
 
