@@ -1,7 +1,5 @@
 package com.example.firstproject3.bottom_fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +17,6 @@ import com.example.firstproject3.CustomHabbitAdapter;
 import com.example.firstproject3.CustomTodoAdapter;
 import com.example.firstproject3.Habbit_Item;
 import com.example.firstproject3.Login.LoginActivity;
-import com.example.firstproject3.Login.ProgressDialog;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.MainActivity;
 import com.example.firstproject3.Todo_Item;
@@ -48,8 +45,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Fragment_Todo extends Fragment {
 
@@ -67,21 +62,12 @@ public class Fragment_Todo extends Fragment {
     private String strDate;
     private int i = 0;
     private int j = 0;
-    ProgressDialog customProgressDialog;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_todo, container, false);
-
-        //로딩창 객체 생성
-        customProgressDialog = new ProgressDialog(viewGroup.getContext());
-        //로딩창을 투명하게
-        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        customProgressDialog.show();
-        customProgressDialog.setCancelable(false);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -116,7 +102,7 @@ public class Fragment_Todo extends Fragment {
 
 
 
-        //todo
+        //habbit
         habbit_list = new ArrayList<Habbit_Item>();
         customHabbitAdapter = new CustomHabbitAdapter(habbit_list, viewGroup.getContext());
 
@@ -155,7 +141,6 @@ public class Fragment_Todo extends Fragment {
                                 todo_list.add(0, new Todo_Item(doc.getString("todo_category"), doc.getString("todo_title"), doc.getString("todo_id"), doc.getBoolean("todo_checkbox")));
                                 String date1 = doc.getString("todo_date");
                         }
-
                         //어답터 갱신
                         customTodoAdapter.notifyDataSetChanged();
                     }
@@ -353,36 +338,18 @@ public class Fragment_Todo extends Fragment {
                         }
                     }
                 });
-
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 3초가 지나면 다이얼로그 닫기
-                        TimerTask task = new TimerTask(){
-                            @Override
-                            public void run() {
-                                customProgressDialog.dismiss();
-
-                            }
-                        };
-
-                        Timer timer = new Timer();
-                        timer.schedule(task, 2000);
-                    }
-                });
-                thread.start();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
         });
 
         todo_recyclerView.setAdapter(customTodoAdapter);
         habbit_recyclerView.setAdapter(customHabbitAdapter);
 
         return viewGroup;
+
     }
 
 }

@@ -25,6 +25,10 @@
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
         <activity
+            android:name=".Challenge_CheckActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+        <activity
             android:name=".AchievementPopupActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />

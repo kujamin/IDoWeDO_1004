@@ -73,6 +73,8 @@ public class Attendance_CheckActivity extends Activity {
 
         attenBtn = findViewById(R.id.checkbutton);
 
+//        Toast.makeText(getApplicationContext(),btnstate+"",Toast.LENGTH_SHORT).show();
+
         String sDY = String.valueOf(CalendarDay.today().getYear());
         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
         String sDD = String.valueOf(CalendarDay.today().getDay());
@@ -118,6 +120,24 @@ public class Attendance_CheckActivity extends Activity {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
 
+//                firebaseFirestore.collection("user").document(usercode).collection("user Check")
+//                        .whereEqualTo("checkCount", "1")
+//                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()) {
+//                            dateqd = new String[sumCount];
+//
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                String intNum = document.getString("checkCount");
+//                                int ant = Integer.parseInt(intNum);
+//
+//                                sumCount = sumCount + 1;
+//                            }
+//                        }
+//                    }
+//                });
+
                 firebaseFirestore.collection("user").document(usercode).collection("user attendance")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -158,6 +178,7 @@ public class Attendance_CheckActivity extends Activity {
                                             btnstate = 1;
                                             attenBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
                                             attenBtn.setText("출석완료");
+//                                            Toast.makeText(getApplicationContext(), btnstate + "", Toast.LENGTH_SHORT).show();
                                         }
                                         else{
                                             Toast.makeText(getApplicationContext(), "안됨", Toast.LENGTH_SHORT).show();
@@ -167,6 +188,36 @@ public class Attendance_CheckActivity extends Activity {
                             }
                         });
 
+
+
+
+//                //달력에 동그라미 남기기
+//                firebaseFirestore.collection("user").document(usercode).collection("user Check")
+//                        .whereEqualTo("checkOX", "O")
+//                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()) {
+//                            dateqd = new String[sumCount];
+//                            Toast.makeText(getApplicationContext(), sumCount+"", Toast.LENGTH_SHORT).show();
+//
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                datee = document.getString("checkDate");//체크된 날짜 얻어옴
+//
+//                                if(datee != null) {
+//                                    dateqd[i] = datee;
+//                                    i++;
+//                                }
+//                            }
+//                            new ApiSimulator(dateqd).executeOnExecutor(Executors.newSingleThreadExecutor());
+//
+//                            if(attenBtn.isSelected()){
+//                                attenBtn.setEnabled(false); //버튼 비활성화
+//                                attenBtn.setText("출석완료");
+//                            }
+//                        }
+//                    }
+//                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -180,10 +231,23 @@ public class Attendance_CheckActivity extends Activity {
             public void onClick(View v) {
                 if (btnstate == 0) {
                     btnstate = 1;
+//                    attenBtn.setEnabled(false); //버튼 비활성화
                     attenBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
                     attenBtn.setText("출석완료");
                     calendarView.addDecorator(new Attend_EventDecorator(Color.RED, Collections.singleton(CalendarDay.today()),Attendance_CheckActivity.this));
-
+//                ArrayList<CalendarDay> dates = new ArrayList<>();
+//                dates = CalendarDay.today();
+//                calendarView.addDecorator(new EventDecorator(Color.rgb(244,56,94), dates, Attendance_CheckActivity.this));
+//                String year = String.valueOf(CalendarDay.today().getYear());
+//                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+//                String day = String.valueOf(CalendarDay.today().getDay());
+//
+//                if (month.length() != 2) {
+//                    month = 0 + month;
+//                }
+//                if (day.length() != 2){
+//                    day = 0 + day;
+//                }
                     mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -229,6 +293,51 @@ public class Attendance_CheckActivity extends Activity {
         });
     }
 
+
+
+//    //특정 날짜에 dot
+//    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+//
+//        String[] Time_Result;
+//
+//        ApiSimulator(String[] Time_Result){
+//            this.Time_Result = Time_Result;
+//        }
+//
+//        @Override
+//        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            Calendar calendar = Calendar.getInstance();
+//            ArrayList<CalendarDay> dates = new ArrayList<>();
+//            /*특정날짜 달력에 점표시해주는곳*/
+//            /*월은 0이 1월 년,일은 그대로*/
+//            //string 문자열인 Time_Result 을 받아와서 ,를 기준으로짜르고 string을 int 로 변환
+//            for(int i = 0 ; i < Time_Result.length ; i ++){
+//                CalendarDay day = CalendarDay.from(calendar);
+//                String[] time = Time_Result[i].split(",");
+//                int year = Integer.parseInt(time[0]);
+//                int month = Integer.parseInt(time[1]);
+//                int dayy = Integer.parseInt(time[2]);
+//                dates.add(day);
+//                calendar.set(year,month-1,dayy);
+//            }
+//            return dates;
+//        }
+//        @Override
+//        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+//            super.onPostExecute(calendarDays);
+//
+//            if (isFinishing()) {
+//                return;
+//            }
+//
+//            calendarView.addDecorator(new Attend_EventDecorator(Color.RED,Collections.singleton(CalendarDay.today()),Attendance_CheckActivity.this));
+//        }
+//    }
 
     public void onClikcPopupClose(View v) {
         Intent intent = new Intent();

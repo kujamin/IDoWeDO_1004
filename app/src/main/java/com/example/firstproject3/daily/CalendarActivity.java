@@ -1,6 +1,7 @@
 package com.example.firstproject3.daily;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstproject3.AtCheck.Attend_EventDecorator;
 import com.example.firstproject3.EventDecorator;
+import com.example.firstproject3.Login.ProgressDialog;
 import com.example.firstproject3.Login.UserAccount;
 import com.example.firstproject3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,6 +54,7 @@ public class CalendarActivity extends AppCompatActivity {
     private String userCode;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,10 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calendar);
 
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.Calendar_toolbar);
         setSupportActionBar(mToolbar);
@@ -110,6 +117,9 @@ public class CalendarActivity extends AppCompatActivity {
         cal_list = new ArrayList<CalListActivity>();
         calAdapter = new CustomCalendar(cal_list, getApplicationContext());
 
+        customProgressDialog.show();
+        customProgressDialog.setCancelable(false);
+
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -123,6 +133,8 @@ public class CalendarActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
+                                    customProgressDialog.dismiss();
+
                                     cal_list.clear();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         cal_list.add(0, new CalListActivity((String)document.getData().get("todo_title"),(String)document.getData().get("todo_time")));
@@ -208,6 +220,7 @@ public class CalendarActivity extends AppCompatActivity {
                         });
 
                 listcal.setAdapter(calAdapter);
+
             }
         });
     }
