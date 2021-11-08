@@ -21,103 +21,92 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextNickName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginRight="20dp"
-        android:maxLength="9"
+        android:orientation="vertical"
+        android:padding="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNickTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editNickName"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textNickTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:background="#fff"
-            android:ems="12"
-            android:textCursorDrawable="@null"
-            android:textColor="#4A4846"
-            android:hint="닉네임을 입력하세요."
-            android:inputType="textPersonName"
+            android:layout_marginBottom="35dp"
             android:fontFamily="@font/nanumbarunpenr"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.432"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textNickTitle"
-            app:layout_constraintVertical_bias="0.052" />
+            android:text="당신의 캐릭터 이름은?"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textNickError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="3dp"
-        android:text="닉네임은 8글자 이하로 입력해주세요."
-        android:fontFamily="@font/nanumbarunpenr"
-        android:textColor="#F43636"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextNickName"
-        app:layout_constraintVertical_bias="0.0" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="9">
 
-    <TextView
-        android:id="@+id/textNickTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="당신의 캐릭터 이름은?"
-        android:textColor="@color/colorAccent"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/nanumbarunpenr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editNickName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:ems="12"
+                    android:fontFamily="@font/nanumbarunpenr"
+                    android:hint="닉네임을 입력하세요."
+                    android:inputType="textPersonName"
+                    android:textColor="#4A4846"
+                    android:textCursorDrawable="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.432"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textNickTitle"
+                    app:layout_constraintVertical_bias="0.052" />
 
-    <TextView
-        android:id="@+id/textgogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:fontFamily="@font/nanumbarunpenb"
-        android:text="시작하기!!"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageNickArrow"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.228" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/imageNickArrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405"
-        app:srcCompat="@drawable/rightarrow" />
+            <ImageView
+                android:id="@+id/imageNickArrow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rightarrow" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textNickError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumbarunpenr"
+            android:paddingTop="4dp"
+            android:paddingBottom="2dp"
+            android:text="닉네임은 8글자 이하로 입력해주세요."
+            android:textColor="#F43636"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textgogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:fontFamily="@font/nanumbarunpenb"
+            android:text="시작하기!!"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

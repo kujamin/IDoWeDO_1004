@@ -1662,7 +1662,7 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
                                                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                                        .document("state").collection("store").document("c10_head");
+                                                        .document("state").collection("store").document("c10_hand");
 
                                                 documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                                         .document("state");
@@ -1703,7 +1703,7 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
                                                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                                        .document("state").collection("store").document("c11_head");
+                                                        .document("state").collection("store").document("c11_hand");
 
                                                 documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                                         .document("state");
@@ -1744,7 +1744,7 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
                                                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                                        .document("state").collection("store").document("c12_head");
+                                                        .document("state").collection("store").document("c12_hand");
 
                                                 documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                                         .document("state");
@@ -1785,7 +1785,7 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
                                                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                                        .document("state").collection("store").document("c13_head");
+                                                        .document("state").collection("store").document("c13_hand");
 
                                                 documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                                         .document("state");

@@ -8,101 +8,95 @@
     tools:context=".Login.LoginActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="50dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481">
+        app:layout_constraintVertical_bias="0.18">
 
         <ImageView
             android:id="@+id/imageLogo"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo3"
             android:padding="10dp"
+            android:src="@drawable/logo3"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+    <LinearLayout
+        android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        android:orientation="vertical"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:fontFamily="@font/nanumbarunpenb"
-            android:id="@+id/et_pwd"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:background="#fff"
-            android:textCursorDrawable="@null"
-            android:textColor="#4A4846"
-            android:hint="비밀번호"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:fontFamily="@font/nanumbarunpenb"
+                android:hint="이메일"
+                android:inputType="textEmailAddress"
+                android:textColor="#4A4846"
+                android:textCursorDrawable="@null" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:fontFamily="@font/nanumbarunpenb"
-            android:id="@+id/et_email"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:background="#fff"
-            android:textCursorDrawable="@null"
-            android:textColor="#4A4846"
-            android:hint="이메일"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:fontFamily="@font/nanumbarunpenb"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:textColor="#4A4846"
+                android:textCursorDrawable="@null" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:layout_marginLeft="10dp"
-
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.69">
 
         <Button
-            android:fontFamily="@font/nanumbarunpenb"
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginLeft="14dp"
             android:layout_weight="2"
             android:background="@drawable/bin_blue"
+            android:fontFamily="@font/nanumbarunpenb"
             android:scaleX=".9"
             android:text="LOGIN"
             android:textColor="#fff"
@@ -113,24 +107,23 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:fontFamily="@font/nanumbarunpenb"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_weight="2"
+            android:fontFamily="@font/nanumbarunpenb"
             android:gravity="center"
-            android:text="OR"/>
+            android:text="OR" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_google"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginRight="14dp"
             android:layout_weight="2"
             android:textColor="#fff"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_login"/>
+            app:layout_constraintStart_toEndOf="@+id/btn_login" />
 
     </LinearLayout>
 
@@ -139,29 +132,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-32dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintVertical_bias="0.88">
 
         <TextView
             android:id="@+id/tv_findPW"
-            android:fontFamily="@font/nanumbarunpenb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="5"
+            android:fontFamily="@font/nanumbarunpenb"
             android:gravity="center"
             android:text="비밀번호 찾기"
             android:textColor="@color/colorblack"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
+
         <TextView
-            android:fontFamily="@font/nanumbarunpenb"
             android:id="@+id/app_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="5"
+            android:fontFamily="@font/nanumbarunpenb"
             android:gravity="center"
             android:text="회원가입"
             android:textColor="@color/colorblack"

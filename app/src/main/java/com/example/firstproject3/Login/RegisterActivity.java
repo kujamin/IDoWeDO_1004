@@ -445,7 +445,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Map<String, Object> r11 = new HashMap<>();
                                 r11.put("buy", "X");
                                 r11.put("category", "head");
-                                r11.put("name", "student_head_01");
+                                r11.put("name", "student_hand_01");
 
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character")
                                         .document("state").collection("reward").document("r4_head").set(r11).addOnCompleteListener(new OnCompleteListener<Void>() {

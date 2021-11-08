@@ -4,53 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.RegisterActivity">
+    tools:context=".Login.RegisterActivity"
+    android:background="#fff">
 
-    <ImageView
-        android:id="@+id/imageViewarrow"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_gravity="left"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="?attr/homeAsUpIndicator" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="15dp"
-        android:text="회원가입"
-        android:fontFamily="@font/nanumbarunpenb"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687" />
+        app:layout_constraintVertical_bias="0.00999999">
+
+        <ImageView
+            android:id="@+id/imageViewarrow"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="?attr/homeAsUpIndicator" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18">
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumbarunpenb"
+            android:gravity="center"
+            android:text="회원가입"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorAccent"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_marginLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/bonus" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="30dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        android:paddingRight="60dp"
+        android:paddingLeft="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -65,13 +85,12 @@
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="#fff"
-                android:textCursorDrawable="@null"
-                android:textColor="#4A4846"
-                android:hint="이름"
                 android:fontFamily="@font/nanumbarunpenb"
-                android:inputType="textEmailAddress" />
+                android:hint="이름"
+                android:inputType="textEmailAddress"
+                android:textColor="#4A4846"
+                android:textCursorDrawable="@null" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,13 +106,12 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="#fff"
-                android:hint="이메일"
-                android:textCursorDrawable="@null"
-                android:textColor="#4A4846"
                 android:fontFamily="@font/nanumbarunpenb"
-                android:inputType="textEmailAddress" />
+                android:hint="이메일"
+                android:inputType="textEmailAddress"
+                android:textColor="#4A4846"
+                android:textCursorDrawable="@null" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -109,13 +127,12 @@
                 android:id="@+id/et_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="#fff"
-                android:textCursorDrawable="@null"
-                android:textColor="#4A4846"
-                android:hint="비밀번호"
                 android:fontFamily="@font/nanumbarunpenb"
-                android:inputType="textPassword" />
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:textColor="#4A4846"
+                android:textCursorDrawable="@null" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -131,22 +148,19 @@
                 android:id="@+id/et_repwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="#fff"
-                android:textCursorDrawable="@null"
-                android:textColor="#4A4846"
-                android:hint="비밀번호 확인"
                 android:fontFamily="@font/nanumbarunpenb"
-                android:inputType="textPassword" />
+                android:hint="비밀번호 확인"
+                android:inputType="textPassword"
+                android:textColor="#4A4846"
+                android:textCursorDrawable="@null" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textPwdError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_gravity="left"
-            android:layout_marginBottom="10dp"
             android:text="똑같은 비밀번호를 입력해주세요!"
             android:textColor="#F43636"
             android:textSize="12dp"
@@ -158,29 +172,14 @@
         android:id="@+id/btn_register"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="80dp"
         android:background="@drawable/bin_blue"
-        android:text="가입하기"
         android:fontFamily="@font/nanumbarunpenb"
+        android:text="가입하기"
         android:textColor="#fff"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView26"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653"
-        app:srcCompat="@drawable/bonus" />
 </androidx.constraintlayout.widget.ConstraintLayout>
