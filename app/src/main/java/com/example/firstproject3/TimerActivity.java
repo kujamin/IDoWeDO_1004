@@ -60,6 +60,7 @@ public class TimerActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String userCode;
+    private long backpressedTime = 0;
 
     public void onClickBack(View v) {
         finish();
@@ -220,6 +221,19 @@ public class TimerActivity extends AppCompatActivity {
                 handler.sendMessage(msg);
             }
         }
+
+
+    }
+    @Override
+    public void onBackPressed() {
+
+        if (System.currentTimeMillis() > backpressedTime + 2000) {
+            backpressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다. 하지만 현재 진행된 시간값은 저장되지 않습니다.", Toast.LENGTH_SHORT).show();
+        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+            finish();
+        }
+
     }
 
 }
