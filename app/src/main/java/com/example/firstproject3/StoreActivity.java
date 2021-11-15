@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -31,7 +32,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -51,13 +54,13 @@ public class StoreActivity extends AppCompatActivity {
             strCoin7, strCoin8, strCoin9, strCoin10, strCoin11, strCoin12,
             strCoin13, strCoin14, strCoin15, strCoin16, strCoin17, strCoin18,
             strCoin19, strCoin20, strCoin21, strCoin22, strCoin23, strCoin24,
-            strCoin25, strCoin26, strCoin27, strCoin28, strCoin29;
+            strCoin25, strCoin26, strCoin27, strCoin28, strCoin29, coin;
     private DocumentReference documentReference, documentReferenceC;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String userCode;
 
-    TextView tv_popup, tv_Item1, tv_Item2, tv_Item3, tv_Item4, tv_Item5, tv_Item6, tv_Item7, tv_Item8, tv_Item9, tv_Item10, tv_Item11, tv_Item12, tv_Item13, tv_Item14, tv_Item15, tv_Item16, tv_Item17, tv_Item18, tv_Item19, tv_Item20, tv_Item21, tv_Item22, tv_Item23, tv_Item24, tv_Item25, tv_Item26, tv_Item27, tv_Item28, tv_Item29;
+    TextView tv_popup, tv_currentMycoin, tv_Item1, tv_Item2, tv_Item3, tv_Item4, tv_Item5, tv_Item6, tv_Item7, tv_Item8, tv_Item9, tv_Item10, tv_Item11, tv_Item12, tv_Item13, tv_Item14, tv_Item15, tv_Item16, tv_Item17, tv_Item18, tv_Item19, tv_Item20, tv_Item21, tv_Item22, tv_Item23, tv_Item24, tv_Item25, tv_Item26, tv_Item27, tv_Item28, tv_Item29;
     String tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvItem7, tvItem8, tvItem9, tvItem10, tvItem11, tvItem12, tvItem13, tvItem14, tvItem15, tvItem16, tvItem17, tvItem18, tvItem19, tvItem20, tvItem21, tvItem22, tvItem23, tvItem24, tvItem25, tvItem26, tvItem27, tvItem28, tvItem29;
 
     @Override
@@ -81,6 +84,7 @@ public class StoreActivity extends AppCompatActivity {
         popupStore = findViewById(R.id.popupStore);
         TextView textYes = findViewById(R.id.textYes);
         TextView textNo = findViewById(R.id.textNo);
+        tv_currentMycoin = findViewById(R.id.currentMycoin);
         soldoutView1 = findViewById(R.id.SoldoutView1);
         soldoutView2 = findViewById(R.id.SoldoutView2);
         soldoutView3 = findViewById(R.id.SoldoutView3);
@@ -182,15 +186,26 @@ public class StoreActivity extends AppCompatActivity {
                 documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                         .document("state");
 
-                documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                documentReferenceC.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot doc = task.getResult();
-                            myCoin = Integer.parseInt(doc.getString("coin"));
-                        }
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+
+                                    myCoin = Integer.parseInt(document.getString("coin"));
+
+
+                                    tv_currentMycoin.setText(myCoin + "");
+
+                                }
+                            }
+                        });
                     }
                 });
+
 
                 firebaseFirestore.collection("user").document(userCode).collection("user character")
                         .document("state").collection("store")
@@ -352,6 +367,7 @@ public class StoreActivity extends AppCompatActivity {
                 itemId = v.getId();
                 darkView.setVisibility(View.VISIBLE);
                 popupStore.setVisibility(View.VISIBLE);
+                tv_currentMycoin.setText(myCoin + "");
                 switch (itemId) {
                     case R.id.item1:
                         tvItem1 = tv_Item1.getText().toString();
@@ -606,6 +622,7 @@ public class StoreActivity extends AppCompatActivity {
                 mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                         documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
 
@@ -615,10 +632,10 @@ public class StoreActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     myCoin = Integer.parseInt(doc.getString("coin"));
-                                    if(myCoin >= 100) {
-                                        switch (itemId) {
-                                            //c1
-                                            case R.id.item1:
+                                    switch (itemId) {
+                                        //c1
+                                        case R.id.item1:
+                                            if (myCoin >= 100) {
                                                 soldoutView1.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -659,9 +676,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin1));
-
-                                                break;
-                                            case R.id.item2:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item2:
+                                            if (myCoin >= 100) {
                                                 soldoutView2.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -701,10 +722,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin2));
-
-                                                break;
-                                            //c2
-                                            case R.id.item3:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c2
+                                        case R.id.item3:
+                                            if (myCoin >= 100) {
                                                 soldoutView3.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -744,9 +769,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin3));
-
-                                                break;
-                                            case R.id.item4:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item4:
+                                            if (myCoin >= 150) {
                                                 soldoutView4.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -786,8 +815,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin4));
-                                                break;
-                                            case R.id.item5:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item5:
+                                            if (myCoin >= 150) {
                                                 soldoutView5.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -827,10 +861,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin5));
-
-                                                break;
-                                            //c3
-                                            case R.id.item6:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c3
+                                        case R.id.item6:
+                                            if (myCoin >= 200) {
                                                 soldoutView6.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -870,8 +908,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin6));
-                                                break;
-                                            case R.id.item7:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item7:
+                                            if (myCoin >= 200) {
                                                 soldoutView7.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -911,8 +954,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin7));
-                                                break;
-                                            case R.id.item8:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item8:
+                                            if (myCoin >= 200) {
                                                 soldoutView8.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -952,9 +1000,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin8));
-                                                break;
-                                            //c4
-                                            case R.id.item9:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c4
+                                        case R.id.item9:
+                                            if (myCoin >= 250) {
                                                 soldoutView9.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -994,8 +1047,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin9));
-                                                break;
-                                            case R.id.item10:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item10:
+                                            if (myCoin >= 250) {
                                                 soldoutView10.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1035,9 +1093,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin10));
-                                                break;
-                                            //c5
-                                            case R.id.item11:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c5
+                                        case R.id.item11:
+                                            if (myCoin >= 300) {
                                                 soldoutView11.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1077,8 +1140,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin11));
-                                                break;
-                                            case R.id.item12:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item12:
+                                            if (myCoin >= 450) {
                                                 soldoutView12.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1118,8 +1186,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin12));
-                                                break;
-                                            case R.id.item13:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item13:
+                                            if (myCoin >= 400) {
                                                 soldoutView13.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1159,9 +1232,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin13));
-                                                break;
-                                            //c6
-                                            case R.id.item14:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c6
+                                        case R.id.item14:
+                                            if (myCoin >= 300) {
                                                 soldoutView14.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1201,8 +1279,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin14));
-                                                break;
-                                            case R.id.item15:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item15:
+                                            if (myCoin >= 550) {
                                                 soldoutView15.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1242,8 +1325,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin15));
-                                                break;
-                                            case R.id.item16:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item16:
+                                            if (myCoin >= 400) {
                                                 soldoutView16.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1283,9 +1371,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin16));
-                                                break;
-                                            //c7
-                                            case R.id.item17:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c7
+                                        case R.id.item17:
+                                            if (myCoin >= 400) {
                                                 soldoutView17.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1325,8 +1418,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin17));
-                                                break;
-                                            case R.id.item18:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item18:
+                                            if (myCoin >= 450) {
                                                 soldoutView18.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1366,8 +1464,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin18));
-                                                break;
-                                            case R.id.item19:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item19:
+                                            if (myCoin >= 350) {
                                                 soldoutView19.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1407,9 +1510,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin19));
-                                                break;
-                                            //c8
-                                            case R.id.item20:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        //c8
+                                        case R.id.item20:
+                                            if (myCoin >= 400) {
                                                 soldoutView20.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1449,8 +1557,13 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin20));
-                                                break;
-                                            case R.id.item21:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            break;
+                                        case R.id.item21:
+                                            if (myCoin >= 450) {
                                                 soldoutView21.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1490,8 +1603,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin21));
-                                                break;
-                                            case R.id.item22:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        case R.id.item22:
+                                            if (myCoin >= 400) {
                                                 soldoutView22.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1531,9 +1650,16 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin22));
-                                                break;
-                                            //c9
-                                            case R.id.item23:
+                                                tv_currentMycoin.setText(myCoin + "");
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        //c9
+                                        case R.id.item23:
+                                            if (myCoin >= 400) {
                                                 soldoutView23.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1573,8 +1699,15 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin23));
-                                                break;
-                                            case R.id.item24:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        case R.id.item24:
+                                            if (myCoin >= 450) {
                                                 soldoutView24.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1614,8 +1747,15 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin24));
-                                                break;
-                                            case R.id.item25:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        case R.id.item25:
+                                            if (myCoin >= 400) {
                                                 soldoutView25.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1655,9 +1795,15 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin25));
-                                                break;
-                                            //c10~c13
-                                            case R.id.item26:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        //c10~c13
+                                        case R.id.item26:
+                                            if (myCoin >= 500) {
                                                 soldoutView26.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1697,8 +1843,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin26));
-                                                break;
-                                            case R.id.item27:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        case R.id.item27:
+                                            if (myCoin >= 500) {
                                                 soldoutView27.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1738,8 +1890,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin27));
-                                                break;
-                                            case R.id.item28:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        case R.id.item28:
+                                            if (myCoin >= 500) {
                                                 soldoutView28.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1779,8 +1937,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin28));
-                                                break;
-                                            case R.id.item29:
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
+                                        case R.id.item29:
+                                            if (myCoin >= 500) {
                                                 soldoutView29.setVisibility(View.VISIBLE);
 
                                                 firebaseFirestore = FirebaseFirestore.getInstance();
@@ -1820,12 +1984,14 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin29));
-                                                break;
-                                        }
+                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            tv_currentMycoin.setText(myCoin + "");
+                                            break;
                                     }
-                                    else {
-                                        Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
-                                    }
+
 
                                 }
                             }
@@ -1847,6 +2013,8 @@ public class StoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 darkView.setVisibility(View.INVISIBLE);
                 popupStore.setVisibility(View.INVISIBLE);
+                tv_currentMycoin.setText(myCoin + "");
+
             }
         });
     }

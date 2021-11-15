@@ -1,5 +1,6 @@
 package com.example.firstproject3.bottom_fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -169,6 +170,10 @@ public class Fragment_Character extends Fragment {
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot document = task.getResult();
+
+                                            Activity activity = (Activity) rootView.getContext();
+                                            if (activity.isFinishing())
+                                                return;
 
                                             Glide.with(rootView.getContext()).load(document.getString("cloHead")).into(cloStateHead);
                                             Glide.with(rootView.getContext()).load(document.getString("cloTorso")).into(cloStateTorso);
