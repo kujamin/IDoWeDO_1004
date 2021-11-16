@@ -111,6 +111,7 @@
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_achieve.xml" value="0.22" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_attendance_check.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_bottom_app_bar.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_challenge_check.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_click_trans.xml" value="0.22" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/jenny/AndroidStudioProjects/IDoWeDO_1004/app/src/main/res/layout/activity_confirm2.xml" value="0.17708333333333334" />
@@ -246,7 +247,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
