@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="220dp"
-    tools:context=".LevelupActivity"
+    tools:context="com.idowedo.firstproject3.LevelupActivity"
     android:background="#ffff"
     android:orientation="vertical" >
     <LinearLayout

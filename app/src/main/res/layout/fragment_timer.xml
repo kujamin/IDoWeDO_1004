@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bottom_fragment.Fragment_Timer"
+    tools:context="com.idowedo.firstproject3.bottom_fragment.Fragment_Timer"
     android:id="@+id/fragment_Timer">
 
     <androidx.constraintlayout.widget.ConstraintLayout

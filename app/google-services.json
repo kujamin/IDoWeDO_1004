@@ -58,6 +58,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915511622927:android:065700a19bad14e7fa127a",
+        "android_client_info": {
+          "package_name": "com.idowedo.firstproject3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915511622927-o0mua66qpvljlhsjgn3hg9lin3m3opct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idowedo.firstproject3",
+            "certificate_hash": "8ab2b795edc8b855fa7e20161ea8f41016b6d93d"
+          }
+        },
+        {
+          "client_id": "915511622927-5bh9gk7go846qadakl0bo5agru5i4bv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChLS7QH7zyqoLMvvdLN8mEowyOBEg-QqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915511622927-5bh9gk7go846qadakl0bo5agru5i4bv0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

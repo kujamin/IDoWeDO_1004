@@ -10,37 +10,37 @@
 
     <activity
         android:id="@+id/test2"
-        android:name="com.example.firstproject3.MainActivity"
+        android:name="com.idowedo.firstproject3.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
 
     <activity
         android:id="@+id/nav_question"
-        android:name="com.example.firstproject3.QuestionPopupActivity"
+        android:name="com.idowedo.firstproject3.QuestionPopupActivity"
         android:label="문의 이메일 보내러가기" />
 
     <fragment
         android:id="@+id/test"
-        android:name="com.example.firstproject3.Test"
+        android:name="com.idowedo.firstproject3.Test"
         android:label="오늘의 할 일"
         tools:layout="@layout/fragment_test" />
 
 
     <activity
         android:id="@+id/noticeActivity"
-        android:name="com.example.firstproject3.NoticeActivity"
+        android:name="com.idowedo.firstproject3.NoticeActivity"
         android:label="activity_notice"
         tools:layout="@layout/activity_notice" />
 
     <activity
         android:id="@+id/logout"
-        android:name="com.example.firstproject3.Logout_Popup"
+        android:name="com.idowedo.firstproject3.Logout_Popup"
         android:label="Logout_Popup"
         tools:layout="@layout/activity_logout_popup" />
 
     <activity
         android:id="@+id/deleteuser"
-        android:name="com.example.firstproject3.DeleteUser"
+        android:name="com.idowedo.firstproject3.DeleteUser"
         android:label="DeleteUser"
         tools:layout="@layout/activity_delete_user" />
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Login.LoginActivity">
+    tools:context="com.idowedo.firstproject3.Login.LoginActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout9"

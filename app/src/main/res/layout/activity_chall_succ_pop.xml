@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="280dp"
-    tools:context=".ChallSuccPopActivity"
+    tools:context="com.idowedo.firstproject3.ChallSuccPopActivity"
     android:background="#ffff"
     android:orientation="vertical">
 

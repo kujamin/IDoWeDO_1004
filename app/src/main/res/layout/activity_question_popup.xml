@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_width="240dp"
     android:background="@drawable/popbackground_layout"
-    tools:context=".QuestionPopupActivity"
+    tools:context="com.idowedo.firstproject3.QuestionPopupActivity"
     android:orientation="vertical" >
 
 

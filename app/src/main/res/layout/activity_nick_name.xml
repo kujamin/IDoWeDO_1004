@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NickNameActivity">
+    tools:context="com.idowedo.firstproject3.NickNameActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/stre_toolbar"

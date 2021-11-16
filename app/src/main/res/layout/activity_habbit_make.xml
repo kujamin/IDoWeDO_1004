@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HabbitMakeActivity"
+    tools:context="com.idowedo.firstproject3.HabbitMakeActivity"
     android:id="@+id/activity_HabbitMake">
 
     <androidx.appcompat.widget.Toolbar

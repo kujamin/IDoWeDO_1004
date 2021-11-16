@@ -5,7 +5,7 @@
     android:layout_height="460dp"
     android:layout_width="320dp"
     android:background="#ffff"
-    tools:context=".Challenge_Wakeup_Activity"
+    tools:context="com.idowedo.firstproject3.Challenge_Wakeup_Activity"
     android:orientation="vertical">
 
     <LinearLayout

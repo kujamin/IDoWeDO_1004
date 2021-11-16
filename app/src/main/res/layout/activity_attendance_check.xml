@@ -5,7 +5,7 @@
     android:layout_height="460dp"
     android:layout_width="320dp"
     android:background="#ffff"
-    tools:context=".AtCheck.Attendance_CheckActivity"
+    tools:context="com.idowedo.firstproject3.AtCheck.Attendance_CheckActivity"
     android:orientation="vertical">
 
     <LinearLayout
