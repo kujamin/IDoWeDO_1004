@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView mTextPwdError;
     private Button mBtnRegister; // 회원가입 버튼
     private FirebaseFirestore firebaseFirestore;
-    ProgressDialog customProgressDialog;
+    com.idowedo.firstproject3.Login.ProgressDialog customProgressDialog;
     private String TAG = "MainActivity";
     private String strNick = null, dateR;
 
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         imgarrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
         //로딩창 객체 생성
-        customProgressDialog = new ProgressDialog(this);
+        customProgressDialog = new com.idowedo.firstproject3.Login.ProgressDialog(this);
         //로딩창을 투명하게
         customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -89,15 +89,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String strRePwd = mEtRePwd.getText().toString();
 
                 if(strName.length() > 0 && strEmail.length() > 0 && strPwd.length() > 0 && strRePwd.length() > 0) {
-                joinstart(strName, strEmail, strPwd, strRePwd);
+                    joinstart(strName, strEmail, strPwd, strRePwd);
                 } else if (strName.length() == 0) {
-                    Toast.makeText(RegisterActivity.this, "이름을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "이름을 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else if (strEmail.length() == 0) {
-                    Toast.makeText(RegisterActivity.this, "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "이메일을 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else if (strPwd.length() == 0) {
-                    Toast.makeText(RegisterActivity.this, "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(RegisterActivity.this, "빠진 항목이 없는지 다시 확인해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "빠진 항목이 없는지 다시 확인하세요.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -115,11 +115,11 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             throw task.getException();
                         } catch (FirebaseAuthInvalidCredentialsException e) {
-                            Toast.makeText(RegisterActivity.this, "e-mail 형식에 맞지 않아요!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "e-mail 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show();
                         } catch (FirebaseAuthUserCollisionException e) {
-                            Toast.makeText(RegisterActivity.this, "이미 존재하는 email 이에요!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "이미 존재하는 email입니다.", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
-                            Toast.makeText(RegisterActivity.this, "다시 확인해주세요!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "다시 확인하세요.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         customProgressDialog.dismiss();
@@ -136,7 +136,6 @@ public class RegisterActivity extends AppCompatActivity {
                         account.setchallengepoint(0);
                         account.setDotodo(0);
                         account.setStorepoint(0);
-                        account.setLvAchieve(0);
 
                         // setValue : database에 insert 행위
                         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
@@ -216,14 +215,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 ////캐릭터 생성////
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                    }
-                                });
-
-                                ////출석체크 생성////
-                                firebaseFirestore.collection("user").document(strEmail).collection("user Check").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -429,11 +420,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 /////교복///
                                 Map<String, Object> r11 = new HashMap<>();
                                 r11.put("buy", "X");
-                                r11.put("category", "head");
+                                r11.put("category", "hand");
                                 r11.put("name", "student_hand_01");
 
                                 firebaseFirestore.collection("user").document(strEmail).collection("user character")
-                                        .document("state").collection("reward").document("r4_head").set(r11).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        .document("state").collection("reward").document("r4_hand").set(r11).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -1071,7 +1062,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         });
                             }
                         });
-                        Toast.makeText(RegisterActivity.this, "회원가입에 성공했어요!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -1083,4 +1073,5 @@ public class RegisterActivity extends AppCompatActivity {
             customProgressDialog.dismiss();
             mTextPwdError.setVisibility(View.VISIBLE);
         }
-    }}
+    }
+}

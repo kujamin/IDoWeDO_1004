@@ -206,11 +206,11 @@ public class HabbitDetailActivity extends AppCompatActivity {
                 String str_cateText = habbitDetail_textch.getText().toString().trim();
 
                 if(str_title.length() == 0){
-                    Toast.makeText(getApplicationContext(),"습관 이름을 입력하세요!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"습관 이름을 입력하세요.",Toast.LENGTH_SHORT).show();
                 }
                 else{
 
-                    pd.setTitle("저장중...");
+                    pd.setTitle("저장 중...");
                     pd.show();
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
@@ -224,7 +224,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void unused) {
                             pd.dismiss();
-                            Toast.makeText(getApplicationContext(),"변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"변경되었습니다.", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });

@@ -66,7 +66,7 @@ public class DeleteUser extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "회원 탈퇴가 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
 
                             //firestore delete
                             mdatabase.child("idowedo").child("UserAccount").child(firebaseUser1.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {

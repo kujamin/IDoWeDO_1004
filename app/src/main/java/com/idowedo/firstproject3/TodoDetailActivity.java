@@ -22,7 +22,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.idowedo.firstproject3.Login.UserAccount;
 import com.idowedo.firstproject3.R;
@@ -260,11 +259,11 @@ public class TodoDetailActivity extends AppCompatActivity {
                 String str_time = todoDetail_textViewTime.getText().toString().trim();
 
                 if(str_title.length() == 0){
-                    Toast.makeText(getApplicationContext(),"일정 이름을 입력하세요!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"일정 이름을 입력하세요.",Toast.LENGTH_SHORT).show();
                 }
                 else{
 
-                    pd.setTitle("저장중...");
+                    pd.setTitle("저장 중...");
                     pd.show();
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
@@ -279,7 +278,7 @@ public class TodoDetailActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void unused) {
                             pd.dismiss();
-                            Toast.makeText(getApplicationContext(),"변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"변경되었습니다.", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });

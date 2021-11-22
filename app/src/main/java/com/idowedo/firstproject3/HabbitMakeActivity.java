@@ -222,13 +222,13 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 String dateStart = dateFormat.format(dateS);
 
                 if(title.length() == 0){
-                    Toast.makeText(getApplicationContext(),"습관 이름을 입력하세요!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"습관 이름을 입력하세요.",Toast.LENGTH_SHORT).show();
                 }
                 else if (date == ""){
-                    Toast.makeText(getApplicationContext(),"기한을 설정하세요!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"기한을 설정하세요.",Toast.LENGTH_SHORT).show();
                 }
                 else if (category == null){
-                    Toast.makeText(getApplicationContext(),"분류를 설정하세요!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"분류를 설정하세요.",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     uploadData(title, date, memo, category, cateText, id, userCode, dateStart);
@@ -282,14 +282,12 @@ public class HabbitMakeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pd.dismiss();
-                        Toast.makeText(HabbitMakeActivity.this, title + " 습관이 설정되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         pd.dismiss();
-                        Toast.makeText(HabbitMakeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }

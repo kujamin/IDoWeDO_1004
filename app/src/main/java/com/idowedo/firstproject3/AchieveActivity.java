@@ -136,7 +136,7 @@ public class AchieveActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int value = snapshot.getValue(Integer.class);
                                 if (value < 30) {
-                                    Toast.makeText(getApplicationContext(), "현재까지 " + value + "일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "현재 " + value + "일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     /*documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                             .document("achieve");
@@ -168,7 +168,7 @@ public class AchieveActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int value = snapshot.getValue(Integer.class);
                                 if (value < 100) {
-                                    Toast.makeText(getApplicationContext(), "현재까지 " + value + " 일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "현재 " + value + " 일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     slideLayout.setVisibility(View.VISIBLE);
                                     darkView.setVisibility(View.VISIBLE);
@@ -205,7 +205,7 @@ public class AchieveActivity extends AppCompatActivity {
                                     slideLayout.startAnimation(translateup);
                                     showImg.setImageDrawable(clickimg);
                                     showName.setText(str);
-                                    showExplain.setText("상점에서 부위별 의상 2개이상 구매하기");
+                                    showExplain.setText("상점에서 부위별 의상 2개 이상 구매하기");
                                 }
 
                             }
@@ -228,7 +228,7 @@ public class AchieveActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int value = snapshot.getValue(Integer.class);
                                 if (value < 30) {
-                                    Toast.makeText(getApplicationContext(), "더 많은 계획을 달성해보세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "더 많은 계획을 이뤄보세요", Toast.LENGTH_SHORT).show();
                                 } else {
                                     slideLayout.setVisibility(View.VISIBLE);
                                     darkView.setVisibility(View.VISIBLE);
@@ -258,14 +258,14 @@ public class AchieveActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int value = snapshot.getValue(Integer.class);
                                 if (value < 29) {
-                                    Toast.makeText(getApplicationContext(), "코인을 더 모아 아이템을 구매해보세요!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "코인을 모아 아이템을 구매해보세요!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     slideLayout.setVisibility(View.VISIBLE);
                                     darkView.setVisibility(View.VISIBLE);
                                     slideLayout.startAnimation(translateup);
                                     showImg.setImageDrawable(clickimg);
                                     showName.setText(str);
-                                    showExplain.setText("상점에 있는 모든 패션아이템 구매하기");
+                                    showExplain.setText("상점에 있는 모든 패션 아이템 구매하기");
                                 }
 
                             }
@@ -286,7 +286,7 @@ public class AchieveActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int value = snapshot.getValue(Integer.class);
                                 if (value == 0) {
-                                    Toast.makeText(getApplicationContext(), "아직 챌린지에 참여하지 않았어요!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "아직 챌린지에 참여하지 않았어요", Toast.LENGTH_SHORT).show();
                                 } else {
                                     slideLayout.setVisibility(View.VISIBLE);
                                     darkView.setVisibility(View.VISIBLE);
@@ -322,7 +322,7 @@ public class AchieveActivity extends AppCompatActivity {
                                     slideLayout.startAnimation(translateup);
                                     showImg.setImageDrawable(clickimg);
                                     showName.setText(str);
-                                    showExplain.setText("할일 정리의 달인! Lv30 축하합니다!");
+                                    showExplain.setText("할 일 정리의 달인! Lv30 축하합니다!");
                                 }
 
                             }

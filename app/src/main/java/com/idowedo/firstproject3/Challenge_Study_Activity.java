@@ -1,6 +1,7 @@
 package com.idowedo.firstproject3;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.idowedo.firstproject3.AtCheck.SaturdayDecorator;
 import com.idowedo.firstproject3.AtCheck.SundayDecorator;
 import com.idowedo.firstproject3.Login.ProgressDialog;
@@ -39,6 +44,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
+import org.w3c.dom.Document;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -136,6 +143,7 @@ public class Challenge_Study_Activity extends Activity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
+
                                         if (document.getString("today_date") != null) {
                                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                             String strd = document.getString("today_date");
@@ -157,6 +165,7 @@ public class Challenge_Study_Activity extends Activity {
                             }
                         });
 
+                //오늘 날짜와 캘린더 참여 날짜가 동일하면 버튼 비활성화
                 firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                         .whereEqualTo("today_date",strDate)
                         .get()
@@ -178,6 +187,23 @@ public class Challenge_Study_Activity extends Activity {
                             }
                         });
 
+
+                DocumentReference documentReference = firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기");
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException error) {
+                        String str = snapshot.getString("userChall_title");
+
+                        if(str != null){ //챌린지 참여한 경우 버튼 활성화
+                            btnstate = 0;
+                        } else { //챌린지 참여하지 않았을 경우 버튼 비활성화
+                            chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
+                            chall_checkBtn.setEnabled(false);
+                        }
+
+                    }
+                });
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -197,7 +223,7 @@ public class Challenge_Study_Activity extends Activity {
                     // alert의 title과 Messege 세팅
                     myAlertBuilder.setMessage("정말 달성하셨나요?");
                     // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
-                    myAlertBuilder.setPositiveButton("네!",new DialogInterface.OnClickListener(){
+                    myAlertBuilder.setPositiveButton("네",new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog,int which){
                             // OK 버튼을 눌렸을 경우
 
@@ -220,7 +246,7 @@ public class Challenge_Study_Activity extends Activity {
                             dateR = year + "-" + month + "-" + day;
 
                             Map<String, Object> doc = new HashMap<>();
-                            doc.put("userChallWakeup_OX", "O");
+                            doc.put("userChallStudy_OX", "O");
                             doc.put("userCode", usercode);
                             doc.put("today_date", dateR);
 
@@ -229,13 +255,12 @@ public class Challenge_Study_Activity extends Activity {
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
                                     });
                         }
                     });
-                    myAlertBuilder.setNegativeButton("아니요..", new DialogInterface.OnClickListener() {
+                    myAlertBuilder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }

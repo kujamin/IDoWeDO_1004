@@ -170,13 +170,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                         nick = nickname;
 
                                                         if (nick != null) {
-                                                            Toast.makeText(getApplicationContext(), "반가워요:)", Toast.LENGTH_SHORT).show();
                                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                             intent.putExtra("userCode", userCode);
                                                             startActivity(intent);
                                                             finish(); // 현재 액티비티 파괴
                                                         } else {
-                                                            Toast.makeText(getApplicationContext(), "반가워요:) 먼저 닉네임을 설정해주세요!", Toast.LENGTH_SHORT).show();
                                                             Intent intent = new Intent(LoginActivity.this, NickNameActivity.class);
                                                             intent.putExtra("userCode", userCode);
                                                             startActivity(intent);
@@ -296,6 +294,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                             }
                                         });
 
+                                        ////출석체크 생성////
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user attendance").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
                                         //습관
                                         firebaseFirestore.collection("user").document(strEmail).collection("user habbit").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -322,14 +328,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                                         //캐릭터
                                         firebaseFirestore.collection("user").document(strEmail).collection("user character").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                            }
-                                        });
-
-                                        //출석체크
-                                        firebaseFirestore.collection("user").document(strEmail).collection("user Check").document("blank").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
@@ -976,10 +974,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     }
                                 });
 
-                            Toast.makeText(LoginActivity.this, "구글계정 연동 성공! 반갑습니다~!", Toast.LENGTH_SHORT).show();
                             updateUI(firebaseUser);
                         } else {
-                            Toast.makeText(LoginActivity.this, "구글계정 연동에 실패했어요,, 다시 시도해주세요!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
                     }

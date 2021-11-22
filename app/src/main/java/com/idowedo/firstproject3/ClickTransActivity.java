@@ -70,6 +70,8 @@ public class ClickTransActivity extends AppCompatActivity {
         TextView textChallplan = findViewById(R.id.textViewChallexplan);
         TextView textChallnotice = findViewById(R.id.textViewChallnotice);
 
+        ImageView chall_check = findViewById(R.id.chall_check);
+
         Intent intent = getIntent();
         chall_Text = intent.getStringExtra("chall_title");
         String chall_Img = intent.getStringExtra("chall_img");
@@ -121,21 +123,21 @@ public class ClickTransActivity extends AppCompatActivity {
         textChallname.setText(chall_Text);
 
         if(chall_Text.equals("자격증 취득하기")){
-            textChallplan.setText("한 달 동안 자격증 하나 취득해보세요!\n자격증 취득 후 취득결과를 사진으로 찍어주세요.\n\n챌린지 기간 : 30일");
-            textChallnotice.setText("보상 : 100코인 지급\n");
+            textChallplan.setText("한 달 안 자격증 취득에 도전하세요!\n자격증 취득 후 취득결과를 사진으로 찍어 인증하세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("보상 : 500코인 + 레어 의상(선택 가능) 지급\n");
         }
         else if(chall_Text.equals("아침 6시 기상하기")){
-            textChallplan.setText("한 달 동안 아침 6시에 뜨는 알림 팝업으로 어플에 들어와서\n미션 완료 버튼을 클릭해보세요.\n\n챌린지 기간 : 30일");
-            textChallnotice.setText("보상 : 100코인 + 레어 의상(선택 O) 지급");
+            textChallplan.setText("한 달 동안 아침 6시 기상에 도전하세요!\n아침 6시 기상 후 도장 버튼을 눌러 인증하세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("보상 : 500코인 + 레어 의상(선택 가능) 지급");
         }
         else {
-            textChallplan.setText("한 달 동안 매일 만보씩 걸어보세요!\n만보를 채운 후 미션 완료 버튼을 클릭해주세요.\n첼린지 현황을 보려면 이미지를 클릭하세요!\n\n챌린지 기간 : 30일");
-            textChallnotice.setText("보상 : 100코인 지급");
+            textChallplan.setText("한 달 동안 매일 만보 걷기에 도전하세요!\n만보를 채운 후 도장 버튼을 눌러 인증하세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("보상 : 100코인 지급 + 레어 의상(선택 가능) 지급");
         }
         Glide.with(getApplicationContext()).load(chall_Img).into(imgChall);
 
 
-        imageViewChall.setOnClickListener(new View.OnClickListener() {
+        chall_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (chall_Text.equals("자격증 취득하기")) {
@@ -233,6 +235,7 @@ public class ClickTransActivity extends AppCompatActivity {
                 Map<String, Object> userChall = new HashMap<>();
                 userChall.put("userChall_title", chall_Text);
                 userChall.put("userCode", usercode);
+                userChall.put("show", "false");
 
                 firebaseFirestore.collection("user").document(usercode).collection("user challenge").document(chall_Text).set(userChall)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

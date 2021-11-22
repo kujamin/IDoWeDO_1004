@@ -218,11 +218,8 @@ public class Challenge_CheckActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (btnstate == 0) {
-
-                    Log.d("Camera1 ", "Success");
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, 0);
-
                 }
             }
         });
@@ -268,7 +265,7 @@ public class Challenge_CheckActivity extends Activity {
                     dateR = year + "-" + month + "-" + day;
 
                     Map<String, Object> doc = new HashMap<>();
-                    doc.put("userChallWakeup_OX", "O");
+                    doc.put("userChallWalk_OX", "O");
                     doc.put("userCode", usercode);
                     doc.put("today_date", dateR);
 

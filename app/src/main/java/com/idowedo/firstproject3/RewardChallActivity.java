@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.idowedo.firstproject3.Login.UserAccount;
 import com.idowedo.firstproject3.R;
 import com.idowedo.firstproject3.bottom_fragment.Fragment_Todo;
@@ -46,6 +50,7 @@ public class RewardChallActivity extends Activity {
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         rewardTitle = getIntent().getStringExtra("rewardTitle");
+        TextView textRewardCoin = findViewById(R.id.textRewardCoin);
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -82,7 +87,7 @@ public class RewardChallActivity extends Activity {
                 switch (rewardTitle) {
                     case "자격증 취득하기" : //교복
                         DocumentReference docH1 = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("reward").document("r4_head");
+                                .document("state").collection("reward").document("r4_hand");
 
                         DocumentReference docT1 = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("reward").document("r4_torso");
@@ -94,7 +99,23 @@ public class RewardChallActivity extends Activity {
                         docT1.update("buy", "O");
                         docL1.update("buy", "O");
 
-                        startActivity(new Intent(RewardChallActivity.this, Fragment_Todo.class));
+                        firebaseFirestore.collection("user").document(userCode).collection("user character").document("state")
+                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    int currentCoin = Integer.parseInt(document.getString("coin"));
+                                    int rewardCoin = Integer.parseInt(String.valueOf(textRewardCoin.getText()));
+
+                                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                                    docRef.update("coin", String.valueOf(currentCoin + rewardCoin));
+                                }
+                            }
+                        });
+
+                        startActivity(new Intent(RewardChallActivity.this, MainActivity.class));
                         break;
                     case "아침 6시 기상하기" : //잠옷
                         DocumentReference docH2 = firebaseFirestore.collection("user").document(userCode).collection("user character")
@@ -110,7 +131,23 @@ public class RewardChallActivity extends Activity {
                         docT2.update("buy", "O");
                         docL2.update("buy", "O");
 
-                        startActivity(new Intent(RewardChallActivity.this, Fragment_Todo.class));
+                        firebaseFirestore.collection("user").document(userCode).collection("user character").document("state")
+                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    int currentCoin = Integer.parseInt(document.getString("coin"));
+                                    int rewardCoin = Integer.parseInt(String.valueOf(textRewardCoin.getText()));
+
+                                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                                    docRef.update("coin", String.valueOf(currentCoin + rewardCoin));
+                                }
+                            }
+                        });
+
+                        startActivity(new Intent(RewardChallActivity.this, MainActivity.class));
 
                         break;
                     case "매일 만보 걷기" :   //골프복
@@ -127,6 +164,22 @@ public class RewardChallActivity extends Activity {
                         docT3.update("buy", "O");
                         docL3.update("buy", "O");
 
+                        firebaseFirestore.collection("user").document(userCode).collection("user character").document("state")
+                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    int currentCoin = Integer.parseInt(document.getString("coin"));
+                                    int rewardCoin = Integer.parseInt(String.valueOf(textRewardCoin.getText()));
+
+                                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                                    docRef.update("coin", String.valueOf(currentCoin + rewardCoin));
+                                }
+                            }
+                        });
+
                         startActivity(new Intent(RewardChallActivity.this, MainActivity.class));
                         break;
                 }
@@ -141,7 +194,7 @@ public class RewardChallActivity extends Activity {
                 switch (rewardTitle) {
                     case "자격증 취득하기" : //교복
                         DocumentReference docH1 = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                .document("state").collection("reward").document("r4_head");
+                                .document("state").collection("reward").document("r4_hand");
 
                         DocumentReference docT1 = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state").collection("reward").document("r4_torso");
@@ -153,7 +206,23 @@ public class RewardChallActivity extends Activity {
                         docT1.update("buy", "O");
                         docL1.update("buy", "O");
 
-                        startActivity(new Intent(RewardChallActivity.this, Fragment_Todo.class));
+                        firebaseFirestore.collection("user").document(userCode).collection("user character").document("state")
+                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    int currentCoin = Integer.parseInt(document.getString("coin"));
+                                    int rewardCoin = Integer.parseInt(String.valueOf(textRewardCoin.getText()));
+
+                                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                                    docRef.update("coin", String.valueOf(currentCoin + rewardCoin));
+                                }
+                            }
+                        });
+
+                        startActivity(new Intent(RewardChallActivity.this, MainActivity.class));
                         break;
                     case "아침 6시 기상하기" : //잠옷
                         DocumentReference docH2 = firebaseFirestore.collection("user").document(userCode).collection("user character")
@@ -169,7 +238,23 @@ public class RewardChallActivity extends Activity {
                         docT2.update("buy", "O");
                         docL2.update("buy", "O");
 
-                        startActivity(new Intent(RewardChallActivity.this, Fragment_Todo.class));
+                        firebaseFirestore.collection("user").document(userCode).collection("user character").document("state")
+                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    int currentCoin = Integer.parseInt(document.getString("coin"));
+                                    int rewardCoin = Integer.parseInt(String.valueOf(textRewardCoin.getText()));
+
+                                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                                    docRef.update("coin", String.valueOf(currentCoin + rewardCoin));
+                                }
+                            }
+                        });
+
+                        startActivity(new Intent(RewardChallActivity.this, MainActivity.class));
 
                         break;
                     case "매일 만보 걷기" :   //골프복
@@ -185,6 +270,22 @@ public class RewardChallActivity extends Activity {
                         docH3.update("buy", "O");
                         docT3.update("buy", "O");
                         docL3.update("buy", "O");
+
+                        firebaseFirestore.collection("user").document(userCode).collection("user character").document("state")
+                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    int currentCoin = Integer.parseInt(document.getString("coin"));
+                                    int rewardCoin = Integer.parseInt(String.valueOf(textRewardCoin.getText()));
+
+                                    DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
+
+                                    docRef.update("coin", String.valueOf(currentCoin + rewardCoin));
+                                }
+                            }
+                        });
 
                         Intent intent = new Intent(RewardChallActivity.this, MainActivity.class);
                         startActivity(intent);

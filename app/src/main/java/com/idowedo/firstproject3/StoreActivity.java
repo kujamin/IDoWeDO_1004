@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,15 +59,17 @@ public class StoreActivity extends AppCompatActivity {
     TextView tv_popup, tv_currentMycoin, tv_Item1, tv_Item2, tv_Item3, tv_Item4, tv_Item5, tv_Item6, tv_Item7, tv_Item8, tv_Item9, tv_Item10, tv_Item11, tv_Item12, tv_Item13, tv_Item14, tv_Item15, tv_Item16, tv_Item17, tv_Item18, tv_Item19, tv_Item20, tv_Item21, tv_Item22, tv_Item23, tv_Item24, tv_Item25, tv_Item26, tv_Item27, tv_Item28, tv_Item29;
     String tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvItem7, tvItem8, tvItem9, tvItem10, tvItem11, tvItem12, tvItem13, tvItem14, tvItem15, tvItem16, tvItem17, tvItem18, tvItem19, tvItem20, tvItem21, tvItem22, tvItem23, tvItem24, tvItem25, tvItem26, tvItem27, tvItem28, tvItem29;
 
+    public void onClickBack(View v) {
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
-
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.stre_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //String usercode = ((LoginActivity)LoginActivity.context_login).strEmail;
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -671,9 +674,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin1));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item2:
@@ -717,9 +719,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin2));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c2
@@ -764,9 +765,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin3));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item4:
@@ -810,9 +810,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin4));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item5:
@@ -856,9 +855,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin5));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c3
@@ -903,9 +901,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin6));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item7:
@@ -949,9 +946,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin7));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item8:
@@ -995,9 +991,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin8));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c4
@@ -1042,9 +1037,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin9));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item10:
@@ -1088,9 +1082,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin10));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c5
@@ -1135,9 +1128,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin11));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item12:
@@ -1181,9 +1173,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin12));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item13:
@@ -1227,9 +1218,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin13));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c6
@@ -1274,9 +1264,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin14));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item15:
@@ -1320,9 +1309,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin15));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item16:
@@ -1366,9 +1354,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin16));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c7
@@ -1413,9 +1400,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin17));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item18:
@@ -1459,9 +1445,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin18));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item19:
@@ -1505,9 +1490,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin19));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         //c8
@@ -1552,9 +1536,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin20));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             break;
                                         case R.id.item21:
@@ -1598,9 +1581,8 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin21));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1646,9 +1628,8 @@ public class StoreActivity extends AppCompatActivity {
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin22));
                                                 tv_currentMycoin.setText(myCoin + "");
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1694,10 +1675,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin23));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                                 tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1742,10 +1722,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin24));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
                                                 tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1790,9 +1769,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin25));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1838,9 +1817,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin26));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1885,9 +1864,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin27));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1932,9 +1911,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin28));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -1979,9 +1958,9 @@ public class StoreActivity extends AppCompatActivity {
 
                                                 documentReference.update("buy", "O");
                                                 documentReferenceC.update("coin", String.valueOf(myCoin - strCoin29));
-                                                Toast.makeText(StoreActivity.this, "구매 완료!", Toast.LENGTH_SHORT).show();
+                                                tv_currentMycoin.setText(myCoin + "");
                                             } else {
-                                                Toast.makeText(StoreActivity.this, "코인이 부족합니다!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(StoreActivity.this, "코인 부족", Toast.LENGTH_SHORT).show();
                                             }
                                             tv_currentMycoin.setText(myCoin + "");
                                             break;
@@ -2012,16 +1991,5 @@ public class StoreActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
-                finish();
-                return true;
-            }
-        }
-        return onOptionsItemSelected(item);
     }
 }

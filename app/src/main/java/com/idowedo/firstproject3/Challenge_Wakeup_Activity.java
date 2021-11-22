@@ -1,6 +1,7 @@
 package com.idowedo.firstproject3;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.idowedo.firstproject3.AtCheck.SaturdayDecorator;
 import com.idowedo.firstproject3.AtCheck.SundayDecorator;
 import com.idowedo.firstproject3.Login.ProgressDialog;
@@ -178,6 +183,22 @@ public class Challenge_Wakeup_Activity extends Activity {
                             }
                         });
 
+                DocumentReference documentReference = firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("아침 6시 기상하기");
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException error) {
+                        String str = snapshot.getString("userChall_title");
+
+                        if(str != null){ //챌린지 참여한 경우 버튼 활성화
+                            btnstate = 0;
+                        } else { //챌린지 참여하지 않았을 경우 버튼 비활성화
+                            chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
+                            chall_checkBtn.setEnabled(false);
+                        }
+
+                    }
+                });
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -196,7 +217,7 @@ public class Challenge_Wakeup_Activity extends Activity {
                     // alert의 title과 Messege 세팅
                     myAlertBuilder.setMessage("정말 달성하셨나요?");
                     // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
-                    myAlertBuilder.setPositiveButton("네!",new DialogInterface.OnClickListener(){
+                    myAlertBuilder.setPositiveButton("네",new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog,int which){
                             // OK 버튼을 눌렸을 경우
 
@@ -228,13 +249,12 @@ public class Challenge_Wakeup_Activity extends Activity {
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
                                     });
                         }
                     });
-                    myAlertBuilder.setNegativeButton("아니요..", new DialogInterface.OnClickListener() {
+                    myAlertBuilder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }

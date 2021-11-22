@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.idowedo.firstproject3.NickNameActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/stre_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:title="닉네임 설정하기"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-    </androidx.appcompat.widget.Toolbar>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +64,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:visibility="invisible"
+                android:layout_marginLeft="5dp"
                 app:srcCompat="@drawable/rightarrow" />
 
         </LinearLayout>
@@ -90,21 +76,9 @@
             android:fontFamily="@font/nanumbarunpenr"
             android:paddingTop="4dp"
             android:paddingBottom="2dp"
-            android:text="닉네임은 8글자 이하로 입력해주세요."
+            android:text="8글자 이하로 입력하세요."
             android:textColor="#F43636"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/textgogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:fontFamily="@font/nanumbarunpenb"
-            android:text="시작하기!!"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="invisible" />
     </LinearLayout>

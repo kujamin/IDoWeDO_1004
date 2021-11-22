@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.idowedo.firstproject3.DecoActivity">
+    tools:context=".DecoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Deco_toolbar"
@@ -372,7 +372,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:background="#fff"
-                                android:src="@drawable/head_deco"
+                                android:src="@drawable/student_hand_01"
                                 android:visibility="invisible" />
                         </FrameLayout>
 
@@ -419,6 +419,7 @@
                     </TableRow>
 
                     <TableRow
+                        android:id="@+id/tabletow3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
@@ -477,7 +478,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:background="#fff"
-                                android:src="@drawable/sleep_head_01" />
+                                android:src="@drawable/head_deco" />
 
                             <ImageButton
                                 android:id="@+id/imageButtonTorso8"
@@ -516,7 +517,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:background="#fff"
-                                android:src="@drawable/sleep_head_02" />
+                                android:src="@drawable/head_deco" />
 
                             <ImageButton
                                 android:id="@+id/imageButtonTorso9"
@@ -536,6 +537,135 @@
 
                             <ImageButton
                                 android:id="@+id/imageButtonArm9"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tabletow4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/imageButtonHead10"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso10"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg10"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm10"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/imageButtonHead11"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso11"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg11"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm11"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/imageButtonHead12"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonTorso12"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonLeg12"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#fff"
+                                android:src="@drawable/head_deco"
+                                android:visibility="invisible" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonArm12"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:background="#fff"
