@@ -1,11 +1,16 @@
 package com.idowedo.firstproject3;
 
+import static com.android.billingclient.api.BillingClient.SkuType.INAPP;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,8 +20,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.idowedo.firstproject3.Login.UserAccount;
 import com.idowedo.firstproject3.R;
+import com.idowedo.firstproject3.Security;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,8 +51,18 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class StoreActivity extends AppCompatActivity {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class StoreActivity extends AppCompatActivity implements PurchasesUpdatedListener {
     View darkView;
+
+    public static final String PREF_FILE= "MyPref";
+    public static final String PURCHASE_KEY= "purchase";
+    public static final String PRODUCT_ID= "coin_1000";
+
+    private BillingClient billingClient;
     LinearLayout popupStore;
     LinearLayout soldoutView1, soldoutView2, soldoutView3, soldoutView4, soldoutView5,
             soldoutView6, soldoutView7, soldoutView8, soldoutView9, soldoutView10,
@@ -55,6 +82,8 @@ public class StoreActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String userCode;
+
+    ImageView purchaseIV;
 
     TextView tv_popup, tv_currentMycoin, tv_Item1, tv_Item2, tv_Item3, tv_Item4, tv_Item5, tv_Item6, tv_Item7, tv_Item8, tv_Item9, tv_Item10, tv_Item11, tv_Item12, tv_Item13, tv_Item14, tv_Item15, tv_Item16, tv_Item17, tv_Item18, tv_Item19, tv_Item20, tv_Item21, tv_Item22, tv_Item23, tv_Item24, tv_Item25, tv_Item26, tv_Item27, tv_Item28, tv_Item29;
     String tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvItem7, tvItem8, tvItem9, tvItem10, tvItem11, tvItem12, tvItem13, tvItem14, tvItem15, tvItem16, tvItem17, tvItem18, tvItem19, tvItem20, tvItem21, tvItem22, tvItem23, tvItem24, tvItem25, tvItem26, tvItem27, tvItem28, tvItem29;
@@ -77,6 +106,11 @@ public class StoreActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        billingClient = BillingClient.newBuilder(this)
+                .enablePendingPurchases().setListener(this).build();
+
+        purchaseIV = (ImageView) findViewById(R.id.iv_buycoin);
 
         darkView = findViewById(R.id.DarkView);
         popupStore = findViewById(R.id.popupStore);
@@ -203,6 +237,38 @@ public class StoreActivity extends AppCompatActivity {
                         });
                     }
                 });
+
+                billingClient.startConnection(new BillingClientStateListener() {
+                    @Override
+                    public void onBillingSetupFinished(BillingResult billingResult) {
+                        if(billingResult.getResponseCode()==BillingClient.BillingResponseCode.OK){
+                            Purchase.PurchasesResult queryPurchase = billingClient.queryPurchases(INAPP);
+                            List<Purchase> queryPurchases = queryPurchase.getPurchasesList();
+                            if(queryPurchases!=null && queryPurchases.size()>0){
+                                handlePurchases(queryPurchases);
+                            }
+                            //if purchase list is empty that means item is not purchased
+                            //Or purchase is refunded or canceled
+                            else{
+                                savePurchaseValueToPref(false);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onBillingServiceDisconnected() {
+                    }
+                });
+
+
+//item Purchased
+                if(getPurchaseValueFromPref()){
+
+                }
+//item not Purchased
+                else{
+
+                }
 
 
                 firebaseFirestore.collection("user").document(userCode).collection("user character")
@@ -1992,4 +2058,175 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
     }
+
+    private SharedPreferences getPreferenceObject() {
+        return getApplicationContext().getSharedPreferences(PREF_FILE, 0);
+    }
+    private SharedPreferences.Editor getPreferenceEditObject() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(PREF_FILE, 0);
+        return pref.edit();
+    }
+    private boolean getPurchaseValueFromPref(){
+        return getPreferenceObject().getBoolean( PURCHASE_KEY,false);
+    }
+    private void savePurchaseValueToPref(boolean value){
+        getPreferenceEditObject().putBoolean(PURCHASE_KEY,value).commit();
+    }
+
+    //버튼 구매 시작
+    public void purchase(View view) {
+        //check if service is already connected
+        if (billingClient.isReady()) {
+            initiatePurchase();
+        }
+        //else reconnect service
+        else{
+            billingClient = BillingClient.newBuilder(this).enablePendingPurchases().setListener(this).build();
+            billingClient.startConnection(new BillingClientStateListener() {
+                @Override
+                public void onBillingSetupFinished(BillingResult billingResult) {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                        initiatePurchase();
+                    } else {
+                        Toast.makeText(getApplicationContext(),"Error "+billingResult.getDebugMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onBillingServiceDisconnected() {
+                }
+            });
+        }
+    }
+
+    private void initiatePurchase() {
+        List<String> skuList = new ArrayList<>();
+        skuList.add(PRODUCT_ID);
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                            if (skuDetailsList != null && skuDetailsList.size() > 0) {
+                                BillingFlowParams flowParams = BillingFlowParams.newBuilder()
+                                        .setSkuDetails(skuDetailsList.get(0))
+                                        .build();
+                                billingClient.launchBillingFlow(StoreActivity.this, flowParams);
+                            }
+                            else{
+                                //try to add item/product id "purchase" inside managed product in google play console
+                                Toast.makeText(getApplicationContext(),"Purchase Item not Found",Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    " Error "+billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
+        //if item newly purchased
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+            handlePurchases(purchases);
+        }
+        //if item already purchased then check and reflect changes
+        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+            Purchase.PurchasesResult queryAlreadyPurchasesResult = billingClient.queryPurchases(INAPP);
+            List<Purchase> alreadyPurchases = queryAlreadyPurchasesResult.getPurchasesList();
+            if(alreadyPurchases!=null){
+                handlePurchases(alreadyPurchases);
+            }
+        }
+        //if purchase cancelled
+        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+            Toast.makeText(getApplicationContext(),"Purchase Canceled",Toast.LENGTH_SHORT).show();
+        }
+        // Handle any other error msgs
+        else {
+            Toast.makeText(getApplicationContext(),"Error "+billingResult.getDebugMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void handlePurchases(List<Purchase>  purchases) {
+        for(Purchase purchase:purchases) {
+            //if item is purchased
+            if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED)
+            {
+                if (!verifyValidSignature(purchase.getOriginalJson(), purchase.getSignature())) {
+                    // Invalid purchase
+                    // show error to user
+                    Toast.makeText(getApplicationContext(), "Error : Invalid Purchase", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // else purchase is valid
+                //if item is purchased and not acknowledged
+                if (!purchase.isAcknowledged()) {
+                    AcknowledgePurchaseParams acknowledgePurchaseParams =
+                            AcknowledgePurchaseParams.newBuilder()
+                                    .setPurchaseToken(purchase.getPurchaseToken())
+                                    .build();
+                    billingClient.acknowledgePurchase(acknowledgePurchaseParams, ackPurchase);
+                }
+                //else item is purchased and also acknowledged
+                else {
+                    // Grant entitlement to the user on item purchase
+                    // restart activity
+                    if(!getPurchaseValueFromPref()){
+                        savePurchaseValueToPref(true);
+                        Toast.makeText(getApplicationContext(), "Item Purchased", Toast.LENGTH_SHORT).show();
+                        this.recreate();
+                    }
+                }
+            }
+            //if purchase is pending
+            else if( PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PENDING)
+            {
+                Toast.makeText(getApplicationContext(),
+                        "Purchase is Pending. Please complete Transaction", Toast.LENGTH_SHORT).show();
+            }
+            //if purchase is unknown
+            else if(PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.UNSPECIFIED_STATE)
+            {
+                savePurchaseValueToPref(false);
+                Toast.makeText(getApplicationContext(), "Purchase Status Unknown", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    AcknowledgePurchaseResponseListener ackPurchase = new AcknowledgePurchaseResponseListener() {
+        @Override
+        public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
+            if(billingResult.getResponseCode()==BillingClient.BillingResponseCode.OK){
+                //if purchase is acknowledged
+                // Grant entitlement to the user. and restart activity
+                savePurchaseValueToPref(true);
+                Toast.makeText(getApplicationContext(), "Item Purchased", Toast.LENGTH_SHORT).show();
+                StoreActivity.this.recreate();
+            }
+        }
+    };
+
+    private boolean verifyValidSignature(String signedData, String signature) {
+        try {
+            // To get key go to Developer Console > Select your app > Development Tools > Services & APIs.
+            String base64Key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjyfOHWthMuMFvozpi3LJTn3JyCZqDOZpqoxRtwomX0/KPGXD78kxcV38Y/qJX7Q/Fr0GekV3GMgQzeAgo4Rk/OUO1u1sZQmyFU+99yPAXjsj+EtU7jcxH/aXB0Z5BbC7J8KjKotrtp2/jolPWfgZt4q/gkR4nKyC1zqIUZVhNhoIG6WMVAi7PKr9zOsSAaWmVe9nGZmUCsXad9eW9TJhlWz7DMetaV4HjHqy68v07DIGn75PpfbOK8U/qwYNFfrxb8KWQF7xv0kUdRWRvF+YLFSdyhlMIbEMoaLfV1LulZTxuz8RbVGE0j1VM372GVWtgqJAoe+Fkas8gTr8DzTw+wIDAQAB";
+            return Security.verifyPurchase(base64Key, signedData, signature);
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(billingClient!=null){
+            billingClient.endConnection();
+        }
+    }
+
+
 }
