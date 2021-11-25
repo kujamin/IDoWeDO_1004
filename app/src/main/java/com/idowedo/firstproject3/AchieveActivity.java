@@ -341,12 +341,30 @@ public class AchieveActivity extends AppCompatActivity {
                         clickimg = img.getDrawable();
                         str = (String) text.getText();
 
-                        slideLayout.setVisibility(View.VISIBLE);
-                        darkView.setVisibility(View.VISIBLE);
-                        slideLayout.startAnimation(translateup);
-                        showImg.setImageDrawable(clickimg);
-                        showName.setText(str);
-                        showExplain.setText("새로운 뱃지가 곧 공개될거에요!");
+                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("coinAchieve").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int value = snapshot.getValue(Integer.class);
+                                if (value == 0) {
+                                    Toast.makeText(AchieveActivity.this, "코인을 더 모아보세요", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    slideLayout.setVisibility(View.VISIBLE);
+                                    darkView.setVisibility(View.VISIBLE);
+                                    slideLayout.startAnimation(translateup);
+                                    showImg.setImageDrawable(clickimg);
+                                    showName.setText(str);
+                                    showExplain.setText("1000코인 모으기 달성!!");
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
                         break;
                     case R.id.badge9:
                         img = findViewById(R.id.imagebadge9);

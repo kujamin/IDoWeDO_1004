@@ -14,11 +14,13 @@ public class UserAccount {
     private String repassword;  // 비밀번호 확인
     private String password;    // 비밀번호
     private String nickname;    // 어플 내 이름
+    //업적관련 realtime DB
     private int datecnt;     // 출석체크
     private int challengepoint; //챌린지 참여 횟수
     private int dotodo;     //해낸 업무숫자
     private int storepoint; //상점 구매갯수
-    private int lvAchieve;
+    private int lvAchieve; //레벨 30 달성 업적
+    private int coinAchieve; // 코인 1000개 수집 달성 업적
 
     public UserAccount() {
 
@@ -88,8 +90,12 @@ public class UserAccount {
 
     public void setLvAchieve(int lvAchieve) {this.lvAchieve = lvAchieve;}
 
+    public int getCoinAchieve() { return  coinAchieve; }
 
-    public UserAccount(String idtoken, String emailid, String repassword, String username, String password, String nickname, int datecnt, int challengepoint, int dotodo, int storepoint, int lvAchieve) {
+    public void setCoinAchieve(int coinAchieve) {this.coinAchieve = coinAchieve;}
+
+
+    public UserAccount(String idtoken, String emailid, String repassword, String username, String password, String nickname, int datecnt, int challengepoint, int dotodo, int storepoint, int lvAchieve, int coinAchieve) {
         this.idtoken = idtoken;
         this.emailid = emailid;
         this.password = password;
@@ -101,6 +107,7 @@ public class UserAccount {
         this.dotodo = dotodo;
         this.storepoint = storepoint;
         this.lvAchieve = lvAchieve;
+        this.coinAchieve = coinAchieve;
 
 
     }

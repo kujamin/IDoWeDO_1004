@@ -175,6 +175,28 @@ public class Fragment_Character extends Fragment {
                                         }
                                     });
 
+                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("coinAchieve").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int value = snapshot.getValue(Integer.class);
+                                            if(value == 0) {
+                                                if(coin >= 1000) {
+                                                    value ++;
+                                                    Intent i = new Intent(rootView.getContext(), AchievementPopupActivity.class);
+                                                    mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("coinAchieve").setValue(value);
+                                                    startActivity(i);
+                                                }
+                                            } else {
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
 
 
                                 }

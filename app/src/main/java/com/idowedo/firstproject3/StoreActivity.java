@@ -26,6 +26,8 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ConsumeParams;
+import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
@@ -61,8 +63,10 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
     public static final String PREF_FILE= "MyPref";
     public static final String PURCHASE_KEY= "purchase";
     public static final String PRODUCT_ID= "coin_1000";
-
+    public static final String PRODUCT_ID2= "coin_500";
     private BillingClient billingClient;
+    private ConsumeResponseListener mConsumeListener;
+
     LinearLayout popupStore;
     LinearLayout soldoutView1, soldoutView2, soldoutView3, soldoutView4, soldoutView5,
             soldoutView6, soldoutView7, soldoutView8, soldoutView9, soldoutView10,
@@ -207,6 +211,18 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
         tv_Item27 = findViewById(R.id.tv_item27);
         tv_Item28 = findViewById(R.id.tv_item28);
         tv_Item29 = findViewById(R.id.tv_item29);
+
+        mConsumeListener = new ConsumeResponseListener() {
+            @Override
+            public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+
+                    return;
+                } else {
+                    return;
+                }
+            }
+        };
 
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -2101,6 +2117,7 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
     private void initiatePurchase() {
         List<String> skuList = new ArrayList<>();
         skuList.add(PRODUCT_ID);
+        skuList.add(PRODUCT_ID2);
         SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
         params.setSkusList(skuList).setType(INAPP);
         billingClient.querySkuDetailsAsync(params.build(),
@@ -2130,17 +2147,18 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
     @Override
     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
         //if item newly purchased
-        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK /*&& purchases != null*/) {
             handlePurchases(purchases);
         }
         //if item already purchased then check and reflect changes
-        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+       /* else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+            handlePurchases(purchases);
             Purchase.PurchasesResult queryAlreadyPurchasesResult = billingClient.queryPurchases(INAPP);
             List<Purchase> alreadyPurchases = queryAlreadyPurchasesResult.getPurchasesList();
             if(alreadyPurchases!=null){
                 handlePurchases(alreadyPurchases);
             }
-        }
+        } */
         //if purchase cancelled
         else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
             Toast.makeText(getApplicationContext(),"Purchase Canceled",Toast.LENGTH_SHORT).show();
@@ -2162,25 +2180,14 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
                     Toast.makeText(getApplicationContext(), "Error : Invalid Purchase", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // else purchase is valid
-                //if item is purchased and not acknowledged
-                if (!purchase.isAcknowledged()) {
-                    AcknowledgePurchaseParams acknowledgePurchaseParams =
-                            AcknowledgePurchaseParams.newBuilder()
-                                    .setPurchaseToken(purchase.getPurchaseToken())
-                                    .build();
-                    billingClient.acknowledgePurchase(acknowledgePurchaseParams, ackPurchase);
-                }
-                //else item is purchased and also acknowledged
-                else {
-                    // Grant entitlement to the user on item purchase
-                    // restart activity
-                    if(!getPurchaseValueFromPref()){
-                        savePurchaseValueToPref(true);
-                        Toast.makeText(getApplicationContext(), "Item Purchased", Toast.LENGTH_SHORT).show();
-                        this.recreate();
-                    }
-                }
+                ConsumeParams consumeParams =
+                        ConsumeParams.newBuilder()
+                                .setPurchaseToken(purchase.getPurchaseToken())
+                                .build();
+                billingClient.consumeAsync(consumeParams, mConsumeListener);
+
+                documentReferenceC.update("coin", String.valueOf(myCoin + 1000));
+
             }
             //if purchase is pending
             else if( PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PENDING)
@@ -2196,6 +2203,8 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
             }
         }
     }
+
+
 
     AcknowledgePurchaseResponseListener ackPurchase = new AcknowledgePurchaseResponseListener() {
         @Override
