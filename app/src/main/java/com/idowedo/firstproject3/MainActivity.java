@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 calendarEnd2.setTimeInMillis(System.currentTimeMillis());
                                 calendarEnd2.set(Calendar.YEAR, 2021);
                                 calendarEnd2.set(Calendar.MONTH, 10);
-                                calendarEnd2.set(Calendar.DATE, 23);
+                                calendarEnd2.set(Calendar.DATE, 28);
 
                                 firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("아침 6시 기상하기").collection("OX")
                                         .whereEqualTo("userChallWakeup_OX", "O").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

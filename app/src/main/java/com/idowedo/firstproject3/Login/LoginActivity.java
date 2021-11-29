@@ -372,9 +372,188 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                                     }
                                                 });
 
-                                        //챌린지 보상 의상
+                                        /////////챌린지 보상 의상
+
+                                        /////핑크 잠옷/////
+                                        Map<String, Object> r1 = new HashMap<>();
+                                        r1.put("buy", "X");
+                                        r1.put("category", "head");
+                                        r1.put("name", "sleep_head_01");
+
                                         firebaseFirestore.collection("user").document(strEmail).collection("user character")
-                                                .document("state").collection("store").document("reward").set(data2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                .document("state").collection("reward").document("r1_head").set(r1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r2 = new HashMap<>();
+                                        r2.put("buy", "X");
+                                        r2.put("category", "torse");
+                                        r2.put("name", "sleep_torse_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r1_torso").set(r2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r3 = new HashMap<>();
+                                        r3.put("buy", "X");
+                                        r3.put("category", "leg");
+                                        r3.put("name", "sleep_leg_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r1_leg").set(r3).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        //////보라 잠옷////
+                                        Map<String, Object> r4 = new HashMap<>();
+                                        r4.put("buy", "X");
+                                        r4.put("category", "head");
+                                        r4.put("name", "sleep_head_02");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r2_head").set(r4).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r5 = new HashMap<>();
+                                        r5.put("buy", "X");
+                                        r5.put("category", "torso");
+                                        r5.put("name", "sleep_torso_02");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r2_torso").set(r5).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r6 = new HashMap<>();
+                                        r6.put("buy", "X");
+                                        r6.put("category", "leg");
+                                        r6.put("name", "sleep_leg_02");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r2_leg").set(r6).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        ////골프복///
+                                        Map<String, Object> r7 = new HashMap<>();
+                                        r7.put("buy", "X");
+                                        r7.put("category", "head");
+                                        r7.put("name", "golf_head_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r3_head").set(r7).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r8 = new HashMap<>();
+                                        r8.put("buy", "X");
+                                        r8.put("category", "torso");
+                                        r8.put("name", "golf_torso_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r3_torso").set(r8).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r9 = new HashMap<>();
+                                        r9.put("buy", "X");
+                                        r9.put("category", "leg");
+                                        r9.put("name", "golf_leg_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r3_leg_01").set(r9).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r10 = new HashMap<>();
+                                        r10.put("buy", "X");
+                                        r10.put("category", "leg");
+                                        r10.put("name", "golf_leg_02");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r3_leg_02").set(r10).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        /////교복///
+                                        Map<String, Object> r11 = new HashMap<>();
+                                        r11.put("buy", "X");
+                                        r11.put("category", "hand");
+                                        r11.put("name", "student_hand_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r4_hand").set(r11).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r12 = new HashMap<>();
+                                        r12.put("buy", "X");
+                                        r12.put("category", "torso");
+                                        r12.put("name", "student_torso_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r4_torso").set(r12).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r13 = new HashMap<>();
+                                        r13.put("buy", "X");
+                                        r13.put("category", "leg");
+                                        r13.put("name", "student_leg_01");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r4_leg_01").set(r13).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+                                        Map<String, Object> r14 = new HashMap<>();
+                                        r14.put("buy", "X");
+                                        r14.put("category", "leg");
+                                        r14.put("name", "student_leg_02");
+
+                                        firebaseFirestore.collection("user").document(strEmail).collection("user character")
+                                                .document("state").collection("reward").document("r4_leg_02").set(r12).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
