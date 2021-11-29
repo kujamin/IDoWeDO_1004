@@ -239,6 +239,9 @@ public class HabbitDetailActivity extends AppCompatActivity {
                 firebaseFirestore = FirebaseFirestore.getInstance();
                 DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user habbit").document(habbit_id);
 
+                pd.setTitle("삭제 중...");
+                pd.show();
+
                 docRef.delete();
                 finish();
             }

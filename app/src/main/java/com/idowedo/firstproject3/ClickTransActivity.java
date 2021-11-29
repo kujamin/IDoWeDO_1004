@@ -123,16 +123,16 @@ public class ClickTransActivity extends AppCompatActivity {
         textChallname.setText(chall_Text);
 
         if(chall_Text.equals("자격증 취득하기")){
-            textChallplan.setText("한 달 안에 자격증을 취득하세요!\n\n* 어떤 자격증이던 상관 없습니다 !\n\n자격증 취득 후 취득 결과를 사진으로 찍어 인증\n\n* 주의사항 : 사진을 찍은 후 X를 누르고 나오면 인증이 되지 않아요.\n\n챌린지 기간 : 30일");
-            textChallnotice.setText("보상 : 500코인 + 레어 의상(선택 가능) 지급\n");
+            textChallplan.setText("한 달 안에 자격증을 취득하세요!\n\n* 어떤 자격증이든 상관 없습니다.\n\n자격증 취득 후 취득 결과를 사진으로 찍어 인증\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("* 주의사항 : 사진을 찍은 후 X를 누르고 나오면 인증이 되지 않아요. \n\n 보상 : 500코인 + 레어 의상(선택 가능) 지급");
         }
         else if(chall_Text.equals("아침 6시 기상하기")){
             textChallplan.setText("휴대폰 내 메모장 어플 open → \n\n주어진 문장을 메모장에 입력 후 화면 캡쳐 → \n\n다시 어플로 돌아온 후 이미지 업로드 버튼을 눌러 캡쳐 화면을 선택 →\n\n인식 버튼 클릭 후 인증 버튼을 누르세요!\n\n챌린지 기간 : 30일");
-            textChallnotice.setText("보상 : 500코인 + 레어 의상(선택 가능) 지급");
+            textChallnotice.setText("* 주의사항 : 인증 버튼을 누르지 않으면 인증이 되지 않아요. \n\n 보상 : 500코인 + 레어 의상(선택 가능) 지급");
         }
         else {
-            textChallplan.setText("한 달 동안 매일 만보 걷기에 도전하세요!\n\n* 걸음 수를 측정 가능한 어플과 함께하면\n더 좋아요!\n\n만보를 채우고 인증하기 버튼을 눌러 인증하세요.\n\n챌린지 기간 : 30일");
-            textChallnotice.setText("보상 : 100코인 지급 + 레어 의상(선택 가능) 지급");
+            textChallplan.setText("한 달 동안 매일 만보 걷기에 도전하세요!\n\n만보를 채우고 인증하기 버튼을 눌러 인증하세요.\n\n챌린지 기간 : 30일");
+            textChallnotice.setText("* 걸음 수를 측정 가능한 어플과 함께하면\n더 좋아요!\n\n보상 : 100코인 지급 + 레어 의상(선택 가능) 지급");
         }
         Glide.with(getApplicationContext()).load(chall_Img).into(imgChall);
 

@@ -58,8 +58,7 @@
             <TextView
                 android:id="@+id/textViewChallname"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -72,8 +71,7 @@
             <TextView
                 android:id="@+id/textViewChallexplan"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -82,11 +80,19 @@
                 android:textColor="#000"
                 android:textSize="19sp" />
 
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorgray"
+                android:layout_marginTop="13dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
             <TextView
                 android:id="@+id/textViewChallnotice"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"

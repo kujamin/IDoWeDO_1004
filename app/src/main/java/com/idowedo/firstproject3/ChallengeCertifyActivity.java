@@ -83,7 +83,16 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
         btn_detection_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextRecognition(recognizer);
+                if(uri == null){
+                    btn_detection_image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getApplicationContext(), "이미지를 업로드하세요.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    TextRecognition(recognizer);
+                }
             }
         });
 
@@ -100,7 +109,7 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }//onCreate
 
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -139,7 +148,7 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
                         // Task completed successfully
                         String resultText = visionText.getText();
                         text_info.setText(resultText);  // 인식한 텍스트를 TextView에 보여줌
-    
+
                         //text_certify.setText 로 하루마다 바꿔주는 거 해야됨. 지금은 for문 안에서 array_text안에 있는 문자열 중 하나라도 포함되어 있으면 인증 완료
                         String input_text = resultText;
 

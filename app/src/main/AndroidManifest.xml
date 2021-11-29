@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.idowedo.firstproject3">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-<!--    <uses-permission android:name="android.permission.CAMERA" />-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,7 +20,7 @@
         <activity
             android:name="com.idowedo.firstproject3.Challenge_Wakeup_Activity"
             android:exported="true"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name="com.idowedo.firstproject3.Challenge_Study_Activity"
             android:exported="true"
