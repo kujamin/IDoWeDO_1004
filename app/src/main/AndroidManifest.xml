@@ -11,7 +11,7 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:name=".usercode"
+        android:name="com.idowedo.firstproject3.usercode"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,65 +19,66 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
         <activity
-            android:name=".RewardCoinActivity"
+            android:name="com.idowedo.firstproject3.Challenge_Wakeup_Activity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
         <activity
-            android:name=".Challenge_Wakeup_Activity"
+            android:name="com.idowedo.firstproject3.Challenge_Study_Activity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+        <activity
+            android:name="com.idowedo.firstproject3.Challenge_CheckActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+        <activity
+            android:name="com.idowedo.firstproject3.AchievementPopupActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".Challenge_Study_Activity"
+            android:name="com.idowedo.firstproject3.Challenge_CheckActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity android:name=".RewardCoinActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".Challenge_CheckActivity"
+            android:name="com.idowedo.firstproject3.LevelupActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".AchievementPopupActivity"
-            android:exported="true"
+            android:name="com.idowedo.firstproject3.RewardChallActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".Challenge_CheckActivity"
-            android:exported="true"
+            android:name="com.idowedo.firstproject3.ChallSuccPopActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".LevelupActivity"
-            android:exported="true"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity
-            android:name=".RewardChallActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity
-            android:name=".ChallSuccPopActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity
-            android:name=".Findpassword"
+            android:name="com.idowedo.firstproject3.Findpassword"
             android:exported="false" />
+        <activity android:name=".ChallengeCertifyActivity"
+            android:exported="false"/>
         <activity
-            android:name=".NickPopup"
+            android:name="com.idowedo.firstproject3.NickPopup"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".DeleteUser"
+            android:name="com.idowedo.firstproject3.DeleteUser"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
         <receiver
-            android:name=".MyReceiver"
+            android:name="com.idowedo.firstproject3.MyReceiver"
             android:enabled="true"
             android:exported="false" />
-        <receiver android:name=".Alarm" />
+        <receiver android:name="com.idowedo.firstproject3.Alarm" />
 
         <activity
-            android:name=".Confirm3Activity"
+            android:name="com.idowedo.firstproject3.Confirm3Activity"
             android:exported="true" />
         <activity
-            android:name=".Confirm2Activity"
+            android:name="com.idowedo.firstproject3.Confirm2Activity"
             android:exported="true" />
         <activity
-            android:name=".ConfirmActivity"
+            android:name="com.idowedo.firstproject3.ConfirmActivity"
             android:exported="true" />
         <!--
           <meta-data
@@ -85,44 +86,44 @@
             android:value="@string/kakaoApi" />
         -->
         <activity
-            android:name=".HabbitDetailActivity"
+            android:name="com.idowedo.firstproject3.HabbitDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".TodoDetailActivity"
+            android:name="com.idowedo.firstproject3.TodoDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".HabbitMakeActivity"
+            android:name="com.idowedo.firstproject3.HabbitMakeActivity"
             android:exported="true" />
         <activity
-            android:name=".TimerActivity"
+            android:name="com.idowedo.firstproject3.TimerActivity"
             android:exported="true" />
         <activity
-            android:name=".Login.RegisterActivity"
+            android:name="com.idowedo.firstproject3.Login.RegisterActivity"
             android:exported="true" />
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".DailyMakeActivity" />
-        <activity android:name=".SaveActivity" />
+        <activity android:name="com.idowedo.firstproject3.Login.LoginActivity" />
+        <activity android:name="com.idowedo.firstproject3.DailyMakeActivity" />
+        <activity android:name="com.idowedo.firstproject3.SaveActivity" />
         <activity
-            android:name=".DailyPopActivity"
+            android:name="com.idowedo.firstproject3.DailyPopActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
-            android:name=".Logout_Popup"
+            android:name="com.idowedo.firstproject3.Logout_Popup"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".daily.CalendarActivity" />
+        <activity android:name="com.idowedo.firstproject3.MainActivity" />
+        <activity android:name="com.idowedo.firstproject3.daily.CalendarActivity" />
         <activity
-            android:name=".QuestionPopupActivity"
+            android:name="com.idowedo.firstproject3.QuestionPopupActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity android:name=".StoreActivity" />
-        <activity android:name=".AchieveActivity" />
-        <activity android:name=".DecoActivity" />
-        <activity android:name=".ClickTransActivity" />
-        <activity android:name=".NoticeActivity" />
-        <activity android:name=".NickNameActivity" />
+        <activity android:name="com.idowedo.firstproject3.StoreActivity" />
+        <activity android:name="com.idowedo.firstproject3.AchieveActivity" />
+        <activity android:name="com.idowedo.firstproject3.DecoActivity" />
+        <activity android:name="com.idowedo.firstproject3.ClickTransActivity" />
+        <activity android:name="com.idowedo.firstproject3.NoticeActivity" />
+        <activity android:name="com.idowedo.firstproject3.NickNameActivity" />
         <activity
-            android:name=".PopupActivity"
+            android:name="com.idowedo.firstproject3.PopupActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity android:name=".splash.SplashActivity2">
+        <activity android:name="com.idowedo.firstproject3.splash.SplashActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -130,7 +131,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AtCheck.Attendance_CheckActivity"
+            android:name="com.idowedo.firstproject3.AtCheck.Attendance_CheckActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
     </application>
 

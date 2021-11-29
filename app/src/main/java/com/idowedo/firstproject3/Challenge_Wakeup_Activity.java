@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -211,63 +212,52 @@ public class Challenge_Wakeup_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 if (btnstate == 0) {
-
-                    AlertDialog.Builder myAlertBuilder =
-                            new AlertDialog.Builder(v.getContext());
-                    // alert의 title과 Messege 세팅
-                    myAlertBuilder.setMessage("정말 달성하셨나요?");
-                    // 버튼 추가 (Ok 버튼과 Cancle 버튼 )
-                    myAlertBuilder.setPositiveButton("네",new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog,int which){
-                            // OK 버튼을 눌렸을 경우
-
-                            btnstate = 1;
-                            chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
-                            chall_checkBtn.setText("인증완료");
-                            calendarView.addDecorator(new Challenge_EventDecorator(Color.BLACK, Collections.singleton(CalendarDay.today()),Challenge_Wakeup_Activity.this));
-
-                            String year = String.valueOf(CalendarDay.today().getYear());
-                            String month = String.valueOf(CalendarDay.today().getMonth() + 1);
-                            String day = String.valueOf(CalendarDay.today().getDay());
-
-                            if (month.length() != 2) {
-                                month = 0 + month;
-                            }
-                            if (day.length() != 2){
-                                day = 0 + day;
-                            }
-
-                            dateR = year + "-" + month + "-" + day;
-
-                            Map<String, Object> doc = new HashMap<>();
-                            doc.put("userChallWakeup_OX", "O");
-                            doc.put("userCode", usercode);
-                            doc.put("today_date", dateR);
-
-                            firebaseFirestore.collection("user").document(usercode)
-                                    .collection("user challenge").document("아침 6시 기상하기").collection("OX").document(dateR).set(doc)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            finish();
-                                        }
-                                    });
+                        Intent intent = new Intent(Challenge_Wakeup_Activity.this, ChallengeCertifyActivity.class);
+                        startActivityForResult(intent, 0);
                         }
-                    });
-                    myAlertBuilder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-                    // Alert를 생성해주고 보여주는 메소드(show를 선언해야 Alert가 생성됨)
-                    myAlertBuilder.show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"이미 오늘은 인증이 완료되었습니다.",Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == RESULT_OK){
+
+            if(btnstate == 0) {
+                // 추출 string이랑 그 날의 string이랑 일치할 경우 다시 현재 액티비티로 돌아와서
+                btnstate = 1;
+                chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
+                chall_checkBtn.setText("인증완료");
+                calendarView.addDecorator(new Challenge_EventDecorator(Color.BLACK, Collections.singleton(CalendarDay.today()), Challenge_Wakeup_Activity.this));
+
+                String year = String.valueOf(CalendarDay.today().getYear());
+                String month = String.valueOf(CalendarDay.today().getMonth() + 1);
+                String day = String.valueOf(CalendarDay.today().getDay());
+
+                if (month.length() != 2) {
+                    month = 0 + month;
+                }
+                if (day.length() != 2) {
+                    day = 0 + day;
+                }
+
+                dateR = year + "-" + month + "-" + day;
+
+                Map<String, Object> doc = new HashMap<>();
+                doc.put("userChallWakeup_OX", "O");
+                doc.put("userCode", usercode);
+                doc.put("today_date", dateR);
+
+                firebaseFirestore.collection("user").document(usercode)
+                        .collection("user challenge").document("아침 6시 기상하기").collection("OX").document(dateR).set(doc)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                            }
+                        });
+            }
+        }
     }
 
     public void onClikcPopupClose(View v) {

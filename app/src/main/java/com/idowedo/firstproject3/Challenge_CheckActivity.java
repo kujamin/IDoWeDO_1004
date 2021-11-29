@@ -274,7 +274,6 @@ public class Challenge_CheckActivity extends Activity {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(getApplicationContext(), "오늘의 참여 완료되었습니다", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -312,22 +311,6 @@ public class Challenge_CheckActivity extends Activity {
 
     @Override
     public void onBackPressed(){
-//        if ( pressedTime == 0){
-//            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-//            pressedTime = System.currentTimeMillis();
-//        }else {
-//            int seconds = (int) (System.currentTimeMillis() - pressedTime);
-//
-//            if(seconds > 2000){
-//                pressedTime = 0;
-//            }else {
-//                Intent intent = new Intent();
-//                intent.putExtra("checkMatching", false);
-//
-//                setResult(RESULT_OK, intent);
-//                finish();
-//            }
-//        }
         return;
     }
 }
