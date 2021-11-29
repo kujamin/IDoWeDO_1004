@@ -80,21 +80,15 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
 
         // 텍스트 인식 버튼
         btn_detection_image = findViewById(R.id.btn_detection_image);
-        btn_detection_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(uri == null){
-                    btn_detection_image.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getApplicationContext(), "이미지를 업로드하세요.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    TextRecognition(recognizer);
+
+        if(uri == null){
+            btn_detection_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "이미지를 업로드하세요.", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
+        }
 
         // 인증 버튼 (인증 문자랑 인식 문자가 동일할 경우에만 Clickable 가능)
         btn_certify = findViewById(R.id.btn_certify);
@@ -117,6 +111,16 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
         if (requestCode == 101) {
             // 갤러리에서 선택한 사진에 대한 uri를 가져온다.
             uri = data.getData();
+
+            if(uri != null) {
+                btn_certify.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextRecognition(recognizer);
+                    }
+                });
+
+            }
 
             setImage(uri);
         }

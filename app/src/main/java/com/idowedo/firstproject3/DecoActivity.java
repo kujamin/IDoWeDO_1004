@@ -487,8 +487,8 @@ public class DecoActivity extends AppCompatActivity {
                                         imgbtnHead8.setBackgroundColor(Color.parseColor("#ECECEC"));
                                         break;
                                     //열번째
-                                    case "sleep_torse_01" :
-                                    case "sleep_torse_02" :
+                                    case "sleep_torso_01" :
+                                    case "sleep_torso_02" :
                                         imgbtnTorse10.setEnabled(false);
                                         imgbtnTorse10.setImageResource(R.drawable.lock);
                                         imgbtnTorse10.setBackgroundColor(Color.parseColor("#ECECEC"));
@@ -559,13 +559,13 @@ public class DecoActivity extends AppCompatActivity {
                                         rwdSleepH1 = "2";
                                         break;
                                     //열번째
-                                    case "sleep_torse_01" :
+                                    case "sleep_torso_01" :
                                         imgbtnTorse10.setEnabled(true);
                                         imgbtnTorse10.setImageResource(R.drawable.sleep_torso_01);
                                         imgbtnTorse10.setBackgroundColor(Color.parseColor("#ffffff"));
                                         rwdSleepT1 = "1";
                                         break;
-                                    case "sleep_torse_02" :
+                                    case "sleep_torso_02" :
                                         imgbtnTorse10.setEnabled(true);
                                         imgbtnTorse10.setImageResource(R.drawable.sleep_torso_02);
                                         imgbtnTorse10.setBackgroundColor(Color.parseColor("#ffffff"));
