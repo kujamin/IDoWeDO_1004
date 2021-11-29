@@ -60,10 +60,10 @@ import java.util.List;
 public class StoreActivity extends AppCompatActivity implements PurchasesUpdatedListener {
     View darkView;
 
-    public static final String PREF_FILE= "MyPref";
-    public static final String PURCHASE_KEY= "purchase";
-    public static final String PRODUCT_ID= "coin_1000";
-    public static final String PRODUCT_ID2= "coin_500";
+    public static final String PREF_FILE = "MyPref";
+    public static final String PURCHASE_KEY = "purchase";
+    public static final String PRODUCT_ID = "coin_1000";
+    public static final String PRODUCT_ID2 = "coin_500";
     private BillingClient billingClient;
     private ConsumeResponseListener mConsumeListener;
 
@@ -212,6 +212,7 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
         tv_Item28 = findViewById(R.id.tv_item28);
         tv_Item29 = findViewById(R.id.tv_item29);
 
+        //소비 리스너
         mConsumeListener = new ConsumeResponseListener() {
             @Override
             public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
@@ -224,7 +225,7 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
             }
         };
 
-
+        //지금 접속중인 유저의 정보를 firebase에서 가져옴 usedcode 는 이메일 아이디
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -254,18 +255,19 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
                     }
                 });
 
+                //구글 플레이 아이템 구매시 필요한 서비스 접속
                 billingClient.startConnection(new BillingClientStateListener() {
                     @Override
                     public void onBillingSetupFinished(BillingResult billingResult) {
-                        if(billingResult.getResponseCode()==BillingClient.BillingResponseCode.OK){
+                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                             Purchase.PurchasesResult queryPurchase = billingClient.queryPurchases(INAPP);
                             List<Purchase> queryPurchases = queryPurchase.getPurchasesList();
-                            if(queryPurchases!=null && queryPurchases.size()>0){
+                            if (queryPurchases != null && queryPurchases.size() > 0) {
                                 handlePurchases(queryPurchases);
                             }
                             //if purchase list is empty that means item is not purchased
                             //Or purchase is refunded or canceled
-                            else{
+                            else {
                                 savePurchaseValueToPref(false);
                             }
                         }
@@ -278,15 +280,15 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
 
 
 //item Purchased
-                if(getPurchaseValueFromPref()){
+                if (getPurchaseValueFromPref()) {
 
                 }
 //item not Purchased
-                else{
+                else {
 
                 }
 
-
+                //처음에 꾸미기탭에서는 잠금화면 -> 아이템 구매시 아이템 보이도록
                 firebaseFirestore.collection("user").document(userCode).collection("user character")
                         .document("state").collection("store")
                         .whereEqualTo("buy", "O")
@@ -440,7 +442,7 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
         });
 
 
-        //팝업창 띄우는 이벤트 리스너
+        //팝업창 띄우는 이벤트 클릭 리스너
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -698,7 +700,7 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
                 darkView.setVisibility(View.INVISIBLE);
                 popupStore.setVisibility(View.INVISIBLE);
 
-
+                //각 상점별 아이템 코인 가격을 비교 현재 내가 가진 코인 값과 비교 가격 차감 후 반영 다시 업데이트
                 mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -2078,25 +2080,28 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
     private SharedPreferences getPreferenceObject() {
         return getApplicationContext().getSharedPreferences(PREF_FILE, 0);
     }
+
     private SharedPreferences.Editor getPreferenceEditObject() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(PREF_FILE, 0);
         return pref.edit();
     }
-    private boolean getPurchaseValueFromPref(){
-        return getPreferenceObject().getBoolean( PURCHASE_KEY,false);
+
+    private boolean getPurchaseValueFromPref() {
+        return getPreferenceObject().getBoolean(PURCHASE_KEY, false);
     }
-    private void savePurchaseValueToPref(boolean value){
-        getPreferenceEditObject().putBoolean(PURCHASE_KEY,value).commit();
+
+    private void savePurchaseValueToPref(boolean value) {
+        getPreferenceEditObject().putBoolean(PURCHASE_KEY, value).commit();
     }
 
     //버튼 구매 시작
     public void purchase(View view) {
-        //check if service is already connected
+        //서비스가 준비 되었는지 확인
         if (billingClient.isReady()) {
             initiatePurchase();
         }
-        //else reconnect service
-        else{
+        //서비스에 접속이 아직 되지않았으면 다시 재요청 해서 접속
+        else {
             billingClient = BillingClient.newBuilder(this).enablePendingPurchases().setListener(this).build();
             billingClient.startConnection(new BillingClientStateListener() {
                 @Override
@@ -2104,9 +2109,10 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
                     if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                         initiatePurchase();
                     } else {
-                        Toast.makeText(getApplicationContext(),"Error "+billingResult.getDebugMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
+
                 @Override
                 public void onBillingServiceDisconnected() {
                 }
@@ -2131,14 +2137,13 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
                                         .setSkuDetails(skuDetailsList.get(0))
                                         .build();
                                 billingClient.launchBillingFlow(StoreActivity.this, flowParams);
-                            }
-                            else{
-                                //try to add item/product id "purchase" inside managed product in google play console
-                                Toast.makeText(getApplicationContext(),"Purchase Item not Found",Toast.LENGTH_SHORT).show();
+                            } else {
+                                //구글 플레이 콘솔 내부에 등록된 아이템을 확인 후 없을 시에 해당 toast 띄움
+                                Toast.makeText(getApplicationContext(), "구매 아이템을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),
-                                    " Error "+billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
+                                    " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -2146,38 +2151,26 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
 
     @Override
     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
-        //if item newly purchased
+        //아이템 구매시에 실행
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK /*&& purchases != null*/) {
             handlePurchases(purchases);
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+            Toast.makeText(getApplicationContext(), "구매가 취소되었습니다.", Toast.LENGTH_SHORT).show();
         }
-        //if item already purchased then check and reflect changes
-       /* else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
-            handlePurchases(purchases);
-            Purchase.PurchasesResult queryAlreadyPurchasesResult = billingClient.queryPurchases(INAPP);
-            List<Purchase> alreadyPurchases = queryAlreadyPurchasesResult.getPurchasesList();
-            if(alreadyPurchases!=null){
-                handlePurchases(alreadyPurchases);
-            }
-        } */
-        //if purchase cancelled
-        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-            Toast.makeText(getApplicationContext(),"Purchase Canceled",Toast.LENGTH_SHORT).show();
-        }
-        // Handle any other error msgs
+        // 다른 기타 에러들 송출
         else {
-            Toast.makeText(getApplicationContext(),"Error "+billingResult.getDebugMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    void handlePurchases(List<Purchase>  purchases) {
-        for(Purchase purchase:purchases) {
-            //if item is purchased
-            if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED)
-            {
+    void handlePurchases(List<Purchase> purchases) {
+        for (Purchase purchase : purchases) {
+            //아이템을 구매 하였으면
+            if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
                 if (!verifyValidSignature(purchase.getOriginalJson(), purchase.getSignature())) {
                     // Invalid purchase
                     // show error to user
-                    Toast.makeText(getApplicationContext(), "Error : Invalid Purchase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "구매가 취소되었습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ConsumeParams consumeParams =
@@ -2189,31 +2182,28 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
                 documentReferenceC.update("coin", String.valueOf(myCoin + 1000));
 
             }
-            //if purchase is pending
-            else if( PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PENDING)
-            {
+            //결제 보류 상태일때
+            else if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PENDING) {
                 Toast.makeText(getApplicationContext(),
                         "Purchase is Pending. Please complete Transaction", Toast.LENGTH_SHORT).show();
             }
-            //if purchase is unknown
-            else if(PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.UNSPECIFIED_STATE)
-            {
+            //결제를 알 수 없을때
+            else if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.UNSPECIFIED_STATE) {
                 savePurchaseValueToPref(false);
-                Toast.makeText(getApplicationContext(), "Purchase Status Unknown", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "구매 상태 확인 불가", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
 
-
     AcknowledgePurchaseResponseListener ackPurchase = new AcknowledgePurchaseResponseListener() {
         @Override
         public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
-            if(billingResult.getResponseCode()==BillingClient.BillingResponseCode.OK){
-                //if purchase is acknowledged
-                // Grant entitlement to the user. and restart activity
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                //구매가 등록 되었을때
+                // 사용자에게 구매 정보를 알려주고 다시 액티비티 실행
                 savePurchaseValueToPref(true);
-                Toast.makeText(getApplicationContext(), "Item Purchased", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "코인 구매 완료! 감사합니다.", Toast.LENGTH_SHORT).show();
                 StoreActivity.this.recreate();
             }
         }
@@ -2232,7 +2222,7 @@ public class StoreActivity extends AppCompatActivity implements PurchasesUpdated
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(billingClient!=null){
+        if (billingClient != null) {
             billingClient.endConnection();
         }
     }

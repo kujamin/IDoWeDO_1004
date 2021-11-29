@@ -138,7 +138,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
-                                customProgressDialog.dismiss();
+                                if (customProgressDialog != null) {
+                                    customProgressDialog.dismiss();
+                                    customProgressDialog = null;
+                                }
                                 try {
                                     throw task.getException();
                                 } catch (FirebaseAuthInvalidUserException e) {
@@ -197,8 +200,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         }
                     });
                 } else {
-                    customProgressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    if (customProgressDialog != null) {
+                        customProgressDialog.dismiss();
+                        customProgressDialog = null;
+                    }
+                Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
                 }
 
             }

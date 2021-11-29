@@ -404,6 +404,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+        Toast.makeText(getApplicationContext(),count1 + "",Toast.LENGTH_SHORT);
         todoFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

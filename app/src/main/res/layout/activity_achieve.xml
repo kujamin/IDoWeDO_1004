@@ -308,7 +308,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge9"
@@ -346,7 +346,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge10"
@@ -374,7 +374,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge11"
@@ -402,7 +402,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge12"
@@ -440,7 +440,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge13"
@@ -468,7 +468,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge14"
@@ -496,7 +496,7 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/logo2_grey" />
+                            android:src="@drawable/undone_badge" />
 
                         <TextView
                             android:id="@+id/textbadge15"

@@ -79,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+        //등록버튼을 누를시에 실행되는 클릭 리스너
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String strPwd = mEtPwd.getText().toString();
                 String strRePwd = mEtRePwd.getText().toString();
 
+                //아이디 회원가입시에 로직처리 구문
                 if(strName.length() > 0 && strEmail.length() > 0 && strPwd.length() > 0 && strRePwd.length() > 0) {
                     joinstart(strName, strEmail, strPwd, strRePwd);
                 } else if (strName.length() == 0) {
@@ -102,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    //회원가입 함수 구현 firebase의 로직을 참고하여 e-mail 형식, 중복처리 등을 처리 후 계정에 필요한 DB값을 생성
     public void joinstart(String strName, String strEmail, String strPwd, String strRePwd) {
         if (strPwd.equals(strRePwd)) {
             customProgressDialog.show();
@@ -138,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
                         account.setStorepoint(0);
                         account.setCoinAchieve(0);
 
-                        // setValue : database에 insert 행위
+                        // firebase에 setvalue를 통해 데이터를 삽입
                         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 
                         //firestore
@@ -222,7 +225,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                //유저별 업적 달성 여부 확인
+                                //유저별 업적 달성 여부 확인 0: 미달성 1: 달성 -> 달성 관련 로직은 achieveactivity 참조
                                 Map<String, Object> userAchieve = new HashMap<>();
                                 userAchieve.put("30일 달성", "0");
                                 userAchieve.put("100일 달성", "0");
@@ -1063,6 +1066,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         });
                             }
                         });
+                        Toast.makeText(getApplicationContext(), "회원가입 완료", Toast.LENGTH_SHORT);
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();

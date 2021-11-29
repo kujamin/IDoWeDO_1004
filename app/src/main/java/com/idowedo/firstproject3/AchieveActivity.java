@@ -36,7 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AchieveActivity extends AppCompatActivity {
     LinearLayout slideLayout;
     View darkView;
-    ImageView showImg;
+    ImageView showImg, img1, img2, img3, img4, img5, img6, img7, img8;
     TextView showName, showExplain;
     int badgeId, myLv;
     private FirebaseFirestore firebaseFirestore;
@@ -85,6 +85,15 @@ public class AchieveActivity extends AppCompatActivity {
         LinearLayout layoutBadge14 = findViewById(R.id.badge14);
         LinearLayout layoutBadge15 = findViewById(R.id.badge15);
 
+        img1 = findViewById(R.id.imagebadge1);
+        img2 = findViewById(R.id.imagebadge2);
+        img3 = findViewById(R.id.imagebadge3);
+        img4 = findViewById(R.id.imagebadge4);
+        img5 = findViewById(R.id.imagebadge5);
+        img6 = findViewById(R.id.imagebadge6);
+        img7 = findViewById(R.id.imagebadge7);
+        img8 = findViewById(R.id.imagebadge8);
+
         //팝업창 닫는 이벤트
         darkView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +104,165 @@ public class AchieveActivity extends AppCompatActivity {
             }
         });
 
-        /*private void getChecked(todo_do, todo_done)
-        {
+        //Database에서 지금 접속중인 유저 정보의 값을 가져옴
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount group = dataSnapshot.getValue(UserAccount.class);
+                userCode = (group.getEmailid());
+            }
 
-        };*/
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value < 30) {
+                    img1.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img1.setImageResource(R.drawable.daily30);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("datecnt").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value < 100) {
+                    img2.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img2.setImageResource(R.drawable.daily100);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value < 5) {
+                    img3.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img3.setImageResource(R.drawable.pair_of_wear);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value < 30) {
+                    img4.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img4.setImageResource(R.drawable.five_task);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("storepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value < 29) {
+                    img5.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img5.setImageResource(R.drawable.fashion);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("challengepoint").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value == 0) {
+                    img6.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img6.setImageResource(R.drawable.challange_starter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("lvAchieve").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value == 0) {
+                    img7.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img7.setImageResource(R.drawable.level_reach30);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("coinAchieve").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int value = snapshot.getValue(Integer.class);
+                if (value == 0) {
+                    img8.setImageResource(R.drawable.undone_badge);
+                } else {
+                    img8.setImageResource(R.drawable.coin_1000_congrate);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         //뱃지 클릭 시 팝업창에 띄움
         View.OnClickListener ocl = new View.OnClickListener() {
@@ -112,19 +276,7 @@ public class AchieveActivity extends AppCompatActivity {
                 showExplain = findViewById(R.id.showExplainBadge);
 
 
-                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                        userCode = (group.getEmailid());
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                // 각 뱃지별 유저가 업적을 달성헀는지 확인 후 클릭시 해당 이벤트 처리를 같이함
                 switch (badgeId) {
                     case R.id.badge1:
                         img = findViewById(R.id.imagebadge1);
