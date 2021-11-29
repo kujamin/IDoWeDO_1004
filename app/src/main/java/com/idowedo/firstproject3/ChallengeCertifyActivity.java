@@ -90,7 +90,7 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
         // 인증 버튼 (인증 문자랑 인식 문자가 동일할 경우에만 Clickable 가능)
         btn_certify = findViewById(R.id.btn_certify);
         btn_certify.setBackground(getDrawable(R.drawable.attencheckeddrawble));
-        btn_certify.setClickable(false);
+        btn_certify.setEnabled(false);
         btn_certify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +146,7 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
                         for(i = 0; i < array_text.length; i++) {
                             if (input_text.contains(array_text[i])) {
                                 btn_certify.setBackground(getDrawable(R.drawable.certify_btnlayout));
-                                btn_certify.setClickable(true);
+                                btn_certify.setEnabled(true);
                                 Toast.makeText(getApplicationContext(), "인증 버튼 ->", Toast.LENGTH_SHORT);
                             }
                         }

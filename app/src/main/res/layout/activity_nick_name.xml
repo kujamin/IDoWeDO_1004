@@ -40,10 +40,10 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editNickName"
-                    android:layout_width="match_parent"
+                    android:layout_width="225dp"
                     android:layout_height="wrap_content"
                     android:background="#fff"
-                    android:ems="12"
+                    android:ems="9"
                     android:fontFamily="@font/nanumbarunpenr"
                     android:hint="닉네임을 입력하세요."
                     android:inputType="textPersonName"
