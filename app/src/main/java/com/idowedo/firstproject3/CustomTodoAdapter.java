@@ -44,16 +44,12 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String usercode;
-
     public static int achieve_point = 0;
 
     public CustomTodoAdapter(ArrayList<Todo_Item> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
-
-
-
 
     @NonNull
     @Override
@@ -64,7 +60,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
         return holder;
     }
 
-    @Override //여기에 온클릭 가능하다네
+    @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getTodo_category())
@@ -72,6 +68,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
         holder.todo_title.setText(arrayList.get(position).getTodo_title());
         holder.todo_checkBox.setChecked(arrayList.get(position).getTodo_checkbox());
 
+        //앱 종료 후에도 글씨 상태 유지
         if(holder.todo_checkBox.isChecked()){
             holder.todo_title.setPaintFlags(holder.todo_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.todo_title.setTextColor(Color.GRAY);
@@ -81,6 +78,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
             holder.todo_title.setTextColor(Color.BLACK);
         }
 
+        //할 일 목록 클릭 시 글씨 상태 변화
         holder.todo_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -103,7 +101,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                usercode = (group.getEmailid());
+                usercode = (group.getEmailid());//현재 로그인된 이메일 계정 가져오기
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -111,15 +109,16 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
             }
         });
 
-
+        //할 일 체크박스 클릭 시
         holder.todo_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.todo_checkBox.isChecked()){
+                if(holder.todo_checkBox.isChecked()){   //할 일 체크되었을 때
 
                     firebaseFirestore = FirebaseFirestore.getInstance();
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
 
+                    //할 일 체크 시 경험치 상승
                     DocumentReference docRefC = firebaseFirestore.collection("user").document(usercode).collection("user character").document("state");
                     docRefC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -135,6 +134,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
                     docRef.update("todo_checkbox",true);
 
+                    //30레벨 달성 시 업적 획득
                     mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("dotodo").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -154,26 +154,8 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
                         }
                     });
-
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-
-
-                                if (document.exists()) {
-                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                } else {
-                                    Log.d(TAG, "No such document");
-                                }
-                            } else {
-                                Log.d(TAG, "get failed with ", task.getException());
-                            }
-                        }
-                    });
                 }
-                else{
+                else{   //할 일 체크 해제 시
                     firebaseFirestore = FirebaseFirestore.getInstance();
                     DocumentReference docRef = firebaseFirestore.collection("user").document(usercode).collection("user todo").document(arrayList.get(position).getTodo_id());
 
@@ -183,6 +165,7 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
             }
         });
 
+        //할 일 목록 클릭 시 화면 이동
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,11 +191,6 @@ public class CustomTodoAdapter extends RecyclerView.Adapter<CustomTodoAdapter.Cu
 
                             context.startActivity(intent);
 
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            } else {
-                                Log.d(TAG, "No such document");
-                            }
                         } else {
                             Log.d(TAG, "get failed with ", task.getException());
                         }

@@ -47,10 +47,9 @@ public class Fragment_Character extends Fragment {
     private DatabaseReference mDatabase;
     ProgressBar progressBar;
     TextView textLevel, textExp, textCoin, textNickName;
-    Handler handler;
     private DocumentReference documentReference;
     private FirebaseFirestore firebaseFirestore;
-    private int coin, level, maxExp, currentExp, heart, lvachieve;
+    private int coin, level, maxExp, currentExp, heart;
     private RatingBar ratingBar;
 
     @Nullable
@@ -61,6 +60,7 @@ public class Fragment_Character extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         ImageView cloStateHead = rootView.findViewById(R.id.imageViewHeadMini);
@@ -75,34 +75,15 @@ public class Fragment_Character extends Fragment {
         textNickName = (TextView) rootView.findViewById(R.id.tv_nickname);
         ratingBar = rootView.findViewById(R.id.ratingBar2);
 
-
         LinearLayout lstore = rootView.findViewById(R.id.storePage);
         LinearLayout ldeco = rootView.findViewById(R.id.decoPage);
         LinearLayout lachieve = rootView.findViewById(R.id.achievePage);
-
-//        String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                String userCode = (group.getEmailid());
-
-//                firebaseFirestore.collection("user").document(userCode).collection("user todo")
-//                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                                if (error != null) {
-//                                    Log.w("TAG", "Listen failed.", error);
-//                                    return;
-//                                }
-//                                for (QueryDocumentSnapshot doc : value) {
-//                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//                                    Date today = new Date ( );
-//                                    Date tomorrow = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 ) );
-//                                }
-//                            }
-//                        });
+                String userCode = (group.getEmailid());//현재 로그인된 이메일 계정 가져오기
 
                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
 
@@ -110,6 +91,7 @@ public class Fragment_Character extends Fragment {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
 
+                        //사용자의 코인, 레벨, 체력 가져오기
                         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -152,7 +134,7 @@ public class Fragment_Character extends Fragment {
                                     textCoin.setText(coin + "");
                                     textExp.setText(currentExp + " / " + maxExp);
 
-                                    //30레벨 업적 달성시 value를 1로 업데이트 후 한번만 보이게 함.
+                                    //30레벨 달성 시 업적 팝업 한번만 뜨게 하기
                                     mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("lvAchieve").addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -175,6 +157,7 @@ public class Fragment_Character extends Fragment {
                                         }
                                     });
 
+                                    //코인 1000 모이면 업적 팝업 띄우기
                                     mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("coinAchieve").addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -205,6 +188,7 @@ public class Fragment_Character extends Fragment {
 
                         DocumentReference docRef = firebaseFirestore.collection("user").document(userCode).collection("user character").document("deco");
 
+                        //사용자가 저장한 옷 불러오기
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -234,28 +218,6 @@ public class Fragment_Character extends Fragment {
                                 });
                             }
                         });
-
-
-//                        maxExp = 100+level;
-//                        progressBar.setMax(maxExp);
-//                        progressBar.setProgress(currentExp);
-//                        if(currentExp >= maxExp) {
-//                            level++;
-//                            currentExp = currentExp - maxExp;
-//                        }
-//                        textLevel.setText("Lv." + level);
-//                        textCoin.setText(coin + "");
-//
-//                        documentReference.update("coin", String.valueOf(coin));
-//                        documentReference.update("exp", String.valueOf(currentExp)).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void unused) {
-//                                textExp.setText(currentExp + " / " + maxExp);
-//                                Log.d("TAG","success");
-//                            }
-//                        });
-//                        documentReference.update("level", String.valueOf(level));
-//                        documentReference.update("maxExp", String.valueOf(maxExp));
                     }
                 });
 
@@ -266,9 +228,7 @@ public class Fragment_Character extends Fragment {
             }
         });
 
-
-
-
+        //사용자 닉네임 띄우기
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -285,7 +245,7 @@ public class Fragment_Character extends Fragment {
             }
         });
 
-        //닉네임 변경 꾹눌렀을때때
+        //닉네임 부분 길게 눌렀을 때 닉네임 변경 팝업 띄우기
         textNickName.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
                 Intent i = new Intent(rootView.getContext(), NickPopup.class);
@@ -302,7 +262,6 @@ public class Fragment_Character extends Fragment {
                 startActivity(i);
             }
         });
-
 
         lachieve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -322,6 +281,4 @@ public class Fragment_Character extends Fragment {
 
         return rootView;
     }
-
-
 }

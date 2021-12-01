@@ -525,40 +525,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }//onCreate
 
-    //새로운 특정 시간에 알람 울리는 코드 위치..허이짜
-    public void regist(View view) {
-        Intent intent = new Intent(MainActivity.this, MyReceiver.class);
-//                            intent.setClass(MainActivity.this, MyReceiver.class);
-//                            intent.setFlags(Integer.parseInt(Intent.ACTION_DATE_CHANGED));
-        intent.putExtra("chall1", str1);
-        intent.putExtra("chall2", str2);
-        intent.putExtra("chall3", str3);
-
-        PendingIntent pIntent  = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-
-        //시간 설정
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 11);
-        calendar.set(Calendar.MINUTE, 41);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-
-        //  알람 예약
-        //  alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-        //  AlarmManager.INTERVAL_DAY, pendingIntent);
-
-        // 지정한 시간에 매일 알림
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
-    }//regist() 끝
-
-    public void unregist (View view){
-        Intent intent = new Intent(this, MyReceiver.class);
-        PendingIntent pIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-        alarmManager.cancel(pIntent);
-    }//unregist() 끝
-
     private void getHashKey(){ //해시키 가져오기
         PackageInfo packageInfo = null;
         try {

@@ -47,9 +47,7 @@ import java.util.UUID;
 
 public class HabbitMakeActivity extends AppCompatActivity {
 
-    int selectYear, selectMonth, selectDay, selectHour, selectMinute;
     static final int REQ_ADD_CONTACT = 1;
-
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
     private String userCode;
@@ -57,8 +55,6 @@ public class HabbitMakeActivity extends AppCompatActivity {
     LinearLayout cateLayout;
     TextView textCate, textch, textDaily;
     ImageView imageViewA;
-    ArrayList<Person> persons;
-    Company company;
     ProgressDialog pd;
     FirebaseFirestore db;
     String strUrl;
@@ -112,6 +108,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
+        //카테고리 항목 클릭 시 화면 이동
         cateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,12 +123,12 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 dailymemo.setBackground(ContextCompat.getDrawable(HabbitMakeActivity.this, R.drawable.dailymakeline));
                 dailycate.setBackground(ContextCompat.getDrawable(HabbitMakeActivity.this, R.drawable.dailymclickline));
 
-
                 Intent intent = new Intent(HabbitMakeActivity.this, DailyPopActivity.class);
                 startActivityForResult(intent, REQ_ADD_CONTACT);
             }
         });
 
+        //습관 이름 클릭 시 상태 변화
         textDailyName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

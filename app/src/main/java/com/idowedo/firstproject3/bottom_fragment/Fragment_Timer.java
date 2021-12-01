@@ -47,7 +47,7 @@ public class Fragment_Timer extends Fragment {
     private Button btnGirok;
     private LinearLayout layoutRecordPaper, addTimerlist;
     private RecyclerView timer_recyclerView;
-    public String text, str;
+    public String text;
     private TextView textRecord, textTitlt;
     private FirebaseFirestore firebaseFirestore;
     private ListViewAdapter timerAdapter;
@@ -68,13 +68,14 @@ public class Fragment_Timer extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
         textRecord = view.findViewById(R.id.timerTextGoal);
         btnGirok = view.findViewById(R.id.girokButton);
         layoutRecordPaper = view.findViewById(R.id.layoutRecordPaper);
         addTimerlist = view.findViewById(R.id.addTimerlist);
         textTitlt = viewList.findViewById(R.id.timerTextName);
 
-        firebaseFirestore = FirebaseFirestore.getInstance();
         timer_recyclerView = view.findViewById(R.id.rec_timer);
         timer_recyclerView.setHasFixedSize(true);
         timer_recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -83,14 +84,13 @@ public class Fragment_Timer extends Fragment {
         timer_list = new ArrayList<Timer_Item>();
         timerAdapter = new ListViewAdapter(timer_list, view.getContext());
 
-        //String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
-
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                String userCode = (group.getEmailid());
+                String userCode = (group.getEmailid());//현재 로그인된 이메일 계정 가져오기
 
+                //사용자가 생성한 타이머 목록 보여주기
                 firebaseFirestore.collection("user").document(userCode).collection("user timer").addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -107,7 +107,6 @@ public class Fragment_Timer extends Fragment {
                                 timer_recyclerView.setVisibility(View.VISIBLE);
                                 layoutRecordPaper.setVisibility(View.GONE);
                                 addTimerlist.setVisibility(View.VISIBLE);
-
                             }
                         }
                         //어답터 갱신
@@ -173,45 +172,10 @@ public class Fragment_Timer extends Fragment {
         switch (requestCode) {
             case 100: {
                 if (data != null) {
-                    String strName = data.getStringExtra("strName");
-                    String strGoal  = data.getStringExtra("strGoal");
                     strUrl = data.getStringExtra("timerUrl");
                     Toast.makeText(getContext(), strUrl, Toast.LENGTH_LONG).show();
                 }
             }
-//            case 101: {
-//                if (data != null) {
-//                    text = data.getStringExtra("strName");
-//
-//                    ListViewAdapter adapter;
-//
-//                    // Adapter 생성
-//                    adapter = new ListViewAdapter() ;
-//
-//                    // 리스트뷰 참조 및 Adapter달기
-//
-//                    recyclerView.setAdapter(adapter);
-//
-//                    // 첫 번째 아이템 추가.
-//                    adapter.addTimer(ContextCompat.getDrawable(getContext(), R.drawable.chara),
-//                            text, "기록하기");
-//
-//                    // 두 번째 아이템 추가.
-//                    adapter.addTimer(ContextCompat.getDrawable(getContext(), R.drawable.chara),
-//                            "타이머2", "기록하기");
-//
-//                    // 세 번째 아이템 추가.
-//                    adapter.addTimer(ContextCompat.getDrawable(getContext(), R.drawable.chara),
-//                            "타이머3", "기록하기");
-//
-//                    layoutRecordPaper.setVisibility(View.GONE);
-//                    recyclerView.setVisibility(View.VISIBLE);
-//                }
-//                break;
-//            }
-//        }//switch
-        }
-
-
-    }
+        }//switch
+    }//onActivityResult
 }

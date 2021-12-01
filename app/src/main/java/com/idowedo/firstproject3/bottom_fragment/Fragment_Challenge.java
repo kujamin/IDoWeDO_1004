@@ -29,8 +29,6 @@ public class Fragment_Challenge extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Challenge_Item> challenge_list;
     private CustomChallengeAdapter customChallengeAdapter;
-    private ImageView imageView;
-    final String TAG = "MainActivity";
 
     @Nullable
     @Override
@@ -46,6 +44,7 @@ public class Fragment_Challenge extends Fragment {
         challenge_list = new ArrayList<Challenge_Item>();
         customChallengeAdapter = new CustomChallengeAdapter(challenge_list, view.getContext());
 
+        //챌린지 목록 보여주기
         firebaseFirestore.collection("challenge").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -58,21 +57,6 @@ public class Fragment_Challenge extends Fragment {
         });
         recyclerView.setAdapter(customChallengeAdapter);
 
-//        View.OnClickListener ocl = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(view.getContext(), ClickTransActivity.class);
-//                startActivity(i);
-//
-//            }
-//        };
-//
-//        challenge1.setOnClickListener(ocl);
-//        challenge2.setOnClickListener(ocl);
-//        challenge3.setOnClickListener(ocl);
-
         return view;
-
     }
-
 }

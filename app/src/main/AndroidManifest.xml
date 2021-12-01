@@ -64,21 +64,8 @@
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
-        <receiver
-            android:name="com.idowedo.firstproject3.MyReceiver"
-            android:enabled="true"
-            android:exported="false" />
         <receiver android:name="com.idowedo.firstproject3.Alarm" />
 
-        <activity
-            android:name="com.idowedo.firstproject3.Confirm3Activity"
-            android:exported="true" />
-        <activity
-            android:name="com.idowedo.firstproject3.Confirm2Activity"
-            android:exported="true" />
-        <activity
-            android:name="com.idowedo.firstproject3.ConfirmActivity"
-            android:exported="true" />
         <!--
           <meta-data
             android:name="com.kakao.sdk.AppKey"

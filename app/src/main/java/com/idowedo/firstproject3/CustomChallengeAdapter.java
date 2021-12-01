@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 
 public class CustomChallengeAdapter extends RecyclerView.Adapter<CustomChallengeAdapter.CustomViewHoler> {
-
     private ArrayList<Challenge_Item> arrayList;
     private android.content.Context context;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
@@ -60,6 +59,7 @@ public class CustomChallengeAdapter extends RecyclerView.Adapter<CustomChallenge
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        //챌린지 목록 클릭 시 화면 이동
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

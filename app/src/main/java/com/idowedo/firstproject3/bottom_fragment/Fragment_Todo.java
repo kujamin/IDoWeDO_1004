@@ -94,24 +94,21 @@ public class Fragment_Todo extends Fragment {
             sDD = 0 + sDD;
         }
 
-
         strDate = sDY + "/" + sDM + "/" + sDD;
 
-
+        //할 일 arraylist, recyclerview, adapter 생성
         todo_recyclerView = viewGroup.findViewById(R.id.rec_Todo);
         todo_recyclerView.setHasFixedSize(true); // 리사이클 뷰 성능 강화
         todo_recyclerView.setLayoutManager(new LinearLayoutManager(viewGroup.getContext()));
 
+        todo_list = new ArrayList<Todo_Item>();
+        customTodoAdapter = new CustomTodoAdapter(todo_list, viewGroup.getContext());
+
+        //습관 arraylist, recyclerview, adapter 생성
         habbit_recyclerView = viewGroup.findViewById(R.id.rec_Habbit);
         habbit_recyclerView.setHasFixedSize(true); // 리사이클 뷰 성능 강화
         habbit_recyclerView.setLayoutManager(new LinearLayoutManager(viewGroup.getContext()));
 
-        todo_list = new ArrayList<Todo_Item>();
-        customTodoAdapter = new CustomTodoAdapter(todo_list, viewGroup.getContext());
-
-
-
-        //todo
         habbit_list = new ArrayList<Habbit_Item>();
         customHabbitAdapter = new CustomHabbitAdapter(habbit_list, viewGroup.getContext());
 
@@ -119,8 +116,9 @@ public class Fragment_Todo extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
-                String userCode = (group.getEmailid());
+                String userCode = (group.getEmailid());//현재 로그인된 이메일 계정 가져오기
 
+                ////////할 일///////
                 firebaseFirestore.collection("user").document(userCode).collection("user todo")
                         .whereEqualTo("todo_date", strDate)
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -146,16 +144,18 @@ public class Fragment_Todo extends Fragment {
 
                                 strDate = sDY + "/" + sDM + "/" + sDD;
 
+                                //할 일: 사용자가 생성한 할 일 목록 보여주기
                                 for (QueryDocumentSnapshot doc : value) {
                                     todo_list.add(0, new Todo_Item(doc.getString("todo_category"), doc.getString("todo_title"), doc.getString("todo_id"), doc.getBoolean("todo_checkbox")));
                                     String date1 = doc.getString("todo_date");
                                 }
 
-                                //어답터 갱신
+                                //adapter 갱신
                                 customTodoAdapter.notifyDataSetChanged();
                             }
                         });
 
+                //할 일: 사용자가 지정한 날짜에만 할 일 목록 보여주기
                 firebaseFirestore.collection("user").document(userCode).collection("user todo").addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -244,6 +244,7 @@ public class Fragment_Todo extends Fragment {
                     }
                 });
 
+                //////습관//////
                 firebaseFirestore.collection("user").document(userCode).collection("user habbit").addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -258,7 +259,7 @@ public class Fragment_Todo extends Fragment {
                         for (QueryDocumentSnapshot doc : value) {
                             if (doc.get("habbit_title") != null) {
 
-
+                                //습관: 사용자가 지정한 날짜까지 습관 보여주기
                                 doc.getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -276,7 +277,6 @@ public class Fragment_Todo extends Fragment {
 
                                                 Date dateE = null;
                                                 Date dateRC = null;
-                                                Date dateS = null;
 
                                                 String strE = document.getString("habbit_date");
                                                 String strS = document.getString("habbit_dateStart");
@@ -321,6 +321,7 @@ public class Fragment_Todo extends Fragment {
                                         }
                                     }
                                 });
+                                ////습관: 사용자가 생성한 습관 목록 보여주기
                                 habbit_list.add(0, new Habbit_Item(doc.getString("habbit_category"), doc.getString("habbit_title"), doc.getString("habbit_id"), doc.getBoolean("habbit_checkbox")));
 
                             }
@@ -349,6 +350,7 @@ public class Fragment_Todo extends Fragment {
                     }
                 });
 
+                //앱 실행 시 로딩창 띄우기
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
