@@ -26,6 +26,7 @@ public class SaturdayDecorator implements DayViewDecorator {
         return weekDay == Calendar.SATURDAY;
     }
 
+    //토요일의 날짜 색은 BLUE임.
     @Override
     public void decorate(DayViewFacade view) {
         view.addSpan(new ForegroundColorSpan(Color.BLUE));

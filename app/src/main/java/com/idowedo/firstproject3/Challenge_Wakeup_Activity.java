@@ -55,20 +55,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Challenge_Wakeup_Activity extends Activity {
-    private TextView monthYearText;
-    String time, kcal, menu;
-    private CalendarDay date;
-    Cursor cursor;
     Button chall_checkBtn;
     MaterialCalendarView calendarView;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
     private DatabaseReference mDatabase;
-    private String usercode, dateR, datee;
+    private String usercode, dateR;
     private String strDate;
     private FirebaseFirestore firebaseFirestore;
-    int sumCount = 0;
-    String[] dateqd;
-    int i = 0;
     private int btnstate = 0;
     final String TAG = "MainActivity";
     ProgressDialog customProgressDialog;
@@ -110,6 +103,7 @@ public class Challenge_Wakeup_Activity extends Activity {
 
         calendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
+        //Material Calendar 커스텀 과정
         calendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
                 .setMinimumDate(CalendarDay.from(2021, 8, 1))   //달력의 시작
@@ -126,9 +120,7 @@ public class Challenge_Wakeup_Activity extends Activity {
                 new SundayDecorator(),
                 new SaturdayDecorator());
 
-//        customProgressDialog.show();
-//        customProgressDialog.setCancelable(false);
-
+        //chall_checkbutton을 클릭했을 때 생성된 오늘 날짜 today_date문서가 있으면 그 날짜 값을 가져와 String으로 변환 후 저장하고 그 date값에 해당하는 날에 도장 찍음
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -163,6 +155,7 @@ public class Challenge_Wakeup_Activity extends Activity {
                             }
                         });
 
+                //오늘 날짜와 챌린지를 인증한 날짜가 동일하면 버튼 비활성화
                 firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("아침 6시 기상하기").collection("OX")
                         .whereEqualTo("today_date",strDate)
                         .get()
@@ -190,9 +183,9 @@ public class Challenge_Wakeup_Activity extends Activity {
                     public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException error) {
                         String str = snapshot.getString("userChall_title");
 
-                        if(str != null){ //챌린지 참여한 경우 버튼 활성화
+                        if(str != null){    //챌린지 참여한 경우 버튼 활성화
                             btnstate = 0;
-                        } else { //챌린지 참여하지 않았을 경우 버튼 비활성화
+                        } else {            //챌린지 참여하지 않았을 경우 버튼 비활성화
                             chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
                             chall_checkBtn.setEnabled(false);
                         }
@@ -207,7 +200,7 @@ public class Challenge_Wakeup_Activity extends Activity {
             }
         });
 
-        //챌린지 인증 버튼
+        //챌린지 인증하기 버튼을 클릭하면 ChallengeCertifyActivity로 이동
         chall_checkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,7 +218,7 @@ public class Challenge_Wakeup_Activity extends Activity {
         if(requestCode == 0 && resultCode == RESULT_OK){
 
             if(btnstate == 0) {
-                // 추출 string이랑 그 날의 string이랑 일치할 경우 다시 현재 액티비티로 돌아와서
+                //이미지에서 추출한 string 값과 그 날의 지정 string값이 일치할 경우 다시 현재 액티비티로 돌아와서 바뀌는 것들
                 btnstate = 1;
                 chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
                 chall_checkBtn.setText("인증완료");

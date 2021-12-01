@@ -19,6 +19,7 @@ import com.idowedo.firstproject3.R;
 
 public class PopupActivity extends Activity {
     ImageView Challlogo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public class PopupActivity extends Activity {
 
         Challlogo.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
 
-        //특정 텍스트에 대한 스타일 적용
+        //특정 텍스트에 대한 스타일 적용(체크란 글자가 나오면 굵음과 #F4385E color 적용)
         TextView textSendToTitle = findViewById(R.id.textViewCheck);
 
         String content = textSendToTitle.getText().toString();

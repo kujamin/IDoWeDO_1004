@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class DailyMakeActivity extends AppCompatActivity {
-    int selectYear, selectMonth, selectDay, selectHour, selectMinute;
+    int selectHour, selectMinute;
     static final int REQ_ADD_CONTACT = 1;
 
     LinearLayout cateLayout;
@@ -127,20 +127,20 @@ public class DailyMakeActivity extends AppCompatActivity {
                 time.setVisibility(View.GONE);
                 daily.setVisibility(View.GONE);
 
+                //TableRow의 테두리 서식이 커스텀되어 있는 dailymakeline으로 background 변경
                 dailycal.setBackground(ContextCompat.getDrawable(DailyMakeActivity.this, R.drawable.dailymakeline));
                 dailyname.setBackground(ContextCompat.getDrawable(DailyMakeActivity.this, R.drawable.dailymakeline));
                 dailytime.setBackground(ContextCompat.getDrawable(DailyMakeActivity.this, R.drawable.dailymakeline));
                 dailymemo.setBackground(ContextCompat.getDrawable(DailyMakeActivity.this, R.drawable.dailymakeline));
                 dailycate.setBackground(ContextCompat.getDrawable(DailyMakeActivity.this, R.drawable.dailymclickline));
 
-
+                //DailyPopActivity로 이동
                 Intent intent = new Intent(DailyMakeActivity.this, DailyPopActivity.class);
                 startActivityForResult(intent, REQ_ADD_CONTACT);
-
             }
         });
 
-
+        //일정 이름 설정하는 레이아웃 영역을 클릭할 때
         textDailyName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -156,6 +156,7 @@ public class DailyMakeActivity extends AppCompatActivity {
             }
         });
 
+        //일정 날짜 설정하는 레이아웃 영역을 클릭할 때
         textDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +181,7 @@ public class DailyMakeActivity extends AppCompatActivity {
             }
         });
 
+        //일정의 상세 시간을 설정하는 레이아웃 영역을 클릭할 때
         textTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,7 +205,7 @@ public class DailyMakeActivity extends AppCompatActivity {
             }
         });
 
-
+        //메모사항을 입력하는 레이아웃 영역을 클릭할 때
         textMemo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -218,6 +220,7 @@ public class DailyMakeActivity extends AppCompatActivity {
 
             }
         });
+
 
         textCate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,17 +261,17 @@ public class DailyMakeActivity extends AppCompatActivity {
             }
         });
 
+        //일정 추가 버튼을 클릭했을 때
         btnReser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = textDailyName.getText().toString().trim(); //슨관 제목
-                String date = textDaily.getText().toString().trim(); //습관 날짜
-                String time = textTime.getText().toString().trim(); //습관 시간
-                String memo = textMemo.getText().toString().trim(); //습관 메모
+                String title = textDailyName.getText().toString().trim(); //일정 제목
+                String date = textDaily.getText().toString().trim(); //일정 날짜
+                String time = textTime.getText().toString().trim(); //일정 시간
+                String memo = textMemo.getText().toString().trim(); //일정 메모
                 String cateText = textch.getText().toString().trim();
-                String category = strUrl; //습관 카테고리 텍스트
+                String category = strUrl; //일정 카테고리 텍스트
                 String id = UUID.randomUUID().toString();
-                //String usercode = ((usercode)getApplication()).getUsercode();
 
                 if(title.length() == 0){
                     Toast.makeText(getApplicationContext(),"일정 이름을 입력하세요.",Toast.LENGTH_SHORT).show();
@@ -304,6 +307,7 @@ public class DailyMakeActivity extends AppCompatActivity {
 
     }//onCreate
 
+    //생성하는 일정을 DB에 저장하는 메소드
     private void uploadData(String title, String date, String time, String memo, String category, String cateText, String id, String userCode) {
         pd.setTitle("할 일 생성 중...");
 
@@ -346,6 +350,7 @@ public class DailyMakeActivity extends AppCompatActivity {
 
     }
 
+    //DailyPopActivity에서 선택한 이미지의 id값을 가져와서 리사이클러뷰에 해당 이미지 visible 시킴
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

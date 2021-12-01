@@ -67,10 +67,6 @@ import dmax.dialog.SpotsDialog;
 public class Challenge_Study_Activity extends Activity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef;
-    private TextView monthYearText;
-    String time, kcal, menu;
-    private CalendarDay date;
-    Cursor cursor;
     Button chall_checkBtn;
     MaterialCalendarView calendarView;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증처리
@@ -78,14 +74,11 @@ public class Challenge_Study_Activity extends Activity {
     private String usercode, dateR, datee;
     private String strDate;
     private FirebaseFirestore firebaseFirestore;
-    int sumCount = 0;
-    String[] dateqd;
-    int i = 0;
     private int btnstate = 0;
     final String TAG = "MainActivity";
     ProgressDialog customProgressDialog;
     ImageView imageViewX;
-    Bitmap bitmap, capturebmp;
+    Bitmap capturebmp;
     AlertDialog waitingDialog;
     boolean CheckSuccess;
 
@@ -115,6 +108,7 @@ public class Challenge_Study_Activity extends Activity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference().child("challenge").child(firebaseUser.getUid());
 
+        //AlertDialog build
         waitingDialog = new SpotsDialog.Builder().
                 setContext(this)
                 .setMessage("Please waiting...")
@@ -123,7 +117,7 @@ public class Challenge_Study_Activity extends Activity {
         chall_checkBtn = findViewById(R.id.chall_checkbutton);
 
         imageViewX = (ImageView) findViewById(R.id.imageView3);
-        imageViewX.setColorFilter(Color.parseColor("#132F7E"), PorterDuff.Mode.SRC_IN);
+        imageViewX.setColorFilter(Color.parseColor("#132F7E"), PorterDuff.Mode.SRC_IN); //imageViewX 이미지의 컬러 바꾸기
 
         //로딩창 객체 생성
         customProgressDialog = new ProgressDialog(this);
@@ -132,15 +126,16 @@ public class Challenge_Study_Activity extends Activity {
 
         calendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
+        //Material Calendar 커스텀 과정
         calendarView.state().edit()
-                .setFirstDayOfWeek(Calendar.SUNDAY)
+                .setFirstDayOfWeek(Calendar.SUNDAY)             //달력의 시작 요일은 일요일
                 .setMinimumDate(CalendarDay.from(2021, 8, 1))   //달력의 시작
                 .setMaximumDate(CalendarDay.from(2030, 11, 31)) //달력의 끝
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
         calendarView.setPadding(0, -20, 0, 30);
-        calendarView.setArrowColor(Color.rgb(19, 47, 126));
+        calendarView.setArrowColor(Color.rgb(19, 47, 126)); //다음 달, 이전 달 이동 화살표의 색깔 변경
 
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
@@ -148,15 +143,13 @@ public class Challenge_Study_Activity extends Activity {
                 new SundayDecorator(),
                 new SaturdayDecorator());
 
-//        customProgressDialog.show();
-//        customProgressDialog.setCancelable(false);
-
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
 
+                //chall_checkBtn를 클릭했을 때 생성된 오늘 날짜 today_date문서가 있으면 그 날짜 값을 가져와 String으로 변환 후 저장하고 그 date값에 해당하는 날에 도장 찍음
                 firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -186,7 +179,7 @@ public class Challenge_Study_Activity extends Activity {
                             }
                         });
 
-                //오늘 날짜와 캘린더 참여 날짜가 동일하면 버튼 비활성화
+                //오늘 날짜와 챌린지를 인증한 날짜가 동일하면 버튼 비활성화
                 firebaseFirestore.collection("user").document(usercode).collection("user challenge").document("자격증 취득하기").collection("OX")
                         .whereEqualTo("today_date",strDate)
                         .get()
@@ -215,9 +208,9 @@ public class Challenge_Study_Activity extends Activity {
                     public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException error) {
                         String str = snapshot.getString("userChall_title");
 
-                        if(str != null){ //챌린지 참여한 경우 버튼 활성화
+                        if(str != null){    //챌린지 참여한 경우 버튼 활성화
                             btnstate = 0;
-                        } else { //챌린지 참여하지 않았을 경우 버튼 비활성화
+                        } else {            //챌린지 참여하지 않았을 경우 버튼 비활성화
                             chall_checkBtn.setBackground(getDrawable(R.drawable.attencheckeddrawble));
                             chall_checkBtn.setEnabled(false);
                         }

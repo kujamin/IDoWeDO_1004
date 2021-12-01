@@ -28,15 +28,18 @@ public class SplashActivity2 extends Activity {
             window.setFormat(PixelFormat.RGBA_8888);
     }
         Thread splashTread;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.activity_splash2);
-            StartAnimation();
+            StartAnimation();   //밑에 있는 StartAnimation 메소드 호출
         }
+
         private void StartAnimation() {
+            //애니메이션 duration, toAlpha, fromAlpha이 설정된 anim파일 적용
             Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
             anim.reset();
             LinearLayout l = (LinearLayout)findViewById(R.id.lin_lay);
@@ -74,7 +77,6 @@ public class SplashActivity2 extends Activity {
                             SplashActivity2.this.finish();
                         }
                     } catch (InterruptedException e) {
-                        //do hothing
                     } finally {
                         SplashActivity2.this.finish();
                     }

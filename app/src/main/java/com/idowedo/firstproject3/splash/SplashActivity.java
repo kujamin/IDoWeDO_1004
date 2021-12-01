@@ -23,12 +23,14 @@ public class SplashActivity extends Activity {
 
     }
     Thread splashTread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         StartAnimation();
     }
+
     private void StartAnimation() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();

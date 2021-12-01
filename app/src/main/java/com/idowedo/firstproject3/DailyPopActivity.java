@@ -23,6 +23,7 @@ public class DailyPopActivity extends Activity {
         final TextView textViewMedi = findViewById(R.id.textViewMedi);
         final TextView textViewSpecial = findViewById(R.id.textViewSpecial);
 
+        //학업에 해당하는 이미지를 선택했을 경우 DB storage에 저장된 이미지의 주소값을 넘김
         textViewStu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +39,7 @@ public class DailyPopActivity extends Activity {
             }
         });
 
+        //타이머에 해당하는 이미지를 선택했을 경우 DB storage에 저장된 이미지의 주소값을 넘김
         textViewTimerr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,7 @@ public class DailyPopActivity extends Activity {
             }
         });
 
+        //의료에 해당하는 이미지를 선택했을 경우 DB storage에 저장된 이미지의 주소값을 넘김
         textViewMedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +71,7 @@ public class DailyPopActivity extends Activity {
             }
         });
 
+        //특별한 날에 해당하는 이미지를 선택했을 경우 DB storage에 저장된 이미지의 주소값을 넘김
         textViewSpecial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,19 +87,4 @@ public class DailyPopActivity extends Activity {
             }
         });
     }
-
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event){
-//        //바깥레이어 클릭시 안 닫히게
-//        if(event.getAction()== MotionEvent.ACTION_OUTSIDE){
-//            return true;
-//        }
-//        return true;
-//    }
-
-//    @Override
-//    public void onBackPressed(){
-//        //안드로이드 백버튼 막기
-//        return;
-//    }
 }

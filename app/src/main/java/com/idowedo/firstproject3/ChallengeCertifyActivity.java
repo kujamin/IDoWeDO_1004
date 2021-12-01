@@ -33,8 +33,6 @@ import java.io.InputStream;
 import dmax.dialog.SpotsDialog;
 
 public class ChallengeCertifyActivity extends AppCompatActivity {
-    static final int REQUEST_CODE = 2;
-
     ImageView imageView;    // 갤러리에서 가져온 이미지를 보여줄 뷰
     Uri uri;                // 갤러리에서 가져온 이미지에 대한 Uri
     Bitmap bitmap;          // 갤러리에서 가져온 이미지를 담을 비트맵
@@ -44,6 +42,7 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
     TextRecognizer recognizer;    //텍스트 인식에 사용될 모델
     AlertDialog waitingDialog;   //로딩창
     Integer i;
+    //이 문자열에 해당하는 String을 동일하게 입력하면 기상 미션 인증 가능
     String[] array_text = {"Hello everyone!", "Believe in yourself.", "Follow your heart.", "Seize the day.", "You only live once." , "Past is just past." ,
             "Love yourself." , "Life is a journey." , "This too shall pass away." , "No pain, No gain." , "No sweat, No sweet."
             , "The die is cast.", "Appearances are deceptive.", "Be brave.", "Every cloud has a silver lining.", "Hang in there.",
@@ -81,13 +80,12 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
         // 텍스트 인식 버튼
         btn_detection_image = findViewById(R.id.btn_detection_image);
 
-
         btn_detection_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(uri == null) {
+                if(uri == null) {   //이미지를 업로드하지 않고 텍스트 인식 버튼을 눌렀을 경우
                     Toast.makeText(getApplicationContext(), "이미지를 업로드하세요.", Toast.LENGTH_SHORT).show();
-                } else {
+                } else {    //이미지를 업로드 후 텍스트 인식 버튼을 누르면 이미지에서 텍스트 값 추출
                     TextRecognition(recognizer);
                 }
 
@@ -95,10 +93,12 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
         });
 
 
-        // 인증 버튼 (인증 문자랑 인식 문자가 동일할 경우에만 Clickable 가능)
+        //인증 버튼 (인증 문자랑 인식 문자가 동일할 경우에만 Clickable 가능)
         btn_certify = findViewById(R.id.btn_certify);
         btn_certify.setBackground(getDrawable(R.drawable.attencheckeddrawble));
-        btn_certify.setEnabled(false);
+        btn_certify.setEnabled(false);  //인증 버튼은 기본값이 사용할 수 없게되어 있음
+
+        //인증 버튼을 클릭하면 Challenge_Wakeup_Activity로 이동
         btn_certify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,12 +110,12 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
 
     }//onCreate
 
+    // 갤러리에서 선택한 사진에 대한 uri를 가져옴.
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == 101) {
             if(resultCode == RESULT_OK) {
-                // 갤러리에서 선택한 사진에 대한 uri를 가져온다.
                 uri = data.getData();
 
                 setImage(uri);
@@ -123,7 +123,7 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
         }
     }
 
-    // uri를 비트맵으로 변환시킨후 이미지뷰에 띄워주고 InputImage를 생성하는 메서드
+    // uri를 비트맵으로 변환시킨후 이미지뷰에 띄워주고 InputImage를 생성하는 메소드
     private void setImage(Uri uri) {
         try{
             InputStream in = getContentResolver().openInputStream(uri);
@@ -131,28 +131,26 @@ public class ChallengeCertifyActivity extends AppCompatActivity {
             imageView.setImageBitmap(bitmap);
 
             image = InputImage.fromBitmap(bitmap, 0);
-//            Log.e("setImage", "image -> bitmap");
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
     }
 
+
     private void TextRecognition(TextRecognizer recognizer){
         Task<Text> result = recognizer.process(image)
-                // 이미지 인식에 성공하면 실행
                 .addOnSuccessListener(new OnSuccessListener<Text>() {
+                    // 이미지 인식에 성공하면 실행되는 메소드
                     @Override
                     public void onSuccess(Text visionText) {
-
-
                         Log.e("텍스트 인식", "성공");
-                        // Task completed successfully
                         String resultText = visionText.getText();
-                        text_info.setText(resultText);  // 인식한 텍스트를 TextView에 보여줌
+                        text_info.setText(resultText);  // 인식한 텍스트를 text_info에 보여줌
 
-                        //text_certify.setText 로 하루마다 바꿔주는 거 해야됨. 지금은 for문 안에서 array_text안에 있는 문자열 중 하나라도 포함되어 있으면 인증 완료
+
                         String input_text = resultText;
 
+                        //for문으로 array_text를 돌려서 배열 안에 있는 문자열 중 하나라도 input_text에 포함되어 있으면 인증 완료
                         for(i = 0; i < array_text.length; i++) {
                             if (input_text.contains(array_text[i])) {
                                 btn_certify.setBackground(getDrawable(R.drawable.certify_btnlayout));

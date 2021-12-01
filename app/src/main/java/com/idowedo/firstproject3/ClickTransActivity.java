@@ -64,7 +64,6 @@ public class ClickTransActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         ImageView imgChall = findViewById(R.id.imageViewChall);
-        ImageView imageViewChall = findViewById(R.id.imageViewChall);
 
         TextView textChallname = findViewById(R.id.textViewChallname);
         TextView textChallplan = findViewById(R.id.textViewChallexplan);
@@ -79,9 +78,10 @@ public class ClickTransActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         imgarrow = findViewById(R.id.imageViewarrow);
-        imgarrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
+        imgarrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);   //imgarrow 이미지의 색상 변경
 
         textChallAttend = findViewById(R.id.textViewAttend);
+
         //usercode 얻어오기
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -89,7 +89,7 @@ public class ClickTransActivity extends AppCompatActivity {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 usercode = (group.getEmailid());
 
-                /////참가 여부 알아보기////
+                //참가 여부 알아보기
                 firebaseFirestore.collection("challenge").document(chall_Text).collection("challenge list")
                         .whereEqualTo("challenge_id", usercode)
                         .get()
