@@ -59,6 +59,7 @@ public class NickPopup extends Activity {
         btn_nick_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출
                 mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -67,7 +68,7 @@ public class NickPopup extends Activity {
 
                         documentReferenceC = firebaseFirestore.collection("user").document(userCode).collection("user character")
                                 .document("state");
-
+                        //유저의 코인값을 불어와서 코인이 30개가 있어야만 동작 될 수 있도록 함.
                         documentReferenceC.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -77,11 +78,11 @@ public class NickPopup extends Activity {
                                     if(myCoin >= 30) {
                                         documentReferenceC.update("coin", String.valueOf(myCoin - nickcoin));
                                         Intent intent = new Intent(NickPopup.this, NickNameActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); //코인이 30개 이상이면 30개를 차감하고 닉네임 변경 화면으로 이동
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     } else {
-                                        Toast.makeText(getApplicationContext(),"코인이 부족합니다!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"코인이 부족합니다!", Toast.LENGTH_SHORT).show(); //부족할때 토스트창으로 안내
                                     }
                                 }
                             }

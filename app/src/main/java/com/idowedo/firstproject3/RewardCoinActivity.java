@@ -48,7 +48,7 @@ public class RewardCoinActivity extends Activity {
         } else if(challcount == "1") {
             textRewardCoin.setText("100");
         }
-
+        //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

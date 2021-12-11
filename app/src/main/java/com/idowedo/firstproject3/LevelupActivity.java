@@ -68,12 +68,13 @@ public class LevelupActivity extends Activity {
         spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         textSendToTitle.setText(spannableString);
+        //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 String userCode = (group.getEmailid());
-
+                //usercharacter에 존재하는 level값을 팝업창에 띄워줌
                 documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character").document("state");
 
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {

@@ -66,7 +66,7 @@ public class NickNameActivity extends AppCompatActivity {
         textNickError = (TextView) findViewById(R.id.textNickError);
         imageNickArrow = (ImageView) findViewById(R.id.imageNickArrow);
         imageNickArrow.setColorFilter(Color.parseColor("#F4385E"), PorterDuff.Mode.SRC_IN);
-
+        //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출 그중에 닉네임의 값이 null 이면 신규 이용자 null이 아니면 기존회원 가입자이므로 그것을 판단하고 액티비티를 전환해줌
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,7 +90,7 @@ public class NickNameActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
+            //닉네임의 길이를 통해 너무 긴 닉네임은 불가하도록 함
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = editNickName.getText().toString();
@@ -110,7 +110,7 @@ public class NickNameActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             customProgressDialog.show();
                             customProgressDialog.setCancelable(false);
-
+                            //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출 닉네임 값을 사용자가 지정한 닉네임으로 파이어베이스에 업데이트 이후 메인으로 이동
                             mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

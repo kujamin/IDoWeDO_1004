@@ -196,6 +196,7 @@ public class TimerActivity extends AppCompatActivity {
         }
     };
 
+    //타이머가 돌아가는 것을 실시간으로 보여줌
     public class timeThread implements Runnable {
         @Override
         public void run() {
@@ -216,6 +217,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
     }
+    //뒤로가기 버튼에 대한 처리
     @Override
     public void onBackPressed() {
 

@@ -83,7 +83,7 @@ public class Fragment_Timer extends Fragment {
 
         timer_list = new ArrayList<Timer_Item>();
         timerAdapter = new ListViewAdapter(timer_list, view.getContext());
-
+        //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -121,11 +121,11 @@ public class Fragment_Timer extends Fragment {
         });
 
         timer_recyclerView.setAdapter(timerAdapter);
-
+        //기록하기 버튼 클릭리스너
         btnGirok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent = new Intent(getContext(), SaveActivity.class);
+                //기록하기시에 저장액티비티로 변환
                 getActivity().startActivityForResult(new Intent(getContext(), SaveActivity.class), 101);
             }
         });
@@ -133,7 +133,7 @@ public class Fragment_Timer extends Fragment {
         layoutRecordPaper.setVisibility(View.VISIBLE);
         timer_recyclerView.setVisibility(View.GONE);
         addTimerlist.setVisibility(View.GONE);
-
+        //타이머리스트추가 버튼 리스너
         addTimerlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -57,7 +57,7 @@ public class DeleteUser extends Activity {
                 finish();
             }
         });
-
+        // 삭제하기 버튼 누를시에 실행
         btn_delete_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +68,7 @@ public class DeleteUser extends Activity {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
 
-                            //firestore delete
+                            //firestore delete, 유저 정보 삭제 진행, 챌린지 기록도 모두 삭제
                             mdatabase.child("idowedo").child("UserAccount").child(firebaseUser1.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,7 +125,7 @@ public class DeleteUser extends Activity {
                                 }
                             });
 
-                            //reltime delete
+                            //리얼타임 DB 삭제
                             FirebaseAuth.getInstance().signOut();
                             mFirebaseAuth.signOut();
 
@@ -136,6 +136,7 @@ public class DeleteUser extends Activity {
                             onDestroy();
 
                         } else {
+                            //유저가 로그인 후에 시간이 지나면 유저토큰을 다시 재발급 받아주어야 함 (탈퇴는 민감한 작업이므로 새로운 토큰이 필요)
                             Toast.makeText(getApplicationContext(), "회원 탈퇴를 진행하기 위해선 다시 로그인이 필요합니다!!", Toast.LENGTH_SHORT).show();
                             FirebaseAuth.getInstance().signOut();
                             mFirebaseAuth.signOut();

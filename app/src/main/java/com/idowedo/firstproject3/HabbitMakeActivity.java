@@ -189,7 +189,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQ_ADD_CONTACT);
             }
         });
-
+        //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -207,7 +207,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String title =  textDailyName.getText().toString().trim();//슨관 제목
+                String title =  textDailyName.getText().toString().trim();//습관 제목
                 String date = textDaily.getText().toString().trim(); //습관 날짜
                 String memo = textMemo.getText().toString().trim(); //습관 메모
                 String category = strUrl; //습관 카테고리 텍스트
@@ -231,26 +231,6 @@ public class HabbitMakeActivity extends AppCompatActivity {
                     uploadData(title, date, memo, category, cateText, id, userCode, dateStart);
                     finish();
                 }
-                //String usercode = ((usercode)getApplication()).getUsercode();
-
-
-
-//                mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        UserAccount group = dataSnapshot.getValue(UserAccount.class);
-//                        int currentexp = group.getExp();
-//                        currentexp += 5;
-//                        mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).child("exp").setValue(currentexp);
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-
             }
         });
 

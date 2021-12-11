@@ -87,6 +87,7 @@ public class SaveActivity extends AppCompatActivity {
             public void onClick(View v) {
                 goalHour = String.valueOf(goalEditHour.getText());
                 goalMin = String.valueOf(goalEditMin.getText());
+                //스톱워치에 관한 정보 입력
 
                 if(goalHour.isEmpty() || goalMin.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "목표 시간을 입력하세요.", Toast.LENGTH_SHORT).show();
@@ -119,6 +120,7 @@ public class SaveActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    //스톱워치에 관한 정보를 집어넣음
     private void uploadData(String id, String title, String goal, String userCode, String strUrl) {
         pd.setTitle("스톱워치 생성 중...");
 

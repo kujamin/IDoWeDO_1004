@@ -51,7 +51,7 @@ public class RewardChallActivity extends Activity {
 
         rewardTitle = getIntent().getStringExtra("rewardTitle");
         TextView textRewardCoin = findViewById(R.id.textRewardCoin);
-
+        //파이어베이스에서 유저의 정보를 계정의 고유 아이디로 식별해서 해당 유저의 정보를 추출
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,7 +65,7 @@ public class RewardChallActivity extends Activity {
             }
         });
 
-
+        //챌린지 달성시에 띄워줄 보상을 다르게함
         switch (rewardTitle) {
             case "자격증 취득하기" : //교복
                 imgPink.setImageResource(R.drawable.student_01);

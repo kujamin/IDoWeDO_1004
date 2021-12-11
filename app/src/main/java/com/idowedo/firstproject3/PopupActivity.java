@@ -45,7 +45,7 @@ public class PopupActivity extends Activity {
 
         textSendToTitle.setText(spannableString);
     }
-
+    //팝업 닫기 버튼을 눌러야만 닫을 수 있도록 함
     public void onClikcPopupClose(View v){
         Intent intent = new Intent();
         intent.putExtra("result", true);
