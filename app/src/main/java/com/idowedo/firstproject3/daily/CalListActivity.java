@@ -6,6 +6,7 @@ public class CalListActivity extends AppCompatActivity {
 
     private String cal_title, cal_time ;
 
+    //달력의 변수이름 제목과 시간
     public CalListActivity(String cal_title, String cal_time) {
         this.cal_title = cal_title;
         this.cal_time = cal_time;

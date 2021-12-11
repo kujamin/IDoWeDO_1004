@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         mBtnRegister = findViewById(R.id.btn_register); // 등록버튼
         mTextPwdError = findViewById(R.id.textPwdError);  //비밀번호 재입력 오류메세지
 
+        //imgarrow클릭시 로그인 액티비티로 이동 (뒤로가기)
         imgarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

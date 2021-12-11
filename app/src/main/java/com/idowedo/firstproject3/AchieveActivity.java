@@ -290,9 +290,6 @@ public class AchieveActivity extends AppCompatActivity {
                                 if (value < 30) {
                                     Toast.makeText(getApplicationContext(), "현재 " + value + "일 밖에 출석하지 못했습니다.", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    /*documentReference = firebaseFirestore.collection("user").document(userCode).collection("user character")
-                                            .document("achieve");
-                                    documentReference.update("30일 달성", "1");*/
                                     slideLayout.setVisibility(View.VISIBLE);
                                     darkView.setVisibility(View.VISIBLE);
                                     slideLayout.startAnimation(translateup);

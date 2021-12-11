@@ -69,7 +69,6 @@ public class CalendarActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //String userCode = ((LoginActivity)LoginActivity.context_login).strEmail;
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -81,6 +80,7 @@ public class CalendarActivity extends AppCompatActivity {
         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
         String sDD = String.valueOf(CalendarDay.today().getDay());
 
+        //오늘 날짜 얻어오는 구문
         if (sDM.length() != 2) {
             sDM = 0 + sDM;
         }
@@ -89,7 +89,6 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         strDate = sDY + "/" + sDM + "/" + sDD;
-//        Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();
 
         calendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
@@ -118,12 +117,14 @@ public class CalendarActivity extends AppCompatActivity {
         customProgressDialog.show();
         customProgressDialog.setCancelable(false);
 
+        //firebase에 존재하는 유저계정에서 지금 로그인 중인 유저의 이메일 하위 목록에 데이터를 가져옴
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount group = dataSnapshot.getValue(UserAccount.class);
                 userCode = (group.getEmailid());
 
+                //해당 계정에 todo_date에서 오늘 날짜랑 같은 date에 존재하는 문서만 보여줄수 있도록 함
                 firebaseFirestore.collection("user").document(userCode).collection("user todo")
                         .whereEqualTo("todo_date", strDate)
                         .get()
@@ -144,6 +145,7 @@ public class CalendarActivity extends AppCompatActivity {
                             }
                         });
 
+                //달력에서 보이는 날짜 중에서 옛날이나 미래에 예정된 날짜에 해당하는 todo가 존재하면 빨간점과 함께 일정의 제목, 시간을 띄워주는 구문
                 firebaseFirestore.collection("user").document(userCode).collection("user todo")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -196,6 +198,7 @@ public class CalendarActivity extends AppCompatActivity {
 
                 strDate = date.getYear() + "/" + month + "/" + day;
 
+                //달력에서 날짜를 클릭하면 해당날짜에 존재하는 todo가 제목과 시간으로 list에 뜨게됨
                 firebaseFirestore = FirebaseFirestore.getInstance();
                 firebaseFirestore.collection("user").document(userCode).collection("user todo")
                         .whereEqualTo("todo_date", strDate)

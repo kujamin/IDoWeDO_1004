@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 customProgressDialog.show();
                 customProgressDialog.setCancelable(false);
 
+                //이메일과 비밀번호를 반드시 입력해야 넘어갈수 있도록함
                 if (strEmail.length() > 0 && strPwd.length() > 0) {
                     mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -142,6 +143,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     customProgressDialog.dismiss();
                                     customProgressDialog = null;
                                 }
+                                // 그에 따른 로직
                                 try {
                                     throw task.getException();
                                 } catch (FirebaseAuthInvalidUserException e) {
@@ -165,6 +167,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                                                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
+                                                //로그인을 할때 닉네임의 존재 여부를 통해서 닉네임이 = null 이면 신규유저 null이 아니면 기존유저이므로 신규유저만 닉네임 액티비티로 이동할수있게함
                                                 mDatabaseRef.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

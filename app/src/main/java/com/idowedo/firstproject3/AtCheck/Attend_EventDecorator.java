@@ -22,9 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Decorate several days with a dot
- */
+
 public class Attend_EventDecorator extends AppCompatActivity implements DayViewDecorator {
 
     private int color;
@@ -33,24 +31,23 @@ public class Attend_EventDecorator extends AppCompatActivity implements DayViewD
 
 
 
+    //도장 이미지 가져와서 색이랑 날짜를 지정
     public Attend_EventDecorator(int color, Collection<CalendarDay> dates, Activity context) {
-        drawable = context.getResources().getDrawable(R.drawable.daily_check);
+        drawable = context.getResources().getDrawable(R.drawable.daily_check);  //도장 이미지 (출석체크를 위한것)
         this.color = color;
         this.dates = new HashSet<>(dates);
     }
 
+    //해당 날짜가 정말 오늘이 맞는지 확인
     @Override
     public boolean shouldDecorate(CalendarDay day) {
         return dates.contains(day);
     }
 
+    //daily_check 도장을 캘린더 해당날짜에 background로 적용
     @Override
     public void decorate(DayViewFacade view) {
-//        view.addSpan(new DotSpan(7,color));
-//        view.addSpan(new BackgroundColorSpan(Color.RED));
         view.setBackgroundDrawable(drawable);
         view.addSpan(new ForegroundColorSpan(color));
-//        view.setBackgroundDrawable(view2.getContext().getResources().getDrawable(R.drawable.ic_baseline_add_24));
-//        view.addSpan(new DotSpan(5, color)); // 날자밑에 점
     }
 }

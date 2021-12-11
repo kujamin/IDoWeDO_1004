@@ -103,6 +103,7 @@ public class LevelupActivity extends Activity {
     }
 
     public void onClikcPopupClose(View v) {
+        //팝업 닫기창
         Intent intent = new Intent();
         intent.putExtra("result", true);
         setResult(RESULT_OK, intent);
