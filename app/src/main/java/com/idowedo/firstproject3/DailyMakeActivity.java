@@ -221,7 +221,7 @@ public class DailyMakeActivity extends AppCompatActivity {
             }
         });
 
-
+        //카테고리 영역 클릭할 때
         textCate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

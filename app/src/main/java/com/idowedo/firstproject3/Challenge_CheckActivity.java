@@ -94,6 +94,7 @@ public class Challenge_CheckActivity extends Activity {
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         setContentView(R.layout.activity_challenge_check);
 
+        //오늘 날짜 얻어오기
         String sDY = String.valueOf(CalendarDay.today().getYear());
         String sDM = String.valueOf(CalendarDay.today().getMonth()+1);
         String sDD = String.valueOf(CalendarDay.today().getDay());
@@ -148,8 +149,6 @@ public class Challenge_CheckActivity extends Activity {
                 new SundayDecorator(),
                 new SaturdayDecorator());
 
-//        customProgressDialog.show();
-//        customProgressDialog.setCancelable(false);
 
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

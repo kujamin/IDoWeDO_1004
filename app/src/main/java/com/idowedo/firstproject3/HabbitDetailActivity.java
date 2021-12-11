@@ -108,6 +108,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
         String habbit_cateText = intent.getStringExtra("habbit_cateText");
         String habbit_id = intent.getStringExtra("habbit_id");
 
+        //인텐트로 얻어온 값으로 채워주기
         strUrl = habbit_category;
 
         Glide.with(this).load(habbit_category).into(habbitDetail_imageViewChange);
@@ -119,7 +120,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
         habbitDetail_cateLayout.setVisibility(View.VISIBLE);
 
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-
+        //제목 영역 클릭 시
         habbitDetail_title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -151,7 +152,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
                 new DatePickerDialog(HabbitDetailActivity.this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
+        //메모 영역 클릭 시
         habbitDetail_memo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -267,7 +268,7 @@ public class HabbitDetailActivity extends AppCompatActivity {
 
         habbitDetail_date.setText(sdf.format(myCalendar.getTime()) + "까지 반복");
     }
-
+    //카테고리 팝업에서 선택하고 돌아올 때
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idowedo.firstproject3.R;
-
+//챌린지 성공 시 뜨는 성공 팝업
 public class ChallSuccPopActivity extends Activity {
     private Button rewardBtn;
     private TextView textSuccTitle;

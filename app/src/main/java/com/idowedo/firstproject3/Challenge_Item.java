@@ -1,5 +1,5 @@
 package com.idowedo.firstproject3;
-
+//챌린지 리스트의 각 항목의 아이템들을 저장하는 클래스
 public class Challenge_Item {
     private String challenge_image;
     private String challenge_title;

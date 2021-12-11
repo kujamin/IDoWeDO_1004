@@ -1,5 +1,5 @@
 package com.idowedo.firstproject3;
-
+//타이머 리스트의 각 항목들의 아이템을 저장하는 클래스
 public class Timer_Item {
     private String timerName;
     private String timerGoal;

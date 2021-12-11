@@ -127,7 +127,7 @@ public class TodoDetailActivity extends AppCompatActivity {
         todoDetail_textViewTime.setText(todo_time);
 
         todoDetail_cateLayout.setVisibility(View.VISIBLE);
-
+        //제목 영역 클릭 시
         todoDetail_title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -165,7 +165,7 @@ public class TodoDetailActivity extends AppCompatActivity {
                 new DatePickerDialog(TodoDetailActivity.this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
+        //메모 영역 클릭 시
         todoDetail_memo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -202,7 +202,7 @@ public class TodoDetailActivity extends AppCompatActivity {
             }
         });
 
-
+        //시간 영역 클릭 시
         todoDetail_textViewTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,7 +235,7 @@ public class TodoDetailActivity extends AppCompatActivity {
             }
         });
 
-        //String usercode = ((usercode)getApplication()).getUsercode();
+
         mDatabase.child("idowedo").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -318,7 +318,7 @@ public class TodoDetailActivity extends AppCompatActivity {
 
         todoDetail_date.setText(sdf.format(myCalendar.getTime()));
     }
-
+    //팝업 가서 선택하고 다시 올 때
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

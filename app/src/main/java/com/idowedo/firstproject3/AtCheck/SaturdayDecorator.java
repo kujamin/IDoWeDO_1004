@@ -12,6 +12,7 @@ import java.util.Calendar;
 /**
  * Highlight Saturdays and Sundays with a background
  */
+//캘린더뷰에서 토요일 날짜 꾸며주는 클래스
 public class SaturdayDecorator implements DayViewDecorator {
 
     private final Calendar calendar = Calendar.getInstance();

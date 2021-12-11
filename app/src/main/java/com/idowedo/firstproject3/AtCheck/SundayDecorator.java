@@ -12,7 +12,7 @@ import java.util.Calendar;
 /**
  * Created by samsung on 2017-04-12.
  */
-
+//캘린더 뷰에서 일요일 날짜 꾸며주는 클래스
 public class SundayDecorator implements DayViewDecorator {
 
     private final Calendar calendar = Calendar.getInstance();

@@ -139,7 +139,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
             }
         });
-
+        //습관 날짜 영역 클릭 시
         textDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,7 +159,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 new DatePickerDialog(HabbitMakeActivity.this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
+        //메모 영역 클릭 시
         textMemo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -169,7 +169,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
                 dailycate.setBackground(ContextCompat.getDrawable(HabbitMakeActivity.this, R.drawable.dailymakeline));
             }
         });
-
+        //카테고리 영역 클릭 시
         textCate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,7 +201,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
 
             }
         });
-
+        //생성 누르면
         btnReser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,7 +235,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
         });
 
     }//onCreate
-
+    //일정을 DB에 저장
     private void uploadData(String title, String date, String memo, String category, String cateText, String id, String userCode, String dateStart) {
         pd.setTitle("습관 생성 중...");
 
@@ -278,7 +278,7 @@ public class HabbitMakeActivity extends AppCompatActivity {
         }
 
     }
-
+    //카테고리 팝업에서 선택하고 돌아올 때
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

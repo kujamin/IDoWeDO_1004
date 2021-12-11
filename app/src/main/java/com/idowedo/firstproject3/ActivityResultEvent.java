@@ -1,7 +1,7 @@
 package com.idowedo.firstproject3;
 
 import android.content.Intent;
-
+//업적 성공하고 넘어갈 때 값을 전닳주는 클래스
 public class ActivityResultEvent {
     private int requestCode;
     private int resultCode;

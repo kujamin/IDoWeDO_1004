@@ -1,7 +1,7 @@
 package com.idowedo.firstproject3;
 
 import android.widget.CheckBox;
-
+//습관 리스트에 각 항목의 아이템들을 저장하는 클래스
 public class Habbit_Item {
     
     private String habbit_category;
